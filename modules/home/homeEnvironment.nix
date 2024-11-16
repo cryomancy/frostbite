@@ -4,10 +4,10 @@
   config,
   ...
 }: let
-  cfg = config.fuyuEnv;
+  cfg = config.homeEnvironment;
 in {
   options = {
-    fuyuEnv.enable = lib.mkOption {
+    homeEnvironment.enable = lib.mkOption {
       default = true;
       example = false;
       description = "Whether to enable the custom fuyu development environment.";

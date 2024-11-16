@@ -6,12 +6,12 @@
   vars,
   ...
 }: let
-  cfg = config.fuyuDeploy;
+  cfg = config.deploy;
 in {
   imports = [inputs.disko.nixosModules.disko];
 
   options = lib.mkIf cfg.enable {
-    fuyuDeploy = {
+    deploy = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;

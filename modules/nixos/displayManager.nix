@@ -4,15 +4,18 @@
   pkgs,
   ...
 }: let
-  cfg = config.fuyuDM;
+  cfg = config.displayManager;
 in {
   options = {
-    fuyuDM = {
+    displayManager = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
       };
-      tuigreet.enable = lib.mkEnableOption "tuigreet";
+      option = {
+        type = lib.types.enum ["lightgreet" "tuigreet" "gdm"];
+        default = "tuigreet";
+      };
     };
   };
 
@@ -21,7 +24,7 @@ in {
       pkgs.greetd.tuigreet
     ];
 
-    services.greetd = lib.mkIf cfg.tuigreet.enable {
+    services.greetd = lib.mkIf (cfg.option == "tuigreet") {
       enable = true;
       vt = 2;
       settings = {
@@ -30,6 +33,11 @@ in {
           user = "greeter";
         };
       };
+    };
+
+    displayManager = {
+      lightdm.enable = lib.mkIf (cfg.option == "lightdm") true;
+      gdm.enable = lib.mkIf (cfg.option == "gdm") true;
     };
   };
 }

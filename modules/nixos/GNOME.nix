@@ -4,10 +4,10 @@
   lib,
   ...
 }: let
-  cfg = config.gnome;
+  cfg = config.GNOME;
 in {
   options = {
-    gnome = {
+    GNOME = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
@@ -25,6 +25,7 @@ in {
       };
     };
   };
+
   config = lib.mkIf cfg.enable {
     services.xserver = {
       enable = true;
@@ -32,16 +33,6 @@ in {
         enable = true;
         debug = true;
       };
-      #displayManager.gdm = {
-      #  enable = true;
-      #  wayland = true;
-      #  debug = true;
-      #  settings = {
-      #  };
-      #};
-      #xkb.layout = "us";
-      displayManager.lightdm.enable = true;
-    };
 
     programs.dconf.enable = true;
 

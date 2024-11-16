@@ -5,12 +5,12 @@
   users,
   ...
 }: let
-  cfg = config.fuyuSecrets;
+  cfg = config.secrets;
 in {
   imports = [inputs.sops-nix.nixosModules.sops];
 
   options = {
-    fuyuSecrets = {
+    secrets = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

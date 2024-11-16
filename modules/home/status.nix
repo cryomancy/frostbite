@@ -14,7 +14,7 @@
   writeCustomShellApplication = import localLib.functions.writeCustomShellApplication {inherit lib pkgs;};
   swayCfg = config.wayland.windowManager.sway;
   hyprlandCfg = config.wayland.windowManager.hyprland;
-  cfg = config.fuyuBar;
+  cfg = config.status;
 in {
   options = {
     fuyuBar = {

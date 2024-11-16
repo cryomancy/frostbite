@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.fuyuSound;
+  cfg = config.sound;
 in {
   options = {
-    fuyuSound = {
+    sound = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

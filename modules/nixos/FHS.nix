@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.fuyuFHS;
+  cfg = config.FHS;
 in {
   options = {
-    fuyuFHS = {
+    FHS = {
       enable = {
         type = lib.types.bool;
         defualt = true;

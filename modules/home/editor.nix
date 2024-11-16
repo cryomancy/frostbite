@@ -4,10 +4,10 @@
   lib,
   ...
 }: let
-  cfg = config.fuyuEditor;
+  cfg = config.editor;
 in {
   options = {
-    fuyuEditor = {
+    editor = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
@@ -20,6 +20,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ cfg.defaultEditor ];
+    home.packages = [cfg.defaultEditor];
   };
 }

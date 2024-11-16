@@ -4,10 +4,10 @@
   lib,
   ...
 }: let
-  cfg = config.fuyuPass;
+  cfg = config.passwordManagement;
 in {
   options = {
-    fuyuPass = {
+    passwordManagement = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
