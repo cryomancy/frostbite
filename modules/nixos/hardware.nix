@@ -2,13 +2,12 @@
   config,
   lib,
   vars,
-  hostname,
   ...
 }: let
-  cfg = config.fuyuWare;
+  cfg = config.hardware;
 in {
   options = {
-    fuyuWare = {
+    hardware = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
