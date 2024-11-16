@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.fuyuENV;
+  cfg = config.environment;
 in {
   options = {
-    fuyuENV = {
+    environment = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

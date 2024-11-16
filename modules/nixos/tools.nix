@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.fuyuTools;
+  cfg = config.tools;
 in {
   options = {
-    fuyuTools = {
+    tools = {
       enable = lib.mkOptions {
         type = lib.types.bool;
         default = true;

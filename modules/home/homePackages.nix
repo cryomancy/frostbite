@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.fuyuPackages;
+  cfg = config.homePackages;
 in {
   options = {
-    fuyuPackages = {
+    homePackages = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

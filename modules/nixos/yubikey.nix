@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.fuyuKey;
+  cfg = config.yubikey;
 in {
   options = {
-    fuyuKey.enable = lib.mkEnableOption "fuyuKey";
+    yubikey.enable = lib.mkEnableOption "custom yubikey";
   };
 
   config = lib.mkIf cfg.enable {

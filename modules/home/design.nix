@@ -6,10 +6,10 @@
   ...
 }: let
   inherit (vars.themes.everforest-dark-hard) base16Scheme;
-  cfg = config.fuyuStyle;
+  cfg = config.design;
 in {
   options = {
-    fuyuStyle = {
+    design = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

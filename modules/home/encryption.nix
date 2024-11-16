@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.fuyuCrypt;
+  cfg = config.encryption;
 in {
   options = {
-    fuyuCrypt = {
+    encryption = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

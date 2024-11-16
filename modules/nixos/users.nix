@@ -5,10 +5,10 @@
   users,
   ...
 }: let
-  cfg = config.fuyuUsers;
+  cfg = config.users;
 in {
   options = {
-    fuyuUsers = {
+    users = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

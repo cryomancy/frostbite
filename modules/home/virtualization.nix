@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.fuyuVirt;
+  cfg = config.virtualization;
 in {
   options = {
     fuyuVirt = {

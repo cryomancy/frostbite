@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.fuyuServices;
+  cfg = config.services;
 in {
   options = {
-    fuyuServices = {
+    services = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

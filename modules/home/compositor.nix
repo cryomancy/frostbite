@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.fuyuDisplay;
+  cfg = config.compositor;
 
   hyprlandGamemodePrograms = lib.makeBinPath [
     config.programs.hyprland.package
@@ -13,7 +13,7 @@
   ];
 in {
   options = {
-    fuyuDisplay = {
+    compositor = {
       hyprland = {
         enable = lib.mkEnableOption "hyprland";
         gamemode = {
