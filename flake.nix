@@ -1,7 +1,18 @@
 {
   description = "NixOS configuration that supports multiple users, systems, and architectures.";
 
-  outputs = inputs: import ./outputs {inherit inputs;};
+  outputs = {
+    nixosModules.fuyu-no-kosei = {
+      imports = [
+        ./modules/nixos
+      ];
+    };
+
+    homeManagerModules.stylix = {
+      imports = [
+        ./modules/home
+      ];
+    };
 
   inputs = {
     /*
