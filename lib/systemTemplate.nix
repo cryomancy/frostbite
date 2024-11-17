@@ -1,17 +1,15 @@
 {
-  self,
   inputs,
-  system,
-  lib,
   pkgs,
-  localLib,
-  vars,
-  overlays,
-  users,
+  system,
   hostName,
+  users,
+  lib,
+  localLib,
+  overlays,
 }: let
   inherit (inputs) home-manager chaotic fuyuNoKosei;
-  specialArgs = {inherit inputs system pkgs localLib vars overlays users hostName;};
+  specialArgs = {inherit inputs system pkgs localLib overlays users hostName;};
 in
   lib.nixosSystem {
     inherit system specialArgs;
@@ -24,7 +22,7 @@ in
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            backupFileExtension = "backup_delete";
+            backupFileExtension = lib.readFile "${pkgs.runCommand "timestamp" {env.when = builtins.currentTime;} "echo -n `date -d @$when +%Y-%m-%d_%H-%M-%S` > $out"}";
             extraSpecialArgs = specialArgs;
             users = lib.attrsets.genAttrs users (user: {
               imports = fuyuNoKosei.homeManagerModules.fuyuNoKosei;

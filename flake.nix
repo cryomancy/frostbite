@@ -1,32 +1,7 @@
 {
   description = "NixOS configuration that supports multiple users, systems, and architectures.";
 
-  outputs = {self, ...}: {
-    nixosModules.fuyu-no-kosei = {
-      imports = [
-        ./modules/nixos
-      ];
-    };
-
-    homeManagerModules.fuyu-no-kosei = {
-      imports = [
-        ./modules/home
-      ];
-    };
-
-    templates = {
-      starter = {
-        path = ./templates/starter;
-        description = "Fuyu-no-kosei starter template";
-      };
-    };
-
-    defaultTemplate = self.template.starter;
-
-    lib = {
-      # TODO: import kosei lib
-    };
-  };
+  outputs = inputs: ./outputs.nix inputs;
 
   inputs = {
     /*
