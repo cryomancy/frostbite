@@ -1,26 +1,23 @@
 {
+  self,
   inputs,
   system,
   lib,
   pkgs,
-  pkgs-stable ? {},
   localLib,
   vars,
   overlays,
-  modules,
   users,
   hostName,
 }: let
-  inherit (inputs) home-manager chaotic;
-  inherit (localLib) baseNixosModules baseHomeModules;
-  specialArgs = {inherit inputs system pkgs pkgs-stable localLib vars overlays users hostName;};
+  inherit (inputs) home-manager chaotic fuyuNoKosei;
+  specialArgs = {inherit inputs system pkgs localLib vars overlays users hostName;};
 in
   lib.nixosSystem {
     inherit system specialArgs;
     modules =
-      baseNixosModules
+      fuyuNoKosei.nixosModules.fuyuNoKosei
       ++ [chaotic.nixosModules.default]
-      ++ modules.nixos
       ++ [
         home-manager.nixosModules.home-manager
         {
@@ -30,7 +27,7 @@ in
             backupFileExtension = "backup_delete";
             extraSpecialArgs = specialArgs;
             users = lib.attrsets.genAttrs users (user: {
-              imports = baseHomeModules ++ modules.${user}.homeManager;
+              imports = fuyuNoKosei.homeManagerModules.fuyuNoKosei;
               config.home.username = user;
             });
           };
