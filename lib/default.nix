@@ -15,7 +15,6 @@
 
   templates = [
     "systemTemplate"
-    "droidTemplate"
   ];
 
   importedDirectories = genAttrs directories (directory: import ./${directory}.nix {inherit inputs system pkgs;});

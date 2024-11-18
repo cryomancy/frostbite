@@ -16,9 +16,9 @@ in {
         type = lib.types.bool;
         default = true;
       };
-      laptop.enable = lib.mkEnableOption "fuyuLaptop";
-      gamemode.enable = lib.mkEnableOption "fuyuGamemode";
-      virtualMachine.enable = lib.mkEnableOption "fuyuVM";
+      laptop.enable = lib.mkEnableOption "laptop";
+      gamemode.enable = lib.mkEnableOption "gamemode";
+      virtualMachine.enable = lib.mkEnableOption "virtual machine";
       yubikey.enable = lib.mkEnableOption "yubikey";
     };
   };
