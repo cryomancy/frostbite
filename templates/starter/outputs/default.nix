@@ -1,22 +1,18 @@
 {inputs}: let
-  inherit (inputs) nixpkgs;
-  inherit (nixpkgs) lib;
-  inherit (lib) genAttrs attrsets;
+  inherit (inputs.nixpkgs) lib;
 
   supportedSystems = ["x86_64-linux" "aarch64-linux"];
 
-  forAllSystems = genAttrs supportedSystems;
+  forAllSystems = lib.genAttrs supportedSystems;
 
   arguments = forAllSystems (system: {
     inherit inputs system lib;
     inherit (pkgs.${system}) pkgs;
     inherit (localLib.${system}) localLib;
-    inherit (localLib.${system}.localLib) vars;
   });
 
-  systems = forAllSystems (system: import ./${system} arguments.${system});
-
-  systemValues = builtins.attrValues systems;
+  systems = forAllSystems (system: import ./${system} arguments.${system})
+    |> builtins.attrValues;
 
   localLib = forAllSystems (system:
     import ../lib {
@@ -25,18 +21,17 @@
     });
 
   pkgs = forAllSystems (system:
-    import nixpkgs
+    import inputs.nixpkgs
     {
       inherit system;
-      config.allowUnfree = true;
       inherit (localLib.${system}.localLib) overlays;
+      config.allowUnfree = true;
     });
 
   formatter = forAllSystems (system: pkgs.${system}.alejandra);
 
   devShells = forAllSystems (system: import ../shell.nix pkgs.${system});
 
-  nixosConfigurations = attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systemValues);
+  nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systems);
 
-  nixOnDroidConfigurations = attrsets.mergeAttrsList (map (it: it.nixOnDroidConfigurations or {}) systemValues);
-in {inherit formatter devShells nixosConfigurations nixOnDroidConfigurations;}
+in {inherit formatter devShells nixosConfigurations;}

@@ -19,7 +19,7 @@ in {
   config = lib.mkIf cfg.enable {
     nix = {
       settings = {
-        experimental-features = ["nix-command" "flakes"];
+        experimental-features = ["nix-command" "flakes" "pipe-operators"];
         trusted-users = ["@wheel"];
         accept-flake-config = true;
         auto-optimise-store = true;
