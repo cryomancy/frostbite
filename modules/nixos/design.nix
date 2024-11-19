@@ -3,7 +3,6 @@
   lib,
   pkgs,
   inputs,
-  vars,
   ...
 }: let
   cfg = config.design;
@@ -23,7 +22,7 @@ in {
     stylix = {
       enable = true;
 
-      inherit (vars.themes.everforest-dark-hard) image;
+      image = "${inputs.walls}/anime/a_drawing_of_a_horse_carriage_on_a_bridge.png";
 
       cursor = {
         package = pkgs.bibata-cursors;

@@ -33,6 +33,7 @@ in {
         enable = true;
         debug = true;
       };
+    };
 
     programs.dconf.enable = true;
 
