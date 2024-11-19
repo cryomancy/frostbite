@@ -11,8 +11,7 @@
     inherit (localLib.${system}) localLib;
   });
 
-  systems = forAllSystems (system: import ./${system} arguments.${system})
-    |> builtins.attrValues;
+  systems = builtins.attrValues (forAllSystems (system: import ./${system} arguments.${system}));
 
   localLib = forAllSystems (system:
     import ../lib {
@@ -33,5 +32,4 @@
   devShells = forAllSystems (system: import ../shell.nix pkgs.${system});
 
   nixosConfigurations = lib.attrsets.mergeAttrsList (map (it: it.nixosConfigurations or {}) systems);
-
 in {inherit formatter devShells nixosConfigurations;}
