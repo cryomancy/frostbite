@@ -1,56 +1,32 @@
 {inputs}: let
-  perSystem = {
-    config,
-    lib,
-    pkgs,
-    self',
-    system,
-    ...
-  }: {
-    modules = {
-      nixos = import ./modules/nixos;
-      homeManager = import ./modules/homeManager;
-    };
-    nixosModules = self'.modules.nixos;
-    homeManagerModules = self'.modules.homeManager;
+  systems = ["x86_64-linux" "riscv64-linux" "aarch64-linux"];
+  forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
 
-    lib = let
-      nixpkgsLib =
-        import inputs.nixpkgs
-        {
-          inherit system;
-        }
-        .lib;
+  nixosModules = import ./modules/nixos;
+  homeManagerModules = import ./modules/homeManager;
 
-      fuyuNoKoseiLib =
-        import ./lib
-        {
-          inherit inputs system pkgs;
-        };
-    in
-      nixpkgsLib // fuyuNoKoseiLib;
+  lib = forEachSystem (system: let
+    nixpkgsLib =
+      import inputs.nixpkgs
+      {
+        inherit system;
+      }
+      .lib;
 
-    pkgs = import inputs.nixpkgs {
+    fuyuNoKoseiLib =
+      import ./lib
+      {
+        inherit inputs system pkgs;
+      };
+  in
+    nixpkgsLib // fuyuNoKoseiLib);
+
+  pkgs = forEachSystem (system:
+    import inputs.nixpkgs {
       inherit system;
       inherit (lib) overlays;
       config.allowUnfree = true;
-    };
-
-    #templates = {
-    #  starter = {
-    #    path = ./templates/starter;
-    #    description = "Fuyu-no-kosei starter template";
-    #  };
-    #};
-    #defaultTemplate = self'.templates.starter;
-  };
-
-  systems = ["x86_64-linux" "riscv64-linux" "aarch64-linux"];
-  systemOutputs = inputs.nixpkgs.lib.genAttrs systems (system: perSystem // {inherit system;});
+    });
 in {
-  inherit systems;
-  nixosModules = builtins.map (o: o.nixosModules) systemOutputs;
-  homeManagerModules = builtins.map (o: o.homeManagerModules) systemOutputs;
-  pkgs = builtins.map (o: o.pkgs) systemOutputs;
-  lib = builtins.map (o: o.lib) systemOutputs;
+  inherit systems pkgs lib nixosModules homeManagerModules;
 }
