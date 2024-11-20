@@ -1,23 +1,15 @@
 {
   config,
   lib,
-  localLib,
   pkgs,
   ...
 }: let
-  writeCustomWaybarModule =
-    import localLib.functions.writeCustomWaybarModule
-    {
-      helperFunction = writeCustomShellApplication;
-      inherit pkgs;
-    };
-  writeCustomShellApplication = import localLib.functions.writeCustomShellApplication {inherit lib pkgs;};
   swayCfg = config.wayland.windowManager.sway;
   hyprlandCfg = config.wayland.windowManager.hyprland;
   cfg = config.status;
 in {
   options = {
-    fuyuBar = {
+    status = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

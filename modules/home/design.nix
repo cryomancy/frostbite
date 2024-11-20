@@ -1,11 +1,10 @@
 {
   config,
-  pkgs,
+  inputs,
   lib,
-  vars,
+  pkgs,
   ...
 }: let
-  inherit (vars.themes.everforest-dark-hard) base16Scheme;
   cfg = config.design;
 in {
   options = {
@@ -17,11 +16,12 @@ in {
     };
   };
 
+  # TODO: Make this a service to dynamically switch themes
   config = lib.mkIf cfg.enable {
     stylix = {
       enable = true;
 
-      inherit base16Scheme;
+      base16Scheme = "${inputs.tt-schemes}/base16/nord.yaml";
 
       cursor = {
         package = pkgs.bibata-cursors;

@@ -5,30 +5,33 @@
   hostName,
   users,
   lib,
-  localLib,
   overlays,
 }: let
-  inherit (inputs) home-manager chaotic fuyuNoKosei;
-  specialArgs = {inherit inputs system pkgs localLib overlays users hostName;};
-in
-  lib.nixosSystem {
-    inherit system specialArgs;
-    modules =
-      fuyuNoKosei.nixosModules.fuyuNoKosei
-      ++ [chaotic.nixosModules.default]
-      ++ [
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            backupFileExtension = lib.readFile "${pkgs.runCommand "timestamp" {env.when = builtins.currentTime;} "echo -n `date -d @$when +%Y-%m-%d_%H-%M-%S` > $out"}";
-            extraSpecialArgs = specialArgs;
-            users = lib.attrsets.genAttrs users (user: {
-              imports = fuyuNoKosei.homeManagerModules.fuyuNoKosei;
-              config.home.username = user;
-            });
-          };
-        }
-      ];
-  }
+  nixosConfigurations = let
+    inherit (inputs) home-manager chaotic fuyuNoKosei;
+    specialArgs = {inherit inputs system pkgs overlays users hostName;};
+  in
+    lib.nixosSystem {
+      inherit system specialArgs;
+      modules =
+        fuyuNoKosei.nixosModules.fuyuNoKosei
+        # TODO: add chaotic to a nixos module
+        ++ [chaotic.nixosModules.default]
+        ++ [
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              inherit (lib) backupFileExtension;
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = specialArgs;
+              # Iterates over a list of users provided in the function call
+              users = lib.attrsets.genAttrs users (user: {
+                imports = fuyuNoKosei.homeManagerModules.fuyuNoKosei;
+                config.home.username = user;
+              });
+            };
+          }
+        ];
+    };
+in {inherit nixosConfigurations;}

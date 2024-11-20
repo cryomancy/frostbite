@@ -20,9 +20,6 @@
     nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
-    nixpkgs-stable = {
-      url = "github:nixos/nixpkgs/nixos-24.05";
-    };
     chaotic = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     };
@@ -50,10 +47,13 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    /*
+       unused
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    */
     impermanence = {
       url = "github:nix-community/impermanence";
     };
@@ -71,12 +71,15 @@
         home-manager.follows = "home-manager";
       };
     };
+    /*
+       unused
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
     };
     systems = {
       url = "github:nix-systems/default-linux";
     };
+    */
     /*
        ___           ___           ___           ___       ___
       /\  \         /\  \         /\  \         /\__\     /\  \
@@ -113,10 +116,13 @@
         home-manager.follows = "home-manager";
       };
     };
+    /*
+       unused
     flake-utils = {
       url = "github:numtide/flake-utils";
       inputs.systems.follows = "systems";
     };
+    */
     /*
          ___                       ___           ___
         /\__\          ___        /\  \         /\  \
@@ -130,12 +136,13 @@
         /:/  /      \/__/        \::/  /       \:\__\
         \/__/                     \/__/         \/__/
     */
-    nvchad4nix = {
-      url = "github:nix-community/nix4nvchad";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Editor
     nixvim = {
       url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nvchad4nix = {
+      url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     jeezyvim = {
@@ -146,11 +153,16 @@
       url = "github:TahlonBrahic/fuyu-no-neovim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Themeing
     base16 = {
       url = "github:SenchoPens/base16.nix";
     };
     tt-schemes = {
       url = "github:tinted-theming/schemes";
+      flake = false;
+    };
+    walls = {
+      url = "github:dharmx/walls";
       flake = false;
     };
   };

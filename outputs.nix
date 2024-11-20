@@ -49,6 +49,7 @@
 
   systemOutputs = builtins.map (system: perSystem // {inherit system;}) systems;
 in {
+  inherit systems;
   nixosModules = builtins.map (o: o.nixosModules) systemOutputs;
   homeManagerModules = builtins.map (o: o.homeManagerModules) systemOutputs;
   templates = builtins.map (o: o.templates) systemOutputs;
