@@ -1,7 +1,7 @@
 {
   description = "NixOS configuration that supports multiple users, systems, and architectures.";
 
-  outputs = inputs: ./outputs.nix inputs;
+  outputs = inputs: import ./outputs.nix inputs;
 
   inputs = {
     /*
