@@ -16,6 +16,8 @@ in {
     };
   };
 
+  inputs = [inputs.chaotic.nixosModules.default];
+
   config = lib.mkIf cfg.enable {
     nix = {
       settings = {
