@@ -46,14 +46,10 @@
   };
 
   systems = ["x86_64-linux" "riscv64-linux" "aarch64-linux"];
-
-  systemOutputs = builtins.map (system: perSystem // {inherit system;}) systems;
+  systemOutputs = inputs.nixpkgs.lib.genAttrs systems (system: perSystem // {inherit system;});
 in {
   inherit systems;
   nixosModules = builtins.map (o: o.nixosModules) systemOutputs;
   homeManagerModules = builtins.map (o: o.homeManagerModules) systemOutputs;
-  #templates = builtins.map (o: o.templates) systemOutputs;
-  #defaultTemplate = builtins.map (o: o.defaultTemplate) systemOutputs;
-  lib = builtins.map (o: o.lib) systemOutputs;
   pkgs = builtins.map (o: o.pkgs) systemOutputs;
 }
