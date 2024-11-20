@@ -3,17 +3,16 @@
   forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
 
   nixosModules = import ./modules/nixos;
-  homeManagerModules = import ./modules/homeManager;
+  homeManagerModules = import ./modules/home;
 
   lib =
-    builtins.trace
     forEachSystem (system:
-      import ./lib {inherit inputs system pkgs;} // inputs.nixpkgs.lib);
+      (import ./lib {inherit inputs system pkgs;}).lib // inputs.nixpkgs.lib);
 
   pkgs = forEachSystem (system:
     import inputs.nixpkgs {
       inherit system;
-      inherit (lib.${system}) overlays;
+      inherit (lib.${system}.overlays) overlays;
       config.allowUnfree = true;
     });
 in {

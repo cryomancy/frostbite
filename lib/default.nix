@@ -23,5 +23,5 @@
   # Imports the entire directory as an attribute set
   importedFunctions = {imports = [./functions.nix];};
 
-  localLib = importedDirectories // importedTemplates // importedFunctions;
-in {inherit localLib;}
+  lib = importedDirectories // importedTemplates // importedFunctions;
+in {inherit lib;}

@@ -7,5 +7,4 @@
     src = ../overlays;
     inputs = {inherit inputs system pkgs;};
   };
-in
-  overlays
+in {inherit overlays;}
