@@ -3,8 +3,9 @@
   system,
   pkgs,
 }: let
-  overlays = builtins.attrValues inputs.haumea.lib.load {
+  overlaySet = inputs.haumea.lib.load {
     src = ../overlays;
     inputs = {inherit inputs system pkgs;};
   };
+  overlays = builtins.attrValues overlaySet;
 in {inherit overlays;}
