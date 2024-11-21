@@ -8,15 +8,13 @@
   overlays,
 }: let
   nixosConfigurations = let
-    inherit (inputs) home-manager chaotic fuyuNoKosei;
+    inherit (inputs) home-manager fuyuNoKosei;
     specialArgs = {inherit inputs system pkgs overlays users hostName;};
   in
     lib.nixosSystem {
       inherit system specialArgs;
       modules =
         fuyuNoKosei.nixosModules.fuyuNoKosei
-        # TODO: add chaotic to a nixos module
-        ++ [chaotic.nixosModules.default]
         ++ [
           home-manager.nixosModules.home-manager
           {
