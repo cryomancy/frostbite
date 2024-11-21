@@ -5,21 +5,9 @@
   nixosModules = import ./modules/nixos;
   homeManagerModules = import ./modules/homeManager;
 
-  lib = forEachSystem (system: let
-    nixpkgsLib =
-      import inputs.nixpkgs
-      {
-        inherit system;
-      }
-      .lib;
-
-    fuyuNoKoseiLib =
-      import ./lib
-      {
-        inherit inputs system pkgs;
-      };
-  in
-    nixpkgsLib // fuyuNoKoseiLib);
+  lib =
+    forEachSystem (system:
+      import ./lib {inherit inputs system pkgs;} // inputs.nixpkgs.lib);
 
   pkgs = forEachSystem (system:
     import inputs.nixpkgs {
