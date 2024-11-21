@@ -1,5 +1,5 @@
 {inputs}: let
-  systems = ["x86_64-linux" "riscv64-linux" "aarch64-linux"];
+  systems = ["x86_64-linux"];
   forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
   genNixosConfig = inputs.nixpkgs.lib.attrsets.mergeAttrsList;
 
