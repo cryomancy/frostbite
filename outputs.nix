@@ -52,4 +52,5 @@ in {
   nixosModules = builtins.map (o: o.nixosModules) systemOutputs;
   homeManagerModules = builtins.map (o: o.homeManagerModules) systemOutputs;
   pkgs = builtins.map (o: o.pkgs) systemOutputs;
+  lib = builtins.map (o: o.lib) systemOutputs;
 }
