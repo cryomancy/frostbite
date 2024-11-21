@@ -12,7 +12,7 @@
   pkgs = forEachSystem (system:
     import inputs.nixpkgs {
       inherit system;
-      inherit (lib) overlays;
+      inherit (lib.${system}) overlays;
       config.allowUnfree = true;
     });
 in {
