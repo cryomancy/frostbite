@@ -6,14 +6,14 @@
   homeManagerModules = import ./modules/homeManager;
 
   lib =
+    builtins.trace
     forEachSystem (system:
       import ./lib {inherit inputs system pkgs;} // inputs.nixpkgs.lib);
 
   pkgs = forEachSystem (system:
     import inputs.nixpkgs {
       inherit system;
-      #inherit (lib.${system}) overlays;
-      lib = builtins.trace lib lib;
+      inherit (lib.${system}) overlays;
       config.allowUnfree = true;
     });
 in {
