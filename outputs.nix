@@ -1,6 +1,7 @@
 {inputs}: let
   systems = ["x86_64-linux" "riscv64-linux" "aarch64-linux"];
   forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
+  genNixosConfig = inputs.nixpkgs.lib.attrsets.mergeAttrsList;
 
   nixosModules = import ./modules/nixos;
   homeManagerModules = import ./modules/home;
@@ -16,5 +17,5 @@
       config.allowUnfree = true;
     });
 in {
-  inherit systems pkgs lib nixosModules homeManagerModules;
+  inherit pkgs lib forEachSystem genNixosConfig nixosModules homeManagerModules;
 }
