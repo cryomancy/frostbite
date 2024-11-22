@@ -16,9 +16,9 @@
       inherit system specialArgs;
       modules =
         nixosModules.fuyuNoKosei
-        ++ fuyuConfig
         ++ [
           home-manager.nixosModules.home-manager
+          nixosModules.fuyuNoKosei
           {
             home-manager = {
               inherit (lib) backupFileExtension;
