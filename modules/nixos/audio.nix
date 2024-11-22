@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.sound;
+  cfg = config.audio;
 in {
-  options.sound.enable = lib.mkOption {
+  options.audio.enable = lib.mkOption {
     type = lib.types.bool;
     default = true;
     description = "Enable sound support";
