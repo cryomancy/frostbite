@@ -11,10 +11,7 @@ in {
 
   options = lib.mkIf cfg.enable {
     deploy = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-      };
+      enable = lib.mkEnableOption "disko deployment";
     };
   };
 
