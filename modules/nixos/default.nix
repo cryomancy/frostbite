@@ -1,5 +1,6 @@
 {
   imports = [
+    ./audio.nix
     ./boot.nix
     ./deploy.nix
     ./design.nix
@@ -14,7 +15,6 @@
     ./secrets.nix
     ./security.nix
     ./services.nix
-    ./sound.nix
     ./systemMaintenance.nix
     ./tools.nix
     ./transcience.nix
