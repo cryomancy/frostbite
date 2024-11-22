@@ -9,13 +9,13 @@
 in {
   imports = [inputs.disko.nixosModules.disko];
 
-  options = lib.mkIf cfg.enable {
+  options = {
     deploy = {
       enable = lib.mkEnableOption "disko deployment";
     };
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     # This module is used for remote deployment and should be removed after succesfuly deploying a system
     users.users = {
       root = {
@@ -32,6 +32,6 @@ in {
       };
     };
     # TODO: import disko device from systems
-    disko.devices = hostName.disko;
+    #disko.devices = hostName.disko;
   };
 }
