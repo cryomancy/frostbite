@@ -3,8 +3,8 @@
   forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
   genNixosConfig = inputs.nixpkgs.lib.attrsets.mergeAttrsList;
 
-  nixosModules = import ./modules/nixos;
-  homeManagerModules = import ./modules/home;
+  nixosModules.fuyuNoKosei = import ./modules/nixos;
+  homeManagerModules.fuyuNoKosei = import ./modules/home;
 
   lib =
     forEachSystem (system:
