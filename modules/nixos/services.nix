@@ -12,7 +12,7 @@ in {
         type = lib.types.bool;
         default = true;
       };
-      openssh.enable = lib.mkOption {
+      fuyuSSH.enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
       };
@@ -24,7 +24,7 @@ in {
   };
   config = lib.mkIf cfg.enable {
     services = {
-      openssh = lib.mkIf cfg.openssh.enable {
+      fuyuSSH = lib.mkIf cfg.fuyuSSH.enable {
         enable = true;
         settings = {
           banner = "冬の国境";
