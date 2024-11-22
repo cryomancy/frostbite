@@ -1,3 +1,25 @@
 {
-  imports = [];
+  imports = [
+    ./boot.nix
+    ./deploy.nix
+    ./design.nix
+    ./displayManager.nix
+    ./environment.nix
+    ./FHS.nix
+    ./GNOME.nix
+    ./localization.nix
+    ./network.nix
+    ./nixSettings.nix
+    ./RGB.nix
+    ./secrets.nix
+    ./security.nix
+    ./services.nix
+    ./sound.nix
+    ./systemMaintenance.nix
+    ./tools.nix
+    ./transcience.nix
+    ./users.nix
+    ./virtualization.nix
+    ./yubikey.nix
+  ];
 }
