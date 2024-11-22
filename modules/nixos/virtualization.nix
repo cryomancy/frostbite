@@ -8,6 +8,8 @@
 }: let
   cfg = config.virtualization;
 in {
+  imports = [inputs.nixos-wsl.nixosModules.wsl];
+
   options = {
     virtualization = {
       enable = lib.mkOption {
@@ -44,7 +46,6 @@ in {
       qemu_kvm
       qemu
     ];
-    imports = [inputs.nixos-wsl.nixosModules.wsl];
 
     wsl = lib.mkIf cfg.wsl.enable {
       enable = true;
