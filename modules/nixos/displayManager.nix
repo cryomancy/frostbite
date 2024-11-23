@@ -35,9 +35,7 @@ in {
       };
     };
 
-    displayManager = {
-      lightdm.enable = lib.mkIf (cfg.option == "lightdm") true;
-      gdm.enable = lib.mkIf (cfg.option == "gdm") true;
-    };
+    displayManager.lightdm.enable = lib.mkIf (cfg.option == "lightdm") true;
+    services.xserver.displayManager.gdm.enable = lib.mkIf (cfg.option == "gdm") true;
   };
 }
