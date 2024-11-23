@@ -7,7 +7,7 @@
   users,
   lib,
   overlays,
-}: let
+}: {
   nixosConfigurations = let
     inherit (inputs) home-manager homeManagerModules nixosModules;
     specialArgs = {inherit inputs system pkgs overlays users hostName;};
@@ -34,4 +34,4 @@
           }
         ];
     };
-in {inherit nixosConfigurations;}
+}
