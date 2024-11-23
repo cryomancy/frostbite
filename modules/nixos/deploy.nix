@@ -3,7 +3,6 @@
   hostName,
   inputs,
   lib,
-  vars,
   ...
 }: let
   cfg = config.deploy;
@@ -35,6 +34,7 @@ in {
         PermitRootLogin = "yes";
       };
     };
-    disko.devices = vars.${hostName}.disko;
+    # TODO: import disko device from systems
+    disko.devices = hostName.disko;
   };
 }
