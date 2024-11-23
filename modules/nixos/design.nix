@@ -7,6 +7,8 @@
 }: let
   cfg = config.design;
 in {
+  imports = [inputs.stylix.nixosModules.stylix];
+
   options = {
     design = {
       enable = lib.mkOption {
@@ -17,8 +19,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    imports = [inputs.stylix.nixosModules.stylix];
-
     stylix = {
       enable = true;
 
