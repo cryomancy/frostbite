@@ -23,7 +23,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    virtualization = {
+    virtualisation = {
       docker = {
         enable = true;
         daemon.settings = {
