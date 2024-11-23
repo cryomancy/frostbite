@@ -26,7 +26,7 @@
             extraSpecialArgs = specialArgs;
             # Iterates over a list of users provided in the function call
             users = lib.attrsets.genAttrs users (user: {
-              imports = homeManagerModules.fuyuNoKosei;
+              imports = [homeManagerModules.fuyuNoKosei];
               config.home.username = user;
             });
           };
