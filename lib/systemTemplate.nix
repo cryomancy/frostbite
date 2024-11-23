@@ -15,8 +15,7 @@
     lib.nixosSystem {
       inherit system specialArgs;
       modules =
-        nixosModules.fuyuNoKosei
-        ++ fuyuConfig
+        nixosModules.fuyuNoKosei {inherit fuyuConfig;}
         ++ [
           home-manager.nixosModules.home-manager
           {
