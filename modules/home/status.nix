@@ -6,6 +6,38 @@
 }: let
   swayCfg = config.wayland.windowManager.sway;
   hyprlandCfg = config.wayland.windowManager.hyprland;
+  writeCustomShellApplication = {
+    name ? "customScript",
+    script, # script
+    dependencies ? [],
+  }:
+    lib.getExe (pkgs.writeShellApplication {
+      inherit name;
+      text = script;
+      runtimeInputs = with pkgs; [coreutils gnugrep systemd] ++ dependencies;
+    });
+  writeCustomWaybarModule = {
+    dependencies ? [],
+    script ? "",
+    text ? "",
+    tooltip ? "",
+    alt ? "",
+    class ? "",
+    percentage ? "",
+  }: {
+    name = "customWaybarModule";
+    dependencies = [pkgs.jq] ++ dependencies;
+    script = ''
+      ${script}
+      jq -cn \
+        --arg text "${text}" \
+        --arg tooltip "${tooltip}" \
+        --arg alt "${alt}" \
+        --arg class "${class}" \
+        --arg percentage "${percentage}" \
+        '{text:$text,tooltip:$tooltip,alt:$alt,class:$class,percentage:$percentage}'
+    '';
+  };
   cfg = config.status;
 in {
   options = {
