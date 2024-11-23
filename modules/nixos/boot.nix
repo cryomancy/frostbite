@@ -7,7 +7,7 @@
 in {
   options.fuyuBoot.enable = lib.mkOption {
     type = lib.types.bool;
-    default = lib.mkDefault true;
+    default = true;
   };
 
   config = lib.mkIf cfg.enable {
