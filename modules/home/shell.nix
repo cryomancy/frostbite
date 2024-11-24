@@ -39,7 +39,8 @@ in {
 
       fish = lib.mkIf (cfg.defaultShell
         == "fish") {
-        enable = true;
+        enable = lib.mkForce true;
+        config.programs.fish.enable = true;
         interactiveShellInit = lib.strings.concatStringsSep " " [
           ''
             ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
