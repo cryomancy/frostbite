@@ -22,8 +22,8 @@ in {
     };
   };
 
+  osConfig.programs.fish.enable = lib.mkIf (cfg.defaultShell == "fish") true;
   config = lib.mkIf cfg.enable {
-    osConfig.programs.fish.enable = lib.mkIf (cfg.defaultShell == "fish") true;
     programs = {
       bash = lib.mkIf (cfg.defaultShell
         == "bash") {
