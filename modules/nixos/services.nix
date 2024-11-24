@@ -24,7 +24,7 @@ in {
   };
   config = lib.mkIf cfg.enable {
     services = {
-      fuyuSSH = lib.mkIf cfg.fuyuSSH.enable {
+      openssh = lib.mkIf cfg.fuyuSSH.enable {
         enable = true;
         settings = {
           banner = "冬の国境";
