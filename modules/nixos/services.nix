@@ -90,7 +90,7 @@ in {
 
     hardware.sensor.iio.enable = lib.mkIf cfg.laptop.enable true;
 
-    services.qemuGuest.enable = lib.mkIf cfg.virtualMachine.enable;
+    services.qemuGuest.enable = lib.mkIf cfg.virtualMachine.enable true;
     services.spice-vdagentd.enable = lib.mkIf cfg.virtualMachine.enable true;
   };
 }
