@@ -39,19 +39,19 @@ in {
 
       fish = lib.mkIf (cfg.defaultShell
         == "fish") {
-        enable = lib.mkForce true;
+        enable = true;
         #interactiveShellInit = lib.strings.concatStringsSep " " [
-         # ''
-          #  ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
+        # ''
+        #  ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
 
-           # set -U fish_greeting
-          #''
+        # set -U fish_greeting
+        #''
 
-          #(
-          #  (lib.strings.optionalString
-          #    cfg.wsl.enable)
-          #  ''fish_add_path --append /mnt/c/Users/tbrahic/AppData/Local/Microsoft/WinGet/Packages/equalsraf.win32yank_Microsoft.Winget.Source_8wekyb3d8bbwe/''
-          #)
+        #(
+        #  (lib.strings.optionalString
+        #    cfg.wsl.enable)
+        #  ''fish_add_path --append /mnt/c/Users/tbrahic/AppData/Local/Microsoft/WinGet/Packages/equalsraf.win32yank_Microsoft.Winget.Source_8wekyb3d8bbwe/''
+        #)
         #];
         functions = {
           refresh = "source $HOME/.config/fish/config.fish";
