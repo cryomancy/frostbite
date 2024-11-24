@@ -14,6 +14,10 @@
 in {
   options = {
     compositor = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+      };
       hyprland = {
         enable = lib.mkEnableOption "hyprland";
         gamemode = {
@@ -176,7 +180,7 @@ in {
     programs.wofi.enable = true;
 
     # enable sway window manager
-    wayland.windowManager.sway = {
+    wayland.windowManager.sway = lib.mkIf cfg.sway.enable {
       enable = true;
 
       config = {
