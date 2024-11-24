@@ -13,11 +13,11 @@ in {
         default = true;
       };
       wsl.enable = lib.mkEnableOption "WSL Integration";
-      defaultShell =
-        lib.mkPackageOption pkgs ["bash" "fish" "sh" "zsh"]
-        {
-          default = "fish";
-        };
+      defaultShell = lib.mkOption {
+        type = lib.types.enum ["fish" "zsh" "bash"];
+        default = "fish";
+        description = "Choose a shell: fish, zsh, or bash.";
+      };
     };
   };
 
