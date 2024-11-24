@@ -7,6 +7,10 @@
 }: let
   cfg = config.design;
 in {
+  imports = [
+    inputs.base16.homeManagerModule
+  ];
+
   options = {
     design = {
       enable = lib.mkOption {
@@ -18,10 +22,11 @@ in {
 
   # TODO: Make this a service to dynamically switch themes
   config = lib.mkIf cfg.enable {
+    scheme = "${inputs.tt-schemes}/base16/nord.yaml";
     stylix = {
       enable = true;
 
-      base16Scheme = "${inputs.tt-schemes}/base16/nord.yaml";
+      base16Scheme = config.scheme;
 
       cursor = {
         package = pkgs.bibata-cursors;
