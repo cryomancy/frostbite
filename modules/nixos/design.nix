@@ -7,7 +7,10 @@
 }: let
   cfg = config.design;
 in {
-  imports = [inputs.stylix.nixosModules.stylix];
+  imports = [
+    inputs.stylix.nixosModules.stylix
+    inputs.base16.nixosModule
+  ];
 
   options = {
     design = {
@@ -19,6 +22,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    scheme = "${inputs.tt-schemes}/base16/nord.yaml";
     stylix = {
       enable = true;
 
