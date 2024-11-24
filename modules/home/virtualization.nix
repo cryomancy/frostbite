@@ -7,7 +7,7 @@
   cfg = config.virtualization;
 in {
   options = {
-    fuyuVirt = {
+    virtualization = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
