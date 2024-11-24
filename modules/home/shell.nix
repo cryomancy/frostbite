@@ -4,10 +4,10 @@
   lib,
   ...
 }: let
-  cfg = config.shell;
+  cfg = config.fuyuShell;
 in {
   options = {
-    shell = {
+    fuyuShell = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

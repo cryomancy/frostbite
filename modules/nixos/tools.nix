@@ -56,4 +56,8 @@ in {
       bottom # Resource monitor (alternative to htop)
     ];
   };
+  programs = {
+    fish.enable = true;
+    zsh.enable = true;
+  };
 }
