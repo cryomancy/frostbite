@@ -24,7 +24,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs = {
       bash = lib.mkIf (cfg.defaultShell
-        == pkgs.bash) {
+        == "bash") {
         enable = true;
         shellOptions = [
           "vi"
@@ -38,7 +38,7 @@ in {
       };
 
       fish = lib.mkIf (cfg.defaultShell
-        == pkgs.fish) {
+        == "fish") {
         enable = true;
         interactiveShellInit = lib.strings.concatStringsSep " " [
           ''
@@ -117,7 +117,7 @@ in {
     };
 
     programs.zsh = lib.mkIf (cfg.defaultShell
-      == pkgs.zsh) {
+      == "zsh") {
       enable = true;
       enableCompletion = true;
       oh-my-zsh = {
