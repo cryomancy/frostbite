@@ -20,7 +20,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = lib.mkIf cfg.tuigreet.enable [
+    environment.systemPackages = lib.mkIf (cfg.option == "tuigreet") [
       pkgs.greetd.tuigreet
     ];
 
