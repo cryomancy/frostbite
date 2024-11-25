@@ -26,7 +26,7 @@ in {
     stylix = {
       enable = true;
 
-      base16Scheme = config.scheme;
+      base16Scheme = "${config.scheme}";
 
       cursor = {
         package = pkgs.bibata-cursors;
