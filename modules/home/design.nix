@@ -61,6 +61,7 @@ in {
         nixvim.enable = true;
         firefox.enable = false;
         gnome.enable = false;
+	fish.enable = false;
       };
     };
   };
