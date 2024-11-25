@@ -10,7 +10,7 @@ in {
     FHS = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        defualt = true;
+        default = true;
       };
     };
   };
