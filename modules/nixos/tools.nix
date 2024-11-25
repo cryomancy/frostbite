@@ -55,5 +55,6 @@ in {
       fx # Command-line JSON processor
       bottom # Resource monitor (alternative to htop)
     ];
+    programs.fish.enable = true;
   };
 }
