@@ -14,23 +14,24 @@
   in
     lib.nixosSystem {
       inherit system specialArgs;
-      modules = [
-        nixosModules.fuyuNoKosei
-        home-manager.nixosModules.home-manager
-        nixosModules.fuyuNoKosei
-        {
-          home-manager = {
-            inherit (lib) backupFileExtension;
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            extraSpecialArgs = specialArgs;
-            # Iterates over a list of users provided in the function call
-            users = lib.attrsets.genAttrs users (user: {
-              imports = [homeManagerModules.fuyuNoKosei];
-              config.home.username = user;
-            });
-          };
-        }
-      ];
+      modules =
+        [
+          nixosModules.fuyuNoKosei
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              inherit (lib) backupFileExtension;
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = specialArgs;
+              # Iterates over a list of users provided in the function call
+              users = lib.attrsets.genAttrs users (user: {
+                imports = [homeManagerModules.fuyuNoKosei];
+                config.home.username = user;
+              });
+            };
+          }
+        ]
+        ++ fuyuConfig;
     };
 }
