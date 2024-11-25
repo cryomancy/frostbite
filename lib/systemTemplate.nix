@@ -20,7 +20,7 @@
           home-manager.nixosModules.home-manager
           {
             home-manager = {
-              inherit (lib) backupFileExtension;
+              backupFileExtension = "bak";
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = specialArgs;
