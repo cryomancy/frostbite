@@ -8,7 +8,7 @@
 in {
   options = {
     FHS = {
-      enable = {
+      enable = lib.mkOption {
         type = lib.types.bool;
         defualt = true;
       };
