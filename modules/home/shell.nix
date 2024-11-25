@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  osConfig,
   lib,
   ...
 }: let
@@ -22,6 +23,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    osConfig.programs.fish.enable = lib.mkIf (cfg.defaultShell == "fish") true;
     programs = {
       bash = lib.mkIf (cfg.defaultShell
         == "bash") {
@@ -40,7 +42,6 @@ in {
       fish = lib.mkIf (cfg.defaultShell
         == "fish") {
         enable = lib.mkForce true;
-        config.programs.fish.enable = true;
         interactiveShellInit = lib.strings.concatStringsSep " " [
           ''
             ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
