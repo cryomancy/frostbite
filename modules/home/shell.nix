@@ -1,7 +1,6 @@
 {
   pkgs,
   config,
-  osConfig,
   lib,
   ...
 }: let
@@ -22,7 +21,6 @@ in {
     };
   };
 
-  osConfig.programs.fish.enable = lib.mkIf (cfg.defaultShell == "fish") true;
   config = lib.mkIf cfg.enable {
     programs = {
       bash = lib.mkIf (cfg.defaultShell
