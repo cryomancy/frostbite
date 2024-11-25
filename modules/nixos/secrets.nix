@@ -27,7 +27,7 @@ in {
       age = {
         keyFile = "/var/lib/sops-nix/key.txt";
       };
-      inherit (cfg.defaultSopsFile) defaultSopsFile;
+      defaultSopsFile = cfg.defaultSopsFile;
       defaultSopsFormat = "yaml";
       secrets = lib.attrsets.mergeAttrsList (builtins.attrValues (lib.genAttrs users (user: {
         "${user}/hashedPasswordFile" = {
