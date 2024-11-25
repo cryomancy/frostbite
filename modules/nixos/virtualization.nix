@@ -61,7 +61,7 @@ in {
     };
 
     # Enable auto-generated name servers
-    environment.etc."resolv.conf".source = lib.mkIf cfg.wsl.enable /etc/resolv.conf;
+    #environment.etc."resolv.conf".source = lib.mkIf cfg.wsl.enable /etc/resolv.conf;
 
     fuyuBoot.enable = (lib.mkIf cfg.wsl.enable) (lib.mkForce false);
   };
