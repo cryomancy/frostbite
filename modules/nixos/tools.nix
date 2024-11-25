@@ -8,7 +8,7 @@
 in {
   options = {
     tools = {
-      enable = lib.mkOptions {
+      enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
       };
