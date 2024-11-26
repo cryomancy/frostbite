@@ -3,7 +3,7 @@
   pkgs,
   system,
   hostName,
-  fuyuConfig,
+  fuyuConfig ? [],
   users,
   lib,
   overlays,
