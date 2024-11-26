@@ -93,7 +93,7 @@ in {
     services = {
       qemuGuest.enable = lib.mkIf cfg.virtualMachine.enable true;
       spice-vdagentd.enable = lib.mkIf cfg.virtualMachine.enable true;
-      services.avahi.enable = true;
+      avahi.enable = true;
     };
   };
 }
