@@ -21,7 +21,7 @@ in {
       inherit hostName;
       useDHCP = lib.mkDefault true;
       networkmanager.enable = false;
-      useNetworkD = true;
+      useNetworkd = true;
     };
 
     hardware.bluetooth.enable = true;
