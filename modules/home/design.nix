@@ -25,7 +25,7 @@ in {
     stylix = {
       enable = true;
 
-      base16Scheme = builtins.readFile "${inputs.tt-schemes}/base16/nord.yaml";
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
 
       cursor = {
         package = pkgs.bibata-cursors;
