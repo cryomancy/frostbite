@@ -22,7 +22,10 @@ in {
 
   # TODO: Make this a service to dynamically switch themes
   config = lib.mkIf cfg.enable {
-    scheme = "${inputs.tt-schemes}/base16/nord.yaml";
+    scheme = {
+      yaml = "${inputs.tt-schemes}/base16/nord.yaml";
+      use-ifd = "auto"; # to suppress errors, set to "always"
+    };
     stylix = {
       enable = true;
 
@@ -61,7 +64,7 @@ in {
         nixvim.enable = true;
         firefox.enable = false;
         gnome.enable = false;
-	fish.enable = false;
+        fish.enable = false;
       };
     };
   };
