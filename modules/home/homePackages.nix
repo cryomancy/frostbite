@@ -19,6 +19,8 @@ in {
     home.packages = with pkgs; [
       obsidian
       lynx
+      audacity
+      gimp-with-plugins
     ];
   };
 }
