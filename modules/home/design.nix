@@ -22,14 +22,10 @@ in {
 
   # TODO: Make this a service to dynamically switch themes
   config = lib.mkIf cfg.enable {
-    scheme = {
-      yaml = "${inputs.tt-schemes}/base16/nord.yaml";
-      use-ifd = "auto"; # to suppress errors, set to "always"
-    };
     stylix = {
       enable = true;
 
-      base16Scheme = "${config.scheme}";
+      base16Scheme = builtins.readfile "${inputs.tt-schemes}/base16/nord.yaml";
 
       cursor = {
         package = pkgs.bibata-cursors;
