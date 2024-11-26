@@ -49,7 +49,7 @@ in {
       ssh = lib.mkIf cfg.openssh.enable {
         startAgent = true;
         # Yubi-Key
-        extraConfig = lib.mkIf cfg.openssh.yubikey.enable ''
+        extraConfig = lib.mkIf cfg.yubikey.enable ''
           AddKeysToAgent yes
         '';
       };
