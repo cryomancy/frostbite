@@ -29,7 +29,6 @@ in {
         settings = {
           banner = "冬の国境";
           PermitRootLogin = "no";
-          PassswordAuthentication = false;
           KbdInteractiveAuthentication = false;
           X11Forwarding = true;
           UsePAM = true;
