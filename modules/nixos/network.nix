@@ -20,8 +20,9 @@ in {
     networking = {
       inherit hostName;
       useDHCP = lib.mkDefault true;
-      networkmanager.enable = false;
-      useNetworkd = true;
+      networkmanager.enable = true;
+      # TODO: Switch to networkd
+      # useNetworkd = true;
     };
 
     hardware.bluetooth.enable = true;
