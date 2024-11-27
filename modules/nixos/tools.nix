@@ -57,7 +57,7 @@ in {
       bottom # Resource monitor (alternative to htop)
       alchemy # Drawing application
       act # Run your Github actions locally
-      _5etools
+      # _5etools # package does not build
 
       # Network tools
       tcpdump # CLI packet analyzer
