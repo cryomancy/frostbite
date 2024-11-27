@@ -5,14 +5,14 @@
   pkgs,
   ...
 }: let
-  cfg = config.design;
+  cfg = config.fuyuNoKosei.design;
 in {
   imports = [
     inputs.base16.homeManagerModule
   ];
 
   options = {
-    design = {
+    fuyuNoKosei.design = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

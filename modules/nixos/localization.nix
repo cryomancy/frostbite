@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.localization;
+  cfg = config.fuyuNoKosei.localization;
 in {
   options = {
-    localization = {
+    fuyuNoKosei.localization = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

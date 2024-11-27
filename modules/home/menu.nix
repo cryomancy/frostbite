@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.menu;
+  cfg = config.fuyuNoKosei.menu;
 in {
   options = {
-    menu = {
+    fuyuNoKosei.menu = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

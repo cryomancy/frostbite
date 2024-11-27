@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.security;
+  cfg = config.fuyuNoKosei.security;
 in {
   options = {
-    security = {
+    fuyuNoKosei.security = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

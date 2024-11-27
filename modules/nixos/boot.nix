@@ -3,9 +3,9 @@
   lib,
   ...
 }: let
-  cfg = config.fuyuBoot;
+  cfg = config.fuyuNoKosei.boot;
 in {
-  options.fuyuBoot.enable = lib.mkOption {
+  options.fuyuNoKosei.boot.enable = lib.mkOption {
     type = lib.types.bool;
     default = true;
   };

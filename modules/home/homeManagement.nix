@@ -3,11 +3,11 @@
   lib,
   ...
 }: let
-  cfg = config.homeManagement;
+  cfg = config.fuyuNoKosei.homeManagement;
   dir = "${config.home.homeDirectory}";
 in {
   options = {
-    homeManagement = {
+    fuyuNoKosei.homeManagement = {
       enable = lib.mkOption {
         default = true;
         example = false;

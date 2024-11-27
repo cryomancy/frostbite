@@ -6,12 +6,12 @@
   pkgs,
   ...
 }: let
-  cfg = config.virtualization;
+  cfg = config.fuyuNoKosei.virtualization;
 in {
   imports = [inputs.nixos-wsl.nixosModules.wsl];
 
   options = {
-    virtualization = {
+    fuyuNoKosei.virtualization = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

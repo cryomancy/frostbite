@@ -5,10 +5,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.nixSettings;
+  cfg = config.fuyuNoKosei.nixSettings;
 in {
   options = {
-    nixSettings = {
+    fuyuNoKosei.nixSettings = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

@@ -38,10 +38,10 @@
         '{text:$text,tooltip:$tooltip,alt:$alt,class:$class,percentage:$percentage}'
     '';
   };
-  cfg = config.status;
+  cfg = config.fuyuNoKosei.status;
 in {
   options = {
-    status = {
+    fuyuNoKosei.status = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

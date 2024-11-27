@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.systemMaintenance;
+  cfg = config.fuyuNoKosei.systemMaintenance;
 in {
   options = {
-    systemMaintenance = {
+    fuyuNoKosei.systemMaintenance = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
