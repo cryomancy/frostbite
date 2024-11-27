@@ -295,7 +295,7 @@ in {
           '';
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             ublock-origin
-            darkmode
+            dark-mode-website-switcher
           ];
           containers = {
             development = {
