@@ -12,7 +12,7 @@ in {
         type = lib.types.bool;
         default = true;
       };
-      fuyuSSH.enable = lib.mkOption {
+      ssh.enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
       };
@@ -24,7 +24,7 @@ in {
   };
   config = lib.mkIf cfg.enable {
     services = {
-      openssh = lib.mkIf cfg.fuyuSSH.enable {
+      openssh = lib.mkIf cfg.ssh.enable {
         enable = true;
         settings = {
           banner = "冬の国境";
@@ -45,7 +45,7 @@ in {
     };
 
     programs = {
-      ssh = lib.mkIf cfg.openssh.enable {
+      ssh = lib.mkIf cfg.ssh.enable {
         startAgent = true;
         # Yubi-Key
         extraConfig = lib.mkIf cfg.yubikey.enable ''
