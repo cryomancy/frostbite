@@ -322,7 +322,7 @@ in {
           id = 1;
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             ublock-origin
-            darkmode
+	    dark-mode-website-switcher
           ];
           containersForce = true;
           search = {
