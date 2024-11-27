@@ -40,6 +40,8 @@ in {
 
       # Encryption
       age
+      # TODO: Add option
+      # age-plugin-yubikey
       sops
       rclone
 
@@ -47,6 +49,12 @@ in {
       gzip
       zip
       zstd
+
+      # Android
+      adb-sync-unstable
+      adbfs-rootless-unstable
+      waydroid
+      scrcpy # Display and control Android devices over USB or TCP/IP
     ];
 
     programs = {

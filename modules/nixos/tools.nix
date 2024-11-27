@@ -43,6 +43,7 @@ in {
       dmidecode # Dump system DMI (SMBIOS) data
       parted # A partitioning tool
       ethtool # Ethernet device settings and diagnostics
+      acpilight # ACPI backlight control
 
       # Disk and file management
       pciutils # PCI device listing
@@ -54,6 +55,31 @@ in {
       age # Simple, secure, modern encryption tool
       fx # Command-line JSON processor
       bottom # Resource monitor (alternative to htop)
+      alchemy # Drawing application
+      act # Run your Github actions locally
+      5
+      etools
+
+      # Network tools
+      tcpdump # CLI packet analyzer
+      nmap # Ttility for network discovery
+      nmapsi4 # Qt frontend for nmap
+      netcat
+      traceroute
+      wireshark
+      termshark
+      iperf # Measure IP bandwidth
+      netboot # Portable PXE server
+      nettools # Swiss army knife of AD troubleshooting
+      ipcalc
+      python312Packages.scapy # Interactive packet manipulation and shell
+      tcpreplay
+      udpreplay
+      mtr # ping + traceroute
+      dig
+      whois
+      arp-scan
+      asn # OSINT CLI tool for investigating network data
     ];
     programs.fish.enable = true;
   };

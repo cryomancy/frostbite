@@ -2,6 +2,7 @@
   config,
   hostName,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.network;
@@ -19,7 +20,8 @@ in {
     networking = {
       inherit hostName;
       useDHCP = lib.mkDefault true;
-      networkmanager.enable = true;
+      networkmanager.enable = false;
+      useNetworkD = true;
     };
 
     hardware.bluetooth.enable = true;
@@ -28,6 +30,10 @@ in {
     programs.openvpn3 = {
       enable = true;
     };
+
+    environment.systemPackages = with pkgs; [
+      gnome-control-center
+    ];
 
     services.openvpn.servers = {
       #local = {
