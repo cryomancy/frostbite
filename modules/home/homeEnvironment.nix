@@ -75,49 +75,51 @@ in {
         enableZshIntegration = true;
       };
       git = {
-    enable = true;
+        enable = true;
+        lfs.enable = true;
+        delta.enable = true;
+        delta.options = {
+          line-numbers = true;
+          side-by-side = true;
+          navigate = true;
+        };
 
-    lfs.enable = true;
+        userName = "TahlonBrahic";
+        userEmail = "tahlonbrahic@gmail.com";
 
-    delta.enable = true;
-    delta.options = {
-      line-numbers = true;
-      side-by-side = true;
-      navigate = true;
-    };
+        extraConfig = {
+          init.defaultBranch = "main";
 
-    userName = "TahlonBrahic";
-    userEmail = "tahlonbrahic@gmail.com";
+          push = {
+            default = "current";
+            autoSetupRemote = true;
+          };
 
-    extraConfig = {
-      init.defaultBranch = "main";
+          pull = {
+            rebase = true;
+          };
 
-      push = {
-        default = "current";
-        autoSetupRemote = true;
-      };
+          merge = {
+            conflictstyle = "diff3";
+          };
 
-      pull = {
-        rebase = true;
-      };
+          diff = {
+            colorMoved = "default";
+          };
 
-      merge = {
-        conflictstyle = "diff3";
-      };
-
-      diff = {
-        colorMoved = "default";
-      };
-
-      url = {
-        "ssh://git@github.com/TahlonBrahic" = {
-          insteadOf = "https://github.com/TahlonBrahic";
+          url = {
+            "ssh://git@github.com/TahlonBrahic" = {
+              insteadOf = "https://github.com/TahlonBrahic";
+            };
+          };
         };
       };
+
       lsd = {
         enable = true;
         enableAliases = true;
       };
+
       starship = {
         enable = true;
         settings = {
@@ -136,6 +138,7 @@ in {
           hostname.style = "bold green";
         };
       };
+
       zoxide = {
         enable = true;
         enableFishIntegration = true;
