@@ -10,7 +10,7 @@ in {
   imports = [inputs.disko.nixosModules.disko];
 
   options = {
-    deploy = {
+    fuyuNoKosei.deploy = {
       enable = lib.mkEnableOption "disko deployment";
     };
   };
