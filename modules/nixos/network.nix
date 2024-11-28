@@ -19,10 +19,12 @@ in {
   config = lib.mkIf cfg.enable {
     networking = {
       inherit hostName;
+      firewall = {
+        allowPing = true;
+      };
       useDHCP = lib.mkDefault true;
       networkmanager.enable = true;
-      # TODO: Switch to networkd
-      # useNetworkd = true;
+      useNetworkd = true;
     };
 
     hardware.bluetooth.enable = true;
