@@ -3,7 +3,7 @@
   pkgs,
   system,
   hostName,
-  fuyuConfig ? [],
+  extraConfig,
   users,
   lib,
   overlays,
@@ -31,5 +31,5 @@ in
           };
         }
       ]
-      ++ fuyuConfig;
+      ++ extraConfig;
   }
