@@ -53,7 +53,6 @@ in {
       # Android
       adb-sync
       adbfs-rootless
-      waydroid
       scrcpy # Display and control Android devices over USB or TCP/IP
     ];
 
