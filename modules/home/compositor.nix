@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.compositor;
+  cfg = config.fuyuNoKosei.compositor;
 
   hyprlandGamemodePrograms = lib.makeBinPath [
     config.programs.hyprland.package
