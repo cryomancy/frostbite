@@ -38,7 +38,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages =
       lib.lists.optionals cfg.chrome.enable [pkgs.google-chrome]
-      ++ lib.lists.options cfg.chromium.enable [pkgs.ungoogled-chromium]
+      ++ lib.lists.optionals cfg.chromium.enable [pkgs.ungoogled-chromium]
       ++ lib.lists.optionals cfg.terminal.enable
       [
         pkgs.w3m
