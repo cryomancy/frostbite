@@ -17,7 +17,12 @@ in {
 
   config = lib.mkIf cfg.enable {
     security = {
-      sudo.wheelNeedsPassword = false;
+      sudo = {
+        wheelNeedsPassword = false;
+        extraConfig = ''
+          Defaults lecture = never
+        '';
+      };
       apparmor = {
         enable = true;
       };
