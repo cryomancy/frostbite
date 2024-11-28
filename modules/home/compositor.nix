@@ -127,9 +127,10 @@ in {
 
         decoration = {
           rounding = 5;
-          drop_shadow = true;
-          shadow_range = 30;
-          shadow_render_power = 2;
+          # The following no longer exist:
+          # drop_shadow = true;
+          # shadow_range = 30;
+          # shadow_render_power = 2;
 
           blur = {
             enabled = true;
