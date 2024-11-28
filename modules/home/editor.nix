@@ -4,10 +4,10 @@
   lib,
   ...
 }: let
-  cfg = config.editor;
+  cfg = config.fuyuNoKosei.editor;
 in {
   options = {
-    editor = {
+    fuyuNoKosei.editor = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

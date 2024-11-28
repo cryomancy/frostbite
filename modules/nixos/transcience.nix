@@ -4,12 +4,12 @@
   lib,
   ...
 }: let
-  cfg = config.transience;
+  cfg = config.fuyuNoKosei.transience;
 in {
   imports = [inputs.impermanence.nixosModules.impermanence];
 
   options = {
-    transience.enable = lib.mkEnableOption "transience";
+    fuyuNoKosei.transience.enable = lib.mkEnableOption "transience";
   };
 
   config = lib.mkIf cfg.enable {

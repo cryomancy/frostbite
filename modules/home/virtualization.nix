@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.virtualization;
+  cfg = config.fuyuNoKosei.virtualization;
 in {
   options = {
-    virtualization = {
+    fuyuNoKosei.virtualization = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

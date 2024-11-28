@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.encryption;
+  cfg = config.fuyuNoKosei.encryption;
 in {
   options = {
-    encryption = {
+    fuyuNoKosei.encryption = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

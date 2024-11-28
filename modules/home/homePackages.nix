@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.homePackages;
+  cfg = config.fuyuNoKosei.homePackages;
 in {
   options = {
-    homePackages = {
+    fuyuNoKosei.homePackages = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

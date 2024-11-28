@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.environment;
+  cfg = config.fuyuNoKosei.environment;
 in {
   options = {
-    environment = {
+    fuyuNoKosei.environment = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

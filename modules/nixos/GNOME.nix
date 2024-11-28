@@ -4,10 +4,10 @@
   lib,
   ...
 }: let
-  cfg = config.GNOME;
+  cfg = config.fuyuNoKosei.GNOME;
 in {
   options = {
-    GNOME = {
+    fuyuNoKosei.GNOME = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

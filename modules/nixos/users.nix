@@ -5,10 +5,10 @@
   users,
   ...
 }: let
-  cfg = config.users;
+  cfg = config.fuyuNoKosei.users;
 in {
   options = {
-    users = {
+    fuyuNoKosei.users = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

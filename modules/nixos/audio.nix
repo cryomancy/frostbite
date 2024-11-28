@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.audio;
+  cfg = config.fuyuNoKosei.audio;
 in {
-  options.audio.enable = lib.mkOption {
+  options.fuyuNoKosei.audio.enable = lib.mkOption {
     type = lib.types.bool;
     default = true;
     description = "Enable sound support";

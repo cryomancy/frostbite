@@ -5,7 +5,7 @@
   lib,
   ...
 }: let
-  cfg = config.deploy;
+  cfg = config.fuyuNoKosei.deploy;
 in {
   imports = [inputs.disko.nixosModules.disko];
 

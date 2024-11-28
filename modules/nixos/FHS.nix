@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.FHS;
+  cfg = config.fuyuNoKosei.FHS;
 in {
   options = {
-    FHS = {
+    fuyuNoKosei.FHS = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

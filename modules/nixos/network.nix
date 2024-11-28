@@ -5,10 +5,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.network;
+  cfg = config.fuyuNoKosei.network;
 in {
   options = {
-    network = {
+    fuyuNoKosei.network = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

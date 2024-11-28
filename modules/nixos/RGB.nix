@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.RGB;
+  cfg = config.fuyuNoKosei.RGB;
 in {
   options = {
-    RGB = {
+    fuyuNoKosei.RGB = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

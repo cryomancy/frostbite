@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.services;
+  cfg = config.fuyuNoKosei.services;
 in {
   options = {
-    services = {
+    fuyuNoKosei.services = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
