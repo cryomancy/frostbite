@@ -24,7 +24,7 @@ in {
       };
       useDHCP = lib.mkDefault true;
       networkmanager.enable = true;
-      useNetworkd = true;
+      useNetworkd = false;
     };
 
     hardware.bluetooth.enable = true;
