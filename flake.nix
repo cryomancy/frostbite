@@ -47,13 +47,6 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    /*
-       unused
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    */
     impermanence = {
       url = "github:nix-community/impermanence";
     };
@@ -72,14 +65,6 @@
       };
     };
     /*
-       unused
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-    };
-    systems = {
-      url = "github:nix-systems/default-linux";
-    };
-    */
     /*
        ___           ___           ___           ___       ___
       /\  \         /\  \         /\  \         /\__\     /\  \
