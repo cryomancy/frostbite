@@ -14,7 +14,7 @@ in {
       };
       chrome.enable = lib.mkOption {
         type = lib.types.bool;
-        default = true;
+        default = false;
       };
       chromium.enable = lib.mkOption {
         type = lib.types.bool;
@@ -22,7 +22,7 @@ in {
       };
       firefox.enable = lib.mkOption {
         type = lib.types.bool;
-        default = true;
+        default = false;
       };
       terminal.enable = lib.mkOption {
         type = lib.types.bool;
