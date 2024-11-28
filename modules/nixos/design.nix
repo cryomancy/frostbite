@@ -22,10 +22,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    scheme = "${inputs.tt-schemes}/base16/nord.yaml";
     stylix = {
       enable = true;
 
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
       image = "${inputs.walls}/anime/a_drawing_of_a_horse_carriage_on_a_bridge.png";
 
       cursor = {
