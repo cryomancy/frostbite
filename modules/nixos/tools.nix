@@ -80,6 +80,13 @@ in {
       arp-scan
       asn # OSINT CLI tool for investigating network data
     ];
-    programs.fish.enable = true;
+    programs = {
+      fish = {
+
+      };
+      zsh = {
+
+      };
+    };
   };
 }
