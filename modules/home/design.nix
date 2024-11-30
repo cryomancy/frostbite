@@ -48,16 +48,15 @@ in {
       };
 
       opacity = {
-        applications = .7;
-        popups = .7;
-        terminal = .7;
+        applications = .4;
+        popups = .4;
+        terminal = .4;
       };
 
       polarity = "dark";
 
       targets = {
         rofi.enable = true;
-	zellij.enable = false;
         nixvim.enable = true;
         gnome.enable = false;
         fish.enable = false;
