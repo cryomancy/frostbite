@@ -26,7 +26,7 @@ in {
           };
         };
       };
-      steam = lib.mkIf {
+      steam = {
         enable = true;
 
         package = pkgs.steam.override {
