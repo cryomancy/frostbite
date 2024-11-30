@@ -156,9 +156,9 @@ in {
 
     programs.zellij = {
       enable = true;
-      #enableBashIntegration = true;
+      enableBashIntegration = true;
       enableFishIntegration = true;
-      #enableZshIntegration = true;
+      enableZshIntegration = true;
     };
   };
 }
