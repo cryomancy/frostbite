@@ -7,6 +7,7 @@
     ./displayManager.nix
     ./environment.nix
     ./FHS.nix
+    ./gaming.nix
     ./GNOME.nix
     ./localization.nix
     ./network.nix

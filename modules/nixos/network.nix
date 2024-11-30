@@ -36,6 +36,7 @@ in {
 
     environment.systemPackages = with pkgs; [
       gnome-control-center
+      networkmanagerapplet
     ];
 
     services.openvpn.servers = {
