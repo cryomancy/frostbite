@@ -35,8 +35,8 @@ in {
 
       fonts = {
         monospace = {
-          package = pkgs.nerd-fonts.jetbrains-mono;
-          name = "JetBrainsMono Nerd Font Mono";
+          package = pkgs.nerd-fonts.meslo-lg;
+          name = "Nerd Fonts: Slashed zeros, customized version of Apple's Menlo";
         };
         sansSerif = {
           package = pkgs.dejavu_fonts;
@@ -49,9 +49,9 @@ in {
       };
 
       opacity = {
-        applications = 4.0;
-        popups = 5.0;
-        terminal = 2.0;
+        applications = .5;
+        popups = .5;
+        terminal = .5;
       };
 
       targets = {
