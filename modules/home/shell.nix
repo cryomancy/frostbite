@@ -15,7 +15,7 @@ in {
         };
         enableWSLIntegration = lib.mkEnableOption "WSL Integration";
         defaultShell = lib.mkOption {
-          type = lib.types.uniq lib.types.enum ["fish" "zsh" "bash"];
+          type = lib.types.enum ["fish" "zsh" "bash"];
           default = "fish";
           description = "Choose a shell: fish, zsh, or bash.";
         };
