@@ -35,7 +35,9 @@ in {
 
       fonts = {
         monospace = {
-          package = pkgs.nerd-fonts.meslo-lg;
+          package = with pkgs; [
+            (nerdfonts.override {fonts = ["meslo-lg"];})
+          ];
           name = "Nerd Fonts: Slashed zeros, customized version of Apple's Menlo";
         };
         sansSerif = {
