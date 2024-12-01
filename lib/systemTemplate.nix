@@ -20,8 +20,8 @@ in
         {
           home-manager = {
             backupFileExtension = "bak";
-            useGlobalPkgs = false;
-            useUserPackages = false;
+            useGlobalPkgs = true;
+            useUserPackages = true;
             extraSpecialArgs = specialArgs;
             # Iterates over a list of users provided in the function call
             users = lib.attrsets.genAttrs users (user: {
