@@ -7,16 +7,18 @@
   cfg = config.fuyuNoKosei.shell;
 in {
   options = {
-    fuyuNoKosei.shell = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
-      };
-      wsl.enable = lib.mkEnableOption "WSL Integration";
-      defaultShell = lib.mkOption {
-        type = lib.types.enum ["fish" "zsh" "bash"];
-        default = "fish";
-        description = "Choose a shell: fish, zsh, or bash.";
+    fuyuNoKosei = {
+      shell = {
+        enable = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+        };
+        enableWSLIntegration = lib.mkEnableOption "WSL Integration";
+        defaultShell = lib.mkOption {
+          type = lib.types.oneOf lib.types.enum ["fish" "zsh" "bash"];
+          default = "fish";
+          description = "Choose a shell: fish, zsh, or bash.";
+        };
       };
     };
   };
@@ -40,19 +42,20 @@ in {
       fish = lib.mkIf (cfg.defaultShell
         == "fish") {
         enable = true;
-        #interactiveShellInit = lib.strings.concatStringsSep " " [
-        # ''
-        #  ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
+        interactiveShellInit = lib.strings.concatStringsSep " " [
+          ''
+             ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
 
-        # set -U fish_greeting
-        #''
+            set -U fish_greeting
+          ''
 
-        #(
-        #  (lib.strings.optionalString
-        #    cfg.wsl.enable)
-        #  ''fish_add_path --append /mnt/c/Users/tbrahic/AppData/Local/Microsoft/WinGet/Packages/equalsraf.win32yank_Microsoft.Winget.Source_8wekyb3d8bbwe/''
-        #)
-        #];
+          (
+            (lib.strings.optionalString
+              cfg.enableWSLIntegration)
+            ''fish_add_path --append /mnt/c/Users/tbrahic/AppData/Local/Microsoft/WinGet/Packages/equalsraf.win32yank_Microsoft.Winget.Source_8wekyb3d8bbwe/''
+          )
+        ];
+
         functions = {
           refresh = "source $HOME/.config/fish/config.fish";
           take = ''mkdir -p -- "$1" && cd -- "$1"'';
