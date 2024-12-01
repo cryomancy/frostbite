@@ -143,13 +143,13 @@ in {
       (
         lib.strings.optionalString
         (cfg.defaultShell
-          == pkgs.fish)
+          == "fish")
         "/etc/profiles/per-user/${config.home.username}/bin/fish"
       )
       (
         lib.strings.optionalString
         (cfg.defaultShell
-          == pkgs.zsh)
+          == "zsh")
         "/etc/profiles/per-user/${config.home.username}/bin/zsh"
       )
     ];
