@@ -15,8 +15,8 @@ in {
         };
         enableWSLIntegration = lib.mkEnableOption "WSL Integration";
         defaultShell = lib.mkOption {
-          type = lib.types.enum ["fish" "zsh" "bash"];
-          default = "fish";
+          type = lib.types.enum [pkgs.fish pkgs.zsh pkgs.bash];
+          default = pkgs.fish;
           description = "Choose a shell: fish, zsh, or bash.";
         };
       };
@@ -26,7 +26,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs = {
       bash = lib.mkIf (cfg.defaultShell
-        == "bash") {
+        == pkgs.bash) {
         enable = true;
         shellOptions = [
           "vi"
@@ -40,7 +40,7 @@ in {
       };
 
       fish = lib.mkIf (cfg.defaultShell
-        == "fish") {
+        == pkgs.fish) {
         enable = true;
         interactiveShellInit = lib.strings.concatStringsSep " " [
           ''
@@ -52,7 +52,7 @@ in {
           (
             (lib.strings.optionalString
               cfg.enableWSLIntegration)
-            ''fish_add_path --append /mnt/c/Users/tbrahic/AppData/Local/Microsoft/WinGet/Packages/equalsraf.win32yank_Microsoft.Winget.Source_8wekyb3d8bbwe/''
+            ''fish_add_path --append /mnt/c/Users/${config.home.username}/AppData/Local/Microsoft/WinGet/Packages/equalsraf.win32yank_Microsoft.Winget.Source_8wekyb3d8bbwe/''
           )
         ];
 
@@ -120,7 +120,7 @@ in {
     };
 
     programs.zsh = lib.mkIf (cfg.defaultShell
-      == "zsh") {
+      == pkgs.zsh) {
       enable = true;
       enableCompletion = true;
       oh-my-zsh = {
@@ -139,20 +139,9 @@ in {
         theme = "jonathan";
       };
     };
-    home.sessionVariables.SHELL = lib.strings.concatStringsSep "user-space error" [
-      (
-        lib.strings.optionalString
-        (cfg.defaultShell
-          == "fish")
-        "/etc/profiles/per-user/${config.home.username}/bin/fish"
-      )
-      (
-        lib.strings.optionalString
-        (cfg.defaultShell
-          == "zsh")
-        "/etc/profiles/per-user/${config.home.username}/bin/zsh"
-      )
-    ];
+
+    # NOTE: I have removed ZSH Integration from session Variables
+    home.sessionVariables.SHELL = /etc/profiles/per-user/${config.home.username}/bin/fish;
 
     programs.zellij = {
       enable = true;
