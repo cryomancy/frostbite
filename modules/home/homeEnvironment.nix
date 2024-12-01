@@ -121,6 +121,7 @@ in {
 
       starship = {
         enable = true;
+        enableFishIntegration = true;
         settings = {
           aws.disabled = true;
           gcloud.disabled = true;
