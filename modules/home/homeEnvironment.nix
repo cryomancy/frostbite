@@ -120,7 +120,7 @@ in {
       };
 
       starship = {
-        enable = true;
+        enable = false;
         enableFishIntegration = true;
         settings = {
           aws.disabled = true;
