@@ -38,7 +38,7 @@ in {
 
     home = {
       homeDirectory = "/home/${config.home.username}";
-      stateVersion = "unstable";
+      stateVersion = "25.05";
     };
 
     systemd.user.targets.tray = {

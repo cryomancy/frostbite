@@ -16,7 +16,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     system = {
-      stateVersion = "24.11";
+      stateVersion = "25.05";
       autoUpgrade = {
         enable = true;
         flags = [
