@@ -11,8 +11,8 @@ in {
       enable = lib.mkEnableOption "gaming";
     };
   };
-  config = {
-    gamemode = lib.mkIf cfg.gamemode.enable {
+  config = lib.mkIf cfg.enable {
+    gamemode = {
       enable = true;
       settings = {
         general = {
@@ -25,7 +25,7 @@ in {
         };
       };
     };
-    steam = lib.mkIf cfg.gamemode.enable {
+    steam = lib.mkIf {
       enable = true;
 
       package = pkgs.steam.override {
