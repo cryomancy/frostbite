@@ -95,7 +95,7 @@ in {
             gsa = "git stash apply stash^{/";
             gsl = "git stash list";
           };
-        shellAliases = lib.mkIf cfg.wsl.enable {
+        shellAliases = lib.mkIf cfg.enableWSLIntegration {
           jvim = "nvim";
           lvim = "nvim";
           pbcopy = "/mnt/c/Windows/System32/clip.exe";
