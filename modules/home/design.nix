@@ -57,8 +57,8 @@ in {
 
       targets = {
         rofi.enable = true;
+	zellij.enable = false;
         nixvim.enable = true;
-        firefox.enable = false;
         gnome.enable = false;
         fish.enable = false;
       };
