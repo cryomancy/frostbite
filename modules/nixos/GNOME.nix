@@ -8,11 +8,7 @@
 in {
   options = {
     fuyuNoKosei.GNOME = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
-        example = false;
-      };
+      enable = lib.mkEnableOption "GNOME";
       gamemode = {
         startscript = lib.mkOption {
           type = lib.types.string;
