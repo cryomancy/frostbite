@@ -7,7 +7,7 @@
   cfg = config.fuyuNoKosei.fileManager;
 in {
   options = {
-    fuyuNoKosei.menu = {
+    fuyuNoKosei.fileManager = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = config.fuyuNoKosei.compositor.enable;
