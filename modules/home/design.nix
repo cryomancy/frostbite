@@ -48,16 +48,18 @@ in {
       };
 
       opacity = {
-        applications = .5;
-        popups = .5;
-        terminal = .5;
+        applications = .1;
+        popups = .1;
+        terminal = .1;
       };
 
       polarity = "dark";
 
       targets = {
-        rofi.enable = true;
-        nixvim.enable = true;
+        nixvim = {
+          enable = true;
+          plugin = "base16-nvim";
+        };
         gnome.enable = false;
         fish.enable = false;
       };
