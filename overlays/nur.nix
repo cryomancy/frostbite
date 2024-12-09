@@ -1,2 +1,2 @@
 {inputs, ...}:
-inputs.nur.overlay.default
+inputs.nur.overlay
