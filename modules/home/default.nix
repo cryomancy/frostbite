@@ -5,6 +5,7 @@
     ./design.nix
     ./editor.nix
     ./encryption.nix
+    ./fileManager.nix
     ./homeEnvironment.nix
     ./homeManagement.nix
     ./homePackages.nix
