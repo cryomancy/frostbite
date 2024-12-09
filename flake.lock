@@ -551,11 +551,11 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1733744323,
-        "narHash": "sha256-1RRBiIlbs4evCfdj7niWsl09REKRLmX4iK+CaqxHeIk=",
+        "lastModified": 1733744934,
+        "narHash": "sha256-1JuAU3QvdLqhDCouLA7lLWbCyVWq9bCuHpcQt4/Vtjs=",
         "owner": "TahlonBrahic",
         "repo": "fuyu-no-neovim",
-        "rev": "17122dd03dcb4e160f449320060161593f9c26a8",
+        "rev": "ca371c34181b0af2dfd870d81a8b712270e7e0cb",
         "type": "github"
       },
       "original": {
