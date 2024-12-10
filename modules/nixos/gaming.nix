@@ -9,9 +9,19 @@ in {
   options = {
     fuyuNoKosei.gaming = {
       enable = lib.mkEnableOption "gaming";
+      enableZenKernel = lib.mkOption {
+        type = lib.types.bool;
+        default = cfg.enable;
+      };
     };
   };
   config = lib.mkIf cfg.enable {
+    # Built using the best configuration and kernel sources for desktop, multimedia, and gaming workloads.
+    boot = lib.mkIf cfg.enableZenKernel {
+      boot.extraModulePackages = with config.boot.kernelPackages; [xone];
+      kernelPackages = lib.mkForce pkgs.linuxPackages_zen;
+    };
+
     programs = {
       gamemode = {
         enable = true;
@@ -51,6 +61,16 @@ in {
       steam-tui
       steam-run
       steamtinkerlaunch
+      steam-rom-manager
+      lutris
+      heroic
+      bottles
+      protonup
+      emulationstation-de
+      pcsx2
+      duckstation
+      xemu
+      dolphin-emu
     ];
   };
 }
