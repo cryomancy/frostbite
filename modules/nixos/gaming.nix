@@ -75,6 +75,11 @@ in {
       lact
     ];
 
+    # Not sure what this is about
+    nixpkgs.config.permittedInsecurePackages = [
+      "freeimage-unstable-2021-11-01"
+    ];
+
     # GPU Monitoring and Fan Adjustment
     systemd.packages = with pkgs; [lact];
     systemd.services.lactd.wantedBy = ["multi-user.target"];
