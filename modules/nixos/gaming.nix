@@ -18,7 +18,7 @@ in {
   config = lib.mkIf cfg.enable {
     # Built using the best configuration and kernel sources for desktop, multimedia, and gaming workloads.
     boot = lib.mkIf cfg.enableZenKernel {
-      boot.extraModulePackages = with config.boot.kernelPackages; [xone];
+      extraModulePackages = with config.boot.kernelPackages; [xone];
       kernelPackages = lib.mkForce pkgs.linuxPackages_zen;
     };
 
@@ -71,6 +71,12 @@ in {
       duckstation
       xemu
       dolphin-emu
+      retroarch
+      lact
     ];
+
+    # GPU Monitoring and Fan Adjustment
+    systemd.packages = with pkgs; [lact];
+    systemd.services.lactd.wantedBy = ["multi-user.target"];
   };
 }
