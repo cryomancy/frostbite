@@ -37,6 +37,7 @@ in {
     environment.systemPackages = with pkgs; [
       gnome-control-center
       networkmanagerapplet
+      protonvpn-gui
     ];
 
     services.openvpn.servers = {
