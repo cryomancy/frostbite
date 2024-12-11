@@ -162,8 +162,8 @@ in {
             enabled = true;
             offset = "3 3";
             range = 12;
-            color = "0x44000000";
-            color_inactive = "0x66000000";
+            color = lib.mkForce "0x44000000";
+            color_inactive = lib.mkForce "0x66000000";
           };
         };
 
