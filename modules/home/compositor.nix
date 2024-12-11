@@ -89,15 +89,15 @@ in {
         };
 
         bindl = [
-          "F10,exec,playerctl volume 0" # Toggle mute
-          "F11,exec,playerctl volume 10+" # Decrease volume
-          "F12,exec,playerctl volume 10-" # Increase volume
-          "XF86AudioMute,exec,playerctl volume 0" # Toggle mute
+          #"F10,exec,playerctl volume 0" # Toggle mute
+          #"F11,exec,playerctl volume 10+" # Decrease volume
+          #"F12,exec,playerctl volume 10-" # Increase volume
+          #"XF86AudioMute,exec,playerctl volume 0" # Toggle mute
           #"XF86AudioMicMute,exec, -i m" # Toggle microphone
-          "XF86AudioLowerVolume,exec,playerctl volume 10-" # Decrease volume
-          "XF86AudioRaiseVolume,exec,playerctl volume 10+" # Increase volume
-          "XF86MonBrightnessUp,exec,"
-          "XF86MonBrightnessDown,exec,"
+          #"XF86AudioLowerVolume,exec,playerctl volume 10-" # Decrease volume
+          #"XF86AudioRaiseVolume,exec,playerctl volume 10+" # Increase volume
+          #"XF86MonBrightnessUp,exec,"
+          #"XF86MonBrightnessDown,exec,"
         ];
 
         bindm = [
@@ -145,7 +145,7 @@ in {
           # Scroll through existing workspaces
           [
             "SUPER,mouse_down,workspace,e+1"
-            "SUPER,mouse_up,worksapace,e-1"
+            "SUPER,mouse_up,workspace,e-1"
           ];
 
         decoration = {
