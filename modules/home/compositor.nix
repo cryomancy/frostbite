@@ -126,7 +126,7 @@ in {
             "SUPER,s,togglespecialworkspace"
             "SUPER,g,togglegroup"
             "SUPER,w,fullscreen"
-            ''SUPER,p,exec,grim -g "$(slurp)" - | wl-copy && wl-past > ~/pictures/screenshots''
+            ''SUPER,p,exec,grim -g "$(slurp)" - | wl-copy && wl-paste > ~/pictures/screenshots''
           ]
           ++
           # Change workspaces
