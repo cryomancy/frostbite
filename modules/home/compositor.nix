@@ -192,7 +192,6 @@ in {
           "blur,rofi"
           "ignorezero,rofi"
           "blur,notifications"
-          "ignore,notifications"
         ];
       };
     };
