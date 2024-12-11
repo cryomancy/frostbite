@@ -63,21 +63,16 @@ in {
       steamtinkerlaunch
       steam-rom-manager
       lutris
-      heroic
+      #heroic
       bottles
-      protonup
-      emulationstation-de
-      pcsx2
-      duckstation
-      xemu
-      dolphin-emu
-      retroarch
+      #protonup
+      #emulationstation-de
+      #pcsx2
+      #duckstation
+      #xemu
+      #dolphin-emu
+      #retroarch
       lact
-    ];
-
-    # Not sure what this is about
-    nixpkgs.config.permittedInsecurePackages = lib.mkForce [
-      "freeimage-unstable-2021-11-01"
     ];
 
     # GPU Monitoring and Fan Adjustment
