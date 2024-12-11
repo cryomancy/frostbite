@@ -49,136 +49,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland = lib.mkIf cfg.hyprland.enable {
-      animations = {
-        enabled = true;
-        bezier = [
-          "wind, 0.05, 0.9, 0.1, 1.05"
-          "winIn, 0.1, 1.1, 0.1, 1.1"
-          "winOut, 0.3, -0.3, 0, 1"
-          "liner, 1, 1, 1, 1"
-        ];
-        animation = [
-          "windows, 1, 6, wind, slide"
-          "windowsIn, 1, 6, winIn, slide"
-          "windowsOut, 1, 5, winOut, slide"
-          "windowsMove, 1, 5, wind, slide"
-          "border, 1, 1, liner"
-          "borderangle, 1, 30, liner, loop"
-          "fade, 1, 10, default"
-          "workspaces, 1, 5, wind"
-          "specialWorkspace, 1, 5, wind, slidevert"
-        ];
-      };
-
-      bindl = [
-        "F10,exec,playerctl volume 0" # Toggle mute
-        "F11,exec,playerctl volume 10+" # Decrease volume
-        "F12,exec,playerctl volume 10-" # Increase volume
-        "XF86AudioMute,exec,playerctl volume 0" # Toggle mute
-        #"XF86AudioMicMute,exec, -i m" # Toggle microphone
-        "XF86AudioLowerVolume,exec,playerctl volume 10-" # Decrease volume
-        "XF86AudioRaiseVolume,exec,playerctl volume 10+" # Increase volume
-        "XF86MonBrightnessUp,exec,"
-        "XF86MonBrightnessDown,exec,"
-      ];
-
-      bindm = [
-        "SUPER,mouse:272,movewindow"
-        "SUPER,mouse:273,resizewindow"
-      ];
-
-      bind = let
-        workspaces = ["0" "1" "2" "3" "4" "5" "6" "7" "8" "9"];
-        directions = rec {
-          left = "l";
-          right = "r";
-          up = "u";
-          down = "d";
-          h = left;
-          l = right;
-          k = up;
-          j = down;
-        };
-      in
-        [
-          "SUPER,t,exec,kitty"
-          "SUPER,f,exec,librewolf"
-          "SUPER,q,killactive"
-          "SUPER,a,exec,killall rofi || rofi -show drun"
-          "SUPER,s,togglespecialworkspace"
-          "SUPER,g,togglegroup"
-          "SUPER,w,fullscreen"
-          ''SUPER,p,exec,grim -g "$(slurp)" - | wl-copy && wl-past > ~/pictures/screenshots''
-        ]
-        ++
-        # Change workspaces
-        (map (n: "SUPER,${n},workspace,name:${n}") workspaces)
-        ++
-        # Move window to workspace
-        (map (n: "SUPERSHIFT,${n},movetoworkspacesilent,name:${n}") workspaces)
-        ++
-        # Move focus
-        (lib.mapAttrsToList (key: direction: "SUPER,${key},movefocus,${direction}") directions)
-        ++ (lib.mapAttrsToList (
-            key: direction: "SUPERCONTROL,${key},movewindoworgroup,${direction}"
-          )
-          directions)
-        ++
-        # Scroll through existing workspaces
-        [
-          "SUPER,mouse_down,workspace,e+1"
-          "SUPER,mouse_up,worksapace,e-1"
-        ];
-
-      decoration = {
-        rounding = 5;
-        fullscreen_opacity = 1.0;
-
-        blur = {
-          enabled = true;
-          size = 4;
-          passes = 2;
-        };
-
-        shadow = {
-          enabled = true;
-          offset = "3 3";
-          range = 12;
-          color = "0x44000000";
-          color_inactive = "0x66000000";
-        };
-      };
-
       enable = true;
-
-      general = {
-        gaps_in = 6;
-        gaps_out = 6;
-        border_size = 0;
-        resize_on_border = true;
-        hover_icon_on_border = true;
-      };
-      gestures = {
-        workspace_swipe = true;
-      };
-
-      input = {
-        follow_mouse = 1;
-        mouse_refocus = false;
-
-        touchpad = {
-          natural_scroll = true;
-          disable_while_typing = true;
-        };
-      };
-
-      layerrule = [
-        "blur,rofi"
-        "ignorezero,rofi"
-        "blur,notifications"
-        "ignore,notifications"
-      ];
-
       settings = {
         env = [
           "NIXOS_OZONE_WL, 1"
@@ -193,6 +64,136 @@ in {
       systemd = {
         enable = true;
         variables = ["--all"];
+      };
+
+      settings = {
+        animations = {
+          enabled = true;
+          bezier = [
+            "wind, 0.05, 0.9, 0.1, 1.05"
+            "winIn, 0.1, 1.1, 0.1, 1.1"
+            "winOut, 0.3, -0.3, 0, 1"
+            "liner, 1, 1, 1, 1"
+          ];
+          animation = [
+            "windows, 1, 6, wind, slide"
+            "windowsIn, 1, 6, winIn, slide"
+            "windowsOut, 1, 5, winOut, slide"
+            "windowsMove, 1, 5, wind, slide"
+            "border, 1, 1, liner"
+            "borderangle, 1, 30, liner, loop"
+            "fade, 1, 10, default"
+            "workspaces, 1, 5, wind"
+            "specialWorkspace, 1, 5, wind, slidevert"
+          ];
+        };
+
+        bindl = [
+          "F10,exec,playerctl volume 0" # Toggle mute
+          "F11,exec,playerctl volume 10+" # Decrease volume
+          "F12,exec,playerctl volume 10-" # Increase volume
+          "XF86AudioMute,exec,playerctl volume 0" # Toggle mute
+          #"XF86AudioMicMute,exec, -i m" # Toggle microphone
+          "XF86AudioLowerVolume,exec,playerctl volume 10-" # Decrease volume
+          "XF86AudioRaiseVolume,exec,playerctl volume 10+" # Increase volume
+          "XF86MonBrightnessUp,exec,"
+          "XF86MonBrightnessDown,exec,"
+        ];
+
+        bindm = [
+          "SUPER,mouse:272,movewindow"
+          "SUPER,mouse:273,resizewindow"
+        ];
+
+        bind = let
+          workspaces = ["0" "1" "2" "3" "4" "5" "6" "7" "8" "9"];
+          directions = rec {
+            left = "l";
+            right = "r";
+            up = "u";
+            down = "d";
+            h = left;
+            l = right;
+            k = up;
+            j = down;
+          };
+        in
+          [
+            "SUPER,t,exec,kitty"
+            "SUPER,f,exec,librewolf"
+            "SUPER,q,killactive"
+            "SUPER,a,exec,killall rofi || rofi -show drun"
+            "SUPER,s,togglespecialworkspace"
+            "SUPER,g,togglegroup"
+            "SUPER,w,fullscreen"
+            ''SUPER,p,exec,grim -g "$(slurp)" - | wl-copy && wl-past > ~/pictures/screenshots''
+          ]
+          ++
+          # Change workspaces
+          (map (n: "SUPER,${n},workspace,name:${n}") workspaces)
+          ++
+          # Move window to workspace
+          (map (n: "SUPERSHIFT,${n},movetoworkspacesilent,name:${n}") workspaces)
+          ++
+          # Move focus
+          (lib.mapAttrsToList (key: direction: "SUPER,${key},movefocus,${direction}") directions)
+          ++ (lib.mapAttrsToList (
+              key: direction: "SUPERCONTROL,${key},movewindoworgroup,${direction}"
+            )
+            directions)
+          ++
+          # Scroll through existing workspaces
+          [
+            "SUPER,mouse_down,workspace,e+1"
+            "SUPER,mouse_up,worksapace,e-1"
+          ];
+
+        decoration = {
+          rounding = 5;
+          fullscreen_opacity = 1.0;
+
+          blur = {
+            enabled = true;
+            size = 4;
+            passes = 2;
+          };
+
+          shadow = {
+            enabled = true;
+            offset = "3 3";
+            range = 12;
+            color = "0x44000000";
+            color_inactive = "0x66000000";
+          };
+        };
+
+        general = {
+          gaps_in = 6;
+          gaps_out = 6;
+          border_size = 0;
+          resize_on_border = true;
+          hover_icon_on_border = true;
+        };
+        gestures = {
+          workspace_swipe = true;
+        };
+
+        input = {
+          follow_mouse = 1;
+          mouse_refocus = false;
+
+          touchpad = {
+            natural_scroll = true;
+            disable_while_typing = true;
+          };
+        };
+
+        layerrule = [
+          "blur,rofi"
+          "ignorezero,rofi"
+          "blur,notifications"
+          "ignore,notifications"
+        ];
       };
     };
 
@@ -228,8 +229,6 @@ in {
     home.sessionVariables = {
       XDG_SESSION_TYPE = "wayland";
     };
-
-    programs.wofi.enable = true;
 
     # enable sway window manager
     wayland.windowManager.sway = lib.mkIf cfg.sway.enable {
