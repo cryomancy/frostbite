@@ -76,7 +76,7 @@ in {
     ];
 
     # Not sure what this is about
-    nixpkgs.config.permittedInsecurePackages = [
+    nixpkgs.config.permittedInsecurePackages = lib.mkForce [
       "freeimage-unstable-2021-11-01"
     ];
 
