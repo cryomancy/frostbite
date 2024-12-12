@@ -15,6 +15,7 @@ in {
         type = lib.types.bool;
         default = true;
       };
+      i2pd.enable = lib.mkEnableOption "i2pd";
       laptop.enable = lib.mkEnableOption "laptop";
       virtualMachine.enable = lib.mkEnableOption "virtual machine";
       yubikey.enable = lib.mkEnableOption "yubikey";
@@ -25,6 +26,33 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
+    containers = {
+      i2pd-container = {
+        autoStart = true;
+        config = {config, ...}: {
+          networking.firewall.allowedTCPPorts = [
+            7656 # SAM
+            7070 # Web Interface
+            4447 # SOCKS Proxy
+            4444 # HTTP Proxy
+          ];
+
+          services.i2pd = {
+            enable = true;
+            addres = "127.0.0.1";
+            proto = {
+              http.enable = true;
+              socksProxy.enable = true;
+              httpProxy.enable = true;
+              sam.enable = true;
+            };
+          };
+
+          system.stateVersion = config.system.stateVersion;
+        };
+      };
+    };
+
     services = {
       openssh = lib.mkIf cfg.ssh.enable {
         enable = true;
