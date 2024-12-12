@@ -19,6 +19,10 @@ in {
       obsidian
       audacity
       gimp-with-plugins
+
+      deluge-gtk
+      bitmagnet
+      xd
     ];
   };
 }
