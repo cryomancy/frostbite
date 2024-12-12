@@ -55,8 +55,9 @@ in {
         else pkgs.firefox;
 
       profiles = {
-        default = {
+        main = {
           id = 0;
+          name = "main";
           settings = {
             "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
             "browser.urlbar.quickactions.enabled" = false;
@@ -294,10 +295,12 @@ in {
 
 
           '';
+
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             ublock-origin
             dark-mode-website-switcher
           ];
+
           containers = {
             development = {
               id = 0;
@@ -309,7 +312,9 @@ in {
               id = 2;
             };
           };
+
           containersForce = true;
+
           search = {
             force = true;
             order = [
@@ -321,10 +326,14 @@ in {
 
         work = {
           id = 1;
+
+          name = "work";
+
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             ublock-origin
             dark-mode-website-switcher
           ];
+
           containers = {
             jira = {
               id = 0;
@@ -342,7 +351,9 @@ in {
               id = 4;
             };
           };
+
           containersForce = true;
+
           search = {
             force = true;
             order = [
@@ -353,7 +364,15 @@ in {
         };
 
         i2pd = {
+          # TODO: add a policy to 'use this proxy for HTTPS' 127.0.0.1:4444 and 4447
           id = 2;
+          name = "i2pd";
+          search = {
+            force = true;
+            order = [
+              "DuckDuckGo"
+            ];
+          };
         };
       };
 
@@ -365,10 +384,11 @@ in {
         DisableTelemetry = true;
         DontCheckDefaultBrowser = true;
         #DownloadDirectory = "\home\${user}\inbox";
-		HardwareAcceleration = true;
+        HardwareAcceleration = true;
         NoDefaultBookmarks = true;
         OverrideFirstRunPage = true;
         OverridePostUpdatePage = true;
+        toolkit.legacyUserProfileCustomizations.stylesheet = true;
       };
     };
   };
