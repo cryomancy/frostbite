@@ -39,7 +39,7 @@ in {
 
           services.i2pd = {
             enable = true;
-            addres = "127.0.0.1";
+            address = "127.0.0.1";
             proto = {
               http.enable = true;
               socksProxy.enable = true;
