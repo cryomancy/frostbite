@@ -16,6 +16,7 @@ in {
         type = lib.types.bool;
         default = true;
       };
+      torrenting.enable = lib.mkEnableOption "torrenting";
       i2pd.enable = lib.mkEnableOption "i2pd";
       laptop.enable = lib.mkEnableOption "laptop";
       virtualMachine.enable = lib.mkEnableOption "virtual machine";
@@ -28,7 +29,7 @@ in {
   };
   config = lib.mkIf cfg.enable {
     containers = {
-      i2pd-container = {
+      i2pd-container = lib.mkIf cfg.i2pd.enable {
         autoStart = true;
         config = {...}: {
           networking.firewall.allowedTCPPorts = [
@@ -50,6 +51,22 @@ in {
           };
 
           system.stateVersion = systemStateVersion;
+        };
+      };
+
+      deluge-container = lib.mkIf cfg.torrenting.enable {
+        autoStart = true;
+        config = {pkgs, ...}: {
+          services.deluge = {
+            enable = true;
+            web = {
+              enable = true;
+              port = 8112;
+            };
+            openFirewall = true;
+            package = pkgs.deluge-gtk;
+            # TODO: Add declarative VPN for deluge
+          };
         };
       };
     };
