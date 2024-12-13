@@ -4,6 +4,7 @@
   ...
 }: let
   cfg = config.fuyuNoKosei.services;
+  systemStateVersion = config.system.stateVersion;
 in {
   options = {
     fuyuNoKosei.services = {
@@ -29,7 +30,7 @@ in {
     containers = {
       i2pd-container = {
         autoStart = true;
-        config = {config, ...}: {
+        config = {...}: {
           networking.firewall.allowedTCPPorts = [
             7656 # SAM
             7070 # Web Interface
@@ -48,7 +49,7 @@ in {
             };
           };
 
-          system.stateVersion = config.system.stateVersion;
+          system.stateVersion = systemStateVersion;
         };
       };
     };
