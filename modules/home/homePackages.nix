@@ -22,6 +22,11 @@ in {
 
       bitmagnet
       xd
+
+      protonvpn-gui
+      protonmail-desktop
+
+      obs-studio
     ];
   };
 }

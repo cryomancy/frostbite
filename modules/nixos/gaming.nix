@@ -63,9 +63,11 @@ in {
       steamtinkerlaunch
       steam-rom-manager
       lutris
-      #heroic
+      heroic
       bottles
-      #protonup
+      protonup
+      protonplus
+      protontricks
       #emulationstation-de
       #pcsx2
       #duckstation
@@ -73,6 +75,8 @@ in {
       #dolphin-emu
       #retroarch
       lact
+      vesktop
+      corectrl
     ];
 
     # GPU Monitoring and Fan Adjustment
