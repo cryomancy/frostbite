@@ -29,6 +29,9 @@
     nur = {
       url = "github:nix-community/NUR";
     };
+    fuyu-no-nur = {
+      url = "github:TahlonBrahic/fuyu-no-nur";
+    };
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -104,13 +107,6 @@
         home-manager.follows = "home-manager";
       };
     };
-    /*
-       unused
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-      inputs.systems.follows = "systems";
-    };
-    */
     /*
          ___                       ___           ___
         /\__\          ___        /\  \         /\  \
