@@ -1,0 +1,9 @@
+[book]
+authors = ["Tahlon Brahic"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Fuyu no Kosei Documentation"
+
+[output.html]
+git-repository-url = "https://github.com/TahlonBrahic/fuyu-no-kosei/docs"
