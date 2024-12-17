@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.fuyuNoKosei.services;
@@ -103,6 +104,8 @@ in {
     };
 
     hardware.sensor.iio.enable = lib.mkIf cfg.laptop.enable true;
+
+    environment.systemPackages = lib.lists.optional cfg.laptop.enable pkgs.iio-hyprland;
 
     services = {
       qemuGuest.enable = lib.mkIf cfg.virtualMachine.enable true;
