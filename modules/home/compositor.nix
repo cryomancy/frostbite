@@ -42,9 +42,6 @@ in {
           };
         };
       };
-      sway = {
-        enable = lib.mkEnableOption "sway";
-      };
     };
   };
 
@@ -208,83 +205,39 @@ in {
       wofi # gtk-based app launcher
       kitty # backup terminal
       rot8 # screen rotation daemon
+      hyprwall # GUI for hyprpaper
       wl-kbptr
-      wl-gammactl
       wl-screenrec
       wl-mirror
       wineWowPackages.wayland
       clipman
       swappy
       wpa_supplicant_gui
-      brightnessctl
       wev
       playerctl
       pavucontrol
+
+      # Brightness
+      brightnessctl
+      wl-gammactl
+      wluma
     ];
 
-    # Enable the gnome-keyring secrets vault.
-    # Will be exposed through DBus to programs willing to store secrets.
-    services.gnome-keyring.enable = true;
+    # These may be moved to seperate modules.
+    services = {
+      dunst.enable = true;
+
+      gnome-keyring.enable = true;
+
+      hyprpaper.enable = true;
+
+      hyprlock.enable = true;
+
+      hypridle.enable = true;
+    };
 
     home.sessionVariables = {
       XDG_SESSION_TYPE = "wayland";
-    };
-
-    # enable sway window manager
-    wayland.windowManager.sway = lib.mkIf cfg.sway.enable {
-      enable = true;
-
-      config = {
-        menu = "wofi";
-        modifier = "Mod4";
-        terminal = "kitty";
-        bars = [
-          {
-            command = "${pkgs.waybar}/bin/waybar";
-          }
-        ];
-
-        gaps = {
-          smartBorders = "on";
-          smartGaps = false;
-          outer = -8;
-          inner = 28;
-        };
-
-        window = {
-          titlebar = false;
-        };
-
-        input = {
-          "type:pointer" = {
-            accel_profile = "flat";
-            pointer_accel = "0";
-          };
-          "type:touchpad" = {
-            middle_emulation = "enabled";
-            natural_scroll = "enabled";
-            tap = "enabled";
-          };
-        };
-
-        keybindings = let
-          mod = config.wayland.windowManager.sway.config.modifier;
-          cfg = config.wayland.windowManager.sway.config;
-        in
-          # Window Management
-          lib.mkOptionDefault {
-            "${mod}+t" = "exec ${cfg.terminal}";
-            "${mod}+a" = "exec ${pkgs.wofi}";
-            "${mod}+q" = "kill";
-
-            # Modes
-            "${mod}+i" = "mode randr";
-
-            # Screenshots
-            "Print" = "grim -g \"$(slurp)\" - | wl-copy -t image/png";
-          };
-      };
-      wrapperFeatures.gtk = true;
     };
   };
 }
