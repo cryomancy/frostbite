@@ -231,9 +231,11 @@ in {
 
       hyprpaper.enable = true;
 
-      hyprlock.enable = true;
-
       hypridle.enable = true;
+    };
+
+    programs = {
+      hyprlock.enable = true;
     };
 
     home.sessionVariables = {
