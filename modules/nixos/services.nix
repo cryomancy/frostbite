@@ -105,7 +105,7 @@ in {
 
     hardware.sensor.iio.enable = lib.mkIf cfg.laptop.enable true;
 
-    programs.iio-hyprland-enable = lib.mkIf cfg.laptop.enable true;
+    programs.iio-hyprland.enable = lib.mkIf cfg.laptop.enable true;
 
     services = {
       qemuGuest.enable = lib.mkIf cfg.virtualMachine.enable true;
