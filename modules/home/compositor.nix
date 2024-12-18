@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  system,
   ...
 }: let
   cfg = config.fuyuNoKosei.compositor;
