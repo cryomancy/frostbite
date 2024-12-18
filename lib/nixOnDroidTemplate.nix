@@ -1,15 +1,17 @@
 {
   inputs,
-  pkgs,
   system,
   hostName,
   extraConfig,
   users,
   lib,
-  overlays,
 }: let
-  inherit (inputs) nix-on-droid home-manager homeManagerModules droidModules;
-  specialArgs = {inherit inputs system pkgs overlays users hostName;};
+  inherit (inputs) nixpkgs nix-on-droid home-manager homeManagerModules droidModules;
+  pkgs = import nixpkgs {
+    system = "aarch64-linux";
+    overlays = [nix-on-droid.overlays.default];
+  };
+  specialArgs = {inherit inputs system pkgs users hostName;};
 in
   nix-on-droid.lib.nixOnDroidConfiguration {
     inherit system specialArgs;

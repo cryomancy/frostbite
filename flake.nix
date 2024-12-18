@@ -1,7 +1,11 @@
 {
   description = "NixOS configuration that supports multiple users, systems, and architectures.";
 
-  outputs = inputs: import ./outputs.nix {inherit inputs;};
+  outputs = {
+    inputs,
+    self,
+  }:
+    import ./outputs.nix {inherit inputs self;};
 
   inputs = {
     /*
@@ -69,6 +73,9 @@
         nixpkgs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
       };
+    };
+    systems = {
+      url = "github:nix-systems/default-linux";
     };
     /*
     /*

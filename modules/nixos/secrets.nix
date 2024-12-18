@@ -17,7 +17,7 @@ in {
       };
       defaultSopsFile = lib.mkOption {
         type = lib.types.path;
-        default = ./secrets/secrets.yaml;
+        default = ../../../../secrets/secrets.yaml;
       };
     };
   };
@@ -27,7 +27,7 @@ in {
       age = {
         keyFile = "/var/lib/sops-nix/key.txt";
       };
-      defaultSopsFile = cfg.defaultSopsFile;
+      inherit (cfg) defaultSopsFile;
       defaultSopsFormat = "yaml";
       secrets = lib.attrsets.mergeAttrsList (builtins.attrValues (lib.genAttrs users (user: {
         "${user}/hashedPasswordFile" = {

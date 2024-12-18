@@ -1,0 +1,10 @@
+# TODO: Replace with your age public key
+keys:
+  - &host1 age1wyzx73w2n3v8mwajrx7z7mj9mth9z40f88en6su99q0freakq3ws66mhjx
+  - &host2 age1aul3zle6h0zdkqvdtyw9f52p3llkf508y3ea4mrps5vhk5f52gxqyhw3zn
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - age:
+          - *host1
+          - *host2
