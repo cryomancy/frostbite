@@ -1,7 +1,6 @@
 [book]
 authors = ["Tahlon Brahic"]
 language = "en"
-multilingual = false
 src = "src"
 title = "Fuyu no Kosei Documentation"
 
