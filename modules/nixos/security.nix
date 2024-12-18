@@ -26,11 +26,12 @@ in {
       apparmor = {
         enable = true;
       };
+      # Enables authentication via Hyprlock
+      pam.services.hyprlock = {};
       polkit = {
         enable = true;
       };
     };
-
     environment.systemPackages = with pkgs; [
       apparmor-bin-utils
       apparmor-profiles
