@@ -1,7 +1,6 @@
 {
   imports = [
     ./browser.nix
-    ./compositor.nix
     ./design.nix
     ./editor.nix
     ./encryption.nix
