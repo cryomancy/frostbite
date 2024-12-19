@@ -1,18 +1,13 @@
-{
-  nixpkgs,
-  self,
-  systems,
-  ...
-} @ inputs: let
-  forEachSystem = nixpkgs.lib.genAttrs (import systems);
-  genConfig = nixpkgs.lib.attrsets.mergeAttrsList;
+{inputs}: let
+  forEachSystem = inputs.nixpkgs.lib.genAttrs (import inputs.systems);
+  genConfig = inputs.nixpkgs.lib.attrsets.mergeAttrsList;
 
   nixosModules.fuyuNoKosei = import ./modules/nixos;
   homeManagerModules.fuyuNoKosei = import ./modules/home;
 
   lib =
     forEachSystem (system:
-      (import ./lib {inherit inputs system pkgs;}).lib // nixpkgs.lib);
+      (import ./lib {inherit inputs system pkgs;}).lib // inputs.nixpkgs.lib);
 
   pkgs = forEachSystem (system:
     import inputs.nixpkgs {
