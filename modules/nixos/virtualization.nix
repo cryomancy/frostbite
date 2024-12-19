@@ -19,6 +19,7 @@ in {
       wsl = {
         enable = lib.mkEnableOption "WSL Integration";
       };
+      waydroid.enable = lib.mkEnableOption "waydroid";
     };
   };
 
@@ -61,8 +62,8 @@ in {
     };
 
     # Enable auto-generated name servers
-    #environment.etc."resolv.conf".source = lib.mkIf cfg.wsl.enable /etc/resolv.conf;
-    virtualisation.waydroid.enable = true;
+    environment.etc."resolv.conf".source = lib.mkIf cfg.wsl.enable /etc/resolv.conf;
+    virtualisation.waydroid.enable = lib.mkIf cfg.waydroid.enable true;
 
     fuyuNoKosei.boot.enable = (lib.mkIf cfg.wsl.enable) (lib.mkForce false);
   };

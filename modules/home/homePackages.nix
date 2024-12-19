@@ -8,11 +8,7 @@
 in {
   options = {
     fuyuNoKosei.homePackages = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = config.fuyuNoKosei.compositor.enable;
-      };
-    };
+      enable = lib.mkEnableOption "fuyuNoKosei home packages";
   };
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [

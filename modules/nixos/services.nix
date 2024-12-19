@@ -1,11 +1,9 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }: let
   cfg = config.fuyuNoKosei.services;
-  systemStateVersion = config.system.stateVersion;
 in {
   options = {
     fuyuNoKosei.services = {
@@ -17,8 +15,6 @@ in {
         type = lib.types.bool;
         default = true;
       };
-      torrenting.enable = lib.mkEnableOption "torrenting";
-      i2pd.enable = lib.mkEnableOption "i2pd";
       laptop.enable = lib.mkEnableOption "laptop";
       virtualMachine.enable = lib.mkEnableOption "virtual machine";
       yubikey.enable = lib.mkEnableOption "yubikey";
@@ -29,49 +25,6 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
-    containers = {
-      i2pd-container = lib.mkIf cfg.i2pd.enable {
-        autoStart = true;
-        config = {...}: {
-          networking.firewall.allowedTCPPorts = [
-            7656 # SAM
-            7070 # Web Interface
-            4447 # SOCKS Proxy
-            4444 # HTTP Proxy
-          ];
-
-          services.i2pd = {
-            enable = true;
-            address = "127.0.0.1";
-            proto = {
-              http.enable = true;
-              socksProxy.enable = true;
-              httpProxy.enable = true;
-              sam.enable = true;
-            };
-          };
-
-          system.stateVersion = systemStateVersion;
-        };
-      };
-
-      deluge-container = lib.mkIf cfg.torrenting.enable {
-        autoStart = true;
-        config = {pkgs, ...}: {
-          services.deluge = {
-            enable = true;
-            web = {
-              enable = true;
-              port = 8112;
-            };
-            openFirewall = true;
-            package = pkgs.deluge-gtk;
-            # TODO: Add declarative VPN for deluge
-          };
-        };
-      };
-    };
-
     services = {
       openssh = lib.mkIf cfg.ssh.enable {
         enable = true;

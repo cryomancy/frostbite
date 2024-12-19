@@ -22,7 +22,7 @@ in {
       };
       tuigreet.enable = lib.mkOption {
         type = lib.types.bool;
-        default = true;
+        default = cfg.enable;
       };
     };
   };

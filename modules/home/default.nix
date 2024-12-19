@@ -9,8 +9,9 @@
     ./homeEnvironment.nix
     ./homeManagement.nix
     ./homePackages.nix
-    ./menu.nix
+    ./hyprland.nix
     ./passwordManagement.nix
+    ./rofi.nix
     ./shell.nix
     ./status.nix
     ./virtualization.nix

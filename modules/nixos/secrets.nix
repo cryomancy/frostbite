@@ -35,5 +35,9 @@ in {
         };
       })));
     };
+    environment.variables = {
+      # NOTE: this directory could be an issue on a multi-user system with different keys...
+      SOPS_AGE_KEY_FILE = "/var/lib/sops-nix/key.txt";
+    };
   };
 }
