@@ -3,18 +3,16 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    disko.url = "github:nix-community/disko";
   };
 
-  outputs = inputs @ {
-    nixpkgs,
-    nixos-hardware,
-    ...
-  }: {
+  # TODO: Call lib.systemTemplate like normal here with options...
+  outputs = inputs @ {nixpkgs, ...}: {
     nixosConfigurations = {
       build = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          inputs.disko.nixosModules.disko
           ({pkgs, ...}: {
             networking.hostName = "build";
             boot.kernelPackages = pkgs.linuxPackages_latest;
