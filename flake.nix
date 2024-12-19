@@ -1,13 +1,8 @@
 {
   description = "NixOS configuration that supports multiple users, systems, and architectures.";
 
-  outputs = {
-    nixpkgs,
-    self,
-    systems,
-    ...
-  }:
-    import ./outputs.nix {inherit nixpkgs self systems;};
+  outputs = inputs:
+    import ./outputs.nix {inherit inputs;};
 
   inputs = {
     /*
