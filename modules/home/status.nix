@@ -44,7 +44,7 @@ in {
     fuyuNoKosei.status = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = config.fuyuNoKosei.compositor.enable;
+        default = config.fuyuNoKosei.hyprland.enable;
       };
     };
   };

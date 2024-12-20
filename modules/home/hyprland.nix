@@ -19,7 +19,6 @@ in {
         default = false;
       };
       gamemode = {
-        enable = lib.mkEnableOption "hyprland";
         startscript = lib.mkOption {
           type = lib.types.string;
           default = pkgs.writeShellScript "gamemode-start" ''

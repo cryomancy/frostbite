@@ -10,7 +10,7 @@ in {
     fuyuNoKosei.passwordManagement = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = config.fuyuNoKosei.compositor.enable;
+        default = true;
       };
     };
   };

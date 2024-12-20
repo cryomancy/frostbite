@@ -19,7 +19,7 @@ in {
       };
       chromium.enable = lib.mkOption {
         type = lib.types.bool;
-        default = true;
+        default = cfg.enable;
       };
       firefox.enable = lib.mkOption {
         type = lib.types.bool;
@@ -31,7 +31,7 @@ in {
       };
       librewolf.enable = lib.mkOption {
         type = lib.types.bool;
-        default = true;
+        default = cfg.enable;
       };
     };
   };
