@@ -2,10 +2,9 @@
   lib,
   config,
   pkgs,
-  system,
   ...
 }: let
-  cfg = config.fuyuNoKosei.compositor;
+  cfg = config.fuyuNoKosei.hyprland;
 
   hyprlandGamemodePrograms = lib.makeBinPath [
     config.programs.hyprland.package
@@ -14,39 +13,37 @@
   ];
 in {
   options = {
-    fuyuNoKosei.compositor = {
+    fuyuNoKosei.hyprland = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;
       };
-      hyprland = {
+      gamemode = {
         enable = lib.mkEnableOption "hyprland";
-        gamemode = {
-          startscript = lib.mkOption {
-            type = lib.types.string;
-            default = pkgs.writeShellScript "gamemode-start" ''
-              export PATH=$PATH:${hyprlandGamemodePrograms}
-              export HYPRLAND_INSTANCE_SIGNATURE=$(ls -1 /tmp/hypr | tail -1)
-              hyprctl --batch 'keyword decoration:blur 0 ; keyword animations:enabled 0 ; keyword misc:vfr 0'
-              powerprofilesctl set performance
-            '';
-          };
-          endscript = lib.mkOption {
-            type = lib.types.string;
-            default = pkgs.writeShellScript "gamemode-end" ''
-              export PATH=$PATH:${hyprlandGamemodePrograms}
-              export HYPRLAND_INSTANCE_SIGNATURE=$(ls -1 /tmp/hypr | tail -1)
-              hyprctl --batch 'keyword decoration:blur 1 ; keyword animations:enabled 1 ; keyword misc:vfr 1'
-              powerprofilesctl set power-saver
-            '';
-          };
+        startscript = lib.mkOption {
+          type = lib.types.string;
+          default = pkgs.writeShellScript "gamemode-start" ''
+            export PATH=$PATH:${hyprlandGamemodePrograms}
+            export HYPRLAND_INSTANCE_SIGNATURE=$(ls -1 /tmp/hypr | tail -1)
+            hyprctl --batch 'keyword decoration:blur 0 ; keyword animations:enabled 0 ; keyword misc:vfr 0'
+            powerprofilesctl set performance
+          '';
+        };
+        endscript = lib.mkOption {
+          type = lib.types.string;
+          default = pkgs.writeShellScript "gamemode-end" ''
+            export PATH=$PATH:${hyprlandGamemodePrograms}
+            export HYPRLAND_INSTANCE_SIGNATURE=$(ls -1 /tmp/hypr | tail -1)
+            hyprctl --batch 'keyword decoration:blur 1 ; keyword animations:enabled 1 ; keyword misc:vfr 1'
+            powerprofilesctl set power-saver
+          '';
         };
       };
     };
   };
 
   config = lib.mkIf cfg.enable {
-    wayland.windowManager.hyprland = lib.mkIf cfg.hyprland.enable {
+    wayland.windowManager.hyprland = {
       enable = true;
       settings = {
         env = [
@@ -87,15 +84,6 @@ in {
         };
 
         bindl = [
-          #"F10,exec,playerctl volume 0" # Toggle mute
-          #"F11,exec,playerctl volume 10+" # Decrease volume
-          #"F12,exec,playerctl volume 10-" # Increase volume
-          #"XF86AudioMute,exec,playerctl volume 0" # Toggle mute
-          #"XF86AudioMicMute,exec, -i m" # Toggle microphone
-          #"XF86AudioLowerVolume,exec,playerctl volume 10-" # Decrease volume
-          #"XF86AudioRaiseVolume,exec,playerctl volume 10+" # Increase volume
-          #"XF86MonBrightnessUp,exec,"
-          #"XF86MonBrightnessDown,exec,"
         ];
 
         bindm = [
@@ -104,6 +92,7 @@ in {
         ];
 
         bind = let
+          pactl = lib.getExe' pkgs.pulseaudio "pactl";
           workspaces = ["0" "1" "2" "3" "4" "5" "6" "7" "8" "9"];
           directions = rec {
             left = "l";
@@ -125,6 +114,11 @@ in {
             "SUPER,g,togglegroup"
             "SUPER,w,fullscreen"
             ''SUPER,p,exec,grim -g "$(slurp)" - | wl-copy && wl-paste > ~/pictures/screenshots''
+            ",XF86AudioRaiseVolume,exec,${pactl} set-sink-volume @DEFAULT_SINK@ +5%"
+            ",XF86AudioLowerVolume,exec,${pactl} set-sink-volume @DEFAULT_SINK@ -5%"
+            ",XF86AudioMute,exec,${pactl} set-sink-mute @DEFAULT_SINK@ toggle"
+            #"XF86MonBrightnessUp,exec,"
+            #"XF86MonBrightnessDown,exec,"
           ]
           ++
           # Change workspaces
@@ -216,6 +210,7 @@ in {
       wev
       playerctl
       pavucontrol
+      waypipe
 
       # Brightness
       brightnessctl
@@ -240,6 +235,28 @@ in {
 
     home.sessionVariables = {
       XDG_SESSION_TYPE = "wayland";
+    };
+
+    systemd.user.services = {
+      waypipe-client = {
+        Unit.Description = "Runs waypipe on startup to support SSH forwarding";
+        Service = {
+          ExecStartPre = "${lib.getExe' pkgs.coreutils "mkdir"} %h/.waypipe -p";
+          ExecStart = "${lib.getExe pkgs.waypipe} --socket %h/.waypipe/client.sock client";
+          ExecStopPost = "${lib.getExe' pkgs.coreutils "rm"} -f %h/.waypipe/client.sock";
+        };
+        Install.WantedBy = ["graphical-session.target"];
+      };
+      waypipe-server = {
+        Unit.Description = "Runs waypipe on startup to support SSH forwarding";
+        Service = {
+          Type = "simple";
+          ExecStartPre = "${lib.getExe' pkgs.coreutils "mkdir"} %h/.waypipe -p";
+          ExecStart = "${lib.getExe pkgs.waypipe} --socket %h/.waypipe/server.sock --title-prefix '[%H] ' --login-shell --display wayland-waypipe server -- ${lib.getExe' pkgs.coreutils "sleep"} infinity";
+          ExecStopPost = "${lib.getExe' pkgs.coreutils "rm"} -f %h/.waypipe/server.sock %t/wayland-waypipe";
+        };
+        Install.WantedBy = ["default.target"];
+      };
     };
   };
 }

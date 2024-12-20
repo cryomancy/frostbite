@@ -8,10 +8,7 @@
 in {
   options = {
     fuyuNoKosei.fileManager = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = config.fuyuNoKosei.compositor.enable;
-      };
+      enable = lib.mkEnableOption "file manager";
     };
   };
 

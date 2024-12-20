@@ -19,6 +19,7 @@
     ./systemMaintenance.nix
     ./tools.nix
     ./transcience.nix
+    ./torrenting.nix
     ./users.nix
     ./virtualization.nix
     ./yubikey.nix
