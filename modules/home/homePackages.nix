@@ -9,6 +9,7 @@ in {
   options = {
     fuyuNoKosei.homePackages = {
       enable = lib.mkEnableOption "fuyuNoKosei home packages";
+    };
   };
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
