@@ -11,8 +11,7 @@
     ./hyprland.nix
     ./passwordManagement.nix
     ./rofi.nix
-    ./shell.nix
-    ./status.nix
     ./virtualization.nix
+    ./waybar.nix
   ];
 }
