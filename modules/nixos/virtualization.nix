@@ -4,6 +4,7 @@
   inputs,
   lib,
   pkgs,
+  users,
   ...
 }: let
   cfg = config.fuyuNoKosei.virtualization;
@@ -50,7 +51,7 @@ in {
 
     wsl = lib.mkIf cfg.wsl.enable {
       enable = true;
-      defaultUser = "tbrahic";
+      defaultUser = builtins.elemAt users 0;
       startMenuLaunchers = true;
 
       wslConf = {
@@ -61,9 +62,6 @@ in {
       };
     };
 
-    # Enable auto-generated name servers
-    # This causes an error?
-    # environment.etc."resolv.conf".source = lib.mkIf cfg.wsl.enable /etc/resolv.conf;
     virtualisation.waydroid.enable = lib.mkIf cfg.waydroid.enable true;
 
     fuyuNoKosei.boot.enable = (lib.mkIf cfg.wsl.enable) (lib.mkForce false);

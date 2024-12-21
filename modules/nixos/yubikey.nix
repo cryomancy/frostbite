@@ -7,7 +7,7 @@
   cfg = config.fuyuNoKosei.yubikey;
 in {
   options = {
-    fuyuNoKosei.yubikey.enable = lib.mkEnableOption "custom yubikey";
+    fuyuNoKosei.yubikey.enable = lib.mkEnableOption "yubikey";
   };
 
   config = lib.mkIf cfg.enable {
@@ -46,6 +46,15 @@ in {
           u2fAuth = true;
           sshAgentAuth = true;
         };
+      };
+    };
+
+    programs = {
+      ssh = lib.mkIf config.fuyuNoKosei.ssh.enable {
+        startAgent = true;
+        extraConfig = lib.mkIf cfg.yubikey.enable ''
+          AddKeysToAgent yes
+        '';
       };
     };
   };

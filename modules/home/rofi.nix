@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }: let
   cfg = config.fuyuNoKosei.rofi;
@@ -18,7 +17,6 @@ in {
   config = lib.mkIf cfg.enable {
     programs.rofi = {
       enable = true;
-      package = pkgs.rofi-wayland-unwrapped;
       extraConfig = {
         show-icons = true;
         image_size = 48;

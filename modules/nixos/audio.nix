@@ -26,7 +26,6 @@ in {
     environment.systemPackages = with pkgs; [
       alsa-utils
       alsa-ucm-conf
-      easyeffects
     ];
 
     security.rtkit.enable = true;

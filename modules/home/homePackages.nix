@@ -13,10 +13,6 @@ in {
   };
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      # Torrenting
-      bitmagnet
-      xd
-
       # Proton
       protonvpn-gui
       protonmail-desktop
@@ -32,6 +28,7 @@ in {
       blender
       gimp-with-plugins
     ];
+
     programs = {
       obs-studio = {
         enable = true;

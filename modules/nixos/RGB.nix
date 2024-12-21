@@ -3,21 +3,23 @@
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.RGB;
+  cfg = config.fuyuNoKosei.rgb;
 in {
   options = {
     fuyuNoKosei.RGB = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-      };
+      enable = lib.mkEnableOption "rgb";
     };
   };
 
   config = lib.mkIf cfg.enable {
-    services.hardware.openrgb = {
-      enable = true;
-      server.port = 6742;
+    containers.openrgb = {
+      autostart = true;
+      config = {...}: {
+        services.hardware.openrgb = {
+          enable = true;
+          server.port = 6742;
+        };
+      };
     };
   };
 }

@@ -1,6 +1,5 @@
 {
   config,
-  hostName,
   inputs,
   lib,
   ...
@@ -31,7 +30,5 @@ in {
         PermitRootLogin = "yes";
       };
     };
-    # TODO: import disko device from systems
-    #disko.devices = hostName.disko;
   };
 }

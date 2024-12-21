@@ -17,7 +17,7 @@ in {
   config = lib.mkIf cfg.enable {
     environment.variables = {
       EDITOR = "nvim";
-      PAGER = "nvim";
+      PAGER = "bat";
       LANG = "en_US.UTF-8";
       LC_ALL = "en_US.UTF-8"; # Fallback to English
     };
