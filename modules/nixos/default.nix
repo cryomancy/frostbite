@@ -9,19 +9,24 @@
     ./FHS.nix
     ./gaming.nix
     ./GNOME.nix
+    ./laptopSupport.nix
     ./localization.nix
+	./microphone.nix
     ./network.nix
     ./nixSettings.nix
+	./qemuGuest.nix
     ./RGB.nix
     ./secrets.nix
     ./security.nix
-    ./services.nix
+    ./syncthing.nix
+    ./ssh.nix
     ./systemMaintenance.nix
     ./tools.nix
-    ./transcience.nix
     ./torrenting.nix
+    ./transcience.nix
     ./users.nix
     ./virtualization.nix
+	./wsl.nix
     ./yubikey.nix
   ];
 }

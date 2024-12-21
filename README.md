@@ -4,27 +4,29 @@ This repository contains a modular NixOS configuration designed to support multi
 
 ## Directory Structure
 
+- **`docs`**: Learn about the flake's API.
+- **`checks`**: Integrates Nix defined checks and formatters.
 - **`flake.nix`**: The main entry point for the NixOS configurations.
+- **`installer`**: Extracts and builds custom ISOs' from the modules.
 - **`lib`**: Custom library of Nix functions.
 - **`modules`**: Contains reusable modules for both nixos and home-manager.
-- **`outputs`**: Literally the flake outputs, although it aggregrates through a series of many function calls.
-- **`secrets`**: Secures storage for sensitive information (e.g., API keys, passwords).
-- **`vars`**: Defined variables to be passed around through modules (e.g. users).
-- **`.sops.yaml`**: SOPS-NIX configuration
+- **`templates`**: Pre-built to quickly start using this flake.
+- **`overlays`**: Extensions of nixpkgs.
 - **`LICENSE`**: A standard MIT License for ease of distribution and modification.
 - **`README.md`**: This file, which provides an overview of the repository.
 
 ## Getting Started
 
-1. Clone the repository:
+1. Choose your template:
 
 ```bash
-git clone https://github.com/TahlonBrahic/nix-config.git .
+$ nix --extra-experimental-features [ "nix-command flakes" ] flake init -t github:TahlonBrahic/fuyu-no-kosei 
 ```
 
 2. Define your own configuration in outputs or choose a pre-defined configuration:
 
-If you choose to use an already established configuration it is important to define your hardware specifications as either or a module or vars.
+Read through all files under the outputs directory and 
+follow the comments to customize it to your liking.
 
 3. Rebuild your system:
 
@@ -32,7 +34,7 @@ If you choose to use an already established configuration it is important to def
 sudo nixos-rebuild switch --flake .#hostname
 ```
 
-Replace `hostname` with the appropriate hostname configured in ./outputs/architecture/src/hostname.nix
+Replace `hostname` with the appropriate hostname configured in ./outputs/architecture/system/hostname/hostname.nix
 
 ## References
 

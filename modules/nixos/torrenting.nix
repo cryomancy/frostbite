@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.fuyuNoKosei.torrenting;
@@ -12,6 +13,11 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      bitmagnet
+      xd
+    ];
+
     containers = {
       deluge-container = {
         autoStart = true;
