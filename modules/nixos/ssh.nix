@@ -12,7 +12,7 @@ in {
   };
   config = lib.mkIf cfg.enable {
     services = {
-      openssh = lib.mkIf cfg.ssh.enable {
+      openssh = {
         enable = true;
         settings = {
           banner = "冬の国境";
