@@ -26,7 +26,7 @@ in {
           hashedPasswordFile = config.sops.secrets."${user}/hashedPasswordFile".path;
           isNormalUser = true;
           # TODO: variable shell for multi-user system?
-          shell = lib.mkDefault pkgs.fish;
+          shell = pkgs.fish;
           extraGroups = [
             "${user}"
             "users"
