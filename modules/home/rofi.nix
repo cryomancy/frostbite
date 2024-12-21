@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.fuyuNoKosei.rofi;
@@ -17,6 +18,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs.rofi = {
       enable = true;
+      package = pkgs.rofi-wayland;
       extraConfig = {
         show-icons = true;
         image_size = 48;
@@ -28,6 +30,11 @@ in {
         run-exec_search = true;
         matching = "multi-contains";
       };
+      plugins = with pkgs; [
+        rofi-games
+        rofi-emoji
+        rofi-top
+      ];
     };
   };
 }
