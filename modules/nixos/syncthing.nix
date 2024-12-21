@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.services;
+  cfg = config.fuyuNoKosei.syncthing;
 in {
   options = {
-    fuyuNoKosei.services = {
+    fuyuNoKosei.syncthing = {
       enable = lib.mkEnableOption "syncthing";
     };
   };
