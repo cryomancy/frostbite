@@ -52,7 +52,7 @@ in {
     programs = {
       ssh = lib.mkIf config.fuyuNoKosei.ssh.enable {
         startAgent = true;
-        extraConfig = lib.mkIf cfg.yubikey.enable ''
+        extraConfig = ''
           AddKeysToAgent yes
         '';
       };
