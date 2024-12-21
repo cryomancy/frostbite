@@ -4,8 +4,6 @@
   pkgs,
   ...
 }: let
-  swayCfg = config.wayland.windowManager.sway;
-  hyprlandCfg = config.wayland.windowManager.hyprland;
   writeCustomShellApplication = {
     name ? "customScript",
     script, # script
@@ -38,14 +36,11 @@
         '{text:$text,tooltip:$tooltip,alt:$alt,class:$class,percentage:$percentage}'
     '';
   };
-  cfg = config.fuyuNoKosei.status;
+  cfg = config.fuyuNoKosei.waybar;
 in {
   options = {
-    fuyuNoKosei.status = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = config.fuyuNoKosei.hyprland.enable;
-      };
+    fuyuNoKosei.waybar = {
+      enable = lib.mkEnableOption "waybar";
     };
   };
 
@@ -66,15 +61,10 @@ in {
           font-family = "JetBrainsMono Nerd Font Mono";
 
           modules-left =
-            ["custom/menu"]
-            ++ (lib.optionals swayCfg.enable [
-              "sway/workspaces"
-              "sway/mode"
-            ])
-            ++ (lib.optionals hyprlandCfg.enable [
+            [
               "hyprland/workspaces"
               "hyprland/submap"
-            ])
+            ]
             ++ [
               "custom/currentplayer"
               "custom/player"
@@ -102,6 +92,30 @@ in {
             tooltip-format = ''
               <big>{:%Y %B}</big>
               <tt><small>{calendar}</small></tt>'';
+          };
+          "hyprland/workspaces" = {
+            active-only = false;
+            disable-scroll = true;
+            format = "{icon}";
+            on-click = "activate";
+            format-icons = {
+              "1" = "I";
+              "2" = "II";
+              "3" = "III";
+              "4" = "IV";
+              "5" = "V";
+              "6" = "VI";
+              "7" = "VII";
+              "8" = "VIII";
+              "9" = "IX";
+              "10" = "X";
+              sort-by-number = true;
+            };
+            persistent-workspaces = {
+              "1" = [];
+              "2" = [];
+              "3" = [];
+            };
           };
 
           cpu = {
@@ -178,14 +192,11 @@ in {
             interval = 1;
             return-type = "json";
             exec = writeCustomWaybarModule {
-              dependencies = lib.optional hyprlandCfg.enable hyprlandCfg.package;
+              dependencies = [pkgs.hyprland];
               text = "";
               tooltip = ''$(grep PRETTY_NAME /etc/os-release | cut -d '"' -f2)'';
               class = let
-                isFullScreen =
-                  if hyprlandCfg.enable
-                  then "hyprctl activewindow -j | jq -e '.fullscreen' &>/dev/null"
-                  else "false";
+                isFullScreen = "hyprctl activewindow -j | jq -e '.fullscreen' &>/dev/null";
               in "$(if ${isFullScreen}; then echo fullscreen; fi)";
             };
           };
