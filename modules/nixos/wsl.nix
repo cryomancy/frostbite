@@ -12,7 +12,7 @@ in {
 
   options = {
     fuyuNoKosei.wsl = {
-      enable = lib.mkEnableOption;
+      enable = lib.mkEnableOption "WSL";
     };
   };
 
