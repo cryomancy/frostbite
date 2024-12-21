@@ -13,7 +13,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    logind = lib.mkIf cfg.laptop.enable {
+    logind = {
       lidSwitch = "suspend";
       lidSwitchDocked = "ignore";
       lidSwitchExternalPower = "ignore";
