@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.rgb;
+  cfg = config.fuyuNoKosei.RGB;
 in {
   options = {
     fuyuNoKosei.RGB = {
