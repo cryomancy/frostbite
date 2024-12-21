@@ -13,7 +13,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    logind = {
+    services.logind = {
       lidSwitch = "suspend";
       lidSwitchDocked = "ignore";
       lidSwitchExternalPower = "ignore";
