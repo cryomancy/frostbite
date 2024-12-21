@@ -17,8 +17,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    services.userborn.enable = true;
-
     users = {
       mutableUsers = false;
       users =
@@ -27,6 +25,7 @@ in {
           home = "/home/${user}";
           hashedPasswordFile = config.sops.secrets."${user}/hashedPasswordFile".path;
           isNormalUser = true;
+          # TODO: variable shell for multi-user system?
           shell = lib.mkDefault pkgs.fish;
           extraGroups = [
             "${user}"
