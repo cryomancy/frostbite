@@ -10,7 +10,7 @@
     ./homePackages.nix
     ./hyprland.nix
     ./passwordManagement.nix
-    ./persistence.nix
+    #./persistence.nix
     ./rofi.nix
     ./virtualization.nix
     ./waybar.nix
