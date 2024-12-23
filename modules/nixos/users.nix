@@ -36,7 +36,10 @@ in {
             "docker"
             "libvirtd"
           ];
-          openssh.authorizedKeys.keys = [(builtins.readFile config.sops.secrets."ssh/publicKeys".path)];
+          # TODO: Iterate over secrets file
+          # TODO: API / Documentation for this? Could be confusing for other people
+          # Technically these don't need to be secret, I just want the only portable thing to be the secrets file
+          # openssh.authorizedKeys.keyFiles = [(builtins.readFile config.sops.secrets."${user}/ssh/publicKeys".path)];
         });
     };
 
