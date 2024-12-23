@@ -15,7 +15,7 @@ in {
       openssh = {
         enable = true;
         settings = {
-          banner = "冬の国境";
+          Banner = "冬の国境";
           PermitRootLogin = "no";
           KbdInteractiveAuthentication = false;
           X11Forwarding = true;

@@ -2,9 +2,9 @@
   imports = [
     ./browser.nix
     ./design.nix
+    ./developmentTools.nix
     ./editor.nix
     ./encryption.nix
-    ./environment.nix
     ./fileManager.nix
     ./homeManagement.nix
     ./homePackages.nix

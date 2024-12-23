@@ -33,7 +33,7 @@ in {
         "${user}/hashedPasswordFile" = {
           neededForUsers = true;
         };
-        "ssh/publicKeys" = {
+        "${user}/ssh/publicKey" = {
           neededForUsers = true;
         };
       })));
