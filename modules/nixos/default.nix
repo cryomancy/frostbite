@@ -11,10 +11,11 @@
     ./GNOME.nix
     ./laptopSupport.nix
     ./localization.nix
-	./microphone.nix
+    ./microphone.nix
     ./network.nix
     ./nixSettings.nix
-	./qemuGuest.nix
+    ./persistence.nix
+    ./qemuGuest.nix
     ./RGB.nix
     ./secrets.nix
     ./security.nix
@@ -23,10 +24,9 @@
     ./systemMaintenance.nix
     ./tools.nix
     ./torrenting.nix
-    ./transcience.nix
     ./users.nix
     ./virtualization.nix
-	./wsl.nix
+    ./wsl.nix
     ./yubikey.nix
   ];
 }

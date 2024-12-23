@@ -33,6 +33,9 @@ in {
         "${user}/hashedPasswordFile" = {
           neededForUsers = true;
         };
+        "ssh/publicKeys" = {
+          neededForUsers = true;
+        };
       })));
     };
     environment.variables = {

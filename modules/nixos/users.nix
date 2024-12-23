@@ -23,6 +23,7 @@ in {
         lib.genAttrs users
         (user: {
           home = "/home/${user}";
+          # TODO: Add option for users to declare account without sops password?
           hashedPasswordFile = config.sops.secrets."${user}/hashedPasswordFile".path;
           isNormalUser = true;
           # TODO: variable shell for multi-user system?
@@ -35,13 +36,25 @@ in {
             "docker"
             "libvirtd"
           ];
-          # TODO: map with vars/keys/ssh.nix
-          openssh.authorizedKeys.keys = [
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICl40SMOUGnodt39ZLHoLt9trFZfv3rStO+j3bc3tdxf shilo"
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH0NCg7dOAIc9pRDUb3sOuBluzZHuQkUoYlrQAce/Y89 taistealai"
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDRUJCFyU2Bhag5GHGq2ihZL6LljX8EZygeKU6KDzHL8 yoru"
-          ];
+          openssh.authorizedKeys.keys = [(builtins.readFile config.sops.secrets."ssh/publicKeys".path)];
         });
     };
+
+    # Recovery Account
+    #specialisation.recovery.configuration =
+    #  lib.mkIf (!(builtins.all (value: value.minimal) (builtins.attrValues settings)))
+    #  {
+    #    security.sudo.extraConfig = lib.mkAfter "recovery ALL=(ALL:ALL) NOPASSWD:ALL";
+    #    users.extraUsers.recovery = {
+    #      name = "recovery";
+    #      description = "Recovery Account";
+    #      isNormalUser = true;
+    #      uid = 1100;
+    #      group = "users";
+    #      extraGroups = ["wheel"];
+    #      useDefaultShell = true;
+    #      initialHashedPassword = lib.mkDefault (builtins.readFile (directory + "/default"));
+    #    };
+    #  };
   };
 }
