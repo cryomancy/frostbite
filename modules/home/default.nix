@@ -12,6 +12,7 @@
     ./passwordManagement.nix
     #./persistence.nix
     ./rofi.nix
+    ./shell.nix
     ./virtualization.nix
     ./waybar.nix
   ];
