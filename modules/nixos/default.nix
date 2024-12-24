@@ -9,12 +9,12 @@
     ./FHS.nix
     ./gaming.nix
     ./GNOME.nix
+    ./impermanence.nix
     ./laptopSupport.nix
     ./localization.nix
     ./microphone.nix
     ./network.nix
     ./nixSettings.nix
-    ./persistence.nix
     ./qemuGuest.nix
     ./RGB.nix
     ./secrets.nix
