@@ -16,25 +16,33 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    programs.rofi = {
-      enable = true;
-      package = pkgs.rofi-wayland;
-      extraConfig = {
-        show-icons = true;
-        image_size = 48;
-        columns = 3;
-        allow_images = true;
-        insensitive = true;
-        run-always_parse_args = true;
-        run-cache_file = "/dev/null";
-        run-exec_search = true;
-        matching = "multi-contains";
-      };
-      plugins = with pkgs; [
-        rofi-games
-        rofi-emoji
-        rofi-top
-      ];
-    };
+    home.packages = [pkgs.rofi-wayland];
+
+    xdg.configFile."rofi/config.rasi".text = ''
+      configuration{
+        modi: "run,drun,window";
+        lines: 5;
+        cycle: false;
+        font: "JetBrainsMono NF Bold 15";
+        show-icons: true;
+        icon-theme: "Papirus-dark";
+        terminal: "kitty";
+        drun-display-format: "{icon} {name}";
+        location: 0;
+        disable-history: true;
+        hide-scrollbar: true;
+        display-drun: " Apps ";
+        display-run: " Run ";
+        display-window: " Window ";
+        sidebar-mode: true;
+        sorting-method: "fzf";
+      }
+    '';
+
+    plugins = with pkgs; [
+      rofi-games
+      rofi-emoji
+      rofi-top
+    ];
   };
 }

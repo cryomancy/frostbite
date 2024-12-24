@@ -1,6 +1,6 @@
 {
   imports = [
-    ./browser.nix
+    ./browser
     ./design.nix
     ./developmentTools.nix
     ./editor.nix
@@ -9,8 +9,8 @@
     ./homeManagement.nix
     ./homePackages.nix
     ./hyprland.nix
+    ./impermanence.nix
     ./passwordManagement.nix
-    #./persistence.nix
     ./rofi.nix
     ./shell.nix
     ./virtualization.nix
