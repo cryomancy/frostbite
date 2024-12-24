@@ -38,11 +38,5 @@ in {
         sorting-method: "fzf";
       }
     '';
-
-    plugins = with pkgs; [
-      rofi-games
-      rofi-emoji
-      rofi-top
-    ];
   };
 }
