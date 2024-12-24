@@ -106,7 +106,7 @@ in {
         in
           [
             "SUPER,t,exec,kitty"
-            "SUPER,f,exec,librewolf"
+            "SUPER,f,exec,firefox"
             "SUPER,q,killactive"
             "SUPER,a,exec,killall rofi || rofi -show drun"
             "SUPER,s,togglespecialworkspace"
