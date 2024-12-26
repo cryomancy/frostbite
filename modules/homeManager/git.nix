@@ -38,7 +38,7 @@ in {
         };
 
         userName = cfg.userName;
-        userEmail = cfg.UserEmail;
+        userEmail = cfg.userEmail;
 
         extraConfig = {
           init.defaultBranch = "main";
