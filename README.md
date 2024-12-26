@@ -20,7 +20,7 @@ This repository contains a modular NixOS configuration designed to support multi
 1. Choose your template:
 
 ```bash
-$ nix --extra-experimental-features [ "nix-command flakes" ] flake init -t github:TahlonBrahic/fuyu-no-kosei 
+$ nix --extra-experimental-features "nix-command flakes" flake init -t github:TahlonBrahic/fuyu-no-kosei 
 ```
 
 2. Define your own configuration in outputs or choose a pre-defined configuration:
