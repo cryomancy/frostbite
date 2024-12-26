@@ -1,15 +1,20 @@
 {
   imports = [
-    ./browser
+    ./chrome.nix
+    ./chromium.nix
     ./design.nix
     ./developmentTools.nix
     ./editor.nix
     ./encryption.nix
     ./fileManager.nix
+    ./firefox/firefox.nix
     ./homeManagement.nix
     ./homePackages.nix
-    ./hyprland.nix
+    ./hypr/hyprland.nix
+    ./hypr/hyprlock.nix
     ./impermanence.nix
+    ./librewolf.nix
+    ./lynx.nix
     ./passwordManagement.nix
     ./rofi.nix
     ./shell.nix
