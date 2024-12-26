@@ -10,7 +10,7 @@ in {
     fuyuNoKosei.developmentTools.enable = lib.mkOption {
       default = true;
       example = false;
-      description = "Whether to enable the custom fuyu development environment.";
+      description = "dev tools";
     };
   };
 
@@ -40,8 +40,6 @@ in {
 
       # Encryption
       age
-      # TODO: Add option
-      # age-plugin-yubikey
       sops
       rclone
 
@@ -49,11 +47,6 @@ in {
       gzip
       zip
       zstd
-
-      # Android
-      adb-sync
-      adbfs-rootless
-      scrcpy # Display and control Android devices over USB or TCP/IP
     ];
 
     programs = {
@@ -73,52 +66,10 @@ in {
         enableFishIntegration = true;
         enableZshIntegration = true;
       };
-      git = {
-        enable = true;
-        lfs.enable = true;
-        delta.enable = true;
-        delta.options = {
-          line-numbers = true;
-          side-by-side = true;
-          navigate = true;
-        };
-
-        userName = "TahlonBrahic";
-        userEmail = "tahlonbrahic@gmail.com";
-
-        extraConfig = {
-          init.defaultBranch = "main";
-
-          push = {
-            default = "current";
-            autoSetupRemote = true;
-          };
-
-          pull = {
-            rebase = true;
-          };
-
-          merge = {
-            conflictstyle = "diff3";
-          };
-
-          diff = {
-            colorMoved = "default";
-          };
-
-          url = {
-            "ssh://git@github.com/TahlonBrahic" = {
-              insteadOf = "https://github.com/TahlonBrahic";
-            };
-          };
-        };
-      };
-
       lsd = {
         enable = true;
         enableAliases = true;
       };
-
       starship = {
         enable = false;
         enableFishIntegration = true;
