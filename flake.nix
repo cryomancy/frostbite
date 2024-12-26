@@ -1,8 +1,10 @@
 {
-  description = "NixOS configuration that supports multiple users, systems, and architectures.";
+  description = "Nix flakes abstraction layer that supports multiple users, systems, and architectures.";
 
-  outputs = inputs:
-    import ./outputs.nix {inherit inputs;};
+  outputs = inputs @ {flake-parts, ...}:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      imports = [./outputs.nix];
+    };
 
   inputs = {
     nixpkgs = {
