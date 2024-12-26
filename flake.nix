@@ -1,9 +1,52 @@
 {
   description = "Nix flakes abstraction layer that supports multiple users, systems, and architectures.";
 
-  outputs = inputs @ {flake-parts, ...}:
-    flake-parts.lib.mkFlake {inherit inputs;} {
-      imports = [./outputs.nix];
+  outputs = inputs @ {
+    flake-parts,
+    self,
+    ...
+  }:
+    flake-parts.lib.mkFlake {inherit inputs self;} {
+      flake = let
+        forEachSystem = inputs.nixpkgs.lib.genAttrs (import inputs.systems);
+      in rec {
+        debug = true;
+
+        homeManagerModules.fuyuNoKosei = import ./modules/homeManager;
+        nixosModules.fuyuNoKosei = import ./modules/nixos;
+
+        genConfig = inputs.nixpkgs.lib.attrsets.mergeAttrsList;
+
+        templates = {
+          default = {
+            path = ./templates/default;
+            description = ''
+              A template that includes examples for all systems
+            '';
+            welcomeText = ''
+            '';
+          };
+          WSL = {
+            path = ./templates/WSL;
+            description = ''
+              A template containing an example only for a single WSL host
+            '';
+            welcomeText = ''
+            '';
+          };
+        };
+
+        lib =
+          forEachSystem (system:
+            (import ./lib {inherit inputs system pkgs;}).lib // inputs.nixpkgs.lib);
+
+        pkgs = forEachSystem (system:
+          import inputs.nixpkgs {
+            inherit system;
+            inherit (lib.${system}.overlays) overlays;
+            config.allowUnfree = true;
+          });
+      };
     };
 
   inputs = {
