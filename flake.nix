@@ -5,11 +5,13 @@
     flake-parts,
     self,
     ...
-  }:
+  }: let
+    systems = import inputs.systems;
+    forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
+  in
     flake-parts.lib.mkFlake {inherit inputs self;} {
-      flake = let
-        forEachSystem = inputs.nixpkgs.lib.genAttrs (import inputs.systems);
-      in rec {
+      inherit systems;
+      flake = rec {
         debug = true;
 
         homeManagerModules.fuyuNoKosei = import ./modules/homeManager;
