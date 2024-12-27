@@ -3,7 +3,7 @@
   genConfig = inputs.nixpkgs.lib.attrsets.mergeAttrsList;
 
   nixosModules.fuyuNoKosei = import ./modules/nixos;
-  homeManagerModules.fuyuNoKosei = import ./modules/home;
+  homeManagerModules.fuyuNoKosei = import ./modules/homeManager;
 
   lib =
     forEachSystem (system:
