@@ -18,6 +18,7 @@
         nixosModules.fuyuNoKosei = import ./modules/nixos;
 
         genConfig = inputs.nixpkgs.lib.attrsets.mergeAttrsList;
+        inherit forEachSystem;
 
         templates = {
           default = {
