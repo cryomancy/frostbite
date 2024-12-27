@@ -13,6 +13,8 @@ in {
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       pam_u2f
+      age-plugin-yubikey
+      yubikey-manager-qt
     ];
 
     services = {

@@ -8,6 +8,7 @@
     ./encryption.nix
     ./fileManager.nix
     ./firefox/firefox.nix
+    ./git.nix
     ./homeManagement.nix
     ./homePackages.nix
     ./hypr/hyprland.nix

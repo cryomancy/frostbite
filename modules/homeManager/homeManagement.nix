@@ -24,7 +24,7 @@ in {
         download = "${dir}/inbox";
         documents = "${dir}/documents";
         music = null;
-        pictures = null;
+        pictures = "${dir}/pictures";
         publicShare = null;
         templates = null;
         videos = null;
@@ -32,6 +32,7 @@ in {
           XDG_PROJECTS_DIR = "${dir}/projects";
           XDG_SYSTEM_DIR = "${dir}/system";
           XDG_MISC_DIR = "${dir}/misc";
+          XDG_SCREENSHOTS_DIR = "${dir}/pictures/screenshots";
         };
       };
     };
@@ -53,6 +54,9 @@ in {
       EDITOR = "nvim";
     };
 
-    programs.home-manager.enable = true;
+    programs = {
+      boxxy.enable = true;
+      home-manager.enable = true;
+    };
   };
 }
