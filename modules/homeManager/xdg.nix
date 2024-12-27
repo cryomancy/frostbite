@@ -40,75 +40,74 @@ in {
     programs = {
       boxxy = {
         enable = true;
-        rules = [
-          ''
-            rules:
-            - name: vim
-              target: ~/.vim
-              rewrite: ~/.local/share/vim
-              mode: file
-              context: []
-              only: []
-              env: {}
-            - name: vim
-              target: ~/.vimrc
-              rewrite: ~/.config/vim/vimrc
-              mode: file
-              context: []
-              only: []
-              env: {}
-            - name: vim
-              target: ~/.viminfo
-              rewrite: ~/.local/share/vim/viminfo
-              mode: file
-              context: []
-              only: []
-              env: {}
-            - name: vim
-              target: ~/.vim
-              rewrite: ~/.local/share/vim
-              mode: file
-              context: []
-              only: []
-              env: {}
-            - name: vim
-              target: ~/.vimrc
-              rewrite: ~/.config/vim/vimrc
-              mode: file
-              context: []
-              only: []
-              env: {}
-            - name: vim
-              target: ~/.viminfo
-              rewrite: ~/.local/share/vim/viminfo
-              mode: file
-              context: []
-              only: []
-              env: {}
-            - name: GnuPG
-              target: ~/.gnupg
-              rewrite: ~/.local/share/gnupg
-              mode: file
-              context: []
-              only: []
-              env: {}
-            - name: GTK 2
-              target: ~/.gtkrc-2.0
-              rewrite: ~/.config/gtk-2.0/gtkrc
-              mode: file
-              context: []
-              only: []
-              env: {}
-            - name: w3m
-              target: ~/.w3m
-              rewrite: ~/.config/w3m
-              mode: file
-              context: []
-              only: []
-              env: {}
-          ''
-        ];
       };
     };
+
+    "${config.xdg.configHome}/boxxy/boxxy.yaml" = ''
+      rules:
+      - name: vim
+        target: ~/.vim
+        rewrite: ~/.local/share/vim
+        mode: file
+        context: []
+        only: []
+        env: {}
+      - name: vim
+        target: ~/.vimrc
+        rewrite: ~/.config/vim/vimrc
+        mode: file
+        context: []
+        only: []
+        env: {}
+      - name: vim
+        target: ~/.viminfo
+        rewrite: ~/.local/share/vim/viminfo
+        mode: file
+        context: []
+        only: []
+        env: {}
+      - name: vim
+        target: ~/.vim
+        rewrite: ~/.local/share/vim
+        mode: file
+        context: []
+        only: []
+        env: {}
+      - name: vim
+        target: ~/.vimrc
+        rewrite: ~/.config/vim/vimrc
+        mode: file
+        context: []
+        only: []
+        env: {}
+      - name: vim
+        target: ~/.viminfo
+        rewrite: ~/.local/share/vim/viminfo
+        mode: file
+        context: []
+        only: []
+        env: {}
+      - name: GnuPG
+        target: ~/.gnupg
+        rewrite: ~/.local/share/gnupg
+        mode: file
+        context: []
+        only: []
+        env: {}
+      - name: GTK 2
+        target: ~/.gtkrc-2.0
+        rewrite: ~/.config/gtk-2.0/gtkrc
+        mode: file
+        context: []
+        only: []
+        env: {}
+      - name: w3m
+        target: ~/.w3m
+        rewrite: ~/.config/w3m
+        mode: file
+        context: []
+        only: []
+        env: {}
+    '';
   };
 }
