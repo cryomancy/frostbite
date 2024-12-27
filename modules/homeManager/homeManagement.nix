@@ -16,27 +16,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    xdg = {
-      userDirs = {
-        enable = true;
-        createDirectories = true;
-        desktop = null;
-        download = "${dir}/inbox";
-        documents = "${dir}/documents";
-        music = null;
-        pictures = "${dir}/pictures";
-        publicShare = null;
-        templates = null;
-        videos = null;
-        extraConfig = {
-          XDG_PROJECTS_DIR = "${dir}/projects";
-          XDG_SYSTEM_DIR = "${dir}/system";
-          XDG_MISC_DIR = "${dir}/misc";
-          XDG_SCREENSHOTS_DIR = "${dir}/pictures/screenshots";
-        };
-      };
-    };
-
     home = {
       homeDirectory = "/home/${config.home.username}";
       stateVersion = "24.11";
@@ -55,7 +34,6 @@ in {
     };
 
     programs = {
-      boxxy.enable = true;
       home-manager.enable = true;
     };
   };
