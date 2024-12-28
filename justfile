@@ -16,3 +16,8 @@ generate-age-key:
     # The public key added to .sops.yaml would then have to be updated with sops updatekeys
 	# on a host with a key already in secrets/secrets.yaml
 	# Then the previous secrets in secrets/secrets.yaml can be accessed
+
+lock:
+    nix flake update
+    nix run github:TahlonBrahic/nix-auto-follow -- -i
+	nix run github:TahlonBrahic/nix-auto-follow -- -c
