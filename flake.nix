@@ -19,6 +19,7 @@
 
         genConfig = inputs.nixpkgs.lib.attrsets.mergeAttrsList;
         inherit forEachSystem;
+        inherit systems;
 
         templates = {
           default = {
