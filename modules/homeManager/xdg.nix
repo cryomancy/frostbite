@@ -43,7 +43,7 @@ in {
       };
     };
 
-    "${config.xdg.configHome}/boxxy/boxxy.yaml" = ''
+    xdg.configFile."boxxy/boxxy.yaml".text = ''
       rules:
       - name: vim
         target: ~/.vim
