@@ -21,5 +21,6 @@
     ./shell.nix
     ./virtualization.nix
     ./waybar.nix
+    ./xdg.nix
   ];
 }
