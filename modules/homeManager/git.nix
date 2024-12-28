@@ -14,12 +14,12 @@ in {
       };
       userName = lib.mkOption {
         default = null;
-        type = lib.types.string;
+        type = lib.types.str;
         example = "Foo Bar";
       };
       userEmail = lib.mkOption {
         default = null;
-        type = lib.types.string;
+        type = lib.types.str;
         example = "foo@bar.com";
       };
     };
@@ -37,8 +37,7 @@ in {
           navigate = true;
         };
 
-        userName = cfg.userName;
-        userEmail = cfg.userEmail;
+        inherit (cfg) userName userEmail;
 
         extraConfig = {
           init.defaultBranch = "main";
