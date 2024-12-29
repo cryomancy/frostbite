@@ -70,7 +70,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     nixvim.url = "github:nix-community/nixvim";
-    nmd.url = "gitlab:rycee/nmd";
+    nmd.url = "sourcehut:~rycee/nmd";
     nvchad4nix.url = "github:nix-community/nix4nvchad";
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-on-droid.url = "github:nix-community/nix-on-droid/release-24.05";
