@@ -636,11 +636,11 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1735532485,
-        "narHash": "sha256-gCDYmSNmboRjE94HHcLIqvkmBWRza+eeyUXmSHdiAkc=",
+        "lastModified": 1735536908,
+        "narHash": "sha256-WquEJQnbDr8Rd/x3SDKB6sOCI6YX/KGv1IpXxcELq88=",
         "owner": "TahlonBrahic",
         "repo": "fuyu-no-neovim",
-        "rev": "78f02a18082694024326f3e7ed9e321830606a4b",
+        "rev": "1e7518629f5bf7ad6338641655f277538f495ed2",
         "type": "github"
       },
       "original": {
