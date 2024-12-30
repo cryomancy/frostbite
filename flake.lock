@@ -636,11 +636,11 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1735531338,
-        "narHash": "sha256-QbOrr07ywTK56hu5O3TjsEWsGOICVrwPmck3Wd8Urdo=",
+        "lastModified": 1735532485,
+        "narHash": "sha256-gCDYmSNmboRjE94HHcLIqvkmBWRza+eeyUXmSHdiAkc=",
         "owner": "TahlonBrahic",
         "repo": "fuyu-no-neovim",
-        "rev": "673eb948595a07b645475380c0043a47769be366",
+        "rev": "78f02a18082694024326f3e7ed9e321830606a4b",
         "type": "github"
       },
       "original": {
@@ -1143,11 +1143,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1733570843,
-        "narHash": "sha256-sQJAxY1TYWD1UyibN/FnN97paTFuwBw3Vp3DNCyKsMk=",
+        "lastModified": 1735218083,
+        "narHash": "sha256-MoUAbmXz9TEr7zlKDRO56DBJHe30+7B5X7nhXm+Vpc8=",
         "owner": "lnl7",
         "repo": "nix-darwin",
-        "rev": "a35b08d09efda83625bef267eb24347b446c80b8",
+        "rev": "bc03f7818771a75716966ce8c23110b715eff2aa",
         "type": "github"
       },
       "original": {
