@@ -54,6 +54,9 @@ in {
         enable = true;
         nix-direnv.enable = true;
       };
+      bat = {
+        enable = true;
+      };
       broot = {
         enable = true;
         enableBashIntegration = true;
