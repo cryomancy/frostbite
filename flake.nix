@@ -64,7 +64,7 @@
     fuyuvim.url = "github:TahlonBrahic/fuyu-no-neovim";
     gitignore.url = "github:hercules-ci/gitignore.nix";
     haumea.url = "github:nix-community/haumea/v0.2.2";
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/release-24.11";
     impermanence.url = "github:nix-community/impermanence";
     jeezyvim.url = "github:LGUG2Z/JeezyVim";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
