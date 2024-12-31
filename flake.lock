@@ -614,11 +614,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1735526852,
-        "narHash": "sha256-G5dVWEih9nfmJHj1lf8S+YPFWleQrEJ8CseCZ69fty0=",
+        "lastModified": 1735604184,
+        "narHash": "sha256-tKWUPzt3hgKOqvFhZq9rCN09gYqw9LeeHPY5Nog/Yec=",
         "owner": "TahlonBrahic",
         "repo": "fuyu-no-nur",
-        "rev": "9edc7b6ca06d354805e958e46943c8dfdde9367c",
+        "rev": "f42c3f4ca9e6391315ef8b317517d2d52c0b1a7c",
         "type": "github"
       },
       "original": {
