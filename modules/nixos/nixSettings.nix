@@ -21,10 +21,22 @@ in {
   config = lib.mkIf cfg.enable {
     nix = {
       settings = {
-        experimental-features = ["nix-command" "flakes" "pipe-operators"];
-        trusted-users = ["@wheel"];
         accept-flake-config = true;
         auto-optimise-store = true;
+        experimental-features = ["nix-command" "flakes" "pipe-operators"];
+        substituters = [
+          "https://cache.nixos.org/"
+          "https://fuyu-no-hokan.cachix.org"
+          "https://nix-community.cachix.org"
+          "https://rycee.cachix.org"
+        ];
+        trusted-users = ["@wheel"];
+        trusted-public-keys = [
+          "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+          "fuyu-no-hokan.cachix.org-1:gW/kI695uo/nTD+nyqpbjZFcfK2dS6N2kAtHDrNYM+g="
+          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          "rycee.cachix.org-1:TiiXyeSk0iRlzlys4c7HiXLkP3idRf20oQ/roEUAh/A="
+        ];
       };
       registry = {
         nixpkgs = {
