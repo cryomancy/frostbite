@@ -11,8 +11,9 @@
         withSystem,
         flake-parts-lib,
         ...
-      }: {
+      }: let
         systems = import inputs.systems;
+      in {
         imports = [
           #inputs.flake-parts.flakeModules.flakeModules
           ./flake-parts/options/lib.nix
@@ -29,6 +30,7 @@
         };
         flake = {
           debug = true;
+          inherit systems;
           homeManagerModules.fuyuNoKosei = import ./modules/homeManager;
           nixosModules.fuyuNoKosei = import ./modules/nixos;
         };
