@@ -30,6 +30,7 @@
           _module.args.pkgs = import inputs.nixpkgs {
             inherit system;
             inherit (config.lib.overlays) overlays;
+            nixpkgs.config.allowUnfree = true;
           };
           inherit (_module.args) lib pkgs;
         };
