@@ -24,4 +24,5 @@
   importedFunctions = {imports = [./functions.nix];};
 
   lib = importedDirectories // importedTemplates // importedFunctions;
-in {inherit lib;}
+in
+  lib
