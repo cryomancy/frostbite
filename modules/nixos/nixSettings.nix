@@ -20,9 +20,11 @@ in {
 
   config = lib.mkIf cfg.enable {
     nix = {
+      channel.enable = false;
       settings = {
         accept-flake-config = true;
         auto-optimise-store = true;
+        # TODO: Add nix.buildMachines with sops nix secrets and build user
         experimental-features = ["nix-command" "flakes" "pipe-operators"];
         substituters = [
           "https://cache.nixos.org/"
@@ -38,6 +40,7 @@ in {
           "rycee.cachix.org-1:TiiXyeSk0iRlzlys4c7HiXLkP3idRf20oQ/roEUAh/A="
         ];
       };
+      # TODO: Add flake registry
       registry = {
         nixpkgs = {
           flake = inputs.nixpkgs;

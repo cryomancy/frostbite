@@ -5,53 +5,35 @@
     flake-parts,
     self,
     ...
-  }: let
-    systems = import inputs.systems;
-    forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
-  in
-    flake-parts.lib.mkFlake {inherit inputs self;} {
-      inherit systems;
-      flake = rec {
-        debug = true;
-
-        homeManagerModules.fuyuNoKosei = import ./modules/homeManager;
-        nixosModules.fuyuNoKosei = import ./modules/nixos;
-
-        genConfig = inputs.nixpkgs.lib.attrsets.mergeAttrsList;
-        inherit forEachSystem;
-        inherit systems;
-
-        templates = {
-          default = {
-            path = ./templates/default;
-            description = ''
-              A template that includes examples for all systems
-            '';
-            welcomeText = ''
-            '';
-          };
-          WSL = {
-            path = ./templates/WSL;
-            description = ''
-              A template containing an example only for a single WSL host
-            '';
-            welcomeText = ''
-            '';
-          };
+  }:
+    flake-parts.lib.mkFlake {inherit inputs self;} (
+      {
+        withSystem,
+        flake-parts-lib,
+        ...
+      }: {
+        systems = import inputs.systems;
+        imports = [
+          #inputs.flake-parts.flakeModules.flakeModules
+          ./flake-parts/options/lib.nix
+          ./flake-parts/options/pkgs.nix
+        ];
+        perSystem = {system, ...}: rec {
+          lib = system: import ./lib {inherit inputs system pkgs;}.lib // inputs.nixpkgs.lib;
+          pkgs = system:
+            import inputs.nixpkgs {
+              inherit system;
+              inherit (lib.${system}.overlays) overlays;
+              config.allowUnfree = true;
+            };
         };
-
-        lib =
-          forEachSystem (system:
-            (import ./lib {inherit inputs system pkgs;}).lib // inputs.nixpkgs.lib);
-
-        pkgs = forEachSystem (system:
-          import inputs.nixpkgs {
-            inherit system;
-            inherit (lib.${system}.overlays) overlays;
-            config.allowUnfree = true;
-          });
-      };
-    };
+        flake = {
+          debug = true;
+          homeManagerModules.fuyuNoKosei = import ./modules/homeManager;
+          nixosModules.fuyuNoKosei = import ./modules/nixos;
+        };
+      }
+    );
 
   inputs = {
     base16.url = "github:SenchoPens/base16.nix";
