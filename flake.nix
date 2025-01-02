@@ -9,7 +9,6 @@
 
   outputs = inputs @ {
     flake-parts,
-    haumea,
     self,
     ...
   }:
@@ -61,7 +60,10 @@
             nixosModules = import ./flake-parts/modules/nixos;
             homeManagerModules = import ./flake-parts/modules/homeManager;
           };
-          fuyu-lib = haumea.lib.load {src = ./flake-parts/lib;};
+          fuyu-lib = inputs.haumea.lib.load {
+            src = ./flake-parts/lib;
+            inputs = {inherit (inputs.nixpkgs) lib;};
+          };
         };
       }
     );
