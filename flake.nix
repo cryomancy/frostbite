@@ -17,6 +17,7 @@
         imports = [
           ./flake-parts/options/lib.nix
           ./flake-parts/options/pkgs.nix
+          flake-parts.flakeModules.partitions
         ];
 
         partitions = {
