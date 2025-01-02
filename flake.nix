@@ -11,9 +11,8 @@
         withSystem,
         flake-parts-lib,
         ...
-      }: let
-        systems = import inputs.systems;
-      in {
+      }: {
+        systems = ["x86_64-linux"];
         imports = [
           #inputs.flake-parts.flakeModules.flakeModules
           ./flake-parts/options/lib.nix
@@ -30,7 +29,6 @@
         };
         flake = {
           debug = true;
-          inherit systems;
           homeManagerModules.fuyuNoKosei = import ./modules/homeManager;
           nixosModules.fuyuNoKosei = import ./modules/nixos;
         };
@@ -61,7 +59,6 @@
     nur.url = "github:nix-community/NUR";
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
     sops-nix.url = "github:Mic92/sops-nix";
-    systems.url = "github:nix-systems/default-linux";
     stylix.url = "github:danth/stylix";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     ixx.url = "github:NuschtOS/ixx/v0.0.6";
