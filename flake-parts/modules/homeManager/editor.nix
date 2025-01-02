@@ -13,8 +13,9 @@ in {
         default = true;
       };
       defaultEditor = lib.mkOption {
-        type = lib.types.enum [pkgs.fuyuvim pkgs.jeezyivm pkgs.nvchad pkgs.nvim];
+        type = lib.types.package;
         default = pkgs.fuyuvim;
+        example = pkgs.jeezyvim;
       };
     };
   };
