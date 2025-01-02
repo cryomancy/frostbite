@@ -1,7 +1,11 @@
 {
   description = "Nix flakes abstraction layer that supports multiple users, systems, and architectures.";
 
-  inputs.flake-parts.url = "github:hercules-ci/flake-parts";
+  inputs = {
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    haumea.url = "github:nix-community/haumea/v0.2.2";
+  };
 
   outputs = inputs @ {
     flake-parts,
@@ -18,6 +22,7 @@
           ./flake-parts/options/lib.nix
           ./flake-parts/options/pkgs.nix
           flake-parts.flakeModules.partitions
+          flake-parts.flakeModules.easyOverlay
         ];
 
         partitions = {
@@ -30,12 +35,12 @@
         };
 
         partitionedAttrs = {
-          assets = "assets";
-          ci = "ci";
+          #assets = "assets";
+          #ci = "ci";
           #checks = "checks";
-          devShells = "dev";
-          docs = "docs";
-          installer = "installer";
+          #devShells = "dev";
+          #docs = "docs";
+          #installer = "installer";
         };
 
         perSystem = {
@@ -43,20 +48,20 @@
           system,
           ...
         }: rec {
-          _module.args.lib = withSystem system ({system, ...}:
-            import ./flake-parts/lib
-            {
-              inherit system;
-              inherit (self) inputs;
-              inherit (config._module.args) pkgs;
-            }
-            // inputs.nixpkgs.lib);
           _module.args.pkgs = import inputs.nixpkgs {
             inherit system;
-            inherit (config.lib.overlays) overlays;
+            overlays = [self.overlays.default];
             config.allowUnfree = true;
           };
-          inherit (_module.args) lib pkgs;
+          inherit (_module.args) pkgs;
+          overlayAttrs = {
+            fuyuvim = inputs.fuyuvim.overlays.default;
+            jeezyvim = inputs.jeezyvim.overlays.default;
+            nur = inputs.nur.overlays.default;
+            nvchad = final: prev: {
+              inherit (inputs.nvchad4nix.packages."${system}".nvchad) nvchad;
+            };
+          };
         };
 
         flake = {
