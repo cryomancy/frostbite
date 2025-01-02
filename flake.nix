@@ -9,6 +9,7 @@
 
   outputs = inputs @ {
     flake-parts,
+    haumea,
     self,
     ...
   }:
@@ -32,15 +33,6 @@
           dev.extraInputsFlake = ./flake-parts/dev;
           docs.extraInputsFlake = ./flake-parts/docs;
           installer.extraInputsFlake = ./flake-parts/installer;
-        };
-
-        partitionedAttrs = {
-          #assets = "assets";
-          #ci = "ci";
-          #checks = "checks";
-          #devShells = "dev";
-          #docs = "docs";
-          #installer = "installer";
         };
 
         perSystem = {
@@ -69,6 +61,7 @@
             nixosModules = import ./flake-parts/modules/nixos;
             homeManagerModules = import ./flake-parts/modules/homeManager;
           };
+          fuyu-lib = haumea.lib.load {src = ./flake-parts/lib;};
         };
       }
     );
