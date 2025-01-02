@@ -7,14 +7,10 @@
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs self;} (
-      {
-        withSystem,
-        flake-parts-lib,
-        ...
-      }: {
+      {withSystem, ...}: {
+        debug = true;
         systems = ["x86_64-linux"];
         imports = [
-          #inputs.flake-parts.flakeModules.flakeModules
           ./flake-parts/options/lib.nix
           ./flake-parts/options/pkgs.nix
         ];
@@ -23,23 +19,23 @@
           system,
           ...
         }: rec {
-          lib = system:
-            import ./lib
+          _module.args.lib = withSystem system ({system, ...}:
+            import ./flake-parts/lib
             {
-              inherit inputs system;
+              inherit system;
+              inherit (self) inputs;
               inherit (config._module.args) pkgs;
             }
-            .lib
-            // inputs.nixpkgs.lib;
+            // inputs.nixpkgs.lib);
           _module.args.pkgs = import inputs.nixpkgs {
             inherit system;
-            inherit (lib.${system}.overlays) overlays;
+            inherit (config.lib.overlays) overlays;
           };
+          inherit (_module.args) lib pkgs;
         };
         flake = {
-          debug = true;
-          homeManagerModules.fuyuNoKosei = import ./modules/homeManager;
-          nixosModules.fuyuNoKosei = import ./modules/nixos;
+          homeManagerModules.fuyuNoKosei = import ./flake-parts/modules/homeManager;
+          nixosModules.fuyuNoKosei = import ./flake-parts/modules/nixos;
         };
       }
     );
