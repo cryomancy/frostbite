@@ -18,14 +18,23 @@
           ./flake-parts/options/lib.nix
           ./flake-parts/options/pkgs.nix
         ];
-        perSystem = {system, ...}: rec {
-          lib = system: import ./lib {inherit inputs system pkgs;}.lib // inputs.nixpkgs.lib;
-          pkgs = system:
-            import inputs.nixpkgs {
-              inherit system;
-              inherit (lib.${system}.overlays) overlays;
-              config.allowUnfree = true;
-            };
+        perSystem = {
+          config,
+          system,
+          ...
+        }: rec {
+          lib = system:
+            import ./lib
+            {
+              inherit inputs system;
+              inherit (config._module.args) pkgs;
+            }
+            .lib
+            // inputs.nixpkgs.lib;
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
+            inherit (lib.${system}.overlays) overlays;
+          };
         };
         flake = {
           debug = true;
