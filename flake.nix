@@ -62,7 +62,7 @@
     nur.url = "github:nix-community/NUR";
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
     sops-nix.url = "github:Mic92/sops-nix";
-    stylix.url = "github:danth/stylix";
+    stylix.url = "github:danth/stylix/release-24.11";
     tt-schemes.url = "github:tinted-theming/schemes";
     tt-schemes.flake = false;
     walls.url = "github:dharmx/walls";
