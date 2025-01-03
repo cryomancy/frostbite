@@ -60,7 +60,7 @@
           homeModules.fuyuNoKosei.homeModules = import ./flake-parts/modules/home;
           lib = inputs.haumea.lib.load {
             src = ./flake-parts/lib;
-            loader = inputs.haumea.lib.loaders.scoped;
+            loader = inputs.haumea.lib.loaders.verbatim;
             inputs = {inherit (inputs.nixpkgs) lib;};
           };
         };
