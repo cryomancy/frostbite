@@ -2,7 +2,6 @@
   imports = [
     ./audio.nix
     ./boot.nix
-    ./deploy.nix
     ./design.nix
     ./displayManager.nix
     ./environment.nix

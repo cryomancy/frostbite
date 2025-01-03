@@ -56,11 +56,9 @@
         };
 
         flake = {
-          nixosModules.fuyuNoKosei = {
-            nixosModules = import ./flake-parts/modules/nixos;
-            homeManagerModules = import ./flake-parts/modules/homeManager;
-          };
-          fuyu-lib = inputs.haumea.lib.load {
+          nixosModules.fuyuNoKosei.nixosModules = import ./flake-parts/modules/nixos;
+          homeModules.fuyuNoKosei.homeModules = import ./flake-parts/modules/home;
+          lib = inputs.haumea.lib.load {
             src = ./flake-parts/lib;
             inputs = {inherit (inputs.nixpkgs) lib;};
           };
