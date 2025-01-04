@@ -3,12 +3,12 @@
   system,
   modules,
   users,
-  hostName
+  hostName,
   ...
 }: let
-  specialArgs = {inherit inputs hostName system users ;};
+  specialArgs = {inherit inputs hostName system users;};
 in
-  lib.nixosSystem {
+  inputs.nixpkgs.lib.nixosSystem {
     inherit system specialArgs;
     modules =
       [
@@ -21,7 +21,7 @@ in
             useUserPackages = true;
             extraSpecialArgs = specialArgs;
             # Iterates over a list of users provided in the function call
-            users = lib.attrsets.genAttrs users (user: {
+            users = inputs.nixpkgs.lib.attrsets.genAttrs users (user: {
               imports = [inputs.homeModules];
               config.home.username = user;
             });
