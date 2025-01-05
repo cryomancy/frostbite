@@ -4,11 +4,12 @@
   modules,
   users,
   hostName,
+  lib,
   ...
 }: let
   specialArgs = {inherit inputs hostName system users;};
 in
-  inputs.nixpkgs.lib.nixosSystem {
+  lib.nixosSystem {
     inherit system specialArgs;
     modules =
       [
