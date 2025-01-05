@@ -56,8 +56,8 @@
         };
 
         flake = {
-          nixosModules.fuyuNoKosei.nixosModules = import ./flake-parts/modules/nixos;
-          homeModules.fuyuNoKosei.homeModules = import ./flake-parts/modules/home;
+          nixosModules = import ./flake-parts/modules/nixos;
+          homeModules = import ./flake-parts/modules/home;
           lib = inputs.haumea.lib.load {
             src = ./flake-parts/lib;
             loader = inputs.haumea.lib.loaders.verbatim;
