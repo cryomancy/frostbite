@@ -3,10 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    flake-parts.url = "github:hercules-ci/flake-parts";
     haumea = {
       url = "github:nix-community/haumea/v0.2.2";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,7 +26,7 @@
         flakeModules =
           inputs.nixpkgs.lib.attrsets.genAttrs modules (module:
             importApply ./flake-parts/${module}/flake-module.nix {inherit withSystem;});
-        flakeModule = flakeModules;
+        flakeModule = flakeModules.modules;
       in {
         debug = true;
         systems = ["x86_64-linux"];

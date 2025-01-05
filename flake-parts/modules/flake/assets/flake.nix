@@ -4,6 +4,5 @@
     assets.url = "github:TahlonBrahic/assets";
   };
 
-  # This flake is only used for its inputs.
-  outputs = {...}: {};
+  outputs = {};
 }
