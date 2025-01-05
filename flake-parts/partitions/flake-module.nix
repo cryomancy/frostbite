@@ -7,8 +7,8 @@ localFlake: {self, ...}: {
   };
 
   partitionedAttrs = {
-    #checks = "dev";
-    #ci = "dev";
+    checks = "dev";
+    ci = "dev";
     formatter = "dev";
   };
 }
