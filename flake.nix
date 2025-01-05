@@ -19,7 +19,7 @@
         ...
       }: let
         inherit (flake-parts-lib) importApply;
-        modules = ["formatter" "packages"];
+        modules = ["packages" "partitions"];
         flakeModules =
           inputs.nixpkgs.lib.attrsets.genAttrs modules (module:
             importApply ./flake-parts/${module}/flake-module.nix {inherit withSystem;});
@@ -29,9 +29,9 @@
         systems = ["x86_64-linux"];
         imports =
           [
+            inputs.flake-parts.flakeModules.partitions
             inputs.flake-parts.flakeModules.flakeModules
             inputs.flake-parts.flakeModules.modules
-            inputs.flake-parts.flakeModules.partitions
             inputs.flake-parts.flakeModules.easyOverlay
           ]
           ++ inputs.nixpkgs.lib.attrsets.attrValues flakeModules;
