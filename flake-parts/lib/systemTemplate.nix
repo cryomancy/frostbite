@@ -14,7 +14,7 @@ in
     modules =
       [
         inputs.fuyuNoKosei.extensibleModules.nixos
-        inputs.home-manager.home-manager
+        inputs.home-manager.nixosModule.home-manager
         {
           home-manager = {
             backupFileExtension = "bak";
