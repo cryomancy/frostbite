@@ -13,58 +13,42 @@
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs self;} (
-      {withSystem, ...}: {
+      {
+        withSystem,
+        flake-parts-lib,
+        ...
+      }: let
+        inherit (flake-parts-lib) importApply;
+        modules = ["formatter" "packages"];
+        flakeModules =
+          inputs.nixpkgs.lib.attrsets.genAttrs modules (module:
+            importApply ./flake-parts/${module}/flake-module.nix {inherit withSystem;});
+        flakeModule = flakeModules;
+      in {
         debug = true;
-
         systems = ["x86_64-linux"];
-
-        imports = [
-          ./flake-parts/options/lib.nix
-          ./flake-parts/options/pkgs.nix
-          flake-parts.flakeModules.partitions
-          flake-parts.flakeModules.easyOverlay
-        ];
-
-        partitions = {
-          assets.extraInputsFlake = ./flake-parts/assets;
-          ci.extraInputsFlake = ./flake-parts/ci;
-          #checks.extraInputsFlake = ./flake-parts/checks;
-          dev.extraInputsFlake = ./flake-parts/dev;
-          docs.extraInputsFlake = ./flake-parts/docs;
-          installer.extraInputsFlake = ./flake-parts/installer;
-        };
-
-        perSystem = {
-          config,
-          system,
-          ...
-        }: rec {
-          _module.args.pkgs = import inputs.nixpkgs {
-            inherit system;
-            overlays = [self.overlays.default];
-            config.allowUnfree = true;
-          };
-          inherit (_module.args) pkgs;
-          overlayAttrs = {
-            fuyuvim = inputs.fuyuvim.overlays.default;
-            jeezyvim = inputs.jeezyvim.overlays.default;
-            nur = inputs.nur.overlays.default;
-            nvchad = final: prev: {
-              inherit (inputs.nvchad4nix.packages."${system}".nvchad) nvchad;
-            };
-          };
-        };
+        imports =
+          [
+            inputs.flake-parts.flakeModules.flakeModules
+            inputs.flake-parts.flakeModules.modules
+            inputs.flake-parts.flakeModules.partitions
+            inputs.flake-parts.flakeModules.easyOverlay
+          ]
+          ++ inputs.nixpkgs.lib.attrsets.attrValues flakeModules;
 
         flake = {
-          nixosModules = inputs.haumea.lib.load {
-            src = ./flake-parts/modules/nixos;
-            loader = inputs.haumea.lib.loaders.verbatim;
-            transformer = inputs.haumea.lib.transformers.hoistAttrs "config" "nixos";
-          };
-          homeModules = inputs.haumea.lib.load {
-            src = ./flake-parts/modules/home;
-            loader = inputs.haumea.lib.loaders.verbatim;
-            transformer = inputs.haumea.lib.transformers.hoistAttrs "config" "home";
+          inherit flakeModule flakeModules;
+          modules = {
+            nixos = inputs.haumea.lib.load {
+              src = ./flake-parts/modules/nixos;
+              loader = inputs.haumea.lib.loaders.verbatim;
+              transformer = inputs.haumea.lib.transformers.hoistAttrs "config" "nixos";
+            };
+            home = inputs.haumea.lib.load {
+              src = ./flake-parts/modules/home;
+              loader = inputs.haumea.lib.loaders.verbatim;
+              transformer = inputs.haumea.lib.transformers.hoistAttrs "config" "home";
+            };
           };
           lib = inputs.haumea.lib.load {
             src = ./flake-parts/lib;
