@@ -13,8 +13,8 @@ in
     inherit system specialArgs;
     modules =
       [
-        inputs.fuyuNoKosei.modules.nixos
-        inputs.home-manager.nixosModules.home-manager
+        inputs.fuyuNoKosei.extensibleModules.nixos
+        inputs.home-manager.extensibleModules.home-manager
         {
           home-manager = {
             backupFileExtension = "bak";
