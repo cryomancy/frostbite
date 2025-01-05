@@ -22,11 +22,10 @@
         ...
       }: let
         inherit (flake-parts-lib) importApply;
-        modules = ["packages" "partitions"];
         flakeModules =
-          inputs.nixpkgs.lib.attrsets.genAttrs modules (module:
+          inputs.nixpkgs.lib.attrsets.genAttrs ["packages" "partitions"] (module:
             importApply ./flake-parts/${module}/flake-module.nix {inherit withSystem;});
-        flakeModule = flakeModules.modules;
+        flakeModule = flakeModules;
       in {
         debug = true;
         systems = ["x86_64-linux"];
