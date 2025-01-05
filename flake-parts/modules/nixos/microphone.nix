@@ -8,8 +8,7 @@
 in {
   options.fuyuNoKosei.microphone.enable = lib.mkEnableOption "microphone";
 
-  config =
-    lib.mkIf cfg.enable {
-	  environment.systemPackages = with pkgs; [easyeffects];
-    };
+  config = lib.mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [easyeffects];
+  };
 }
