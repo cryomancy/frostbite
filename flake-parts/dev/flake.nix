@@ -6,7 +6,7 @@
     # See https://github.com/ursi/get-flake/issues/4
     git-hooks-nix.inputs.nixpkgs.follows = "";
   };
-
+  nixConfig.commit-lockfile-summary = "flake: bump dev inputs";
   # This flake is only used for its inputs.
   outputs = _: {};
 }
