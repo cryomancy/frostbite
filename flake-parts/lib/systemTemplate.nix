@@ -14,7 +14,7 @@ in
     modules =
       [
         inputs.fuyuNoKosei.extensibleModules.nixos
-        inputs.home-manager.extensibleModules.home-manager
+        inputs.home-manager.home-manager
         {
           home-manager = {
             backupFileExtension = "bak";
@@ -23,7 +23,7 @@ in
             extraSpecialArgs = specialArgs;
             # Iterates over a list of users provided in the function call
             users = inputs.nixpkgs.lib.attrsets.genAttrs users (user: {
-              imports = [inputs.fuyuNoKosei.modules.home];
+              imports = [inputs.fuyuNoKosei.extensibleModules.home];
               config.home.username = user;
             });
           };
