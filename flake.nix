@@ -56,12 +56,19 @@
         };
 
         flake = {
-          nixosModules = import ./flake-parts/modules/nixos;
-          homeModules = import ./flake-parts/modules/home;
+          nixosModules = inputs.haumea.lib.load {
+            src = ./flake-parts/modules/nixos;
+            loader = inputs.haumea.lib.loaders.verbatim;
+            transformer = inputs.haumea.lib.transformers.hoistAttrs "config" "nixos";
+          };
+          homeModules = inputs.haumea.lib.load {
+            src = ./flake-parts/modules/home;
+            loader = inputs.haumea.lib.loaders.verbatim;
+            transformer = inputs.haumea.lib.transformers.hoistAttrs "config" "home";
+          };
           lib = inputs.haumea.lib.load {
             src = ./flake-parts/lib;
             loader = inputs.haumea.lib.loaders.verbatim;
-            inputs = {inherit (inputs.nixpkgs) lib;};
           };
         };
       }
