@@ -1,4 +1,4 @@
-{
+localFlake: {
   inputs = {
     nixpkgs = {
       url = "github:TahlonBrahic/fuyu-no-nur";
@@ -66,5 +66,5 @@
     };
   };
 
-  outputs = {};
+  outputs = _: {};
 }

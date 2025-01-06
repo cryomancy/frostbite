@@ -1,8 +1,12 @@
 localFlake: {self, ...}: {
   partitions = {
+    default = {
+      extraInputsFlake = ./default;
+      module = ./default/flake-module;
+    };
     dev = {
-      extraInputsFlake = ../dev;
-      module = ../dev/flake-module.nix;
+      extraInputsFlake = ./dev;
+      module = ./dev/flake-module.nix;
     };
   };
 
