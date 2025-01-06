@@ -1,4 +1,4 @@
-{inputs, ...}: let
+wrapper: {inputs, ...}: let
   inherit (inputs) haumea nixpkgs;
   inherit (nixpkgs) lib;
   systems = haumea.lib.load {
