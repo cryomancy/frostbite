@@ -1,8 +1,9 @@
-wrapper: {inputs, ...}: let
+{inputs, ...}: let
   inherit (inputs) haumea nixpkgs;
   inherit (nixpkgs) lib;
   systems = haumea.lib.load {
-    src = ./flake-parts/systems;
+    # Note: having to 'meta-escape' the directory to remove the previous loaders directory path
+    src = ../../flake-parts/systems;
     loader = haumea.lib.loaders.verbatim;
   };
 
@@ -13,7 +14,7 @@ wrapper: {inputs, ...}: let
     (system:
       haumea.lib.load
       {
-        src = ./flake-parts/systems/${system};
+        src = ../../flake-parts/systems/${system};
         inputs = {inherit inputs lib;};
       });
 in
