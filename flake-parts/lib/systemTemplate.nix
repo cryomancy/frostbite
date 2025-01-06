@@ -1,20 +1,19 @@
 {
   inputs,
   system,
-  modules,
+  extraModules,
   users,
   hostName,
   lib,
   ...
 }: let
   specialArgs = {inherit inputs hostName system users;};
-  userModules = modules;
 in
   lib.nixosSystem {
     inherit system specialArgs;
     modules =
       [
-        inputs.fuyuNoKosei.extensibleModules.nixos
+        inputs.fuyuNoKosei.modules.nixos
         inputs.home-manager.nixosModules.home-manager
         {
           home-manager = {
@@ -24,11 +23,11 @@ in
             extraSpecialArgs = specialArgs;
             # Iterates over a list of users provided in the function call
             users = inputs.nixpkgs.lib.attrsets.genAttrs users (user: {
-              imports = [inputs.fuyuNoKosei.extensibleModules.home];
+              imports = [inputs.fuyuNoKosei.modules.home];
               config.home.username = user;
             });
           };
         }
       ]
-      ++ userModules;
+      ++ extraModules;
   }
