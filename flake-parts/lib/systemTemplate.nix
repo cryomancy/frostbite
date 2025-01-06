@@ -8,6 +8,7 @@
   ...
 }: let
   specialArgs = {inherit inputs hostName system users;};
+  userModules = modules;
 in
   lib.nixosSystem {
     inherit system specialArgs;
@@ -29,5 +30,5 @@ in
           };
         }
       ]
-      ++ modules;
+      ++ userModules;
   }
