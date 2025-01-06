@@ -38,19 +38,27 @@
           ]
           ++ inputs.nixpkgs.lib.attrsets.attrValues flakeModules;
 
-        flake = rec {
+        flake = {
           inherit flakeModule flakeModules;
           # Traditional modules (seperate from the flake-parts system)
-          modules = {
-            nixos = inputs.haumea.lib.load {
-              src = ./flake-parts/modules/nixos;
-              loader = inputs.haumea.lib.loaders.verbatim;
-              #transformer = inputs.haumea.lib.transformers.hoistAttrs "config" "nixos";
+          nixModules = {
+            nixos = {
+              imports = [
+                inputs.haumea.lib.load
+                {
+                  src = ./flake-parts/modules/nixos;
+                  loader = inputs.haumea.lib.loaders.literal;
+                }
+              ];
             };
-            home = inputs.haumea.lib.load {
-              src = ./flake-parts/modules/home;
-              loader = inputs.haumea.lib.loaders.verbatim;
-              #transformer = inputs.haumea.lib.transformers.hoistAttrs "config" "home";
+            home = {
+              imports = [
+                inputs.haumea.lib.load
+                {
+                  src = ./flake-parts/modules/home;
+                  loader = inputs.haumea.lib.loaders.path;
+                }
+              ];
             };
           };
           lib = inputs.haumea.lib.load {
