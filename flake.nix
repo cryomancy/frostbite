@@ -40,7 +40,7 @@
 
         flake = {
           inherit flakeModule flakeModules;
-          extensibleModules = {
+          modules = {
             nixos = inputs.haumea.lib.load {
               src = ./flake-parts/modules/nixos;
               loader = inputs.haumea.lib.loaders.verbatim;
