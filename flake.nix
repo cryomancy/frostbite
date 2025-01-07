@@ -20,7 +20,7 @@
     haumea,
     ...
   }:
-    flake-utils.lib.eachDefaultSystem (system: {
+    flake-utils.lib.eachDefaultSystemPassThrough (system: {
       modules = {
         nixos =
           haumea.lib.load
