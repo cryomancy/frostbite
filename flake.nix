@@ -42,29 +42,23 @@
           inherit flakeModule flakeModules;
           # Traditional modules (seperate from the flake-parts system)
           nixModules = {
-            nixos = {
-              imports = [
-                inputs.haumea.lib.load
-                {
-                  src = ./flake-parts/modules/nixos;
-                  loader = inputs.haumea.lib.loaders.literal;
-                }
-              ];
-            };
-            home = {
-              imports = [
-                inputs.haumea.lib.load
-                {
-                  src = ./flake-parts/modules/home;
-                  loader = inputs.haumea.lib.loaders.path;
-                }
-              ];
-            };
+            nixos =
+              inputs.haumea.lib.load
+              {
+                src = ./flake-parts/modules/nixos;
+                loader = inputs.haumea.lib.loaders.literal;
+              };
+            home =
+              inputs.haumea.lib.load
+              {
+                src = ./flake-parts/modules/home;
+                loader = inputs.haumea.lib.loaders.path;
+              };
           };
-          lib = inputs.haumea.lib.load {
-            src = ./flake-parts/lib;
-            loader = inputs.haumea.lib.loaders.verbatim;
-          };
+        };
+        lib = inputs.haumea.lib.load {
+          src = ./flake-parts/lib;
+          loader = inputs.haumea.lib.loaders.verbatim;
         };
       }
     );
