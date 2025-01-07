@@ -8,7 +8,7 @@
   cfg = config.fuyuNoKosei.design;
 in {
   imports = [
-    inputs.assets.themes
+    inputs.assets
   ];
 
   options = {
