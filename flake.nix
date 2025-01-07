@@ -56,10 +56,6 @@
               };
           };
         };
-        lib = inputs.haumea.lib.load {
-          src = ./flake-parts/lib;
-          loader = inputs.haumea.lib.loaders.verbatim;
-        };
       }
     );
 }
