@@ -27,8 +27,8 @@ in {
     stylix = {
       enable = true;
 
-      base16Scheme = "${inputs.assets.themes}/nord.yaml";
-      image = "${inputs.assets.wallpapers}/anime/a_drawing_of_a_horse_carriage_on_a_bridge.png";
+      base16Scheme = "${inputs.assets}/themes/nord.yaml";
+      image = "${inputs.assets}/themes/anime/a_drawing_of_a_horse_carriage_on_a_bridge.png";
 
       cursor = {
         package = pkgs.bibata-cursors;
