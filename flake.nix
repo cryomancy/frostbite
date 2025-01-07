@@ -44,12 +44,12 @@
           modules = {
             nixos = inputs.haumea.lib.load {
               src = ./flake-parts/modules/nixos;
-              loader = inputs.haumea.lib.loaders.scoped;
+              loader = inputs.haumea.lib.loaders.verbatim;
               #transformer = inputs.haumea.lib.transformers.hoistAttrs "config" "nixos";
             };
             home = inputs.haumea.lib.load {
               src = ./flake-parts/modules/home;
-              loader = inputs.haumea.lib.loaders.scoped;
+              loader = inputs.haumea.lib.loaders.verbatim;
               #transformer = inputs.haumea.lib.transformers.hoistAttrs "config" "home";
             };
           };
