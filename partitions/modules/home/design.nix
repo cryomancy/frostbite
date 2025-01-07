@@ -8,7 +8,7 @@
   cfg = config.fuyuNoKosei.design;
 in {
   imports = [
-    inputs.base16.homeManagerModule
+    inputs.assets.themes
   ];
 
   options = {
@@ -25,7 +25,7 @@ in {
     stylix = {
       enable = true;
 
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
+      base16Scheme = "${inputs.assets.themes}/nord.yaml";
 
       cursor = {
         package = pkgs.bibata-cursors;

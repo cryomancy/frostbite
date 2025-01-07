@@ -9,7 +9,9 @@
 in {
   imports = [
     inputs.stylix.nixosModules.stylix
-    inputs.base16.nixosModule
+    inputs.assets.wallpapers
+    inputs.assets.themes
+    inputs.assets.gifs
   ];
 
   options = {
@@ -25,8 +27,8 @@ in {
     stylix = {
       enable = true;
 
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
-      image = "${inputs.walls}/anime/a_drawing_of_a_horse_carriage_on_a_bridge.png";
+      base16Scheme = "${inputs.assets.themes}/nord.yaml";
+      image = "${inputs.assets.wallpapers}/anime/a_drawing_of_a_horse_carriage_on_a_bridge.png";
 
       cursor = {
         package = pkgs.bibata-cursors;
