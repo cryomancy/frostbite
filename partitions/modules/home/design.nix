@@ -25,7 +25,7 @@ in {
     stylix = {
       enable = true;
 
-      base16Scheme = "${inputs.assets.themes}/nord.yaml";
+      base16Scheme = "${inputs.assets}/themes/nord.yaml";
 
       cursor = {
         package = pkgs.bibata-cursors;
