@@ -15,7 +15,6 @@
   };
 
   outputs = {
-    self,
     flake-utils,
     haumea,
     ...
@@ -26,13 +25,13 @@
           haumea.lib.load
           {
             src = ./partitions/modules/nixos;
-            loader = haumea.lib.loaders.verbatim;
+            loader = haumea.lib.loaders.scoped;
           };
         home =
           haumea.lib.load
           {
             src = ./partitions/modules/home;
-            loader = haumea.lib.loaders.verbatim;
+            loader = haumea.lib.loaders.scoped;
           };
       };
     });
