@@ -18,10 +18,11 @@ in {
     ];
 
     services = {
-      pcscd.enable = true;
+      pcscd.enable = true; # Smart card mode
       yubikey-agent.enable = true;
       udev = {
-        packages = with pkgs; [yubikey-personalization];
+        packages = with pkgs; [yubikey-personalization libu2f-host];
+        # Lock on yubikey removal
         extraRules = ''
           ACTION=="remove",\
            ENV{ID_BUS}=="usb",\
