@@ -9,9 +9,7 @@
 in {
   imports = [
     inputs.stylix.nixosModules.stylix
-    inputs.assets.wallpapers
-    inputs.assets.themes
-    inputs.assets.gifs
+    inputs.assets
   ];
 
   options = {
