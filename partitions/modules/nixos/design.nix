@@ -26,7 +26,7 @@ in {
       };
       wallpaper = lib.mkOption {
         type = lib.types.path;
-        default = /anime/a_drawing_of_a_horse_carriage_on_a_bridge.png;
+        default = ./anime/a_drawing_of_a_horse_carriage_on_a_bridge.png;
       };
     };
   };
@@ -35,9 +35,9 @@ in {
     stylix = {
       enable = true;
 
-      base16Scheme = ./${inputs.assets.themes} + ./${cfg.scheme} + ".yaml";
+      base16Scheme = /. + "${inputs.assets.themes}" + "${cfg.scheme}" + ".yaml";
 
-      image = ./${inputs.assets.image} + ./${cfg.wallpaper};
+      image = /. + "${inputs.assets.image}" + "${cfg.wallpaper}";
 
       cursor = {
         package = pkgs.bibata-cursors;
