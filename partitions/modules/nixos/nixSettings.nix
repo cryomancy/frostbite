@@ -16,8 +16,6 @@ in {
     };
   };
 
-  imports = [inputs.chaotic.nixosModules.default];
-
   config = lib.mkIf cfg.enable {
     nix = {
       channel.enable = false;
