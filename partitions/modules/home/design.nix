@@ -2,7 +2,6 @@
   config,
   inputs,
   lib,
-  pkgs,
   ...
 }: let
   cfg = config.fuyuNoKosei.design;
@@ -22,46 +21,34 @@ in {
 
   # TODO: Make this a service to dynamically switch themes
   config = lib.mkIf cfg.enable {
+    home-manager.sharedModules = [
+      {
+      }
+    ];
+
     stylix = {
       enable = true;
-
-      base16Scheme = "${inputs.assets}/themes/nord.yaml";
-
-      cursor = {
-        package = pkgs.bibata-cursors;
-        name = "Bibata-Modern-Ice";
-      };
-
-      fonts = {
-        monospace = {
-          package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
-          name = "JetBrainsMono Nerd Font Mono";
-        };
-        sansSerif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Sans";
-        };
-        serif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Serif";
-        };
-      };
-
-      opacity = {
-        applications = .1;
-        popups = .1;
-        terminal = .1;
-      };
-
-      polarity = "dark";
+      autoEnable = true;
 
       targets = {
-        nixvim = {
-          enable = true;
-          plugin = "base16-nvim";
-        };
-        gnome.enable = false;
-        fish.enable = false;
+        bat.enable = true;
+        btop.enable = true;
+        firefox.enable = true;
+        fzf.enable = true;
+        # gtk.enable = true;
+        hyprland.enable = true;
+        hyprland.hyprlock.enable = true;
+        hypaper.enable = true;
+        kitty.enable = true;
+        librewolf.enable = true;
+        mangohud.enable = true;
+        rofi.enable = true;
+        waybar.enable = true;
+        zellij.enable = true;
+        #nixvim = {
+        #  enable = true;
+        #  plugin = "base16-nvim";
+        #};
       };
     };
   };
