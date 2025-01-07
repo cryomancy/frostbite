@@ -46,13 +46,13 @@
               inputs.haumea.lib.load
               {
                 src = ./flake-parts/modules/nixos;
-                loader = inputs.haumea.lib.loaders.literal;
+                loader = inputs.haumea.lib.loaders.verbatim;
               };
             home =
               inputs.haumea.lib.load
               {
                 src = ./flake-parts/modules/home;
-                loader = inputs.haumea.lib.loaders.path;
+                loader = inputs.haumea.lib.loaders.verbatim;
               };
           };
         };
