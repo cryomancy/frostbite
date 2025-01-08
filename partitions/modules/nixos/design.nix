@@ -34,7 +34,7 @@ in {
 
       base16Scheme = "${inputs.assets}/themes/${cfg.scheme}.yaml";
 
-      image = "${inputs.assets.image}+ ${cfg.wallpaper}";
+      image = "${inputs.assets}/wallpapers/${cfg.wallpaper}";
 
       cursor = {
         package = pkgs.bibata-cursors;
