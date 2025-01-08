@@ -34,7 +34,7 @@
           #nixStorePaths = builtins.attrValues modules;
           #relativeStorePaths = inputs.nixpkgs.lib.strings.splitString
         in {
-          imports = import (builtins.attrValues modules);
+          imports = builtins.attrValues modules;
         };
         home = let
           modules =
@@ -44,7 +44,7 @@
               loader = haumea.lib.loaders.path;
             };
         in {
-          imports = import (builtins.attrValues modules);
+          imports = builtins.attrValues modules;
         };
       };
     });
