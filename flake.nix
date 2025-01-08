@@ -31,8 +31,10 @@
               src = ./partitions/modules/nixos;
               loader = haumea.lib.loaders.path;
             };
+          #nixStorePaths = builtins.attrValues modules;
+          #relativeStorePaths = inputs.nixpkgs.lib.strings.splitString
         in {
-          imports = builtins.attrValues modules;
+          imports = import (builtins.attrValues modules);
         };
         home = let
           modules =
@@ -42,7 +44,7 @@
               loader = haumea.lib.loaders.path;
             };
         in {
-          imports = builtins.attrValues modules;
+          imports = import (builtins.attrValues modules);
         };
       };
     });
