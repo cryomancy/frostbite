@@ -9,7 +9,6 @@
 in {
   imports = [
     inputs.stylix.nixosModules.stylix
-    inputs.assets
   ];
 
   options = {
@@ -33,9 +32,9 @@ in {
     stylix = {
       enable = true;
 
-      base16Scheme = builtins.readFile ((/. + "${inputs.assets.themes}") + "${cfg.scheme}" + ".yaml");
+      base16Scheme = "${inputs.assets}/themes/${cfg.scheme}.yaml";
 
-      image = (/. + "${inputs.assets.image}") + "${cfg.wallpaper}";
+      image = "${inputs.assets.image}+ ${cfg.wallpaper}";
 
       cursor = {
         package = pkgs.bibata-cursors;
