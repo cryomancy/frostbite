@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  self,
   pkgs,
   inputs,
   ...
@@ -32,9 +33,9 @@ in {
     stylix = {
       enable = true;
 
-      base16Scheme = "${inputs.assets.outPath}/themes/${cfg.scheme}.yaml";
+      base16Scheme = "${self.inputs.assets.outPath}/themes/${cfg.scheme}.yaml";
 
-      image = "${inputs.assets}/wallpapers/${cfg.wallpaper}";
+      image = "${self.inputs.assets}/wallpapers/${cfg.wallpaper}";
 
       cursor = {
         package = pkgs.bibata-cursors;
