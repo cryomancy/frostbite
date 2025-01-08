@@ -34,6 +34,7 @@ in {
         type = "github";
         owner = "TahlonBrahic";
         repo = "assets";
+        rev = "d90fe144a835106819f5ca3fb6c9ddc007c0b26b";
       };
     in {
       enable = true;
