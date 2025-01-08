@@ -9,9 +9,6 @@
 in {
   imports = [
     inputs.stylix.nixosModules.stylix
-    inputs.assets.themes
-    inputs.assets.gifs
-    inputs.assets.wallpapers
   ];
 
   options = {
@@ -35,7 +32,7 @@ in {
     stylix = {
       enable = true;
 
-      #base16Scheme = builtins.readFile ((/. + "${inputs.assets.themes}") + "${cfg.scheme}" + ".yaml");
+      base16Scheme = builtins.readFile ((/. + "${inputs.assets.themes}") + "${cfg.scheme}" + ".yaml");
 
       image = (/. + "${inputs.assets.image}") + "${cfg.wallpaper}";
 
