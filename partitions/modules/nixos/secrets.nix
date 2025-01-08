@@ -17,6 +17,7 @@ in {
       };
       defaultSopsFile = lib.mkOption {
         type = lib.types.path;
+        # NOTE: for some reason this has to be defined in a user configuration?
         default = ../../../../secrets/secrets.yaml;
       };
     };
