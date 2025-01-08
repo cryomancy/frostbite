@@ -21,11 +21,6 @@ in {
 
   # TODO: Make this a service to dynamically switch themes
   config = lib.mkIf cfg.enable {
-    home-manager.sharedModules = [
-      {
-      }
-    ];
-
     stylix = {
       enable = true;
       autoEnable = true;
