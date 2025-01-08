@@ -9,6 +9,7 @@
 in {
   imports = [
     inputs.stylix.nixosModules.stylix
+    inputs.assets
   ];
 
   options = {
