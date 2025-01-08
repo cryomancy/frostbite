@@ -35,9 +35,9 @@ in {
     stylix = {
       enable = true;
 
-      base16Scheme = /. + "${inputs.assets.themes}" + "${cfg.scheme}" + ".yaml";
+      base16Scheme = (/. + "${inputs.assets.themes}") + "${cfg.scheme}" + ".yaml";
 
-      image = /. + "${inputs.assets.image}" + "${cfg.wallpaper}";
+      image = (/. + "${inputs.assets.image}") + "${cfg.wallpaper}";
 
       cursor = {
         package = pkgs.bibata-cursors;
