@@ -28,13 +28,13 @@
           haumea.lib.load
           {
             src = ./partitions/modules/nixos;
-            loader = haumea.lib.loaders.scoped;
+            loader = haumea.lib.loaders.callPackage;
           };
         home =
           haumea.lib.load
           {
             src = ./partitions/modules/home;
-            loader = haumea.lib.loaders.scoped;
+            loader = haumea.lib.loaders.callPackage;
           };
       };
     });
