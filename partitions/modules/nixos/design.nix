@@ -33,7 +33,7 @@ in {
     stylix = {
       enable = true;
 
-      base16Scheme = "${self.inputs.assets.outPath}/themes/${cfg.scheme}.yaml";
+      base16Scheme = "${builtins.toString self.inputs.assets.outPath}/themes/${cfg.scheme}.yaml";
 
       image = "${self.inputs.assets}/wallpapers/${cfg.wallpaper}";
 
