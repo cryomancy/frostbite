@@ -27,7 +27,7 @@ in {
         fzf.enable = true;
         # gtk.enable = true;
         hyprland.enable = true;
-        hyprland.hyprlock.enable = true;
+        hyprlock.enable = true;
         hyprpaper.enable = true;
         kitty.enable = true;
         librewolf.enable = true;
