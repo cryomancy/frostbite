@@ -6,10 +6,6 @@
 }: let
   cfg = config.fuyuNoKosei.design;
 in {
-  imports = [
-    inputs.assets
-  ];
-
   options = {
     fuyuNoKosei.design = {
       enable = lib.mkOption {
@@ -19,7 +15,6 @@ in {
     };
   };
 
-  # TODO: Make this a service to dynamically switch themes
   config = lib.mkIf cfg.enable {
     stylix = {
       enable = true;
