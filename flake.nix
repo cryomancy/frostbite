@@ -32,7 +32,9 @@
               loader = haumea.lib.loaders.path;
             };
           #nixStorePaths = builtins.attrValues modules;
-          #relativeStorePaths = inputs.nixpkgs.lib.strings.splitString
+          # TODO: map over each element in store paths and perform the two functions listed below
+          #relativeStorePathsList = inputs.nixpkgs.lib.strings.splitString "/";
+          #relativeStorePaths = inputs.nixpkgs.lib.lists.elemAt relativeStorePathsList 2;
         in {
           imports = builtins.attrValues modules;
         };
