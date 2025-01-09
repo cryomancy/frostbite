@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  self,
   pkgs,
   inputs,
   ...
@@ -30,12 +29,18 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    stylix = {
+    stylix = let
+      assets = builtins.fetchTree {
+        type = "github";
+        owner = "TahlonBrahic";
+        repo = "assets";
+      };
+    in {
       enable = true;
 
-      base16Scheme = "${builtins.toString self.inputs.assets.outPath}/themes/${cfg.scheme}.yaml";
+      base16Scheme = "${assets}/themes/${cfg.scheme}.yaml";
 
-      image = "${self.inputs.assets}/wallpapers/${cfg.wallpaper}";
+      image = "${assets}/wallpapers/${cfg.wallpaper}";
 
       cursor = {
         package = pkgs.bibata-cursors;
