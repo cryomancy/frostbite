@@ -17,7 +17,7 @@
     };
   };
 
-  outputs = {
+  outputs = inputs @ {
     flake-utils,
     haumea,
     ...
@@ -25,24 +25,26 @@
     flake-utils.lib.eachDefaultSystemPassThrough (system: {
       modules = {
         nixos = let
-          modules =
+          localModules =
             haumea.lib.load
             {
-              src = ./partitions/modules/nixos;
+              src = ./modules/nixos;
               loader = haumea.lib.loaders.path;
             };
-          #nixStorePaths = builtins.attrValues modules;
-          # TODO: map over each element in store paths and perform the two functions listed below
-          #relativeStorePathsList = inputs.nixpkgs.lib.strings.splitString "/";
-          #relativeStorePaths = inputs.nixpkgs.lib.lists.elemAt relativeStorePathsList 2;
+          nixStorePaths = builtins.attrValues localModules;
+          modules = map (module:
+            inputs.nixpkgs.lib.path.subpath.join
+            (inputs.nixpkgs.lib.lists.sublist 4 7
+              (inputs.nixpkgs.lib.strings.splitString "/" module)))
+          nixStorePaths;
         in {
-          imports = builtins.attrValues modules;
+          imports = modules;
         };
         home = let
           modules =
             haumea.lib.load
             {
-              src = ./partitions/modules/home;
+              src = ./modules/home;
               loader = haumea.lib.loaders.path;
             };
         in {
