@@ -25,6 +25,7 @@ in {
         type = lib.types.path;
         default = ./anime/a_drawing_of_a_horse_carriage_on_a_bridge.png;
       };
+      assets = lib.mkEnableOption "assets";
     };
   };
 

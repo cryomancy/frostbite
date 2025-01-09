@@ -24,26 +24,22 @@
   }:
     flake-utils.lib.eachDefaultSystemPassThrough (system: {
       modules = {
-        nixos = let
-          modules =
-            haumea.lib.load
-            {
-              src = ./partitions/modules/nixos;
-              loader = haumea.lib.loaders.path;
-            };
-        in {
+        nixos =
+		  let modules = haumea.lib.load
+          {
+            src = ./partitions/modules/nixos;
+            loader = haumea.lib.loaders.path;
+          }; in {
           imports = builtins.attrValues modules;
-        };
-        home = let
-          modules =
-            haumea.lib.load
-            {
-              src = ./partitions/modules/home;
-              loader = haumea.lib.loaders.path;
-            };
-        in {
-          imports = builtins.attrValues modules;
-        };
-      };
-    });
+		  };
+        home =
+          let modules = haumea.lib.load
+          {
+            src = ./partitions/modules/home;
+            loader = haumea.lib.loaders.path;
+          }; in {
+		  imports = builtins.attrValues modules;
+		  };
+      };}
+    
 }
