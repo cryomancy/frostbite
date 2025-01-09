@@ -28,7 +28,7 @@ in {
         # gtk.enable = true;
         hyprland.enable = true;
         hyprland.hyprlock.enable = true;
-        hypaper.enable = true;
+        hypraper.enable = true;
         kitty.enable = true;
         librewolf.enable = true;
         mangohud.enable = true;
