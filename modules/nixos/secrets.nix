@@ -1,16 +1,16 @@
-{
+scoped: {
   config,
   inputs,
   lib,
   users,
   ...
 }: let
-  cfg = config.fuyuNoKosei.secrets;
+  cfg = config.kosei.secrets;
 in {
   imports = [inputs.sops-nix.nixosModules.sops];
 
   options = {
-    fuyuNoKosei.secrets = {
+    kosei.secrets = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

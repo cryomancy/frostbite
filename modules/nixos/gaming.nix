@@ -1,13 +1,13 @@
-{
+scoped: {
   config,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.fuyuNoKosei.gaming;
+  cfg = config.kosei.gaming;
 in {
   options = {
-    fuyuNoKosei.gaming = {
+    kosei.gaming = {
       enable = lib.mkEnableOption "gaming";
       enableZenKernel = lib.mkOption {
         type = lib.types.bool;

@@ -1,13 +1,13 @@
-{
+scoped: {
   config,
   pkgs,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.browser.firefox;
+  cfg = config.kosei.browser.firefox;
 in {
   options = {
-    fuyuNoKosei.browser = {
+    kosei.browser = {
       firefox.enable = lib.mkOption {
         type = lib.types.bool;
         default = false;

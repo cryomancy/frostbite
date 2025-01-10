@@ -1,10 +1,10 @@
-{
+scoped: {
   lib,
   config,
   pkgs,
   ...
 }: let
-  cfg = config.fuyuNoKosei.hyprland;
+  cfg = config.kosei.hyprland;
 
   hyprlandGamemodePrograms = lib.makeBinPath [
     config.programs.hyprland.package
@@ -13,7 +13,7 @@
   ];
 in {
   options = {
-    fuyuNoKosei.hyprland = {
+    kosei.hyprland = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;

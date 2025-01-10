@@ -1,4 +1,4 @@
-{
+scoped: {
   config,
   pkgs,
   lib,

@@ -1,15 +1,15 @@
-{
+scoped: {
   config,
   inputs,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.impermanence;
+  cfg = config.kosei.impermanence;
 in {
   imports = [inputs.impermanence.nixosModules.impermanence];
 
   options = {
-    fuyuNoKosei.impermanence.enable = lib.mkEnableOption "impermanence";
+    kosei.impermanence.enable = lib.mkEnableOption "impermanence";
   };
 
   config = lib.mkIf cfg.enable {

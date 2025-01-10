@@ -1,12 +1,12 @@
-{
+scoped: {
   config,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.environment;
+  cfg = config.kosei.environment;
 in {
   options = {
-    fuyuNoKosei.environment = {
+    kosei.environment = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

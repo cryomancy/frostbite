@@ -1,13 +1,13 @@
-{
+scoped: {
   pkgs,
   config,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.shell;
+  cfg = config.kosei.shell;
 in {
   options = {
-    fuyuNoKosei = {
+    kosei = {
       shell = {
         enable = lib.mkOption {
           type = lib.types.bool;

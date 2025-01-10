@@ -1,13 +1,13 @@
-{
+scoped: {
   config,
   pkgs,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.browser.lynx;
+  cfg = config.kosei.browser.lynx;
 in {
   options = {
-    fuyuNoKosei.browser = {
+    kosei.browser = {
       lynx.enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

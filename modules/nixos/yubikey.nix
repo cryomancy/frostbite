@@ -1,13 +1,13 @@
-{
+scoped: {
   config,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.fuyuNoKosei.yubikey;
+  cfg = config.kosei.yubikey;
 in {
   options = {
-    fuyuNoKosei.yubikey.enable = lib.mkEnableOption "yubikey";
+    kosei.yubikey.enable = lib.mkEnableOption "yubikey";
   };
 
   config = lib.mkIf cfg.enable {
@@ -53,7 +53,7 @@ in {
     };
 
     programs = {
-      ssh = lib.mkIf config.fuyuNoKosei.ssh.enable {
+      ssh = lib.mkIf config.kosei.ssh.enable {
         startAgent = true;
         extraConfig = ''
           AddKeysToAgent yes

@@ -1,12 +1,12 @@
-{
+scoped: {
   config,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.qemuGuest;
+  cfg = config.kosei.qemuGuest;
 in {
   options = {
-    fuyuNoKosei.qemuGuest = {
+    kosei.qemuGuest = {
       enable = lib.mkEnableOption "QEMU guest suppport";
     };
   };

@@ -1,12 +1,12 @@
-{
+scoped: {
   config,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.syncthing;
+  cfg = config.kosei.syncthing;
 in {
   options = {
-    fuyuNoKosei.syncthing = {
+    kosei.syncthing = {
       enable = lib.mkEnableOption "syncthing";
     };
   };

@@ -1,4 +1,4 @@
-{
+scoped: {
   config,
   hostName,
   inputs,
@@ -7,12 +7,12 @@
   users,
   ...
 }: let
-  cfg = config.fuyuNoKosei.virtualization;
+  cfg = config.kosei.virtualization;
 in {
   imports = [inputs.nixos-wsl.nixosModules.wsl];
 
   options = {
-    fuyuNoKosei.virtualization = {
+    kosei.virtualization = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
@@ -64,6 +64,6 @@ in {
 
     virtualisation.waydroid.enable = lib.mkIf cfg.waydroid.enable true;
 
-    fuyuNoKosei.boot.enable = (lib.mkIf cfg.wsl.enable) (lib.mkForce false);
+    kosei.boot.enable = (lib.mkIf cfg.wsl.enable) (lib.mkForce false);
   };
 }

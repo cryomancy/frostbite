@@ -1,14 +1,14 @@
-{
+scoped: {
   config,
   hostName,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.fuyuNoKosei.network;
+  cfg = config.kosei.network;
 in {
   options = {
-    fuyuNoKosei.network = {
+    kosei.network = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

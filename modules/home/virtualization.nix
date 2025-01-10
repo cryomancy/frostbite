@@ -1,13 +1,13 @@
-{
+scoped: {
   config,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.fuyuNoKosei.virtualization;
+  cfg = config.kosei.virtualization;
 in {
   options = {
-    fuyuNoKosei.virtualization = {
+    kosei.virtualization = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

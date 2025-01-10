@@ -1,13 +1,13 @@
-{
+scoped: {
   config,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.homeManagement;
+  cfg = config.kosei.homeManagement;
   dir = "${config.home.homeDirectory}";
 in {
   options = {
-    fuyuNoKosei.homeManagement = {
+    kosei.homeManagement = {
       enable = lib.mkOption {
         default = true;
         example = false;

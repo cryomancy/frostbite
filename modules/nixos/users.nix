@@ -1,14 +1,14 @@
-{
+scoped: {
   config,
   lib,
   pkgs,
   users,
   ...
 }: let
-  cfg = config.fuyuNoKosei.users;
+  cfg = config.kosei.users;
 in {
   options = {
-    fuyuNoKosei.users = {
+    kosei.users = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

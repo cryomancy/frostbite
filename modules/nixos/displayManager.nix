@@ -1,12 +1,12 @@
-{
+scoped: {
   config,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.fuyuNoKosei.displayManager;
+  cfg = config.kosei.displayManager;
 in {
-  options.fuyuNoKosei = {
+  options.kosei = {
     displayManager = {
       enable = lib.mkOption {
         type = lib.types.bool;

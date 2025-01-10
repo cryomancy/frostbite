@@ -1,14 +1,14 @@
-{
+scoped: {
   config,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.fuyuNoKosei.homePackages;
+  cfg = config.kosei.homePackages;
 in {
   options = {
-    fuyuNoKosei.homePackages = {
-      enable = lib.mkEnableOption "fuyuNoKosei home packages";
+    kosei.homePackages = {
+      enable = lib.mkEnableOption "kosei home packages";
     };
   };
   config = lib.mkIf cfg.enable {

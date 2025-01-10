@@ -1,12 +1,12 @@
-{
+scoped: {
   lib,
   config,
   ...
 }: let
-  cfg = config.fuyuNoKosei.git;
+  cfg = config.kosei.git;
 in {
   options = {
-    fuyuNoKosei.git = {
+    kosei.git = {
       enable = lib.mkOption {
         default = true;
         example = false;

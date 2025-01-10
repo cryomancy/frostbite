@@ -1,13 +1,13 @@
-{
+scoped: {
   config,
   pkgs,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.editor;
+  cfg = config.kosei.editor;
 in {
   options = {
-    fuyuNoKosei.editor = {
+    kosei.editor = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

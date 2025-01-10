@@ -1,14 +1,14 @@
-{
+scoped: {
   config,
   inputs,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.fuyuNoKosei.nixSettings;
+  cfg = config.kosei.nixSettings;
 in {
   options = {
-    fuyuNoKosei.nixSettings = {
+    kosei.nixSettings = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

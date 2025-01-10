@@ -1,4 +1,4 @@
-{
+scoped: {
   config,
   lib,
   pkgs,
@@ -36,10 +36,10 @@
         '{text:$text,tooltip:$tooltip,alt:$alt,class:$class,percentage:$percentage}'
     '';
   };
-  cfg = config.fuyuNoKosei.waybar;
+  cfg = config.kosei.waybar;
 in {
   options = {
-    fuyuNoKosei.waybar = {
+    kosei.waybar = {
       enable = lib.mkEnableOption "waybar";
     };
   };

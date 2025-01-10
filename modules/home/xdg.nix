@@ -1,13 +1,13 @@
-{
+scoped: {
   config,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.xdg;
+  cfg = config.kosei.xdg;
   dir = "${config.home.homeDirectory}";
 in {
   options = {
-    fuyuNoKosei.xdg = {
+    kosei.xdg = {
       enable = lib.mkOption {
         default = true;
         example = false;
