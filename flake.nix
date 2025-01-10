@@ -20,40 +20,13 @@
   outputs = inputs @ {
     flake-utils,
     haumea,
+    nixpkgs,
     ...
   }:
     flake-utils.lib.eachDefaultSystemPassThrough (system: {
-      modules = {
-        nixos = let
-          localModules =
-            haumea.lib.load
-            {
-              src = ./modules/nixos;
-              loader = haumea.lib.loaders.path;
-            };
-          nixStorePaths = builtins.attrValues localModules;
-          modules = map (module:
-            inputs.nixpkgs.lib.path.subpath.join
-            (inputs.nixpkgs.lib.lists.sublist 4 7
-              (inputs.nixpkgs.lib.strings.splitString "/" module)))
-          nixStorePaths;
-        in
-          modules;
-        home = let
-          localModules =
-            haumea.lib.load
-            {
-              src = ./modules/home;
-              loader = haumea.lib.loaders.path;
-            };
-          nixStorePaths = builtins.attrValues localModules;
-          modules = map (module:
-            inputs.nixpkgs.lib.path.subpath.join
-            (inputs.nixpkgs.lib.lists.sublist 4 7
-              (inputs.nixpkgs.lib.strings.splitString "/" module)))
-          nixStorePaths;
-        in
-          modules;
-      };
+      modules = let
+        inherit (nixpkgs) lib;
+      in
+        import ./modules/imports.nix {inherit haumea lib;};
     });
 }
