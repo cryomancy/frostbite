@@ -19,11 +19,13 @@ in {
       };
       theme = lib.mkOption {
         type = lib.types.str;
-        default = "nord";
+        default = null;
+		examples = "${inputs.assets}/wallpapers/theme.yaml";
       };
       wallpaper = lib.mkOption {
         type = lib.types.path;
-        default = ./anime/a_drawing_of_a_horse_carriage_on_a_bridge.png;
+        default = null;
+		example = "${inputs.assets}/wallpapers/image.png";
       };
       assets = lib.mkEnableOption "assets";
     };
@@ -32,9 +34,9 @@ in {
   config = lib.mkIf cfg.enable {
       enable = true;
 
-      base16Scheme = "${inputs.assets}" + ./themes + "${cfg.theme}" + ".yaml";
+      base16Scheme = "${cfg.theme}";
 
-      image = "${inputs.assets}" ./wallpapers "${cfg.wallpaper}";
+      image = "${cfg.wallpaper}";
 
       cursor = {
         package = pkgs.bibata-cursors;
