@@ -28,7 +28,7 @@ in {
           isNormalUser = true;
           # TODO: variable shell for multi-user system?
           shell = pkgs.fish;
-          extraGroups = lib.lists.optionals [
+          extraGroups = lib.lists.concatLists [
             (lib.mkIf true ["${user}" "users"])
             (lib.mkIf config.security.level < 5 ["networkmanager"])
             (lib.mkIf config.security.level < 5 ["wheel"])
