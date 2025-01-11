@@ -37,19 +37,23 @@
             (inputs.nixpkgs.lib.lists.sublist 4 7
               (inputs.nixpkgs.lib.strings.splitString "/" module)))
           nixStorePaths;
-        in {
-          imports = modules;
-        };
+        in
+          modules;
         home = let
-          modules =
+          localModules =
             haumea.lib.load
             {
               src = ./modules/home;
               loader = haumea.lib.loaders.path;
             };
-        in {
-          imports = builtins.attrValues modules;
-        };
+          nixStorePaths = builtins.attrValues localModules;
+          modules = map (module:
+            inputs.nixpkgs.lib.path.subpath.join
+            (inputs.nixpkgs.lib.lists.sublist 4 7
+              (inputs.nixpkgs.lib.strings.splitString "/" module)))
+          nixStorePaths;
+        in
+          modules;
       };
     });
 }
