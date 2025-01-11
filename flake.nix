@@ -18,13 +18,13 @@
       nixos =
         haumea.lib.load
         {
-          src = ./nixos;
+          src = ./modules/nixos;
           loader = haumea.lib.loaders.scoped;
         };
       home =
         haumea.lib.load
         {
-          src = ./home;
+          src = ./modules/home;
           loader = haumea.lib.loaders.scoped;
         };
     };
