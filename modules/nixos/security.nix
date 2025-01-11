@@ -12,13 +12,20 @@ in {
         type = lib.types.bool;
         default = true;
       };
+      level = lib.mkOption {
+        type = lib.types.ints.between 0 5;
+        default = 2;
+      };
     };
   };
 
   config = lib.mkIf cfg.enable {
     security = {
       sudo = {
-        wheelNeedsPassword = false;
+        wheelNeedsPassword =
+          if cfg.level > 3
+          then true
+          else false;
         extraConfig = ''
           Defaults lecture = never
         '';
@@ -27,6 +34,7 @@ in {
         enable = true;
       };
       # Enables authentication via Hyprlock
+      # NOTE: Does this need to match a home option?
       pam.services.hyprlock = {};
       polkit = {
         enable = true;
@@ -50,7 +58,10 @@ in {
         updater.enable = true;
       };
 
-      fail2ban.enable = true;
+      fail2ban.enable =
+        if cfg.level > 1
+        then true
+        else false;
     };
   };
 }
