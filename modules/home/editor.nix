@@ -16,13 +16,12 @@ in {
       defaultEditor = lib.mkOption {
         type = lib.types.package;
         default = pkgs.fuyuvim;
-        example = pkgs.jeezyvim;
+        example = pkgs.emacs;
       };
     };
   };
 
   imports = [
-    inputs.jeezyvim.packages.jeezyvim
     inputs.fuyuvim.packages.fuyuvim
   ];
 
