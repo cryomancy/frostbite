@@ -49,7 +49,5 @@ in {
     ];
 
     virtualisation.waydroid.enable = lib.mkIf cfg.waydroid.enable true;
-
-    kosei.boot.enable = (lib.mkIf cfg.wsl.enable) (lib.mkForce false);
   };
 }
