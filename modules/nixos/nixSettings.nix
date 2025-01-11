@@ -3,6 +3,7 @@ scoped: {
   inputs,
   lib,
   pkgs,
+  system,
   ...
 }: let
   cfg = config.kosei.nixSettings;
@@ -17,6 +18,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    imports = [inputs.nur.modules.nixos.default];
+
     nix = {
       channel.enable = false;
       settings = {
@@ -57,7 +60,9 @@ in {
       extraOptions = ''experimental-features = nix-command flakes'';
     };
 
-    nixpkgs.config.allowUnfree = true;
+    nixpkgs = {
+      config.allowUnfree = true;
+    };
 
     # OOM configuration:
     systemd = {
