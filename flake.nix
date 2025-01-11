@@ -3,30 +3,30 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    systems.url = "github:nix-systems/x86_64-linux";
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-      inputs.systems.follows = "systems";
-    };
     haumea = {
       url = "github:nix-community/haumea/v0.2.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    stylix = {
-      url = "github:danth/stylix/release-24.11";
-    };
   };
 
-  outputs = inputs @ {
-    flake-utils,
-    haumea,
-    nixpkgs,
-    ...
-  }:
-    flake-utils.lib.eachDefaultSystemPassThrough (system: {
-      modules = let
-        inherit (nixpkgs) lib;
-      in
-        import ./modules/imports.nix {inherit haumea lib;};
-    });
+  outputs = inputs @ {haumea, ...}: {
+    lib = haumea.lib.load {
+      src = ./lib;
+      loader = haumea.lib.loaders.scoped;
+    };
+    modules = {
+      nixos =
+        haumea.lib.load
+        {
+          src = ./nixos;
+          loader = haumea.lib.loaders.scoped;
+        };
+      home =
+        haumea.lib.load
+        {
+          src = ./home;
+          loader = haumea.lib.loaders.scoped;
+        };
+    };
+  };
 }
