@@ -17,9 +17,6 @@ in {
         type = lib.types.bool;
         default = true;
       };
-      wsl = {
-        enable = lib.mkEnableOption "WSL Integration";
-      };
       waydroid.enable = lib.mkEnableOption "waydroid";
     };
   };
@@ -50,19 +47,6 @@ in {
       podman-tui # status of containers in the terminal
       docker-compose # start group of containers for dev
     ];
-
-    wsl = lib.mkIf cfg.wsl.enable {
-      enable = true;
-      defaultUser = builtins.elemAt users 0;
-      startMenuLaunchers = true;
-
-      wslConf = {
-        automount.root = "/mnt";
-        interop.appendWindowsPath = false;
-        network.generateHosts = false;
-        network.hostname = "${hostName}";
-      };
-    };
 
     virtualisation.waydroid.enable = lib.mkIf cfg.waydroid.enable true;
 

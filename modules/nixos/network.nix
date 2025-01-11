@@ -19,9 +19,7 @@ in {
   config = lib.mkIf cfg.enable {
     networking = {
       inherit hostName;
-      firewall = {
-        allowPing = true;
-      };
+
       useDHCP = lib.mkDefault true;
       networkmanager.enable = true;
       useNetworkd = false;

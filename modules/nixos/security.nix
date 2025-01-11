@@ -26,12 +26,19 @@ in {
           if cfg.level > 3
           then true
           else false;
+        execWheelOnly = lib.mkIf cfg.level > 3;
         extraConfig = ''
           Defaults lecture = never
         '';
       };
       apparmor = {
         enable = true;
+      };
+      audit = {
+        enable = lib.mkIf cfg.level > 1 true;
+      };
+      auditd = {
+        enable = lib.mkIf cfg.level > 1 true;
       };
       # Enables authentication via Hyprlock
       # NOTE: Does this need to match a home option?
