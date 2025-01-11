@@ -31,44 +31,46 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    enable = true;
+    stylix = {
+      enable = true;
 
-    base16Scheme = "${cfg.theme}";
+      base16Scheme = "${cfg.theme}";
 
-    image = "${cfg.wallpaper}";
+      image = "${cfg.wallpaper}";
 
-    cursor = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Ice";
-    };
-
-    fonts = {
-      monospace = {
-        package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
-        name = "JetBrainsMono Nerd Font Mono";
+      cursor = {
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Ice";
       };
-      sansSerif = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Sans";
+
+      fonts = {
+        monospace = {
+          package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
+          name = "JetBrainsMono Nerd Font Mono";
+        };
+        sansSerif = {
+          package = pkgs.dejavu_fonts;
+          name = "DejaVu Sans";
+        };
+        serif = {
+          package = pkgs.dejavu_fonts;
+          name = "DejaVu Serif";
+        };
       };
-      serif = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Serif";
+
+      opacity = {
+        applications = .1;
+        popups = .1;
+        terminal = .1;
       };
-    };
 
-    opacity = {
-      applications = .1;
-      popups = .1;
-      terminal = .1;
-    };
+      targets = {
+        grub.enable = false;
+        gnome.enable = false;
+        lightdm.enable = false;
+      };
 
-    targets = {
-      grub.enable = false;
-      gnome.enable = false;
-      lightdm.enable = false;
+      polarity = "dark";
     };
-
-    polarity = "dark";
   };
 }
