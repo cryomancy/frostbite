@@ -29,9 +29,9 @@ in {
           # TODO: variable shell for multi-user system?
           shell = pkgs.fish;
           extraGroups = lib.lists.concatLists [
-            (lib.mkIf true ["${user}" "users"])
-            (lib.mkIf config.security.level < 5 ["networkmanager"])
-            (lib.mkIf config.security.level < 5 ["wheel"])
+            (lib.lists.optionals true ["${user}" "users"])
+            (lib.lists.optionals (config.security.level < 5) ["networkmanager"])
+            (lib.lists.optionals (config.security.level < 5) ["wheel"])
           ];
           # TODO: Iterate over secrets file
           # TODO: API / Documentation for this? Could be confusing for other people
