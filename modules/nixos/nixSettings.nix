@@ -64,7 +64,6 @@ in {
 
     nixpkgs = {
       config.allowUnfree = true;
-      legacyPackages.${system} = pkgs.extend [inputs.fuyuvim.overlays.default];
     };
 
     # OOM configuration:
