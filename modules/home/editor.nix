@@ -1,5 +1,6 @@
 scoped: {
   config,
+  inputs,
   pkgs,
   lib,
   ...
@@ -19,6 +20,11 @@ in {
       };
     };
   };
+
+  imports = [
+    inputs.fuyuvim.overlays.default
+    inputs.fuyuvim.packages.fuyuvim
+  ];
 
   config = lib.mkIf cfg.enable {
     home.packages = [cfg.defaultEditor];
