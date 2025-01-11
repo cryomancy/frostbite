@@ -22,7 +22,7 @@ in {
   };
 
   imports = [
-    inputs.fuyuvim.overlays.default
+    inputs.jeezyvim.packages.jeezyvim
     inputs.fuyuvim.packages.fuyuvim
   ];
 
