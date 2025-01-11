@@ -1,14 +1,14 @@
-{
+scoped: {
   config,
   inputs,
   lib,
   osConfig,
   ...
 }: let
-  cfg = config.fuyuNoKosei.hyprlock;
+  cfg = config.kosei.hyprlock;
 in {
   options = {
-    fuyuNoKosei.hyprlock = {
+    kosei.hyprlock = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;
@@ -49,7 +49,7 @@ in {
           font_size = 115
           shadow_passes = 3
           position = 0, ${
-          if osConfig.fuyuNoKosei.laptopSupport.enable
+          if osConfig.kosei.laptopSupport.enable
           then "-25"
           else "-150"
         }
@@ -64,7 +64,7 @@ in {
           font_size = 18
           shadow_passes = 3
           position = 0, ${
-          if osConfig.fuyuNoKosei.laptopSupport.enable
+          if osConfig.kosei.laptopSupport.enable
           then "-225"
           else "-350"
         }
@@ -82,7 +82,7 @@ in {
           rotate = 0
 
           position = 0, ${
-          if osConfig.fuyuNoKosei.laptopSupport.enable
+          if osConfig.kosei.laptopSupport.enable
           then "120"
           else "270"
         }
@@ -96,7 +96,7 @@ in {
           text =   $USER
           font_size = 15
           position = 0, ${
-          if osConfig.fuyuNoKosei.laptopSupport.enable
+          if osConfig.kosei.laptopSupport.enable
           then "131"
           else "281"
         }
@@ -118,7 +118,7 @@ in {
           placeholder_text = <i>Enter Password</span></i>
           hide_input = false
           position = 0, ${
-          if osConfig.fuyuNoKosei.laptopSupport.enable
+          if osConfig.kosei.laptopSupport.enable
           then "50"
           else "200"
         }

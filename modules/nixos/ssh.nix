@@ -1,12 +1,12 @@
-{
+scoped: {
   config,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.ssh;
+  cfg = config.kosei.ssh;
 in {
   options = {
-    fuyuNoKosei.ssh = {
+    kosei.ssh = {
       enable = lib.mkEnableOption "ssh";
     };
   };

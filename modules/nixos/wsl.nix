@@ -1,4 +1,4 @@
-{
+scoped: {
   config,
   hostName,
   inputs,
@@ -6,12 +6,12 @@
   users,
   ...
 }: let
-  cfg = config.fuyuNoKosei.wsl;
+  cfg = config.kosei.wsl;
 in {
   imports = [inputs.nixos-wsl.nixosModules.wsl];
 
   options = {
-    fuyuNoKosei.wsl = {
+    kosei.wsl = {
       enable = lib.mkEnableOption "WSL";
     };
   };
@@ -30,6 +30,6 @@ in {
       };
     };
 
-    fuyuNoKosei.boot.enable = lib.mkForce false;
+    kosei.boot.enable = lib.mkForce false;
   };
 }

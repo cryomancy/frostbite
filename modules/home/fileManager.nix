@@ -1,13 +1,13 @@
-{
+scoped: {
   config,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.fuyuNoKosei.fileManager;
+  cfg = config.kosei.fileManager;
 in {
   options = {
-    fuyuNoKosei.fileManager = {
+    kosei.fileManager = {
       enable = lib.mkEnableOption "file manager";
     };
   };

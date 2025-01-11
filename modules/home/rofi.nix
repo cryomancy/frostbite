@@ -1,16 +1,16 @@
-{
+scoped: {
   config,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.fuyuNoKosei.rofi;
+  cfg = config.kosei.rofi;
 in {
   options = {
-    fuyuNoKosei.rofi = {
+    kosei.rofi = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = config.fuyuNoKosei.hyprland.enable;
+        default = config.kosei.hyprland.enable;
       };
     };
   };

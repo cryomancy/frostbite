@@ -1,14 +1,14 @@
-{
+scoped: {
   config,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.fuyuNoKosei.torrenting;
+  cfg = config.kosei.torrenting;
   systemStateVersion = config.system.stateVersion;
 in {
   options = {
-    fuyuNoKosei.torrenting = {
+    kosei.torrenting = {
       enable = lib.mkEnableOption "torrenting";
     };
   };

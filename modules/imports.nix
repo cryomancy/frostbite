@@ -4,31 +4,21 @@
   ...
 }: {
   nixos = let
-    localModules =
+    scopedModules =
       haumea.lib.load
       {
         src = ./nixos;
-        loader = haumea.lib.loaders.path;
+        loader = haumea.lib.loaders.scoped;
       };
-    nixStorePaths = builtins.attrValues localModules;
-    modules = map (module:
-      lib.path.subpath.join
-      (lib.lists.sublist 4 7
-        (lib.strings.splitString "/" module)))
-    nixStorePaths;
-  in {imports = modules;};
+  in
+    scopedModules;
   home = let
-    localModules =
+    scopedModules =
       haumea.lib.load
       {
         src = ./home;
-        loader = haumea.lib.loaders.path;
+        loader = haumea.lib.loaders.scoped;
       };
-    nixStorePaths = builtins.attrValues localModules;
-    modules = map (module:
-      lib.path.subpath.join
-      (lib.lists.sublist 4 7
-        (lib.strings.splitString "/" module)))
-    nixStorePaths;
-  in {imports = modules;};
+  in
+    scopedModules;
 }

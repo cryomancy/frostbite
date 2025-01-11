@@ -1,12 +1,12 @@
-{
+scoped: {
   config,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.systemMaintenance;
+  cfg = config.kosei.systemMaintenance;
 in {
   options = {
-    fuyuNoKosei.systemMaintenance = {
+    kosei.systemMaintenance = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

@@ -1,12 +1,12 @@
-{
+scoped: {
   config,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.browser.librewolf;
+  cfg = config.kosei.browser.librewolf;
 in {
   options = {
-    fuyuNoKosei.browser = {
+    kosei.browser = {
       librewolf.enable = lib.mkOption {
         type = lib.types.bool;
         default = false;

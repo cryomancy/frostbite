@@ -1,12 +1,12 @@
-{
+scoped: {
   config,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.fuyuNoKosei.microphone;
+  cfg = config.kosei.microphone;
 in {
-  options.fuyuNoKosei.microphone.enable = lib.mkEnableOption "microphone";
+  options.kosei.microphone.enable = lib.mkEnableOption "microphone";
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [easyeffects];

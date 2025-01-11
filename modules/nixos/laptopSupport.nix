@@ -1,12 +1,12 @@
-{
+scoped: {
   config,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.laptopSupport;
+  cfg = config.kosei.laptopSupport;
 in {
   options = {
-    fuyuNoKosei.laptopSupport = {
+    kosei.laptopSupport = {
       enable = lib.mkEnableOption "laptop suppport";
       enableHyprlandSupport = lib.mkEnableOption "laptop Hyprland support";
     };

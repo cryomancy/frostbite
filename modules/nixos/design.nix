@@ -1,18 +1,18 @@
-{
+scoped: {
   config,
   lib,
   pkgs,
   inputs,
   ...
 }: let
-  cfg = config.fuyuNoKosei.design;
+  cfg = config.kosei.design;
 in {
   imports = [
     inputs.stylix.nixosModules.stylix
   ];
 
   options = {
-    fuyuNoKosei.design = {
+    kosei.design = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

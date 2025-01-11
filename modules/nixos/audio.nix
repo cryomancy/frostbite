@@ -1,12 +1,12 @@
-{
+scoped: {
   config,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.fuyuNoKosei.audio;
+  cfg = config.kosei.audio;
 in {
-  options.fuyuNoKosei.audio.enable = lib.mkOption {
+  options.kosei.audio.enable = lib.mkOption {
     type = lib.types.bool;
     default = true;
     description = "Enable sound support";

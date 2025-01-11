@@ -1,12 +1,12 @@
-{
+scoped: {
   config,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.RGB;
+  cfg = config.kosei.RGB;
 in {
   options = {
-    fuyuNoKosei.RGB = {
+    kosei.RGB = {
       enable = lib.mkEnableOption "rgb";
     };
   };

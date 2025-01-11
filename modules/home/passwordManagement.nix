@@ -1,13 +1,13 @@
-{
+scoped: {
   config,
   pkgs,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.passwordManagement;
+  cfg = config.kosei.passwordManagement;
 in {
   options = {
-    fuyuNoKosei.passwordManagement = {
+    kosei.passwordManagement = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

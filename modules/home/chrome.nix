@@ -1,13 +1,13 @@
-{
+scoped: {
   config,
   pkgs,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.browser.chrome;
+  cfg = config.kosei.browser.chrome;
 in {
   options = {
-    fuyuNoKosei.browser = {
+    kosei.browser = {
       chrome.enable = lib.mkOption {
         type = lib.types.bool;
         default = false;

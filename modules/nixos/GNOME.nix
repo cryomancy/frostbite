@@ -1,13 +1,13 @@
-{
+scoped: {
   pkgs,
   config,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.GNOME;
+  cfg = config.kosei.GNOME;
 in {
   options = {
-    fuyuNoKosei.GNOME = {
+    kosei.GNOME = {
       enable = lib.mkEnableOption "GNOME";
       gamemode = {
         startscript = lib.mkOption {

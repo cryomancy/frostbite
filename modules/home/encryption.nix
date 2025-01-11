@@ -1,12 +1,12 @@
-{
+scoped: {
   config,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.encryption;
+  cfg = config.kosei.encryption;
 in {
   options = {
-    fuyuNoKosei.encryption = {
+    kosei.encryption = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

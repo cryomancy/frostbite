@@ -1,11 +1,11 @@
-{
+scoped: {
   config,
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.boot;
+  cfg = config.kosei.boot;
 in {
-  options.fuyuNoKosei.boot.enable = lib.mkOption {
+  options.kosei.boot.enable = lib.mkOption {
     type = lib.types.bool;
     default = true;
   };

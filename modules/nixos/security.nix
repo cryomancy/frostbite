@@ -1,13 +1,13 @@
-{
+scoped: {
   config,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.fuyuNoKosei.security;
+  cfg = config.kosei.security;
 in {
   options = {
-    fuyuNoKosei.security = {
+    kosei.security = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

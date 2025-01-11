@@ -1,13 +1,13 @@
-{
+scoped: {
   config,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.fuyuNoKosei.localization;
+  cfg = config.kosei.localization;
 in {
   options = {
-    fuyuNoKosei.localization = {
+    kosei.localization = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
