@@ -17,9 +17,9 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    imports = [inputs.nur.modules.nixos.default];
+  imports = [inputs.nur.modules.nixos.default];
 
+  config = lib.mkIf cfg.enable {
     nix = {
       channel.enable = false;
       settings = {
