@@ -17,7 +17,9 @@ in {
     };
   };
 
-  imports = [inputs.nur.modules.nixos.default];
+  imports = [
+    inputs.nur.modules.nixos.default
+  ];
 
   config = lib.mkIf cfg.enable {
     nix = {
@@ -62,6 +64,7 @@ in {
 
     nixpkgs = {
       config.allowUnfree = true;
+      legacyPackages.${system} = pkgs.extend [inputs.fuyuvim.overlays.default];
     };
 
     # OOM configuration:
