@@ -20,7 +20,7 @@ in {
       theme = lib.mkOption {
         type = lib.types.str;
         default = null;
-        examples = "${inputs.assets}/wallpapers/theme.yaml";
+        example = "${inputs.assets}/wallpapers/theme.yaml";
       };
       wallpaper = lib.mkOption {
         type = lib.types.path;
