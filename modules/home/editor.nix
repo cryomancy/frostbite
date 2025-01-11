@@ -21,10 +21,6 @@ in {
     };
   };
 
-  imports = [
-    inputs.fuyuvim.packages.fuyuvim
-  ];
-
   config = lib.mkIf cfg.enable {
     home.packages = [cfg.defaultEditor];
   };
