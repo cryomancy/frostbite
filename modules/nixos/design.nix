@@ -17,7 +17,7 @@ in {
         type = lib.types.bool;
         default = true;
       };
-      scheme = lib.mkOption {
+      theme = lib.mkOption {
         type = lib.types.str;
         default = "nord";
       };
@@ -30,19 +30,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    stylix = let
-      assets = builtins.fetchTree {
-        type = "github";
-        owner = "TahlonBrahic";
-        repo = "assets";
-        rev = "d90fe144a835106819f5ca3fb6c9ddc007c0b26b";
-      };
-    in {
       enable = true;
 
-      base16Scheme = "${assets}/themes/${cfg.scheme}.yaml";
+      base16Scheme = "${inputs.assets}" + ./themes + "${cfg.theme}" + ".yaml";
 
-      image = "${assets}/wallpapers/${cfg.wallpaper}";
+      image = "${inputs.assets}" ./wallpapers "${cfg.wallpaper}";
 
       cursor = {
         package = pkgs.bibata-cursors;
