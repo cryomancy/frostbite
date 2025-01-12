@@ -17,6 +17,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    services.userborn = {
+      enable = true;
+    };
+
     users = {
       mutableUsers = false;
       users =
@@ -32,6 +36,7 @@ in {
             (lib.lists.optionals true ["${user}" "users"])
             (lib.lists.optionals (config.kosei.security.level < 5) ["networkmanager"])
             (lib.lists.optionals (config.kosei.security.level < 5) ["wheel"])
+            (lib.lists.optionals config.home-manager.${user}.kosei.arduino.enable ["dialout"])
           ];
           # TODO: Iterate over secrets file
           # TODO: API / Documentation for this? Could be confusing for other people
