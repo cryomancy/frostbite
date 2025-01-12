@@ -26,7 +26,7 @@ in {
           if cfg.level > 3
           then true
           else false;
-        execWheelOnly = lib.mkIf cfg.level > 3;
+        execWheelOnly = (lib.mkIf (cfg.level > 3)) true;
         extraConfig = ''
           Defaults lecture = never
         '';
@@ -35,10 +35,10 @@ in {
         enable = true;
       };
       audit = {
-        enable = lib.mkIf cfg.level > 1 true;
+        enable = (lib.mkIf (cfg.level > 1)) true;
       };
       auditd = {
-        enable = lib.mkIf cfg.level > 1 true;
+        enable = (lib.mkIf (cfg.level > 1)) true;
       };
       # Enables authentication via Hyprlock
       # NOTE: Does this need to match a home option?
@@ -66,7 +66,7 @@ in {
       };
 
       fail2ban.enable =
-        if cfg.level > 1
+        if (cfg.level > 1)
         then true
         else false;
     };
