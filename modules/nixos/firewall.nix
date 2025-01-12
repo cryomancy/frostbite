@@ -25,7 +25,7 @@ in {
         enable = true;
         allowPing = (lib.mkIf (cfg.level < 4)) true;
         allowedTCPPorts = lib.lists.concatLists [
-          (lib.mkIf true [80 443])
+          [80 443]
         ];
         allowedUDPPorts =
           lib.lists.concatLists [
