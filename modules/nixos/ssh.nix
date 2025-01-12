@@ -8,10 +8,10 @@ in {
   options = {
     kosei.ssh = {
       enable = lib.mkEnableOption "ssh";
-    };
-    level = lib.mkOption {
-      type = lib.types.int.between 0 2;
-      default = 2;
+      level = lib.mkOption {
+        type = lib.types.int.between 0 2;
+        default = 2;
+      };
     };
   };
 
