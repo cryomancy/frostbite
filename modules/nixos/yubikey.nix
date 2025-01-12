@@ -14,7 +14,7 @@ in {
     environment.systemPackages = with pkgs; [
       pam_u2f
       age-plugin-yubikey
-      yubikey-manager-qt
+      yubioath-flutter
     ];
 
     services = {
@@ -39,8 +39,9 @@ in {
       u2f = {
         enable = true;
         settings = {
-          cue = false;
+          cue = true;
           authFile = "/etc/secure/Yubico/u2f_keys";
+          interactive = true;
         };
       };
       services = {

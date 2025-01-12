@@ -28,13 +28,10 @@ in {
           isNormalUser = true;
           # TODO: variable shell for multi-user system?
           shell = pkgs.fish;
-          extraGroups = [
-            "${user}"
-            "users"
-            "networkmanager"
-            "wheel"
-            "docker"
-            "libvirtd"
+          extraGroups = lib.lists.optionals [
+            (lib.mkIf true ["${user}" "users"])
+            (lib.mkIf config.security.level < 5 ["networkmanager"])
+            (lib.mkIf config.security.level < 5 ["wheel"])
           ];
           # TODO: Iterate over secrets file
           # TODO: API / Documentation for this? Could be confusing for other people
