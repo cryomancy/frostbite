@@ -7,7 +7,7 @@ scoped: {
   cfg = config.kosei.arduino;
 in {
   options = {
-    kosei.arduino.enable = lib.mkEnableOption "arduino" {
+    kosei.arduino.enable = lib.mkEnableOption "arduino";
   };
 
   config = lib.mkIf cfg.enable {
