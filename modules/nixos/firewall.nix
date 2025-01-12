@@ -33,7 +33,7 @@ in {
       };
     };
     services = {
-      openssh.openFirewall = lib.mkIf config.ssh.enable true;
+      openssh.openFirewall = lib.mkIf config.kosei.ssh.enable true;
     };
   };
 }
