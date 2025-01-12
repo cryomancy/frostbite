@@ -9,7 +9,7 @@ in {
     kosei.ssh = {
       enable = lib.mkEnableOption "ssh";
       level = lib.mkOption {
-        type = lib.types.int.between 0 2;
+        type = lib.types.ints.between 0 2;
         default = 2;
       };
     };
