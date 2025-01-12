@@ -26,14 +26,13 @@ in {
 
   config = lib.mkIf cfg.enable {
     virtualisation = {
-      docker = {
-        enable = true;
-        daemon.settings = {
-          "features" = {"containerd-snapshotter" = true;};
-        };
-
-        enableOnBoot = true;
+      podman = {
         autoPrune.enable = true;
+        enable = true;
+        defaultNetwork.settings.dns_enabled = true;
+        dockerCompat = true;
+        dockerSocket.enable = true;
+        networkSocket.openFirewall = lib.mkIf config.firewall.enable;
       };
 
       libvirtd = {
@@ -47,6 +46,9 @@ in {
       virt-manager
       qemu_kvm
       qemu
+      dive # look into docker image layers
+      podman-tui # status of containers in the terminal
+      docker-compose # start group of containers for dev
     ];
 
     wsl = lib.mkIf cfg.wsl.enable {
