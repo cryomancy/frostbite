@@ -2,6 +2,7 @@ scoped: {
   config,
   lib,
   pkgs,
+  users,
   ...
 }: let
   cfg = config.kosei.yubikey;
@@ -15,6 +16,7 @@ in {
       pam_u2f
       age-plugin-yubikey
       yubioath-flutter
+      yubikey-manager
     ];
 
     services = {
@@ -55,11 +57,9 @@ in {
 
     programs = {
       ssh = lib.mkIf config.kosei.ssh.enable {
-        startAgent = true;
-        extraConfig = ''
-          AddKeysToAgent yes
-        '';
+        startAgent = false;
       };
+      yubikey-touch-detector.enable = true;
     };
   };
 }
