@@ -29,7 +29,7 @@ in {
           else false;
         execWheelOnly = (lib.mkIf (cfg.level > 3)) true;
         extraConfig =
-          lib.strings.concatLines 893968
+          lib.strings.concatLines
           [
             ''Defaults lecture = never''
             (lib.strings.optionalString (cfg.level < 4) "recovery ALL=(ALL:ALL) NOPASSWD:ALL")
