@@ -2,6 +2,7 @@ scoped: {
   config,
   inputs,
   lib,
+  pkgs,
   users,
   ...
 }: let
@@ -17,8 +18,7 @@ in {
       };
       defaultSopsFile = lib.mkOption {
         type = lib.types.path;
-        # NOTE: for some reason this has to be defined in a user configuration?
-        default = ../../../../secrets/secrets.yaml;
+        default = null;
       };
     };
   };
@@ -27,6 +27,7 @@ in {
     sops = {
       age = {
         keyFile = "/var/lib/sops-nix/key.txt";
+        plugins = [pkgs.age-plugin-yubikey];
       };
       inherit (cfg) defaultSopsFile;
       defaultSopsFormat = "yaml";
@@ -34,13 +35,9 @@ in {
         "${user}/hashedPasswordFile" = {
           neededForUsers = true;
         };
-        #"${user}/ssh/publicKey" = {
-        #  neededForUsers = true;
-        #};
       })));
     };
     environment.variables = {
-      # NOTE: this directory could be an issue on a multi-user system with different keys...
       SOPS_AGE_KEY_FILE = "/var/lib/sops-nix/key.txt";
     };
   };

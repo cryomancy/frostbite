@@ -23,6 +23,7 @@ in {
     security = {
       acme.acceptTerms = true;
       sudo = {
+        security.sudo.extraConfig = lib.mkIf cfg.level < 4 "recovery ALL=(ALL:ALL) NOPASSWD:ALL";
         wheelNeedsPassword =
           if cfg.level > 3
           then true
