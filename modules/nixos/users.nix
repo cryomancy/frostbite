@@ -27,8 +27,7 @@ in {
         lib.genAttrs users
         (user: {
           home = "/home/${user}";
-          # TODO: Add option for users to declare account without sops password?
-          hashedPasswordFile = config.sops.secrets."${user}/hashedPasswordFile".path;
+          hashedPasswordFile = lib.mkDefault config.sops.secrets."${user}/hashedPasswordFile".path;
           isNormalUser = true;
           # TODO: variable shell for multi-user system?
           shell = pkgs.fish;
@@ -38,28 +37,23 @@ in {
             (lib.lists.optionals (config.kosei.security.level < 4) ["wheel"])
             (lib.lists.optionals config.home-manager.users.${user}.kosei.arduino.enable ["dialout"])
           ];
-          # TODO: Iterate over secrets file
-          # TODO: API / Documentation for this? Could be confusing for other people
-          # Technically these don't need to be secret, I just want the only portable thing to be the secrets file
-          # openssh.authorizedKeys.keyFiles = [(builtins.readFile config.sops.secrets."${user}/ssh/publicKeys".path)];
+          # openssh.authorizedKeys.keyFiles = [(builtins.readFile config.sops.secrets."${u440265
+		  ser}/ssh/publicKeys".path)];
         });
     };
 
     # Recovery Account
-    #specialisation.recovery.configuration =
-    #  lib.mkIf (!(builtins.all (value: value.minimal) (builtins.attrValues settings)))
-    #  {
-    #    security.sudo.extraConfig = lib.mkAfter "recovery ALL=(ALL:ALL) NOPASSWD:ALL";
-    #    users.extraUsers.recovery = {
-    #      name = "recovery";
-    #      description = "Recovery Account";
-    #      isNormalUser = true;
-    #      uid = 1100;
-    #      group = "users";
-    #      extraGroups = ["wheel"];
-    #      useDefaultShell = true;
-    #      initialHashedPassword = lib.mkDefault (builtins.readFile (directory + "/default"));
-    #    };
-    #  };
+    users.extraUsers.recovery =
+      lib.mkIf config.kosei.security.level
+      < 4 {
+        name = "recovery";
+        description = "Recovery Account";
+        isNormalUser = true;
+        uid = 1100;
+        group = "users";
+        extraGroups = ["wheel"];
+        useDefaultShell = true;
+        initialHashedPassword = config.sops.secrets."recovery/hashedPasswordFile".path;
+      };
   };
 }
