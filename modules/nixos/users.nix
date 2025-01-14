@@ -51,7 +51,7 @@ in {
       group = "users";
       extraGroups = ["wheel"];
       useDefaultShell = true;
-      initialHashedPassword = config.sops.secrets."recovery/hashedPasswordFile".path;
+      hashedPasswordFile = config.sops.secrets."recovery/hashedPasswordFile".path;
     };
   };
 }
