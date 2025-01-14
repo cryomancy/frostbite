@@ -23,15 +23,17 @@ in {
     security = {
       acme.acceptTerms = true;
       sudo = {
-        security.sudo.extraConfig = lib.mkIf (cfg.level < 4) "recovery ALL=(ALL:ALL) NOPASSWD:ALL";
         wheelNeedsPassword =
           if cfg.level > 3
           then true
           else false;
         execWheelOnly = (lib.mkIf (cfg.level > 3)) true;
-        extraConfig = ''
-          Defaults lecture = never
-        '';
+        extraConfig =
+          lib.strings.concatLines 893968
+          [
+            ''Defaults lecture = never''
+            (lib.strings.optionalString (cfg.level < 4) "recovery ALL=(ALL:ALL) NOPASSWD:ALL")
+          ];
       };
       apparmor = {
         enable = true;
