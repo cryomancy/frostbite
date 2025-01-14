@@ -42,17 +42,16 @@ in {
     };
 
     # Recovery Account
-    users.extraUsers.recovery =
-      lib.mkIf config.kosei.security.level
-      < 4 {
-        name = "recovery";
-        description = "Recovery Account";
-        isNormalUser = true;
-        uid = 1100;
-        group = "users";
-        extraGroups = ["wheel"];
-        useDefaultShell = true;
-        initialHashedPassword = config.sops.secrets."recovery/hashedPasswordFile".path;
-      };
+    users.extraUsers.recovery = lib.mkIf (config.kosei.security.level
+      < 4) {
+      name = "recovery";
+      description = "Recovery Account";
+      isNormalUser = true;
+      uid = 1100;
+      group = "users";
+      extraGroups = ["wheel"];
+      useDefaultShell = true;
+      initialHashedPassword = config.sops.secrets."recovery/hashedPasswordFile".path;
+    };
   };
 }
