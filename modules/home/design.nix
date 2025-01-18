@@ -15,11 +15,11 @@ in {
     };
   };
 
-  home.packeges = with pkgs; [
-    swww
-  ];
-
   config = lib.mkIf cfg.enable {
+    home.packeges = with pkgs; [
+      swww
+    ];
+
     stylix = {
       enable = true;
       autoEnable = true;
