@@ -27,6 +27,9 @@ in {
       inkscape
       blender
       gimp-with-plugins
+
+      # Office
+      libreoffice-qt6
     ];
 
     programs = {
