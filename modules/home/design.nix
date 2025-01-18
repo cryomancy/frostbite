@@ -16,7 +16,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packeges = with pkgs; [
+    home.packages = with pkgs; [
       swww
     ];
 
