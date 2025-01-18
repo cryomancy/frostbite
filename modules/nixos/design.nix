@@ -33,6 +33,7 @@ in {
   config = lib.mkIf cfg.enable {
     stylix = {
       enable = true;
+      autoEnable = false;
 
       base16Scheme = "${cfg.theme}";
 
@@ -58,16 +59,12 @@ in {
         };
       };
 
-      opacity = {
-        applications = .1;
-        popups = .1;
-        terminal = .1;
-      };
-
       targets = {
-        grub.enable = false;
+        fish.enable = true;
+        grub.enable = true;
         gnome.enable = false;
         lightdm.enable = false;
+        regreet.enable = true;
       };
 
       polarity = "dark";
