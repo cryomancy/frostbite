@@ -3,6 +3,7 @@ scoped: {
   lib,
   pkgs,
   inputs,
+  users,
   ...
 }: let
   cfg = config.kosei.design;
@@ -31,6 +32,7 @@ in {
       autoEnable = false;
 
       base16Scheme = "${cfg.theme}";
+      image = /home/${builtins.elemAt users 0}/.local/state/wallpaperd/wallpapers;
 
       cursor = {
         package = pkgs.bibata-cursors;
