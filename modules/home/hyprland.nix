@@ -86,11 +86,9 @@ in {
           ];
         };
 
-        bindl = let
-          hyprctl = lib.getExe' pkgs.hyprland "hyprctl";
-        in [
-          ''switch:off:Lid Switch,exec, ${hyprctl} keyword monitor "eDP-1, 2560x1440, 0x0, 1"''
-          ''switch:on:Lid Switch,exec, ${hyprctl} keyword monitor "eDP-1, disable"''
+        bindl = [
+          ",switch:off:Lid Switch,exec, hyprctl keyword monitor 'eDP-1, 2560x1440, 0x0, 1'"
+          ",switch:on:Lid Switch,exec, hyprctl keyword monitor 'eDP-1, disable'"
         ];
 
         bindm = [
