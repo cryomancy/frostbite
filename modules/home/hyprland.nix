@@ -38,6 +38,10 @@ in {
           '';
         };
       };
+      monitors = lib.mkOptions {
+        type = lib.types.listOf lib.types.str;
+        example = ["eDP-1"];
+      };
     };
   };
 
@@ -83,8 +87,8 @@ in {
         };
 
         bindl = let
-          on = pkgs.writeShellScript "on" ''hyprctl keyword monitor "eDP-1, 2560x1440, 0x0, 1"'';
-          off = pkgs.writeShellScript "off" ''hyprctl keyword monitor "eDP-1, disable"'';
+          on = builtins.readFile (pkgs.writeShellScript "on" ''hyprctl keyword monitor "eDP-1, 2560x1440, 0x0, 1"'');
+          off = builtins.readFile (pkgs.writeShellScript "off" ''hyprctl keyword monitor "eDP-1, disable"'');
         in [
           ''switch:off:Lid Switch,exec,${on}''
           ''switch:on:Lid Switch,exec,${off}''
