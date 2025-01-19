@@ -20,7 +20,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    programs.wpaperd = lib.mkForce {
+    programs.wpaperd = {
       enable = true;
       settings = {
         default = {
