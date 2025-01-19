@@ -1,7 +1,7 @@
 scoped: {
   config,
-  inputs,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.kosei.design;
@@ -15,6 +15,10 @@ in {
     };
   };
 
+  home.packeges = with pkgs; [
+    swww
+  ];
+
   config = lib.mkIf cfg.enable {
     stylix = {
       enable = true;
@@ -25,7 +29,7 @@ in {
         btop.enable = true;
         firefox.enable = true;
         fzf.enable = true;
-        # gtk.enable = true;
+        gtk.enable = true;
         hyprland.enable = true;
         hyprlock.enable = true;
         hyprpaper.enable = true;
@@ -35,10 +39,6 @@ in {
         rofi.enable = true;
         waybar.enable = true;
         zellij.enable = true;
-        #nixvim = {
-        #  enable = true;
-        #  plugin = "base16-nvim";
-        #};
       };
     };
   };

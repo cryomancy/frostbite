@@ -198,7 +198,6 @@ in {
       wofi # gtk-based app launcher
       kitty # backup terminal
       rot8 # screen rotation daemon
-      hyprwall # GUI for hyprpaper
       wl-kbptr
       wl-screenrec
       wl-mirror
@@ -222,8 +221,6 @@ in {
       dunst.enable = true;
 
       gnome-keyring.enable = true;
-
-      hyprpaper.enable = true;
 
       hypridle.enable = true;
     };
