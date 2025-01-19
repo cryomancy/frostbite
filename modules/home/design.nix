@@ -20,7 +20,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    programs.wpaperd = {
+    programs.wpaperd = lib.mkForce {
       enable = true;
       settings = {
         path = cfg.wallpaper;
