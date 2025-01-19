@@ -82,9 +82,12 @@ in {
           ];
         };
 
-        bindl = [
-          ''switch:off:Lid Switch,exec,hyprctl keyword monitor "eDP-1, 2560x1440, 0x0, 1"''
-          ''switch:on:Lid Switch,exec,hyprctl keyword monitor "eDP-1, disable"''
+        bindl = let
+          on = lib.writeShellScriptBin on ''hyprctl keyword monitor "eDP-1, 2560x1440, 0x0, 1"'';
+          off = lib.writeShellScriptBin off ''hyprctl keyword monitor "eDP-1, disable"'';
+        in [
+          ''switch:off:Lid Switch,exec,${on}''
+          ''switch:on:Lid Switch,exec,${off}''
         ];
 
         bindm = [
