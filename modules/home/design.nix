@@ -33,7 +33,7 @@ in {
       enable = true;
       autoEnable = true;
 
-      image = "${cfg.wallpaper}";
+      image = "${inputs.assets}/wallpapers/anime/a_waterfall_in_the_rain.jpg";
 
       targets = {
         bat.enable = true;
