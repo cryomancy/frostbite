@@ -12,6 +12,11 @@ in {
         type = lib.types.ints.between 0 2;
         default = 2;
       };
+      publicKeys = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [];
+        example = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDRUJCFyU2Bhag5GHGq2ihZL6LljX8EZygeKU6KDzHL8 tbrahic@proton.me"];
+      };
     };
   };
 
