@@ -20,12 +20,7 @@ in {
       theme = lib.mkOption {
         type = lib.types.str;
         default = null;
-        example = "${inputs.assets}/wallpapers/theme.yaml";
-      };
-      wallpaper = lib.mkOption {
-        type = lib.types.path;
-        default = null;
-        example = "${inputs.assets}/wallpapers/image.png";
+        example = "${inputs.assets}/themes/theme.yaml";
       };
     };
   };
@@ -36,8 +31,6 @@ in {
       autoEnable = false;
 
       base16Scheme = "${cfg.theme}";
-
-      image = "${cfg.wallpaper}";
 
       cursor = {
         package = pkgs.bibata-cursors;
