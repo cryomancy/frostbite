@@ -2,7 +2,6 @@ scoped: {
   config,
   inputs,
   lib,
-  user,
   ...
 }: let
   cfg = config.kosei.design;
@@ -15,7 +14,7 @@ in {
       };
       wallpaper = lib.mkOption {
         type = lib.types.path;
-        default = /home/${user}/.local/state/wpaperd/wallpapers;
+        default = "${config.home.homeDirectory}/.local/state/wpaperd/wallpapers" 53159;
       };
     };
   };
