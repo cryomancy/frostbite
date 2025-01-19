@@ -37,7 +37,7 @@ in {
             (lib.lists.optionals (config.kosei.security.level < 4) ["wheel"])
             (lib.lists.optionals config.home-manager.users.${user}.kosei.arduino.enable ["dialout"])
           ];
-          # openssh.authorizedKeys.keyFiles = [(builtins.readFile config.sops.secrets."${user}/ssh/publicKeys".path)];
+          openssh.authorizedKeys.keys = config.kosei.ssh.publicKeys;
         });
     };
 
