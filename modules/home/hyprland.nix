@@ -87,11 +87,11 @@ in {
         };
 
         bindl = let
-          on = builtins.readFile (pkgs.writeShellScript "on" ''hyprctl keyword monitor "eDP-1, 2560x1440, 0x0, 1"'');
-          off = builtins.readFile (pkgs.writeShellScript "off" ''hyprctl keyword monitor "eDP-1, disable"'');
+          on = pkgs.writeShellScript "on" ''hyprctl keyword monitor "eDP-1, 2560x1440, 0x0, 1"'';
+          off = pkgs.writeShellScript "off" ''hyprctl keyword monitor "eDP-1, disable"'';
         in [
-          ''switch:off:Lid Switch,exec,${on}''
-          ''switch:on:Lid Switch,exec,${off}''
+          ''switch:off:Lid Switch,exec,${builtins.readFile on}''
+          ''switch:on:Lid Switch,exec,${builtins.readFile off}''
         ];
 
         bindm = [
