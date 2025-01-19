@@ -15,8 +15,7 @@ in {
       };
       wallpaper = lib.mkOption {
         type = lib.types.path;
-        default = null;
-        example = /home/${user}/.local/state/wpaperd/wallpapers;
+        default = /home/${user}/.local/state/wpaperd/wallpapers;
       };
     };
   };
@@ -25,7 +24,7 @@ in {
     programs.wpaperd = {
       enable = true;
       settings = {
-        path = "${inputs.assets}/wallpapers";
+        path = cfg.wallpaper;
       };
     };
 
