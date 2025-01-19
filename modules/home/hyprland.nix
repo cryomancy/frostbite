@@ -38,7 +38,7 @@ in {
           '';
         };
       };
-      monitors = lib.mkOptions {
+      monitors = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         example = ["eDP-1"];
       };
