@@ -14,7 +14,7 @@ in {
       };
       wallpaper = lib.mkOption {
         type = lib.types.path;
-        default = "${config.home.homeDirectory}/.local/state/wpaperd/wallpapers" 53159;
+        default = "${config.home.homeDirectory}/.local/state/wpaperd/wallpapers";
       };
     };
   };
