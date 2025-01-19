@@ -1,7 +1,8 @@
 scoped: {
   config,
+  inputs,
   lib,
-  pkgs,
+  user,
   ...
 }: let
   cfg = config.kosei.design;
@@ -12,17 +13,27 @@ in {
         type = lib.types.bool;
         default = true;
       };
+      wallpaper = lib.mkOption {
+        type = lib.types.path;
+        default = null;
+        example = /home/${user}/.local/state/wpaperd/wallpapers;
+      };
     };
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      swww
-    ];
+    programs.wpaperd = {
+      enable = true;
+      settings = {
+        path = "${inputs.assets}/wallpapers";
+      };
+    };
 
     stylix = {
       enable = true;
       autoEnable = true;
+
+      image = "${cfg.wallpaper}";
 
       targets = {
         bat.enable = true;
