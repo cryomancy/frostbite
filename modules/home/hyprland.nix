@@ -83,8 +83,8 @@ in {
         };
 
         bindl = let
-          on = pkgs.writeShellScriptBin on ''hyprctl keyword monitor "eDP-1, 2560x1440, 0x0, 1"'';
-          off = pkgs.writeShellScriptBin off ''hyprctl keyword monitor "eDP-1, disable"'';
+          on = pkgs.writeShellScriptBin "on" ''hyprctl keyword monitor "eDP-1, 2560x1440, 0x0, 1"'';
+          off = pkgs.writeShellScriptBin "off" ''hyprctl keyword monitor "eDP-1, disable"'';
         in [
           ''switch:off:Lid Switch,exec,${on}''
           ''switch:on:Lid Switch,exec,${off}''
