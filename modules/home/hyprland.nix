@@ -86,12 +86,9 @@ in {
           ];
         };
 
-        bindl = let
-          on = pkgs.writeShellScript "on" ''hyprctl keyword monitor "eDP-1, 2560x1440, 0x0, 1"'';
-          off = pkgs.writeShellScript "off" ''hyprctl keyword monitor "eDP-1, disable"'';
-        in [
-          ''switch:off:Lid Switch,exec,"${builtins.readFile on}"''
-          ''switch:on:Lid Switch,exec,"${builtins.readFile off}"''
+        bindl = [
+          ''switch:off:Lid Switch,exec,${pkgs.writeShellScript "on" ''hyprctl keyword monitor "eDP-1, 2560x1440, 0x0, 1"''}''
+          ''switch:on:Lid Switch,exec,"${pkgs.writeShellScript "off" ''hyprctl keyword monitor "eDP-1, disable"''}''
         ];
 
         bindm = [
