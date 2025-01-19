@@ -23,7 +23,9 @@ in {
     programs.wpaperd = lib.mkForce {
       enable = true;
       settings = {
-        path = cfg.wallpaper;
+        default = {
+          path = cfg.wallpaper;
+        };
       };
     };
 
