@@ -1,4 +1,4 @@
-scoped: importScoped: {
+scoped: {
   inputs,
   system,
 }: {
