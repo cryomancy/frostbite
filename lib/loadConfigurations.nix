@@ -1,4 +1,4 @@
-scoped: {
+scoped: importScoped: {
   inputs,
   lib,
   pkgs,
