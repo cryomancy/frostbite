@@ -12,5 +12,5 @@ scoped: {
 in
   lib.attrsets.genAttrs systemNames
   (systemName:
-    import ./src/systems/${systemName}/${systemName}.nix
+    import "${src}${systemName}/${systemName}.nix"
     {inherit inputs lib pkgs;})
