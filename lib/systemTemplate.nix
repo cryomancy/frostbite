@@ -1,5 +1,4 @@
 scoped: {
-  self ? {},
   extraModules ? [],
   hostName ? "nixos",
   inputs ? self.inputs,
@@ -10,7 +9,6 @@ scoped: {
   ...
 }: let
   inherit (inputs) kosei home-manager;
-  inherit (self) outPath;
 in
   lib.nixosSystem {
     inherit system;
@@ -18,14 +16,14 @@ in
       [
         home-manager.nixosModules.home-manager
         {
-          config._module.args = {inherit outPath system hostName users;};
+          config._module.args = {inherit system hostName users;};
         }
         {
           home-manager = {
             backupFileExtension = "bak";
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = {inherit outPath system hostName users;};
+            extraSpecialArgs = {inherit system hostName users;};
             # Iterates over a list of users provided in the function call
             users = inputs.nixpkgs.lib.attrsets.genAttrs users (user: {
               imports =
