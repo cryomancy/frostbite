@@ -13,7 +13,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     services = {
-      syncthing = lib.mkIf cfg.syncthing.enable {
+      syncthing = {
         settings = {
           enable = true;
           openDefaultPorts = true;
