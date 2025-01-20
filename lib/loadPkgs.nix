@@ -1,7 +1,7 @@
-scoped: {
+scoped: importScoped: {
   inputs,
   system,
-}: scoped: {
+}: {
   pkgs =
     import inputs.nixpkgs
     {
