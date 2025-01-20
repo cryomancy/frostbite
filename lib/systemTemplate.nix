@@ -1,7 +1,7 @@
 scoped: {
   extraModules ? [],
   hostName ? "nixos",
-  inputs ? self.inputs,
+  inputs ? {},
   lib ? inputs.nixpkgs.lib,
   pkgs ? import inputs.nixpkgs {inherit system;},
   system ? "x86_64-linux",
@@ -12,12 +12,10 @@ scoped: {
   extraArgs = {inherit hostName inputs lib pkgs system users;};
 in
   lib.nixosSystem {
-    inherit system;
+    inherit system extraArgs;
     modules =
       [
         home-manager.nixosModules.home-manager
-        {
-        }
         {
           home-manager = {
             backupFileExtension = "bak";
