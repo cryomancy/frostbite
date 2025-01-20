@@ -46,7 +46,7 @@ in {
     };
 
     services.xserver.desktopManager.gnome = {
-      enable = mkOption {
+      enable = mkEnableOption {
         type = types.bool;
         default = false;
         description = "Enable GNOME desktop manager.";
