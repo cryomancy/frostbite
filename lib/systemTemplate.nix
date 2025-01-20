@@ -13,9 +13,9 @@ scoped: {
 in
   lib.nixosSystem {
     inherit system;
+    extraArgs = {inherit self system hostName users;};
     modules =
       [
-        {_module.args = {inherit self system hostName users;};}
         home-manager.nixosModules.home-manager
         {
           home-manager = {
