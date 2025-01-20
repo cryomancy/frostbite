@@ -1,8 +1,8 @@
 scoped: {
   inputs,
   system,
-}: {
-  pkgs = scoped:
+}: scoped: {
+  pkgs =
     import inputs.nixpkgs
     {
       inherit system;
