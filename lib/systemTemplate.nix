@@ -15,7 +15,7 @@ in
     inherit system;
     modules =
       [
-        {_module.args = {inherit inputs self system hostName users;};}
+        {_module.args = {inherit self system hostName users;};}
         home-manager.nixosModules.home-manager
         {
           home-manager = {
