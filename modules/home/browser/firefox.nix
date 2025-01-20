@@ -40,7 +40,7 @@ in {
           };
 
           # TODO: Add an option to choose styles?
-          userChrome = builtins.readFile ./_assets/_twilly.css;
+          userChrome = builtins.readFile ./_assets/twilly.css;
 
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             ublock-origin
