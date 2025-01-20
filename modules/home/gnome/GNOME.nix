@@ -133,7 +133,7 @@ in {
     })
 
     (lib.mkIf serviceCfg.core-os-services.enable {
-      config.nixosConfig = {
+      nixosConfig = {
         networking.networkmanager.enable = mkDefault true;
         programs.dconf.enable = true;
         security.polkit.enable = true;
@@ -179,7 +179,7 @@ in {
     })
 
     (lib.mkIf serviceCfg.core-shell.enable {
-      config.nixosConfig = {
+      nixosConfig = {
         services = {
           xserver.desktopManager.gnome.sessionPath = [
             pkgs.gnome-shell
@@ -260,7 +260,7 @@ in {
         pkgs.totem
       ];
 
-      config.nixosConfig = {
+      nixosConfig = {
         services.gnome.sushi.enable = notExcluded pkgs.sushi;
         programs = {
           file-roller.enable = notExcluded pkgs.file-roller;
