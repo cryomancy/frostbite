@@ -39,8 +39,25 @@ in {
         };
       };
       monitors = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        example = ["eDP-1"];
+        type = lib.types.attrsOf lib.types.submodule {
+          options = {
+            name = lib.mkOption {
+              type = lib.types.str;
+            };
+            resolution = lib.mkOption {
+              type = lib.types.str;
+            };
+            refreshRate = lib.mkOption {
+              type = lib.types.str;
+            };
+            position = lib.mkOption {
+              type = lib.types.str;
+            };
+            scale = lib.mkOption {
+              type = lib.types.int;
+            };
+          };
+        };
       };
     };
   };

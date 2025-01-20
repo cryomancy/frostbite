@@ -9,23 +9,27 @@
     };
   };
 
-  outputs = inputs @ {haumea, ...}: {
+  outputs = inputs @ {
+    haumea,
+    self,
+    ...
+  }: {
     lib = haumea.lib.load {
       src = ./lib;
       loader = haumea.lib.loaders.scoped;
     };
     modules = {
       nixos =
-        haumea.lib.load
+        self.lib.loadModulesRecursively
         {
+          inherit inputs;
           src = ./modules/nixos;
-          loader = haumea.lib.loaders.scoped;
         };
       home =
-        haumea.lib.load
+        self.lib.loadModulesRecursively
         {
+          inherit inputs;
           src = ./modules/home;
-          loader = haumea.lib.loaders.scoped;
         };
     };
   };
