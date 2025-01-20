@@ -35,6 +35,13 @@ in {
 
       image = "${inputs.assets}/wallpapers/anime/a_waterfall_in_the_rain.jpg";
 
+      opacity = {
+        applications = 0.85;
+        desktop = 0.85;
+        popups = 0.65;
+        terminal = 0.65;
+      };
+
       targets = {
         bat.enable = true;
         btop.enable = true;
