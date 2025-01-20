@@ -16,7 +16,7 @@ in {
         default = true;
       };
       defaultSopsFile = lib.mkOption {
-        type = lib.types.anything;
+        type = lib.types.path;
         default = null;
       };
     };
