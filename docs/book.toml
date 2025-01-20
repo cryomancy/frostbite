@@ -1,8 +1,13 @@
 [book]
 authors = ["Tahlon Brahic"]
-language = "en"
-src = "src"
-title = "Fuyu no Kosei Documentation"
+description = "Nix modules that abstract the arduous Linux customization experience"
+title = "kosei"
+
+[build]
+extra-watch-dirs = ["."]
 
 [output.html]
-git-repository-url = "https://github.com/TahlonBrahic/fuyu-no-kosei/docs"
+edit-url-template = "https://github.com/TahlonBrahic/fuyu-no-kosei/edit/main/docs/{path}"
+git-repository-url = "https://github.com/TahlonBrahic/fuyu-no-kosei"
+preferred-dark-theme = "ayu"
+site-url = "/kosei/"
