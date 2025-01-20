@@ -44,7 +44,7 @@ in {
       core-utilities.enable = mkEnableOption "GNOME core utilities";
     };
 
-    services.xserver.desktopManager.gnome = {
+    gnome = {
       enable = mkEnableOption {
         type = types.bool;
         default = false;
