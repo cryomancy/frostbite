@@ -3,7 +3,6 @@ scoped: importScoped: {
   lib,
   pkgs,
   src,
-  self,
 }: let
   loadSystems = inputs.haumea.lib.load {
     inherit src;
@@ -14,4 +13,4 @@ in
   lib.attrsets.genAttrs systemNames
   (systemName:
     import "${src}/${systemName}/${systemName}.nix"
-    {inherit inputs lib pkgs self;})
+    {inherit inputs lib pkgs;})
