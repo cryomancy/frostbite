@@ -13,10 +13,12 @@ scoped: {
 in
   lib.nixosSystem {
     inherit system;
-    config._module.args = {inherit self system hostName users;};
     modules =
       [
         home-manager.nixosModules.home-manager
+        {
+          config._module.args = {inherit self system hostName users;};
+        }
         {
           home-manager = {
             backupFileExtension = "bak";
