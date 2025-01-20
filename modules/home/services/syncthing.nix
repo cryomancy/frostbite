@@ -14,13 +14,9 @@ in {
   config = lib.mkIf cfg.enable {
     services = {
       syncthing = {
-        settings = {
-          enable = true;
-          openDefaultPorts = true;
-          # TODO: decide where folders get specified (user-config?)
-        };
+        enable = true;
       };
     };
-    systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true"; # Don't create default ~/Sync folder
+    #systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true"; # Don't create default ~/Sync folder
   };
 }
