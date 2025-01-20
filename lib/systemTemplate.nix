@@ -9,7 +9,7 @@ scoped: {
   ...
 }: let
   inherit (inputs) kosei home-manager;
-  specialArgs = {inherit hostName inputs lib pkgs system users;};
+  specialArgs = {inherit hostName inputs pkgs system users;};
 in
   lib.nixosSystem {
     inherit system specialArgs;
