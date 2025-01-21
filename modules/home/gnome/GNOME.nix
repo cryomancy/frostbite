@@ -173,7 +173,7 @@ in {
         };
       };
 
-      home.Packages = with pkgs; [
+      home.packages = with pkgs; [
         sound-theme-freedesktop
       ];
     })
