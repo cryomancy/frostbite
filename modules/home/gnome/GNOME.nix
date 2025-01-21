@@ -151,7 +151,7 @@ in {
             tinysparql.enable = mkDefault true;
           };
           udisks2.enable = true;
-          upower.enable = config.powerManagement.enable;
+          upower.enable = osConfig.powerManagement.enable;
           libinput.enable = mkDefault true;
           xserver.updateDbusEnvironment = true;
         };
