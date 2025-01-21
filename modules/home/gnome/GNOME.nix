@@ -2,7 +2,7 @@ scoped: {
   config,
   lib,
   pkgs,
-  osConfig,
+  nixosConfig,
   ...
 }: let
   inherit
@@ -15,7 +15,7 @@ scoped: {
     ;
 
   cfg = config.kosei.gnome;
-  serviceCfg = osConfig.services.gnome;
+  serviceCfg = nixosConfig.services.gnome;
 
   mimeAppsList = pkgs.writeTextFile {
     name = "gnome-mimeapps";
@@ -133,7 +133,7 @@ in {
     })
 
     (lib.mkIf serviceCfg.core-os-services.enable {
-      osConfig = {
+      nixosConfig = {
         networking.networkmanager.enable = mkDefault true;
         programs.dconf.enable = true;
         security.polkit.enable = true;
@@ -151,7 +151,7 @@ in {
             tinysparql.enable = mkDefault true;
           };
           udisks2.enable = true;
-          #upower.enable = osConfig.powerManagement.enable;
+          #upower.enable = nixosConfig.powerManagement.enable;
           libinput.enable = mkDefault true;
           xserver.updateDbusEnvironment = true;
         };
@@ -179,7 +179,7 @@ in {
     })
 
     (lib.mkIf serviceCfg.core-shell.enable {
-      osConfig = {
+      nixosConfig = {
         services = {
           xserver.desktopManager.gnome.sessionPath = [
             pkgs.gnome-shell
@@ -260,7 +260,7 @@ in {
         pkgs.totem
       ];
 
-      osConfig = {
+      nixosConfig = {
         services.gnome.sushi.enable = notExcluded pkgs.sushi;
         programs = {
           file-roller.enable = notExcluded pkgs.file-roller;
