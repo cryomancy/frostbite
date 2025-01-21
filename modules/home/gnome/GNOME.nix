@@ -14,7 +14,7 @@ scoped: {
     literalExpression
     ;
 
-  cfg = kosei.gnome;
+  cfg = config.kosei.gnome;
   serviceCfg = osConfig.services.gnome;
 
   mimeAppsList = pkgs.writeTextFile {
