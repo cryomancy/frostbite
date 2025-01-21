@@ -18,7 +18,7 @@ in {
       };
       defaultSopsFile = lib.mkOption {
         type = lib.types.path;
-        default = ./src/secrets/secrets.yaml;
+        default = scoped: ./src/secrets/secrets.yaml;
       };
     };
   };
@@ -28,7 +28,7 @@ in {
       age = {
         keyFile = "/var/lib/sops-nix/key.txt";
       };
-      inherit (cfg) defaultSopsFile;
+      defaultSopsFile = "scoped" cfg.defaultSopsFile;
       defaultSopsFormat = "yaml";
       secrets =
         lib.mergeAttrs
