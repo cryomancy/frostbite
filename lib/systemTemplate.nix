@@ -13,7 +13,7 @@ scoped: {
 in
   lib.nixosSystem {
     inherit system;
-    extraArgs = {inherit self system hostName users;};
+    config._module.args = {inherit self system hostName users;};
     modules =
       [
         home-manager.nixosModules.home-manager
