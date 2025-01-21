@@ -9,10 +9,10 @@ scoped: {
   ...
 }: let
   inherit (inputs) kosei home-manager;
-  extraArgs = {inherit hostName inputs lib pkgs system users;};
+  specialArgs = {inherit hostName inputs lib pkgs system users;};
 in
   lib.nixosSystem {
-    inherit system extraArgs;
+    inherit system specialArgs;
     modules =
       [
         home-manager.nixosModules.home-manager
@@ -21,7 +21,7 @@ in
             backupFileExtension = "bak";
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = extraArgs;
+            extraSpecialArgs = specialArgs;
             # Iterates over a list of users provided in the function call
             users = inputs.nixpkgs.lib.attrsets.genAttrs users (user: {
               imports =
