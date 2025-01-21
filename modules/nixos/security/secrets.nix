@@ -2,6 +2,7 @@ scoped: {
   config,
   inputs,
   lib,
+  outPath,
   users,
   ...
 }: let
@@ -17,7 +18,7 @@ in {
       };
       defaultSopsFile = lib.mkOption {
         type = lib.types.path;
-        default = null;
+        default = "${outPath}/src/secrets/secrets.yaml";
       };
     };
   };
