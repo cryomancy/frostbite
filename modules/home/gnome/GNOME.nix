@@ -14,7 +14,7 @@ scoped: {
     literalExpression
     ;
 
-  cfg = osConfig.services.xserver.desktopManager.gnome;
+  cfg = kosei.gnome;
   serviceCfg = osConfig.services.gnome;
 
   mimeAppsList = pkgs.writeTextFile {
@@ -37,7 +37,7 @@ scoped: {
 
   notExcluded = pkg: mkDefault (!(lib.elem (lib.getName pkg) (map lib.getName config.environment.gnome.excludePackages)));
 in {
-  options = {
+  options.kosei = {
     services.gnome = {
       core-os-services.enable = mkEnableOption "essential services for GNOME3";
       core-shell.enable = mkEnableOption "GNOME Shell services";
