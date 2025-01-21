@@ -17,7 +17,7 @@ in {
         default = true;
       };
       defaultSopsFile = lib.mkOption {
-        type = lib.types.path;
+        type = lib.types.any;
         default = scoped: ./src/secrets/secrets.yaml;
       };
     };
