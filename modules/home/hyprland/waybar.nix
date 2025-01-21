@@ -227,7 +227,7 @@ in {
 
           "custom/hostname" = {
             exec = writeWaybarApplication {
-              script = ''
+              text = ''
                 echo "$USER@$HOSTNAME"
               '';
             };
