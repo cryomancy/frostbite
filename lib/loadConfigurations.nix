@@ -11,6 +11,6 @@ scoped: importScoped: {
   systemNames = builtins.attrNames loadSystems;
 in
   lib.attrsets.genAttrs systemNames
-  (systemName: scoped:
+  (systemName:
     import "${src}/${systemName}/${systemName}.nix"
     {inherit inputs lib pkgs;})
