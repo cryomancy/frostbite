@@ -14,8 +14,8 @@ scoped: {
     literalExpression
     ;
 
-  cfg = config.services.xserver.desktopManager.gnome;
-  serviceCfg = config.services.gnome;
+  cfg = osConfig.services.xserver.desktopManager.gnome;
+  serviceCfg = osConfig.services.gnome;
 
   mimeAppsList = pkgs.writeTextFile {
     name = "gnome-mimeapps";
@@ -33,7 +33,6 @@ scoped: {
 
   nixos-gsettings-desktop-schemas = pkgs.gnome.nixos-gsettings-overrides.override {
     inherit (cfg) extraGSettingsOverrides extraGSettingsOverridePackages favoriteAppsOverride;
-    inherit flashbackEnabled nixos-background-dark nixos-background-light;
   };
 
   notExcluded = pkg: mkDefault (!(lib.elem (lib.getName pkg) (map lib.getName config.environment.gnome.excludePackages)));
