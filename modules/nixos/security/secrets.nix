@@ -18,7 +18,7 @@ in {
       };
       defaultSopsFile = lib.mkOption {
         type = lib.types.path;
-        default = null;
+        default = ./src/secrets/secrets.yaml;
       };
     };
   };
