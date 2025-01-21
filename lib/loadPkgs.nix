@@ -3,14 +3,14 @@ scoped: importScoped: {
   system,
 }: {
   pkgs =
-    (import inputs.nixpkgs
+    import inputs.nixpkgs
       {
         inherit system;
         config.allowUnfree = true;
-      })
-    .appendOverlays
-    [
-      inputs.fuyuvim.overlays.default
-      inputs.nur.overlays.default
-    ];
+      }
+#   .appendOverlays
+#    [
+#      inputs.fuyuvim.overlays.default
+#      inputs.nur.overlays.default
+#    ];
 }
