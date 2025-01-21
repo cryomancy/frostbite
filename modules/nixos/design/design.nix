@@ -55,10 +55,11 @@ in {
       };
 
       targets = {
+        console.enable = true;
         fish.enable = true;
         grub.enable = true;
-        gnome.enable = false;
-        lightdm.enable = false;
+        gnome.enable = true;
+        lightdm.enable = true;
         regreet.enable = true;
       };
 
