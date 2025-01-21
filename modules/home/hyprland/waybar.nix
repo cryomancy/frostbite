@@ -1,41 +1,11 @@
 scoped: {
   config,
+  inputs,
   lib,
   pkgs,
   ...
 }: let
-  writeCustomShellApplication = {
-    name ? "customScript",
-    script, # script
-    dependencies ? [],
-  }:
-    lib.getExe (pkgs.writeShellApplication {
-      inherit name;
-      text = script;
-      runtimeInputs = with pkgs; [coreutils gnugrep systemd] ++ dependencies;
-    });
-  writeCustomWaybarModule = {
-    dependencies ? [],
-    script ? "",
-    text ? "",
-    tooltip ? "",
-    alt ? "",
-    class ? "",
-    percentage ? "",
-  }: {
-    name = "customWaybarModule";
-    dependencies = [pkgs.jq] ++ dependencies;
-    script = ''
-      ${script}
-      jq -cn \
-        --arg text "${text}" \
-        --arg tooltip "${tooltip}" \
-        --arg alt "${alt}" \
-        --arg class "${class}" \
-        --arg percentage "${percentage}" \
-        '{text:$text,tooltip:$tooltip,alt:$alt,class:$class,percentage:$percentage}'
-    '';
-  };
+  inherit (inputs.kosei.lib) writeWaybarApplication writeWaybarModule;
   cfg = config.kosei.waybar;
 in {
   options = {
@@ -140,8 +110,8 @@ in {
               ];
             };
             on-click = lib.getExe pkgs.pavucontrol;
-            on-click-right = writeCustomShellApplication {
-              script = "pkill pavucontrol";
+            on-click-right = writeWaybarApplication {
+              text = "pkill pavucontrol";
             };
           };
 
@@ -191,7 +161,7 @@ in {
           "custom/menu" = {
             interval = 1;
             return-type = "json";
-            exec = writeCustomWaybarModule {
+            exec = writeWaybarModule {
               dependencies = [pkgs.hyprland];
               text = "";
               tooltip = ''$(grep PRETTY_NAME /etc/os-release | cut -d '"' -f2)'';
@@ -204,7 +174,7 @@ in {
           "custom/currentplayer" = {
             interval = 2;
             return-type = "json";
-            exec = writeCustomWaybarModule {
+            exec = writeWaybarModule {
               dependencies = [pkgs.playerctl];
               script = ''
                 all_players=$(playerctl -l 2>/dev/null)
@@ -225,16 +195,16 @@ in {
           };
 
           "custom/player" = {
-            exec-if = writeCustomShellApplication {
+            exec-if = writeWaybarApplication {
               dependencies = [pkgs.playerctl];
-              script = ''
+              text = ''
                 selected_player="$(playerctl status -f "{{playerName}}" 2>/dev/null || true)"
                 playerctl status -p "$selected_player" 2>/dev/null
               '';
             };
-            exec = writeCustomShellApplication {
+            exec = writeWaybarApplication {
               dependencies = [pkgs.playerctl];
-              script = ''
+              text = ''
                 selected_player="$(playerctl status -f "{{playerName}}" 2>/dev/null || true)"
                 playerctl metadata -p "$selected_player" \
                   --format '{"text": "{{artist}} - {{title}}", "alt": "{{status}}", "tooltip": "{{artist}} - {{title}} ({{album}})"}' 2>/dev/null
@@ -249,14 +219,14 @@ in {
               "Paused" = "󰏤 ";
               "Stopped" = "󰓛";
             };
-            on-click = writeCustomShellApplication {
+            on-click = writeWaybarApplication {
               dependencies = [pkgs.playerctl];
-              script = "playerctl play-pause";
+              text = "playerctl play-pause";
             };
           };
 
           "custom/hostname" = {
-            exec = writeCustomShellApplication {
+            exec = writeWaybarApplication {
               script = ''
                 echo "$USER@$HOSTNAME"
               '';

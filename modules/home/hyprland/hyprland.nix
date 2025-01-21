@@ -43,18 +43,38 @@ in {
           options = {
             name = lib.mkOption {
               type = lib.types.str;
+              example = "DP-1";
             };
-            resolution = lib.mkOption {
-              type = lib.types.str;
+            resolution = lib.types.submodule {
+              options = {
+                x = lib.mkOption {
+                  type = lib.types.int;
+                  default = 1920;
+                };
+                y = lib.mkOption {
+                  type = lib.types.int;
+                  default = 1080;
+                };
+              };
             };
             refreshRate = lib.mkOption {
               type = lib.types.str;
             };
-            position = lib.mkOption {
-              type = lib.types.str;
+            position = lib.types.submodule {
+              options = {
+                x = lib.mkOption {
+                  type = lib.types.int;
+                  default = 0;
+                };
+                y = lib.mkOption {
+                  type = lib.types.int;
+                  default = 0;
+                };
+              };
             };
             scale = lib.mkOption {
               type = lib.types.int;
+              default = 1.5;
             };
           };
         };
@@ -104,7 +124,7 @@ in {
         };
 
         bindl = [
-          ",switch:off:Lid Switch,exec, hyprctl keyword monitor 'eDP-1, 2560x1440, 0x0, 1'"
+          ",switch:off:Lid Switch,exec, hyprctl keyword monitor 'eDP-1, 2560x1440, 0x0, 1.5'; pkill waybar; waybar"
           ",switch:on:Lid Switch,exec, hyprctl keyword monitor 'eDP-1, disable'"
         ];
 
