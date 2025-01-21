@@ -28,7 +28,7 @@ in {
       age = {
         keyFile = "/var/lib/sops-nix/key.txt";
       };
-      defaultSopsFile = "scoped" cfg.defaultSopsFile;
+      defaultSopsFile = cfg.defaultSopsFile "scoped";
       defaultSopsFormat = "yaml";
       secrets =
         lib.mergeAttrs
