@@ -5,9 +5,9 @@ scoped: importScoped: {
   outPath,
   src,
 }: let
-  loadSystems = inputs.haumea.lib.load {
+  loadSystems = inputs.eris.lib.load {
     inherit src;
-    loader = inputs.haumea.lib.loaders.verbatim;
+    loader = inputs.eris.lib.loaders.verbatim;
   };
   systemNames = builtins.attrNames loadSystems;
 in
