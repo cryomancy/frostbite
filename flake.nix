@@ -3,20 +3,17 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    haumea = {
-      url = "github:nix-community/haumea/v0.2.2";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    eris.url = "github:TahlonBrahic/eris";
   };
 
   outputs = inputs @ {
-    haumea,
+    eris,
     self,
     ...
   }: {
-    lib = haumea.lib.load {
+    lib = eris.lib.load {
       src = ./lib;
-      loader = haumea.lib.loaders.scoped;
+      loader = eris.lib.loaders.scoped;
     };
     modules = {
       nixos =

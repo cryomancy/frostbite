@@ -3,14 +3,14 @@ scoped: {
   inputs,
   src,
 }: let
-  inherit (inputs) haumea nixpkgs;
+  inherit (inputs) eris nixpkgs;
   inherit (nixpkgs) lib;
   inherit (lib) pipe attrsets;
   inherit (attrsets) filterAttrs mergeAttrsList;
   inherit (builtins) attrValues isAttrs;
-  loadModules = haumea.lib.load {
+  loadModules = eris.lib.load {
     inherit src;
-    loader = haumea.lib.loaders.scoped;
+    loader = eris.lib.loaders.scoped;
   };
 in
   pipe loadModules
