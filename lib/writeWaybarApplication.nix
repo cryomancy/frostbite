@@ -1,13 +1,15 @@
 scoped: {
+  lib,
+  pkgs,
+}: {
   name ? "customScript",
   text,
   dependencies ? [],
-  lib ? {inherit lib;},
-  pkgs ? {inherit pkgs;},
 }: let
   inherit (lib) getExe;
+  inherit (pkgs) writeShellApplication;
 in
-  getExe (pkgs.writeShellApplication {
+  getExe (writeShellApplication {
     inherit name text;
     runtimeInputs = with pkgs; [coreutils gnugrep systemd] ++ dependencies;
   })
