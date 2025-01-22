@@ -1,10 +1,9 @@
-scoped: {
+scoped: pkgs: {
   alt ? "",
   class ? "",
   dependencies ? [],
   name ? "customWaybarModule",
   percentage ? "",
-  pkgs ? {inherit pkgs;},
   script ? "",
   text ? "",
   tooltip ? "",

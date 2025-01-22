@@ -5,8 +5,8 @@ scoped: {
   pkgs,
   ...
 }: let
-  inherit (inputs.kosei.lib) writeWaybarModule;
   writeWaybarApplication = inputs.kosei.lib.writeWaybarApplication {inherit lib pkgs;};
+  writeWaybarModule = inputs.kosei.lib.writeWaybarModule pkgs;
   cfg = config.kosei.waybar;
 in {
   options = {
