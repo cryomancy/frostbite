@@ -22,7 +22,7 @@ scoped: lib: let
     fi
   '';
 in
-  lib.mergeAttrsList (
+  lib.attrsets.mergeAttrsList (
     lib.forEach (builtins.genList (x: x + 1) (parseHyprctlMonitors "count" ""))
     (
       monitorIndex: let
