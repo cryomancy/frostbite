@@ -7,8 +7,9 @@ scoped: {
   ...
 }: let
   cfg = config.kosei.hyprland;
-  monitors = builtins.trace inputs.kosei.lib.parseMonitors {inherit lib;} inputs.kosei.lib.parseMonitors {inherit lib;};
+  monitors = inputs.kosei.lib.parseMonitors {inherit lib;};
   gamemode = inputs.kosei.lib.hyprlandGameMode {inherit config lib pkgs;};
+  _ = lib.debug "Monitors: ${toString cfg.monitors}";
 in {
   options = {
     kosei.hyprland = {
