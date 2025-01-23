@@ -107,7 +107,7 @@ in {
         bindl = lib.mkIf nixosConfig.kosei.laptopSupport.enable [
           ''
             ,switch:off:Lid Switch,exec, hyprctl keyword monitor
-            '${cfg.monitors}, ${cfg.monitors},
+            '${lib.debug.traceSeq monitors monitors}, ${cfg.monitors},
             ${cfg.monitors}, ${cfg.monitors}';
             pkill waybar; waybar
           ''
