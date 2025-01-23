@@ -21,18 +21,15 @@ scoped: {
     if [ $1 == "count" ]; then
       echo $monitors
     else
-      echo monitorData[$1]
+      echo monitorData[$1][$2]
     fi
   '';
 
   monitors = lib.attrsets.mergeAttrsList (
-    lib.forEach (builtins.genList (x: x + 1) (parseHyprctlMonitors "count" ""))
+    lib.forEach (builtins.genList (x: x + 1) (parseHyprctlMonitors "count"))
     (
-      monitorIndex: let
-        monitorName = parseHyprctlMonitors "name" monitorIndex;
-      in {
-        # For each monitor, return an object with relevant details
-        inherit monitorName;
+      monitorIndex: {
+        name = parseHyprctlMonitors "name" monitorIndex;
         resolution = parseHyprctlMonitors "resolution" monitorIndex;
         position = parseHyprctlMonitors "position" monitorIndex;
         refreshRate = parseHyprctlMonitors "refreshRate" monitorIndex;
