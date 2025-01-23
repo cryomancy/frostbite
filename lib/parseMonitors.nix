@@ -1,5 +1,4 @@
-scoped: lib: parameter: monitor: let
-  # Capture monitor data using `hyprctl`
+scoped: lib: let
   parseHyprctlMonitors = lib.writeShellScriptBin "parseHyprctlMonitors" ''
     monitors=$(hyprctl monitors all | grep Monitor | awk 'END {print NR}')
     monitorNames=$(hyprctl monitors all | grep Monitor | awk '{print $2}')
@@ -25,11 +24,16 @@ scoped: lib: parameter: monitor: let
 in
   lib.mergeAttrsList (
     lib.forEach (builtins.genList (x: x + 1) (parseHyprctlMonitors "count" ""))
-    (monitorIndex: {
-      name = parseHyprctlMonitors "name" monitorIndex;
-      position = parseHyprctlMonitors "position" monitorIndex;
-      resolution = parseHyprctlMonitors "resolution" monitorIndex;
-      refreshRate = parseHyprctlMonitors "refreshRate" monitorIndex;
-      scale = parseHyprctlMonitors "scale" monitorIndex;
-    })
+    (
+      monitorIndex: let
+        monitorName = parseHyprctlMonitors "name" monitorIndex;
+      in {
+        # For each monitor, return an object with relevant details
+        inherit monitorName;
+        resolution = parseHyprctlMonitors "resolution" monitorIndex;
+        position = parseHyprctlMonitors "position" monitorIndex;
+        refreshRate = parseHyprctlMonitors "refreshRate" monitorIndex;
+        scale = parseHyprctlMonitors "scale" monitorIndex;
+      }
+    )
   )
