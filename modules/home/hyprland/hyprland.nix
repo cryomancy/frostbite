@@ -269,11 +269,11 @@ in {
       sessionVariables = {
         XDG_SESSION_TYPE = "wayland";
       };
+    };
 
-      services = {
-        dunst.enable = true;
-        gnome-keyring.enable = true;
-      };
+    services = {
+      dunst.enable = true;
+      gnome-keyring.enable = true;
     };
   };
 }
