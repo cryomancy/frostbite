@@ -211,33 +211,6 @@ in {
           "blur,notifications"
         ];
       };
-
-      decoration = {
-        rounding = 5;
-        fullscreen_opacity = 1.0;
-
-        blur = {
-          enabled = true;
-          size = 4;
-          passes = 2;
-        };
-
-        shadow = {
-          enabled = true;
-          offset = "3 3";
-          range = 12;
-          color = lib.mkForce "0x44000000";
-          color_inactive = lib.mkForce "0x66000000";
-        };
-      };
-
-      general = {
-        gaps_in = 6;
-        gaps_out = 6;
-        border_size = 0;
-        resize_on_border = true;
-        hover_icon_on_border = true;
-      };
     };
 
     home.packages = with pkgs; [
