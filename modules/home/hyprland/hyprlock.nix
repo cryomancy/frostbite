@@ -21,10 +21,9 @@ in {
       enable = true;
 
       extraConfig = ''
-        # BACKGROUND
         background {
           monitor =
-          path = ${inputs.walls}/anime/a_drawing_of_a_horse_carriage_on_a_bridge.png"
+          path = ${inputs.assets}/anime/a_drawing_of_a_horse_carriage_on_a_bridge.png"
           blur_passes = 2
           contrast = 0.8916
           brightness = 0.8172
@@ -32,7 +31,6 @@ in {
           vibrancy_darkness = 0.0
         }
 
-        # GENERAL
         general {
           hide_cursor = true
           no_fade_in = false
@@ -104,7 +102,6 @@ in {
           valign = bottom
         }
 
-        # INPUT FIELD
         input-field {
           monitor =
           size = 300, 50
