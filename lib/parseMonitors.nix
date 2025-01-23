@@ -21,8 +21,8 @@ scoped: lib: let
       echo monitorData[$1]
     fi
   '';
-in
-  lib.attrsets.mergeAttrsList (
+
+  monitors = lib.attrsets.mergeAttrsList (
     lib.forEach (builtins.genList (x: x + 1) (parseHyprctlMonitors "count" ""))
     (
       monitorIndex: let
@@ -36,4 +36,5 @@ in
         scale = parseHyprctlMonitors "scale" monitorIndex;
       }
     )
-  )
+  );
+in {inherit monitors;}
