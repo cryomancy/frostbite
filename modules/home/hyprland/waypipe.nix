@@ -9,7 +9,7 @@ in {
   options = {
     kosei.waypipe.enable = lib.mkOption {
       type = lib.types.bool;
-      default = lib.mkIf config.kosei.hyprland.enable;
+      default = config.kosei.hyprland.enable;
     };
   };
 
