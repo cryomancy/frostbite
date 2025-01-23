@@ -25,7 +25,7 @@ scoped: {
     fi
   '';
 
-  monitors = lib.attrsets.mergeAttrsList (
+  parsedMonitors = lib.attrsets.mergeAttrsList (
     lib.forEach (builtins.genList (x: x + 1) (parseHyprctlMonitors "count"))
     (
       monitorIndex: {
@@ -37,4 +37,5 @@ scoped: {
       }
     )
   );
-in {inherit monitors;}
+in
+  parsedMonitors
