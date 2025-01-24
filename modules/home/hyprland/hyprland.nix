@@ -45,7 +45,7 @@ in {
       };
       */
 
-      monitors = lib.mkOption {
+      monitors = {
         type = lib.types.attrsOf lib.types.submodule {
           options = {
             name = lib.mkOption {
