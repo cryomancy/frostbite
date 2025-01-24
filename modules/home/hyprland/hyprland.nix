@@ -26,7 +26,7 @@ in {
       };
 
       monitors = {
-        type = lib.type.attrsOf lib.types.submodule {
+        type = lib.types.attrsOf lib.types.submodule {
           options =
             lib.attrsets.mapAttrs
             (monitor: monitorData: {
