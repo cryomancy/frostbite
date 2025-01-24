@@ -15,10 +15,10 @@ scoped: lib: let
     done
 
     # Output the relevant data based on the parameter
-    if [ "${parameter}" == "count" ]; then
+    if [ $1 == "count" ]; then
       echo $monitors
     else
-      echo monitorData[${parameter}]
+      echo monitorData[$1]
     fi
   '';
 in
