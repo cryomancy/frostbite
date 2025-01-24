@@ -5,8 +5,8 @@ scoped: {
   parseMonitors = lib.getExe (pkgs.writeShellApplication {
     name = "parseMonitors.sh";
     runtimeInputs = with pkgs; [hyprland coreutils];
+    excludeShellChecks = ["SC2034"];
     text = ''
-      # shellcheck disable=SC2034
       monitors=$(hyprctl monitors all | grep Monitor | awk 'END {print NR}')
       monitorNames=$(hyprctl monitors all | grep Monitor | awk '{print $2}')
       resolutions=$(hyprctl monitors all | grep ' at ' | awk '{print $1}')
