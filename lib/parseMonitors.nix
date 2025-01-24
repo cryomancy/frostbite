@@ -17,7 +17,7 @@ scoped: {
 
       for i in $(seq 0 "$monitors" - 1); do
         # Assign the data for each monitor to a dictionary
-        monitorData[$i]=$(echo "$monitorNames $resolutions $positions $scales" | cut -d' ' -f((i + 1)))
+        monitorData[$i]=$(echo "$monitorNames $resolutions $positions $scales" | cut -d' ' -f$(i + 1))
       done
 
       # Output the relevant data based on the parameter
