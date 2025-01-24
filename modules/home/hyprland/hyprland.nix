@@ -9,7 +9,7 @@ scoped: {
   cfg = config.kosei.hyprland;
   monitors = inputs.kosei.lib.parseMonitors {inherit lib;};
   gamemode = inputs.kosei.lib.hyprlandGameMode {inherit config lib pkgs;};
-  _ = lib.debug "Monitors: ${toString cfg.monitors}";
+  debug_monitors = lib.debug.traceSeq "Monitors: ${toString monitors}" monitors;
 in {
   options = {
     kosei.hyprland = {
@@ -56,7 +56,7 @@ in {
                 default = monitorData.scale;
               };
             })
-            monitors;
+            debug_monitors;
         };
       };
     };
