@@ -1,5 +1,8 @@
-scoped: {lib}: let
-  parseHyprctlMonitors = lib.writeShellScriptBin "parseHyprctlMonitors" ''
+scoped: {
+  lib,
+  pkgs,
+}: let
+  parseHyprctlMonitors = pkgs.writeShellScriptBin "parseHyprctlMonitors" ''
     monitors=$(hyprctl monitors all | grep Monitor | awk 'END {print NR}')
     monitorNames=$(hyprctl monitors all | grep Monitor | awk '{print $2}')
     resolutions=$(hyprctl monitors all | grep ' at ' | awk '{print $1}')
