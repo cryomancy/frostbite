@@ -25,6 +25,26 @@ in {
         };
       };
 
+      /*
+      cfg.monitors = {
+        "0" = {
+      	name = "eDP-1";
+      	position = "0x0";
+      	resolution = "2880x1800";
+      	refreshRate = "120.00Hz";
+      	scale = 1.5;
+        };
+
+        "1" = {
+      	name = "HDMI-1";
+      	position = "1920x0";
+      	resolution = "2560x1440";
+      	refreshRate = "60.00Hz";
+      	scale = 1.0;
+        };
+      };
+      */
+
       monitors = lib.mkOption {
         type = lib.types.attrsOf lib.types.submodule {
           options = {
@@ -106,8 +126,17 @@ in {
         ];
 
         bindl = lib.mkIf nixosConfig.kosei.laptopSupport.enable [
-          ",switch:off:Lid Switch,exec, hyprctl keyword monitor 'eDP-1, 2560x1440, 0x0, 1.6'; pkill waybar; waybar"
-          ",switch:on:Lid Switch,exec, hyprctl keyword monitor 'eDP-1, disable'"
+          ''
+            ,switch:off:Lid Switch,exec, hyprctl keyword monitor
+            '${cfg.monitors."0".name}, ${cfg.monitors."0".resolution},
+            ${cfg.monitors."0".position}, ${cfg.monitors."0".refreshRate}';
+            pkill waybar; waybar
+          ''
+
+          ''
+            ,switch:on:Lid Switch,exec, hyprctl keyword monitor
+            '${cfg.monitors."0".name}, disable
+          ''
         ];
 
         bindm = [
@@ -213,41 +242,38 @@ in {
       };
     };
 
-    home.packages = with pkgs; [
-      grim # screenshot functionality
-      slurp # screenshot functionality
-      wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
-      wlogout # wayland logout menu
-      wlr-randr # wayland output utility
-      wlr-which-key # keymap manager
-      mako # notification system
-      wofi # gtk-based app launcher
-      kitty # backup terminal
-      rot8 # screen rotation daemon
-      wl-kbptr
-      wl-screenrec
-      wl-mirror
-      wineWowPackages.wayland
-      clipman
-      swappy
-      wpa_supplicant_gui
-      wev
-      playerctl
-      pavucontrol
-    ];
+    home = {
+      packages = with pkgs; [
+        grim # screenshot functionality
+        slurp # screenshot functionality
+        wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
+        wlogout # wayland logout menu
+        wlr-randr # wayland output utility
+        wlr-which-key # keymap manager
+        mako # notification system
+        wofi # gtk-based app launcher
+        kitty # backup terminal
+        rot8 # screen rotation daemon
+        wl-kbptr
+        wl-screenrec
+        wl-mirror
+        wineWowPackages.wayland
+        clipman
+        swappy
+        wpa_supplicant_gui
+        wev
+        playerctl
+        pavucontrol
+      ];
 
-    services = {
-      dunst.enable = true;
-      gnome-keyring.enable = true;
-      hypridle.enable = true;
-    };
+      sessionVariables = {
+        XDG_SESSION_TYPE = "wayland";
+      };
 
-    programs = {
-      hyprlock.enable = true;
-    };
-
-    home.sessionVariables = {
-      XDG_SESSION_TYPE = "wayland";
+      services = {
+        dunst.enable = true;
+        gnome-keyring.enable = true;
+      };
     };
   };
 }

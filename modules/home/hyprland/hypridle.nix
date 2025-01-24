@@ -9,7 +9,7 @@ in {
     kosei.hypridle = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = false;
+        default = config.kosei.hyprland.enable;
       };
     };
   };
