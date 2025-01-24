@@ -239,42 +239,42 @@ in {
         hover_icon_on_border = true;
       };
     };
-  };
 
-  home.packages = with pkgs; [
-    grim # screenshot functionality
-    slurp # screenshot functionality
-    wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
-    wlogout # wayland logout menu
-    wlr-randr # wayland output utility
-    wlr-which-key # keymap manager
-    mako # notification system
-    wofi # gtk-based app launcher
-    kitty # backup terminal
-    rot8 # screen rotation daemon
-    wl-kbptr
-    wl-screenrec
-    wl-mirror
-    wineWowPackages.wayland
-    clipman
-    swappy
-    wpa_supplicant_gui
-    wev
-    playerctl
-    pavucontrol
-  ];
+    home.packages = with pkgs; [
+      grim # screenshot functionality
+      slurp # screenshot functionality
+      wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
+      wlogout # wayland logout menu
+      wlr-randr # wayland output utility
+      wlr-which-key # keymap manager
+      mako # notification system
+      wofi # gtk-based app launcher
+      kitty # backup terminal
+      rot8 # screen rotation daemon
+      wl-kbptr
+      wl-screenrec
+      wl-mirror
+      wineWowPackages.wayland
+      clipman
+      swappy
+      wpa_supplicant_gui
+      wev
+      playerctl
+      pavucontrol
+    ];
 
-  services = {
-    dunst.enable = true;
-    gnome-keyring.enable = true;
-    hypridle.enable = true;
-  };
+    services = {
+      dunst.enable = true;
+      gnome-keyring.enable = true;
+      hypridle.enable = true;
+    };
 
-  programs = {
-    hyprlock.enable = true;
-  };
+    programs = {
+      hyprlock.enable = true;
+    };
 
-  home.sessionVariables = {
-    XDG_SESSION_TYPE = "wayland";
+    home.sessionVariables = {
+      XDG_SESSION_TYPE = "wayland";
+    };
   };
 }
