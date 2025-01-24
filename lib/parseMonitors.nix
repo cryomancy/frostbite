@@ -2,7 +2,7 @@ scoped: {
   lib,
   pkgs,
 }: let
-  parseHyprctlMonitors = pkgs.writeShellScriptBin "parseHyprctlMonitors" ''
+  parseHyprctlMonitors = pkgs.writeShellScriptBin "${parseHyprctlMonitors}" ''
     monitors=$(hyprctl monitors all | grep Monitor | awk 'END {print NR}')
     monitorNames=$(hyprctl monitors all | grep Monitor | awk '{print $2}')
     resolutions=$(hyprctl monitors all | grep ' at ' | awk '{print $1}')
@@ -26,14 +26,14 @@ scoped: {
   '';
 
   parsedMonitors = lib.attrsets.mergeAttrsList (
-    lib.forEach (builtins.genList (x: x + 1) (parseHyprctlMonitors "count"))
+    lib.forEach (builtins.genList (x: x + 1) (${parseHyprctlMonitors} "count"))
     (
       monitorIndex: {
-        name = parseHyprctlMonitors "name" monitorIndex;
-        resolution = parseHyprctlMonitors "resolution" monitorIndex;
-        position = parseHyprctlMonitors "position" monitorIndex;
-        refreshRate = parseHyprctlMonitors "refreshRate" monitorIndex;
-        scale = parseHyprctlMonitors "scale" monitorIndex;
+        name = ${parseHyprctlMonitors} "name" monitorIndex;
+        resolution = ${parseHyprctlMonitors} "resolution" monitorIndex;
+        position = ${parseHyprctlMonitors} "position" monitorIndex;
+        refreshRate = ${parseHyprctlMonitors} "refreshRate" monitorIndex;
+        scale = ${parseHyprctlMonitors} "scale" monitorIndex;
       }
     )
   );
