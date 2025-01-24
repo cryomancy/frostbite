@@ -25,60 +25,38 @@ in {
         };
       };
 
-      /*
-      cfg.monitors = {
-        "0" = {
-      	name = "eDP-1";
-      	position = "0x0";
-      	resolution = "2880x1800";
-      	refreshRate = "120.00Hz";
-      	scale = 1.5;
-        };
-
-        "1" = {
-      	name = "HDMI-1";
-      	position = "1920x0";
-      	resolution = "2560x1440";
-      	refreshRate = "60.00Hz";
-      	scale = 1.0;
-        };
-      };
-      */
-
       monitors = {
-        type = lib.types.attrsOf lib.types.submodule {
-          options = {
-            name = lib.mkOption {
-              type = lib.types.str;
-              default = lib.mkDefault (monitors "name" 0);
-            };
-            position = lib.mkOption {
-              type = lib.types.str;
-              default = lib.mkDefault (monitors "position" 0);
-            };
-            resolution = lib.mkOption {
-              type = lib.types.str;
-              default = lib.mkDefault (monitors "resolution" 0);
-            };
-            refreshRate = lib.mkOption {
-              type = lib.types.str;
-              default = lib.mkDefault (monitors "refreshRate" 0);
-            };
-            scale = lib.mkOption {
-              type = lib.types.int;
-              default = lib.mkDefault (monitors "scale" 0);
-            };
-          };
+        type = lib.type.attrsOf lib.types.submodule {
+          options =
+            lib.attrsets.mapAttrs
+            (monitor: monitorData: {
+              name = lib.mkOption {
+                type = lib.types.str;
+                default = monitorData.name;
+              };
+
+              position = lib.mkOption {
+                type = lib.types.str;
+                default = monitorData.position;
+              };
+
+              resolution = lib.mkOption {
+                type = lib.types.str;
+                default = monitorData.resolution;
+              };
+
+              refreshRate = lib.mkOption {
+                type = lib.types.str;
+                default = monitorData.refreshRate;
+              };
+
+              scale = lib.mkOption {
+                type = lib.types.float;
+                default = monitorData.scale;
+              };
+            })
+            monitors;
         };
-        default = lib.mkDefault (
-          lib.mapAttrsToList (monitorIndex: {
-            name = monitors "name" monitorIndex;
-            position = monitors "position" monitorIndex;
-            resolution = monitors "resolution" monitorIndex;
-            refreshRate = monitors "refreshRate" monitorIndex;
-            scale = monitors "scale" monitorIndex;
-          }) (builtins.genList 0 (monitors "count" ""))
-        );
       };
     };
   };
