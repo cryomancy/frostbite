@@ -4,7 +4,7 @@ scoped: {
 }: let
   parseMonitors = lib.getExe (pkgs.writeShellApplication {
     name = "parseMonitors.sh";
-    #runtimeInputs = with pkgs; [hyprland coreutils];
+    runtimeInputs = with pkgs; [hyprland coreutils];
     excludeShellChecks = ["SC2034"];
     text = ''
       monitors=$(hyprctl monitors all | grep Monitor | awk 'END {print NR}')
@@ -27,7 +27,7 @@ scoped: {
   });
 
   parsedMonitors = lib.attrsets.mergeAttrsList (
-    lib.forEach (builtins.genList (x: x + 1) (pkgs.callPackage parseMonitors "count"))
+    lib.forEach (builtins.genList (x: x + 1) (parseMonitors "count"))
     (
       monitorIndex: {
         name = parseMonitors "name" monitorIndex;
