@@ -24,7 +24,7 @@ scoped: {
       if [ "$1" == "count" ]; then
         echo "$monitors"
       else
-        echo monitorData[$1][$2]
+        echo monitorData["$1"]["$2"]
       fi
     '';
   });
