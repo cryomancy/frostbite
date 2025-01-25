@@ -21,7 +21,7 @@ scoped: {
       done
 
       # Output the relevant data based on the parameter
-      if [ $1 == "count" ]; then
+      if [ "$1" == "count" ]; then
         echo $monitors
       else
         echo monitorData[$1][$2]
