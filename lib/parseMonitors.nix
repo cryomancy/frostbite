@@ -2,7 +2,7 @@ scoped: {
   lib,
   pkgs,
 }: let
-  parseMonitors = arg: {index ? ""}:
+  parseMonitors = arg: index:
     lib.getExe (pkgs.writeShellApplication {
       name = "parseMonitors.sh";
       runtimeInputs = with pkgs; [hyprland coreutils];
@@ -30,14 +30,14 @@ in
   lib.attrsets.mergeAttrsList (
     lib.forEach
     (builtins.genList (x: x)
-      (parseMonitors "count"))
+      (parseMonitors "count" ""))
     (
       monitorIndex: {
-        name = parseMonitors "name" {inherit monitorIndex;};
-        resolution = parseMonitors "resolution" {inherit monitorIndex;};
-        position = parseMonitors "position" {inherit monitorIndex;};
-        refreshRate = parseMonitors "refreshRate" {inherit monitorIndex;};
-        scale = parseMonitors "scale" {inherit monitorIndex;};
+        name = parseMonitors "name" monitorIndex;
+        resolution = parseMonitors "resolution" monitorIndex;
+        position = parseMonitors "position" monitorIndex;
+        refreshRate = parseMonitors "refreshRate" monitorIndex;
+        scale = parseMonitors "scale" monitorIndex;
       }
     )
   )
