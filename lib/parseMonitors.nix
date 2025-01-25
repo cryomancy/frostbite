@@ -2,7 +2,7 @@ scoped: {
   lib,
   pkgs,
 }: let
-  parseMonitors = pkgs.writeShellApplication {
+  parseMonitors = {_, __ ? ""}: pkgs.writeShellApplication {
     name = "parseMonitors.sh";
     #runtimeInputs = with pkgs; [hyprland coreutils];
     excludeShellChecks = ["SC2034"];
@@ -18,10 +18,10 @@ scoped: {
         monitorData[i]=$(echo "$monitorNames $resolutions $positions $scales" | cut -d' ' -f"$(i + 1)")
       done
 
-      if [ "$1" == "count" ]; then
+      if [ "${_}" == "count" ]; then
         echo "$monitors"
       else
-        echo monitorData["$1"]["$2"]
+        echo monitorData["${_}"]["${_}"]
       fi
     '';
   };
