@@ -2,7 +2,7 @@ scoped: {
   lib,
   pkgs,
 }: let
-  parseMonitors = lib.getExe (pkgs.writeShellApplication {
+  parseMonitors = pkgs.writeShellApplication {
     name = "parseMonitors.sh";
     #runtimeInputs = with pkgs; [hyprland coreutils];
     excludeShellChecks = ["SC2034"];
@@ -24,10 +24,10 @@ scoped: {
         echo monitorData["$1"]["$2"]
       fi
     '';
-  });
+  };
 in
   lib.attrsets.mergeAttrsList (
-    lib.forEach (builtins.genList (x: x + 1) ((builtins.readFile parseMonitors) "count"))
+    lib.forEach (builtins.genList (x: x + 1) (lib.getExe parseMonitors "count")
     (
       monitorIndex: {
         name = parseMonitors "name" monitorIndex;
