@@ -14,7 +14,7 @@ scoped: {
       monitorData=()
 
       for i in $(seq 0 "$monitors" - 1); do
-        monitorData[$i]=$(echo "$monitorNames $resolutions $positions $scales" | cut -d' ' -f"$(i + 1)")
+        monitorData[i]=$(echo "$monitorNames $resolutions $positions $scales" | cut -d' ' -f"$(i + 1)")
       done
 
       if [ "$1" == "count" ]; then
