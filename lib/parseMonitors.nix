@@ -8,7 +8,7 @@ scoped: {
   }:
     pkgs.writeShellApplication {
       name = "parseMonitors.sh";
-      #runtimeInputs = with pkgs; [hyprland coreutils];
+      runtimeInputs = with pkgs; [hyprland coreutils];
       excludeShellChecks = ["SC2034"];
       text = ''
         monitors=$(hyprctl monitors all | grep Monitor | awk 'END {print NR}')
@@ -32,7 +32,8 @@ scoped: {
 in
   lib.attrsets.mergeAttrsList (
     lib.forEach (
-      builtins.genList (x: x + 1) (lib.getExe parseMonitors "count")
+      (builtins.genList (x: x)
+        (lib.getExe parseMonitors "count"))
       (
         monitorIndex: {
           name = parseMonitors "name" monitorIndex;
