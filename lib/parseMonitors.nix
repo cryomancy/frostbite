@@ -2,10 +2,7 @@ scoped: {
   lib,
   pkgs,
 }: let
-  parseMonitors = {
-    _,
-    __ ? "",
-  }:
+  parseMonitors = arg: {index ? ""}:
     lib.getExe (pkgs.writeShellApplication {
       name = "parseMonitors.sh";
       runtimeInputs = with pkgs; [hyprland coreutils];
@@ -22,10 +19,10 @@ scoped: {
           monitorData[i]=$(echo "$monitorNames $resolutions $positions $scales" | cut -d' ' -f"$(i + 1)")
         done
 
-        if [ "${_}" == "count" ]; then
+        if [ "${arg}" == "count" ]; then
           echo "$monitors"
         else
-          echo monitorData["${_}"]["${_}"]
+          echo monitorData["${arg}"]["${index}"]
         fi
       '';
     });
@@ -36,11 +33,11 @@ in
       (parseMonitors "count"))
     (
       monitorIndex: {
-        name = parseMonitors "name" monitorIndex;
-        resolution = parseMonitors "resolution" monitorIndex;
-        position = parseMonitors "position" monitorIndex;
-        refreshRate = parseMonitors "refreshRate" monitorIndex;
-        scale = parseMonitors "scale" monitorIndex;
+        name = parseMonitors "name" {inherit monitorIndex;};
+        resolution = parseMonitors "resolution" {inherit monitorIndex;};
+        position = parseMonitors "position" {inherit monitorIndex;};
+        refreshRate = parseMonitors "refreshRate" {inherit monitorIndex;};
+        scale = parseMonitors "scale" {inherit monitorIndex;};
       }
     )
   )
