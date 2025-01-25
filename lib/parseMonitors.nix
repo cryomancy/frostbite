@@ -31,17 +31,16 @@ scoped: {
     };
 in
   lib.attrsets.mergeAttrsList (
-    lib.forEach (
-      (builtins.genList (x: x)
-        ((lib.getExe parseMonitors) "count"))
-      (
-        monitorIndex: {
-          name = parseMonitors "name" monitorIndex;
-          resolution = parseMonitors "resolution" monitorIndex;
-          position = parseMonitors "position" monitorIndex;
-          refreshRate = parseMonitors "refreshRate" monitorIndex;
-          scale = parseMonitors "scale" monitorIndex;
-        }
-      )
+    lib.forEach
+    (builtins.genList (x: x)
+      ((lib.getExe parseMonitors) "count"))
+    (
+      monitorIndex: {
+        name = parseMonitors "name" monitorIndex;
+        resolution = parseMonitors "resolution" monitorIndex;
+        position = parseMonitors "position" monitorIndex;
+        refreshRate = parseMonitors "refreshRate" monitorIndex;
+        scale = parseMonitors "scale" monitorIndex;
+      }
     )
   )
