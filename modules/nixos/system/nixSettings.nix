@@ -26,6 +26,7 @@ in {
       channel.enable = false;
       settings = {
         accept-flake-config = true;
+        allow-unsafe-native-code-during-evaluation = true;
         auto-optimise-store = true;
         # TODO: Add nix.buildMachines with sops nix secrets and build user
         experimental-features = ["nix-command" "flakes" "pipe-operators"];
