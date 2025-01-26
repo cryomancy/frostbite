@@ -44,7 +44,7 @@ in {
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
           "rycee.cachix.org-1:TiiXyeSk0iRlzlys4c7HiXLkP3idRf20oQ/roEUAh/A="
         ];
-        use-xdg-base-directoires = true;
+        use-xdg-base-directories = true;
         warn-dirty = false;
       };
       # TODO: Add flake registry
