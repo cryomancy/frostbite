@@ -27,19 +27,19 @@ scoped: {
       '';
     });
 
-  monitorCount = builtins.readFile (parseMonitors "count" "");
+  # Execute the script to get the monitor count and convert it to an integer
+  monitorCount = builtins.fromJSON (builtins.readFile (parseMonitors "count" ""));
+
+  # Generate a list of monitor indices
+  monitorIndices = builtins.genList (x: x) monitorCount;
+
+  # Create a list of monitor attributes
+  monitorAttributes = lib.forEach monitorIndices (monitorIndex: {
+    name = builtins.readFile (parseMonitors "name" monitorIndex);
+    resolution = builtins.readFile (parseMonitors "resolution" monitorIndex);
+    position = builtins.readFile (parseMonitors "position" monitorIndex);
+    refreshRate = builtins.readFile (parseMonitors "refreshRate" monitorIndex);
+    scale = builtins.readFile (parseMonitors "scale" monitorIndex);
+  });
 in
-  lib.attrsets.mergeAttrsList (
-    lib.forEach
-    (builtins.genList (x: x)
-      "${monitorCount}")
-    (
-      monitorIndex: {
-        name = parseMonitors "name" monitorIndex;
-        resolution = parseMonitors "resolution" monitorIndex;
-        position = parseMonitors "position" monitorIndex;
-        refreshRate = parseMonitors "refreshRate" monitorIndex;
-        scale = parseMonitors "scale" monitorIndex;
-      }
-    )
-  )
+  lib.attrsets.mergeAttrsList monitorAttributes
