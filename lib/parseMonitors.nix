@@ -3,7 +3,7 @@ scoped: {
   pkgs,
 }: let
   # Create a shell application using writeShellApplication
-  parseMonitors = arg: index:
+  parseMonitorsScript = arg: index:
     pkgs.writeShellApplication {
       name = "parseMonitors";
       runtimeInputs = with pkgs; [hyprland coreutils];
