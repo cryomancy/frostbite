@@ -47,7 +47,6 @@ in {
         use-xdg-base-directories = true;
         warn-dirty = false;
       };
-      # TODO: Add flake registry
       registry = {
         nixpkgs = {
           flake = inputs.nixpkgs;
