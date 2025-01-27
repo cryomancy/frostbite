@@ -2,10 +2,9 @@ scoped: {
   lib,
   pkgs,
 }: let
-  # Create a shell application using writeShellApplication
-  parseMonitorsScript = arg: index:
-    pkgs.writeShellApplication {
-      name = "parseMonitors";
+  parseMonitors = arg: index:
+    lib.getExe (pkgs.writeShellApplication {
+      name = "parseMonitors.sh";
       runtimeInputs = with pkgs; [hyprland coreutils];
       excludeShellChecks = ["SC2034" "SC2050"];
       text = ''
@@ -26,20 +25,19 @@ scoped: {
           echo monitorData["${arg}"]["${index}"]
         fi
       '';
-    };
-  parseMonitors = arg: index:
-    builtins.readFile (lib.getExe (parseMonitorsScript "${arg} ${index}"));
-
-  monitorCount = builtins.fromJSON (parseMonitors "count" "");
-
-  monitorIndices = builtins.genList (x: x) monitorCount;
-
-  monitorAttributes = lib.forEach monitorIndices (monitorIndex: {
-    name = parseMonitors "name" monitorIndex;
-    resolution = parseMonitors "resolution" monitorIndex;
-    position = parseMonitors "position" monitorIndex;
-    refreshRate = parseMonitors "refreshRate" monitorIndex;
-    scale = parseMonitors "scale" monitorIndex;
-  });
+    });
 in
-  lib.attrsets.mergeAttrsList monitorAttributes
+  lib.attrsets.mergeAttrsList (
+    lib.forEach
+    (builtins.genList (x: x))
+    (builtins.exec (parseMonitors "count" ""))
+    (
+      monitorIndex: {
+        name = parseMonitors "name" monitorIndex;
+        resolution = parseMonitors "resolution" monitorIndex;
+        position = parseMonitors "position" monitorIndex;
+        refreshRate = parseMonitors "refreshRate" monitorIndex;
+        scale = parseMonitors "scale" monitorIndex;
+      }
+    )
+  )
