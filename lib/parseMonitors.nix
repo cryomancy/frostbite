@@ -35,7 +35,7 @@ scoped: {
     };
   };
   
-  monitors = builtins.exec ["bash" "-c" "${parseMonitors}" "--" "count"]
+  monitors = builtins.exec ["${pkgs.bash}" "-c" "${parseMonitors}" "--" "count"]
     |> builtins.genList (x: x)
 	|> builtins.map formattedOutput
     |> lib.attrsets.mergeAttrsList;
