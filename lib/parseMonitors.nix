@@ -30,7 +30,7 @@ in
   lib.attrsets.mergeAttrsList (
     lib.forEach
     (builtins.genList (x: x)
-      (parseMonitors "count" ""))
+      (builtins.readFile (parseMonitors "count" "")))
     (
       monitorIndex: {
         name = parseMonitors "name" monitorIndex;
