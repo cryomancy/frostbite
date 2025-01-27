@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+scoped: { lib, pkgs, ... }:
 
 let
   # Define the shell script that interacts with `hyprctl` and retrieves monitor data
