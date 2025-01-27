@@ -35,12 +35,9 @@ scoped: {
     };
   };
   
-  monitorCount = builtins.exec ["bash" "-c" "${parseMonitors}" "--" "count"];
-
-in
-    lib.forEach
-	(
-      (builtins.genList (x: x) monitorCount)
-	  formattedOutput
-	)
-    |> lib.attrsets.mergeAttrsList
+  monitors = builtins.exec ["bash" "-c" "${parseMonitors}" "--" "count"]
+    |> builtins.genList (x: x)
+	|> builtins.map formattedOutput
+    |> lib.attrsets.mergeAttrsList;
+in 
+  monitors
