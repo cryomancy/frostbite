@@ -13,7 +13,7 @@ let
       scales=$(hyprctl monitors all | grep 'scale' | awk '{print $2}')
       monitorData=()
 
-      for i in $(seq 0 "$monitors" - 1); do
+      for i in $(seq 0 "$monitors"); do
         monitorData[i]=$(echo "$monitorNames $resolutions $positions $scales" | cut -d' ' -f"$(i + 1)")
       done
 
