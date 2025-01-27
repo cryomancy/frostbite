@@ -4,7 +4,7 @@ scoped: {
 }: let
   parseMonitors = pkgs.writeShellApplication {
     name = "parseMonitors.sh";
-	checkPhase = ["SC2034"];
+	excludeShellChecks = ["SC2034"];
     text = ''
       monitors=$(hyprctl monitors all | grep Monitor | awk 'END {print NR}')
       monitorNames=$(hyprctl monitors all | grep Monitor | awk '{print $2}')
