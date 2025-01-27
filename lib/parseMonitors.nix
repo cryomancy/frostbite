@@ -39,7 +39,7 @@ let
     };
   };
 
-  monitors = lib.genList (i: formattedOutput i) (builtins.toInt monitorCountOutput) |> lib.attrsets.mergeAttrsList;
+  monitors = lib.genList (i: formattedOutput i) (lib.toInt monitorCountOutput) |> lib.attrsets.mergeAttrsList;
 
 in 
   monitors
