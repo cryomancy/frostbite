@@ -28,7 +28,7 @@ scoped: {
       '';
     };
   parseMonitors = arg: index:
-    builtins.readFile (lib.getExe parseMonitorsScript) + " ${arg} ${index}";
+    builtins.readFile (lib.getExe (parseMonitorsScript "${arg} ${index}"));
 
   monitorCount = builtins.fromJSON (parseMonitors "count" "");
 
