@@ -25,20 +25,22 @@ scoped: {
     '';
   } |> lib.getExe |> builtins.readFile;
 
+  formattedOutput = monitorIndex: {
+    "${monitorIndex}" = {
+      name = parseMonitors "name" monitorIndex;
+      resolution = parseMonitors "resolution" monitorIndex;
+      position = parseMonitors "position" monitorIndex;
+      refreshRate = parseMonitors "refreshRate" monitorIndex;
+      scale = parseMonitors "scale" monitorIndex;
+    };
+  };
+  
+  monitorCount = builtins.exec ["bash" "-c" "${parseMonitors}" "--" "count"];
+
 in
-  lib.attrsets.mergeAttrsList (
     lib.forEach
-    (builtins.genList (x: x)
-      (builtins.exec [(parseMonitors "count" "")]))
-    (
-      monitorIndex: {
-        "${monitorIndex}" = {
-          name = parseMonitors "name" monitorIndex;
-          resolution = parseMonitors "resolution" monitorIndex;
-          position = parseMonitors "position" monitorIndex;
-          refreshRate = parseMonitors "refreshRate" monitorIndex;
-          scale = parseMonitors "scale" monitorIndex;
-        };
-      }
-    )
-  )
+	(
+      (builtins.genList (x: x) monitorCount)
+	  formattedOutput
+	)
+    |> lib.attrsets.mergeAttrsList
