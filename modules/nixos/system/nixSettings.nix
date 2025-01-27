@@ -28,8 +28,9 @@ in {
         accept-flake-config = true;
         allow-unsafe-native-code-during-evaluation = true;
         auto-optimise-store = true;
-        # TODO: Add nix.buildMachines with sops nix secrets and build user
+        commit-lock-file-summary = "update lock file";
         experimental-features = ["nix-command" "flakes" "pipe-operators"];
+        pure-eval = true;
         substituters = [
           "https://cache.nixos.org/"
           "https://fuyu-no-hokan.cachix.org"
@@ -43,6 +44,8 @@ in {
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
           "rycee.cachix.org-1:TiiXyeSk0iRlzlys4c7HiXLkP3idRf20oQ/roEUAh/A="
         ];
+        use-xdg-base-directoires = true;
+        warn-dirty = false;
       };
       # TODO: Add flake registry
       registry = {
@@ -52,8 +55,6 @@ in {
       };
       nixPath = [
         "nixpkgs=${inputs.nixpkgs.outPath}"
-        "nixos-config=/etc/nixos/configuration.nix"
-        "/nix/var/nix/profiles/per-user/root/channels"
       ];
       gc = {
         automatic = true;
