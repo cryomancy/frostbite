@@ -29,8 +29,8 @@ scoped: {
 in
   lib.attrsets.mergeAttrsList (
     lib.forEach
-    (builtins.genList (x: x))
-    (builtins.exec (parseMonitors "count" ""))
+    (builtins.genList (x: x)
+      (builtins.exec (parseMonitors "count" "")))
     (
       monitorIndex: {
         name = parseMonitors "name" monitorIndex;
