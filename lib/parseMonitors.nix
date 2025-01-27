@@ -1,10 +1,10 @@
-scoped: {
-  lib,
-  pkgs,
-}: let
+{ lib, pkgs, ... }:
+
+let
+  # Define the shell script that interacts with `hyprctl` and retrieves monitor data
   parseMonitors = pkgs.writeShellApplication {
     name = "parseMonitors.sh";
-	excludeShellChecks = ["SC2034"];
+    excludeShellChecks = ["SC2034"];
     text = ''
       monitors=$(hyprctl monitors all | grep Monitor | awk 'END {print NR}')
       monitorNames=$(hyprctl monitors all | grep Monitor | awk '{print $2}')
@@ -25,6 +25,7 @@ scoped: {
     '';
   } |> lib.getExe |> builtins.readFile;
 
+  # Format the output based on the monitor index
   formattedOutput = monitorIndex: {
     "${monitorIndex}" = {
       name = parseMonitors "name" monitorIndex;
@@ -34,10 +35,12 @@ scoped: {
       scale = parseMonitors "scale" monitorIndex;
     };
   };
-  
-  monitors = builtins.exec ["${parseMonitors}" "--" "count"]
-    |> builtins.genList (x: x)
-	|> builtins.map formattedOutput
-    |> lib.attrsets.mergeAttrsList;
+
+  # Use `builtins.exec` to count monitors (output from the shell script)
+  monitorCountOutput = builtins.exec ["${parseMonitors}" "--" "count"];
+
+  # Parse the count to generate the list of monitors
+  monitors = lib.genList (i: formattedOutput i) (builtins.toString monitorCountOutput);
+
 in 
   monitors
