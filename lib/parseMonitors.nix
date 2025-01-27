@@ -30,7 +30,7 @@ in
   lib.attrsets.mergeAttrsList (
     lib.forEach
     (builtins.genList (x: x)
-      (import (parseMonitors "count" "")))
+      (parseMonitors "count" ""))
     (
       monitorIndex: {
         name = parseMonitors "name" monitorIndex;
