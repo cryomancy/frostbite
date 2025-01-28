@@ -27,7 +27,7 @@ let
 
   callAttr = attr: monitorIndex:  builtins.exec ["bash" "-c" "${parseMonitors}" "--" "${attr}" "${monitorIndex}"];
 
-  monitorCountOutput = builtins.exec ["bash" "-c" "${parseMonitors}" "--" "count"];
+  monitorCount = builtins.exec ["bash" "-c" "${parseMonitors}" "--" "count"];
 
   formattedOutput = monitorIndex: {
     "${monitorIndex}" = {
@@ -39,7 +39,9 @@ let
     };
   };
 
-  monitors = lib.genList (i: formattedOutput i) (lib.toInt monitorCountOutput) |> lib.attrsets.mergeAttrsList;
+  monitorsList = lib.genList (i: formattedOutput i) monitorCount;
 
-in 
-  monitors
+  mergedMonitorsList = lib.attrsets.mergeAttrsList monitorsList;
+
+in
+  mergedMonitorsList
