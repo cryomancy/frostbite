@@ -2,9 +2,9 @@ scoped: {
   lib,
   pkgs,
 }: let
-  parseMonitors = arg: index:
-    pkgs.writeShellScript "parseMonitors.sh"
-    ''
+  parseMonitors = pkgs.writeShellApplication {
+    name = "parseMonitors.sh";
+    text = ''
       monitors=$(hyprctl monitors all | grep Monitor | awk 'END {print NR}')
       monitorNames=$(hyprctl monitors all | grep Monitor | awk '{print $2}')
       resolutions=$(hyprctl monitors all | grep ' at ' | awk '{print $1}')
@@ -16,12 +16,14 @@ scoped: {
         monitorData[i]=$(echo "$monitorNames $resolutions $positions $scales" | cut -d' ' -f"$(i + 1)")
       done
 
-      if [ "${arg}" == "count" ]; then
+      if [ "$1" == "count" ]; then
         echo "$monitors"
       else
-        echo monitorData["${arg}"]["${index}"]
+        echo monitorData["$1"]["$2"]
       fi
     '';
+  } |> lib.getExe |> builtins.readFile;
+
 in
   lib.attrsets.mergeAttrsList (
     lib.forEach
@@ -29,11 +31,13 @@ in
       (builtins.exec [(parseMonitors "count" "")]))
     (
       monitorIndex: {
-        name = parseMonitors "name" monitorIndex;
-        resolution = parseMonitors "resolution" monitorIndex;
-        position = parseMonitors "position" monitorIndex;
-        refreshRate = parseMonitors "refreshRate" monitorIndex;
-        scale = parseMonitors "scale" monitorIndex;
+        "${monitorIndex}" = {
+          name = parseMonitors "name" monitorIndex;
+          resolution = parseMonitors "resolution" monitorIndex;
+          position = parseMonitors "position" monitorIndex;
+          refreshRate = parseMonitors "refreshRate" monitorIndex;
+          scale = parseMonitors "scale" monitorIndex;
+        };
       }
     )
   )
