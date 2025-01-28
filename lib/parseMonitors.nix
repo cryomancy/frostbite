@@ -3,7 +3,7 @@ scoped: {
   pkgs,
   ...
 }: let
-  # Define the shell script that interacts with `hyprctl` and retrieves monitor data
+  # Shell script that interacts with `hyprctl` and retrieves monitor data
   parseMonitors = pkgs.writeTextFile {
     name = "parseMonitors.sh";
     executable = true;
@@ -59,9 +59,9 @@ scoped: {
     '';
   } |> builtins.readFile;
 
-  callAttr = attr: monitorIndex: builtins.exec ["bash" "-c" "${parseMonitors}" "--" "${monitorIndex}" "${attr}"];
+  callAttr = attr: monitorIndex: builtins.exec ["${parseMonitors}" "${monitorIndex}" "${attr}"];
 
-  monitorCount = builtins.exec ["bash" "-c" "${parseMonitors}" "--" "count"];
+  monitorCount = builtins.exec ["${parseMonitors}" "count"];
 
   formattedOutput = monitorIndex: {
     "${monitorIndex}" = {
