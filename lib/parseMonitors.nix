@@ -2,9 +2,9 @@ scoped: { lib, pkgs, ... }:
 
 let
   # Define the shell script that interacts with `hyprctl` and retrieves monitor data
-  parseMonitors = pkgs.writeShellApplication {
+  parseMonitors = pkgs.writeTextFile {
     name = "parseMonitors.sh";
-    excludeShellChecks = ["SC2034"];
+	executable = true;
     text = ''
       monitors=$(hyprctl monitors all | grep Monitor | awk 'END {print NR}')
       monitorNames=$(hyprctl monitors all | grep Monitor | awk '{print $2}')
@@ -23,7 +23,7 @@ let
         echo monitorData["$1"]["$2"]
       fi
     '';
-  } |> lib.getExe |> builtins.readFile;
+  } |> builtins.readFile;
 
   # Format the output based on the monitor index
   formattedOutput = monitorIndex: {
