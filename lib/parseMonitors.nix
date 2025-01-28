@@ -7,6 +7,7 @@ scoped: {
   parseMonitors = pkgs.writeShellApplication {
     name = "parseMonitors.sh";
 	excludeShellChecks = ["SC2034"];
+	runtimeInputs = with pkgs; [hyprland];
     text = ''
       monitors=$(hyprctl monitors all | grep Monitor | awk 'END {print NR}')
       monitorNames=$(hyprctl monitors all | grep Monitor | awk '{print $2}')
