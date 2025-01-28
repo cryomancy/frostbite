@@ -4,12 +4,10 @@ scoped: {
   ...
 }: let
   # Shell script that interacts with `hyprctl` and retrieves monitor data
-  parseMonitors = pkgs.writeTextFile {
+  parseMonitors = pkgs.writeShellApplication {
     name = "parseMonitors.sh";
-    executable = true;
+	excludeShellChecks = ["SC2034"];
     text = ''
-      #!/usr/bin/env bash
-
       monitors=$(hyprctl monitors all | grep Monitor | awk 'END {print NR}')
       monitorNames=$(hyprctl monitors all | grep Monitor | awk '{print $2}')
       resolutions=$(hyprctl monitors all | grep ' at ' | awk '{print $1}')
@@ -57,7 +55,7 @@ scoped: {
       	fi
       }
     '';
-  } |> builtins.readFile;
+  } |> lib.getExe |> builtins.readFile;
 
   callAttr = attr: monitorIndex: builtins.exec ["${parseMonitors}" "${monitorIndex}" "${attr}"];
 
