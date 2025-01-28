@@ -16,7 +16,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    wayland.windowManager.hyprland.settings.monitors = [(builtins.readFile ~/.config/hypr/workspaces.conf)];
+    wayland.windowManager.hyprland.settings.monitors = [(builtins.readFile "${config.home.homeDirectory}/.config/hypr/workspaces.conf")];
 
     home.packages = with pkgs; [nwg-displays];
 
