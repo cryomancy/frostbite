@@ -31,6 +31,7 @@ in {
         commit-lock-file-summary = "update lock file";
         experimental-features = ["nix-command" "flakes" "pipe-operators"];
         pure-eval = true;
+        pipe-operators = true;
         substituters = [
           "https://cache.nixos.org/"
           "https://fuyu-no-hokan.cachix.org"
@@ -60,7 +61,6 @@ in {
         options = "--delete-older-than 7d";
       };
       package = pkgs.nixVersions.stable;
-      extraOptions = ''experimental-features = nix-command flakes'';
     };
 
     nixpkgs = {
