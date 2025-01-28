@@ -8,6 +8,7 @@ scoped: {
     name = "parseMonitors.sh";
 	excludeShellChecks = ["SC2034"];
 	runtimeInputs = with pkgs; [hyprland];
+	extraShellCheckFlags = [];
     text = ''
       monitors=$(hyprctl monitors all | grep Monitor | awk 'END {print NR}')
       monitorNames=$(hyprctl monitors all | grep Monitor | awk '{print $2}')
