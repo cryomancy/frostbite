@@ -25,22 +25,23 @@ let
     '';
   } |> builtins.readFile;
 
+  callAttr = attr: builtins.exec ["bash" "-c" "${parseMonitors}" "--" "${attr}" "${monitorIndex}"];
+
+  monitorCountOutput = builtins.exec ["bash" "-c" "${parseMonitors}" "--" "count"];
+
   # Format the output based on the monitor index
   formattedOutput = monitorIndex: {
     "${monitorIndex}" = {
-      name = parseMonitors "name" monitorIndex;
-      resolution = parseMonitors "resolution" monitorIndex;
-      position = parseMonitors "position" monitorIndex;
-      refreshRate = parseMonitors "refreshRate" monitorIndex;
-      scale = parseMonitors "scale" monitorIndex;
+      name = callAttr "name";
+      resolution = callAttr "resolution";
+      position = callAttr "position";
+      refreshRate = callAttr "refreshRate";
+      scale = callAttr "scale";
     };
   };
 
-  # Use `builtins.exec` to count monitors (output from the shell script)
-  monitorCountOutput = builtins.exec ["${parseMonitors}" "--" "count"];
-
   # Parse the count to generate the list of monitors
-  monitors = lib.genList (i: formattedOutput i) (builtins.toString monitorCountOutput);
+  monitors = lib.genList (i: formattedOutput i) (builtins.toString monitorCountOutput) |> lib.attrsets.mergeAttrsList;
 
 in 
   monitors
