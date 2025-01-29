@@ -7,9 +7,9 @@ scoped: {
   ...
 }: let
   cfg = config.kosei.hyprland;
-  monitors = inputs.kosei.lib.parseMonitors {inherit lib pkgs;};
   gamemode = inputs.kosei.lib.hyprlandGameMode {inherit config lib pkgs;};
-  debug_monitors = lib.debug.traceSeq monitors monitors;
+  onMonitorAttached = inputs.kosei.lib.onMonitorAttached {inherit lib pkgs;};
+  onMonitorDetached = inputs.kosei.lib.onMonitorDetached {inherit lib pkgs;};
 in {
   options = {
     kosei.hyprland = {
@@ -25,46 +25,16 @@ in {
           default = gamemode "stop";
         };
       };
-
-      monitors = {
-        type = lib.types.attrsOf lib.types.submodule {
-          options =
-            lib.attrsets.mapAttrs
-            (monitor: monitorData: {
-              name = lib.mkOption {
-                type = lib.types.str;
-                default = monitorData.name;
-              };
-
-              position = lib.mkOption {
-                type = lib.types.str;
-                default = monitorData.position;
-              };
-
-              resolution = lib.mkOption {
-                type = lib.types.str;
-                default = monitorData.resolution;
-              };
-
-              refreshRate = lib.mkOption {
-                type = lib.types.str;
-                default = monitorData.refreshRate;
-              };
-
-              scale = lib.mkOption {
-                type = lib.types.float;
-                default = monitorData.scale;
-              };
-            })
-            debug_monitors;
-        };
-      };
     };
   };
 
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       enable = true;
+
+      plugins = with pkgs.hyprland-plugins; [
+        hyprbars
+      ];
 
       systemd = {
         enable = true;
@@ -104,19 +74,10 @@ in {
           "WLR_RENDERER_ALLOW_SOFTWARE, 1"
         ];
 
-        bindl = lib.mkIf nixosConfig.kosei.laptopSupport.enable [
-          ''
-            ,switch:off:Lid Switch,exec, hyprctl keyword monitor
-            '${lib.debug.traceSeq monitors monitors}, ${cfg.monitors},
-            ${cfg.monitors}, ${cfg.monitors}';
-            pkill waybar; waybar
-          ''
-
-          ''
-            ,switch:on:Lid Switch,exec, hyprctl keyword monitor
-            '${cfg.monitors."0".name}, disable
-          ''
-        ];
+        exec-once =
+          (lib.getExe pkgs.hyprland-monitor-attached)
+          onMonitorAttached
+          onMonitorDetached;
 
         bindm = [
           "SUPER,mouse:272,movewindow"
@@ -233,6 +194,8 @@ in {
         wofi # gtk-based app launcher
         kitty # backup terminal
         rot8 # screen rotation daemon
+        hyprland-protocols # wayland protocols extension for hyprland
+        hyprland-monitor-attached
         wl-kbptr
         wl-screenrec
         wl-mirror
