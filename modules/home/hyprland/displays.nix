@@ -20,7 +20,7 @@ in {
 
     home.packages = with pkgs; [nwg-displays];
 
-    xdg.configFile."hypr/workspaces.conf".text = null;
+    xdg.configFile."hypr/workspaces.conf".text = "monitor = , preferred, auto, 1";
 
     systemd.user.services.displays = {
       Unit = {
