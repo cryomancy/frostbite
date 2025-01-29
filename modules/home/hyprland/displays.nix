@@ -20,7 +20,7 @@ in {
 
     home.packages = with pkgs; [nwg-displays];
 
-    xdg.configFile."hypr/workspaces.conf".source = "${config.xdg.configHome}/hypr/workspaces.conf";
+    xdg.configFile."hypr/workspaces.conf".text = "";
 
     systemd.user.services.displays = {
       Unit = {
