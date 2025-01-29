@@ -32,7 +32,7 @@ in {
     wayland.windowManager.hyprland = {
       enable = true;
 
-      plugins = with pkgs.hyprland-plugins; [
+      plugins = with pkgs.hyprlandPlugins; [
         hyprbars
       ];
 
