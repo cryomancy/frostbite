@@ -74,11 +74,7 @@ in {
           "WLR_RENDERER_ALLOW_SOFTWARE, 1"
         ];
 
-        exec-once = ''
-          ${(lib.getExe pkgs.hyprland-monitor-attached)}
-          ${onMonitorAttached}
-          ${onMonitorDetached}
-        '';
+        exec-once = ''${(lib.getExe pkgs.hyprland-monitor-attached)} ${onMonitorAttached} ${onMonitorDetached}'';
 
         bindm = [
           "SUPER,mouse:272,movewindow"
