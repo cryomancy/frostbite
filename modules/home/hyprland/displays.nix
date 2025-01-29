@@ -30,7 +30,6 @@ in {
       Install = {
         WantedBy = ["graphical.target"];
       };
-      script = '''';
     };
   };
 }
