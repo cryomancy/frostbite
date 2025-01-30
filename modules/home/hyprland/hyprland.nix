@@ -33,7 +33,7 @@ in {
       enable = true;
 
       plugins = with pkgs.hyprlandPlugins; [
-        hyprbars
+        #hyprbars
       ];
 
       systemd = {
