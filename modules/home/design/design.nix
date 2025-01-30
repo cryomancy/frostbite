@@ -20,15 +20,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    programs.wpaperd = {
-      enable = true;
-      settings = {
-        default = {
-          path = cfg.wallpaper;
-        };
-      };
-    };
-
     stylix = {
       enable = true;
       autoEnable = true;
