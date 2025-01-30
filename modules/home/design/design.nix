@@ -18,7 +18,7 @@ in {
   config = lib.mkIf cfg.enable {
     stylix = {
       enable = true;
-      autoEnable = true;
+      autoEnable = false;
 
       opacity = {
         applications = 0.85;
@@ -30,9 +30,12 @@ in {
       targets = {
         bat.enable = true;
         btop.enable = true;
+        emacs.enable = true;
         firefox.enable = true;
+        fish.enable = true;
         fzf.enable = true;
         gtk.enable = true;
+        ghostty.enable = true;
         hyprland.enable = true;
         hyprlock.enable = true;
         hyprpaper.enable = true;
@@ -40,7 +43,10 @@ in {
         librewolf.enable = true;
         mangohud.enable = true;
         rofi.enable = true;
+        vesktop.enable = true;
+        vim.enable = true;
         waybar.enable = true;
+        wofi.enable = true;
         zellij.enable = true;
       };
     };
