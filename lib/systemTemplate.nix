@@ -3,14 +3,13 @@ scoped: {
   hostName ? "nixos",
   inputs ? {},
   lib ? inputs.nixpkgs.lib,
-  pkgs ? import inputs.nixpkgs {inherit system;},
   outPath,
   system ? "x86_64-linux",
   users ? ["nixos"],
   ...
 }: let
   inherit (inputs) kosei home-manager;
-  specialArgs = {inherit hostName inputs pkgs outPath system users;};
+  specialArgs = {inherit hostName inputs outPath system users;};
 in
   lib.nixosSystem {
     inherit system specialArgs;
