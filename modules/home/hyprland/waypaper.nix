@@ -22,8 +22,8 @@ in {
     xdg.configFile."waypaper/config.ini".text = ''
       [Settings]
       language = en
-      folder = ${inputs.assets + ./wallpapers}
-      wallpaper = ${inputs.assets + ./wallpapers/anime/a_waterfall_in_the_rain.jpg}
+      folder = ${inputs.assets}/wallpapers
+      wallpaper = ${inputs.assets}/wallpapers/anime/a_waterfall_in_the_rain.jpg
       backend = swww
       monitors = All
       fill = Fill
