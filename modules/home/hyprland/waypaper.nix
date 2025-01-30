@@ -17,8 +17,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    wayland.windowManager.hyprland.settings.monitor = ["${config.xdg.configFile."waypaper/config.ini".text}"];
-
     home.packages = with pkgs; [waypaper swww];
 
     xdg.configFile."waypaper/config.ini".text = ''
