@@ -5,10 +5,10 @@ scoped: {
   pkgs,
   ...
 }: let
-  cfg = config.kosei.wpaperd;
+  cfg = config.kosei.waypaper;
 in {
   options = {
-    kosei.displays = {
+    kosei.waypaper = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = config.kosei.hyprland.enable;
@@ -17,11 +17,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    wayland.windowManager.hyprland.settings.monitor = ["${config.xdg.configFile."waypaper/config".text}"];
+    wayland.windowManager.hyprland.settings.monitor = ["${config.xdg.configFile."waypaper/config.ini".text}"];
 
     home.packages = with pkgs; [waypaper swww];
 
-    xdg.configFile."hypr/workspaces.conf".text = ''
+    xdg.configFile."waypaper/config.ini".text = ''
       [Settings]
       language = en
       folder = ${inputs.assets + ./wallpapers}
