@@ -3,9 +3,11 @@ scoped: {
   inputs,
   pkgs,
   lib,
+  system,
   ...
 }: let
   cfg = config.kosei.editor;
+  inherit (inputs.fuyuvim.packages.${system}) fuyuvim;
 in {
   options = {
     kosei.editor = {
@@ -15,7 +17,7 @@ in {
       };
       defaultEditor = lib.mkOption {
         type = lib.types.package;
-        default = pkgs.fuyuvim;
+        default = fuyuvim;
         example = pkgs.emacs;
       };
     };
