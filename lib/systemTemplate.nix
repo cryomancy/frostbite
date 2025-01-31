@@ -22,7 +22,7 @@ in
             backupFileExtension = "bak";
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = specialArgs;
+            extraSpecialArgs = specialArgs // {inherit pkgs;};
             # Iterates over a list of users provided in the function call
             users = inputs.nixpkgs.lib.attrsets.genAttrs users (user: {
               imports =

@@ -22,7 +22,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    nixpkgs = pkgs.appendOverlays [inputs.fuyuvim.overlays.default];
     home.packages = [cfg.defaultEditor];
   };
 }
