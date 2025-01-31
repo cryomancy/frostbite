@@ -19,7 +19,6 @@ in {
 
   imports = [
     inputs.nur.modules.nixos.default
-    #(modulesPath + "/misc/nixpkgs/read-only.nix")
   ];
 
   config = lib.mkIf cfg.enable {
@@ -65,7 +64,6 @@ in {
 
     nixpkgs = {
       config.allowUnfree = true;
-      inherit pkgs;
     };
 
     # OOM configuration:
