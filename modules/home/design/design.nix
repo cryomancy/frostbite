@@ -12,10 +12,6 @@ in {
         type = lib.types.bool;
         default = true;
       };
-      wallpaper = lib.mkOption {
-        type = lib.types.path;
-        default = "${config.home.homeDirectory}/.local/state/wpaperd/wallpapers";
-      };
     };
   };
 
@@ -23,8 +19,6 @@ in {
     stylix = {
       enable = true;
       autoEnable = true;
-
-      image = "${inputs.assets}/wallpapers/anime/a_waterfall_in_the_rain.jpg";
 
       opacity = {
         applications = 0.85;
