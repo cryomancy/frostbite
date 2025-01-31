@@ -3,7 +3,7 @@ scoped: {
   inputs,
   lib,
   pkgs,
-  system,
+  modulesPath,
   ...
 }: let
   cfg = config.kosei.nixSettings;
@@ -19,6 +19,7 @@ in {
 
   imports = [
     inputs.nur.modules.nixos.default
+    (modulesPath + "/misc/nixpkgs/read-only.nix")
   ];
 
   config = lib.mkIf cfg.enable {
@@ -31,7 +32,6 @@ in {
         commit-lock-file-summary = "update lock file";
         experimental-features = ["nix-command" "flakes" "pipe-operators"];
         pure-eval = true;
-        #pipe-operators = true;
         substituters = [
           "https://cache.nixos.org/"
           "https://fuyu-no-hokan.cachix.org"
@@ -65,6 +65,7 @@ in {
 
     nixpkgs = {
       config.allowUnfree = true;
+      inherit pkgs;
     };
 
     # OOM configuration:
