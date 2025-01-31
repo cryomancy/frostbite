@@ -56,7 +56,6 @@ in {
 
       targets = {
         console.enable = true;
-        fish.enable = true;
         grub.enable = true;
         gnome.enable = true;
         lightdm.enable = true;
