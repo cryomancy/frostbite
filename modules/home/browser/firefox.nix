@@ -3,10 +3,11 @@ scoped: {
   inputs,
   pkgs,
   lib,
+  system,
   ...
 }: let
   cfg = config.kosei.browser.firefox;
-  inherit (inputs.nur.repos.rycee) firefox-addons;
+  inherit (inputs.nur.legacyPackages.${system}.repos.rycee) firefox-addons;
 in {
   options = {
     kosei.browser = {
