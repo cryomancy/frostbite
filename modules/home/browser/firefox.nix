@@ -6,6 +6,7 @@ scoped: {
   ...
 }: let
   cfg = config.kosei.browser.firefox;
+  inherit (inputs.nur.repos.rycee) firefox-addons;
 in {
   options = {
     kosei.browser = {
@@ -43,7 +44,7 @@ in {
           # TODO: Add an option to choose styles?
           userChrome = builtins.readFile ./_assets/twilly.css;
 
-          extensions = with pkgs.repos.rycee.firefox-addons; [
+          extensions = with firefox-addons; [
             ublock-origin
             simple-tab-groups
             darkreader
