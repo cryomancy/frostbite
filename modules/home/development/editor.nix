@@ -22,6 +22,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    pkgs = pkgs.appendOverlays [inputs.fuyuvim.overlays.default];
     home.packages = [cfg.defaultEditor];
   };
 }
