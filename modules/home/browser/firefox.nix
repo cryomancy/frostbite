@@ -1,10 +1,12 @@
 scoped: {
   config,
+  inputs,
   pkgs,
   lib,
   ...
 }: let
   cfg = config.kosei.browser.firefox;
+  pkgs = pkgs.appendOverlays [inputs.fuyuvim.overlays.default];
 in {
   options = {
     kosei.browser = {
