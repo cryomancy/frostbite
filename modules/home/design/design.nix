@@ -37,7 +37,7 @@ in {
         gtk.enable = true;
         ghostty.enable = true;
         hyprland.enable = true;
-        hyprlock.enable = true;
+        #hyprlock.enable = true;
         hyprpaper.enable = true;
         kitty.enable = true;
         librewolf.enable = true;
