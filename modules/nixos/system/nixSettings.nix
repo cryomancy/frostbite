@@ -19,7 +19,7 @@ in {
 
   imports = [
     inputs.nur.modules.nixos.default
-    (modulesPath + "/misc/nixpkgs/read-only.nix")
+    #(modulesPath + "/misc/nixpkgs/read-only.nix")
   ];
 
   config = lib.mkIf cfg.enable {
