@@ -26,9 +26,8 @@ in {
       ansible
       tree-sitter
       any-nix-shell
-
-      # Language Servers
-      nil
+      zig
+      zig-shell-completions
 
       # Formatters and Linters
       alejandra
