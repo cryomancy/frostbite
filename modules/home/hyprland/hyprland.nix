@@ -191,7 +191,6 @@ in {
         wofi # gtk-based app launcher
         kitty # backup terminal
         rot8 # screen rotation daemon
-        hyprland-protocols # wayland protocols extension for hyprland
         hyprland-monitor-attached
         wl-kbptr
         wl-screenrec
