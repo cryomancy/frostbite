@@ -68,7 +68,7 @@ in {
       wireshark
       termshark
       iperf # Measure IP bandwidth
-      netboot # Portable PXE server
+      # netboot # Portable PXE server
       nettools # Swiss army knife of AD troubleshooting
       ipcalc
       python312Packages.scapy # Interactive packet manipulation and shell
