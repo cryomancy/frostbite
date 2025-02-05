@@ -15,6 +15,19 @@
       src = ./lib;
       loader = eris.lib.loaders.scoped;
     };
+
+    templates = {
+      "bootstrap" = {
+        path = ./templates/bootstrap;
+        description = "use to enable experimental features needed to switch to kosei modules";
+      };
+
+      "multiple-systems" = {
+        path = ./templates/multiple-systems;
+        description = "example of a multiple systems";
+      };
+    };
+
     modules = {
       nixos =
         self.lib.loadModulesRecursively
