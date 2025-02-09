@@ -10,6 +10,9 @@ in {
 
   options = {
     kosei.impermanence.enable = lib.mkEnableOption "impermanence";
+    directories = [
+      "/var/log"
+    ];
   };
 
   config =
