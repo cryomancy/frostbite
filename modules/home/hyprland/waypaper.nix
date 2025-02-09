@@ -19,6 +19,8 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [waypaper swww];
 
+    wayland.window-manager.hyprland.settings.exec-once = ''${(lib.getExe pkgs.waypaper)} --restore'';
+
     xdg.configFile."waypaper/config.ini".text = ''
       [Settings]
       language = en
