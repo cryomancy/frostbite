@@ -68,6 +68,9 @@ in {
         enableFishIntegration = true;
         enableZshIntegration = true;
       };
+      eza = {
+        enable = true;
+      };
       lsd = {
         enable = true;
         enableAliases = true;
