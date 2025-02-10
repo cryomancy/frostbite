@@ -15,6 +15,11 @@ in {
     kosei.hyprland = {
       enable = lib.mkEnableOption "hyprland";
 
+      autostartWorkspaces = lib.mkOption {
+        type = lib.types.string;
+        default = cfg.enable;
+      };
+
       gamemode = {
         startscript = lib.mkOption {
           type = lib.types.string;
@@ -76,7 +81,10 @@ in {
 
         exec-once =
           ''${(lib.getExe pkgs.hyprland-monitor-attached)} ${onMonitorAttached} ${onMonitorDetached}''
-          + lib.strings.optionalString (config.kosei.waypaper.enable) ''${(lib.getExe pkgs.waypaper)} --restore'';
+          + (lib.strings.optionalString config.kosei.waypaper.enable
+            ''${(lib.getExe pkgs.waypaper)} --restore'')
+          + (lib.strings.optionalString cfg.autostartWorkspaces
+            ''[workspace 1 silent] ${(lib.getExe pkgs.firefox)}'');
 
         bindm = [
           "SUPER,mouse:272,movewindow"
@@ -163,6 +171,12 @@ in {
           workspace_swipe = true;
         };
 
+        group = {
+          groupbar = {
+            render_titles = false;
+          };
+        };
+
         input = {
           follow_mouse = 1;
           mouse_refocus = false;
@@ -178,7 +192,14 @@ in {
           "ignorezero,rofi"
           "blur,notifications"
         ];
+
+        misc = {
+          disable_splash_rendering = true;
+          force_default_wallpaper = false;
+        };
       };
+
+      xwayland.enable = true;
     };
 
     home = {
