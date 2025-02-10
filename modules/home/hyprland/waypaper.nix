@@ -31,8 +31,9 @@ in {
       color = #ffffff
       subfolders = False
       number_of_columns = 3
-      post_command =
-      show_hidden = False
+      include_all_subfolders = True
+      include_subfolders = True
+      show_hidden = True
       show_gifs_only = False
       swww_transition_type = any
       swww_transition_step = 90
