@@ -16,7 +16,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [pkgs.rofi-wayland];
+    home.packages = [pkgs.rofi-wayland-unwrapped];
 
     xdg.configFile."rofi/config.rasi".text = ''
       configuration{
