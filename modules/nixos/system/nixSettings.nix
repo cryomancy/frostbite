@@ -80,5 +80,18 @@ in {
       # strongly prefer killing nix-daemon child processes
       services."nix-daemon".serviceConfig.OOMScoreAdjust = 1000;
     };
+    # Move temporary Nix-Daemon files to disk while packaging
+    # TODO: Add option for this for high memory systems
+    environment.variables.NIX_REMOTE = "daemon";
+    nix-daemon = {
+      environment = {
+        # Location for temporary files
+        TMPDIR = "/var/cache/nix";
+      };
+      serviceConfig = {
+        # Create /var/cache/nix automatically on Nix Daemon start
+        CacheDirectory = "nix";
+      };
+    };
   };
 }

@@ -14,18 +14,46 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.persistence = {
-      "/nix" = {
-        enable = true;
+      "/nix/persistent" = {
+        # Hide these mount from the sidebar of file managers
+        hideMounts = true;
+
+        # Folders you want to map
         directories = [
-          "/nix/store"
-          "/nix/var"
+          "/etc/NetworkManager/system-connections"
+          "/home"
+          "/root"
+          "/var"
         ];
-      };
-      "/home" = {
-        enable = true;
-        directories = [
-          "test"
+
+        # Files you want to map
+        files = [
+          "/etc/machine-id"
+          "/etc/ssh/ssh_host_ed25519_key.pub"
+          "/etc/ssh/ssh_host_ed25519_key"
+          "/etc/ssh/ssh_host_rsa_key.pub"
+          "/etc/ssh/ssh_host_rsa_key"
         ];
+
+        users.tahlon = {
+          directories = [
+            # Personal files
+            "Desktop"
+            "Documents"
+            "Downloads"
+            "Music"
+            "Pictures"
+            "Videos"
+
+            # Config folders
+            ".cache"
+            ".config"
+            ".gnupg"
+            ".local"
+            ".ssh"
+          ];
+          files = [];
+        };
       };
     };
   };
