@@ -8,10 +8,18 @@ scoped: {
 in {
   imports = [inputs.impermanence.nixosModules.impermanence];
 
+  # NOTE: Only configured for BTRFS with or without LUKS
   options = {
     kosei.impermanence = {
       enable = lib.mkEnableOption "impermanence";
-      root = lib.mkOption;
+      root = lib.mkOption {
+        type = lib.types.path;
+        default = null;
+        description = ''
+          Exact path of device containing BTRFS root file system
+        '';
+      };
+      passwordFile = lib.mkOption;
     };
   };
 
@@ -41,18 +49,17 @@ in {
       };
     };
 
-    # TODO: Absolutely make this an option with parameters before enabling
     boot.initrd.postResumeCommands = lib.mkAfter ''
-      mkdir /btrfs_tmp
-      mount /dev/root_vg/root /btrfs_tmp
-      if [[ -e /btrfs_tmp/root ]]; then
-          mkdir -p /btrfs_tmp/old_roots
-          timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
-          mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
+      mkdir -p /mnt/impermanence
+      mount ${cfg.root} /mnt/impermanence
+
+      if [[ -e ${cfg.root} ]]; then
+          mkdir -p /mnt/impermanence/old_roots
+          timestamp=$(date --date="@$(stat -c %Y /mnt/impermanence)" "+%Y-%m-%-d_%H:%M:%S")
+          mv /mnt/impermanence "/mnt/impermanence/$timestamp"
       fi
 
       delete_subvolume_recursively() {
-          IFS=$'\n'
           for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
               delete_subvolume_recursively "/btrfs_tmp/$i"
           done
@@ -63,7 +70,7 @@ in {
           delete_subvolume_recursively "$i"
       done
 
-      btrfs subvolume create /btrfs_tmp/root
+      btrfs subvolume create /mnt/impermanence/root
       umount /btrfs_tmp
     '';
   };
