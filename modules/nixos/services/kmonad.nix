@@ -7,7 +7,7 @@ scoped: {
 in {
   options = {
     kosei.kmonad = {
-      enable = lib.mkEnableOption "rgb";
+      enable = lib.mkEnableOption "kmonad";
     };
   };
 

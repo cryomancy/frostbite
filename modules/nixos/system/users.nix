@@ -8,10 +8,19 @@ scoped: {
   cfg = config.kosei.users;
 in {
   options = {
-    kosei.users = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
+    kosei = {
+      users = {
+        enable = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+        };
+        hashedPasswordFile = lib.mkOption {
+          type = lib.types.path;
+          default = null;
+          description = ''
+            A path to a password file that will be set as the password for all new users.
+          '';
+        };
       };
     };
   };
@@ -22,12 +31,25 @@ in {
     };
 
     users = {
-      mutableUsers = false;
+      mutableUsers = lib.mkDefault (
+        if config.kosei.secrets.enable
+        then false
+        else true
+      );
       users =
         lib.genAttrs users
         (user: {
           home = "/home/${user}";
-          hashedPasswordFile = lib.mkDefault config.sops.secrets."${user}/hashedPasswordFile".path;
+          hashedPasswordFile = lib.mkDefault (
+            if config.kosei.secrets.enable
+            then config.sops.secrets."${user}/hashedPasswordFile".path
+            else null
+          );
+          initialPasswordFile = lib.mkDefault (
+            if !config.kosei.secrets.enable
+            then cfg.hashedPasswordFile
+            else null
+          );
           isNormalUser = true;
           # TODO: variable shell for multi-user system?
           shell = pkgs.fish;
@@ -42,6 +64,7 @@ in {
     };
 
     # Recovery Account
+    # Does not use Yubikey authentication / other PAM methods
     users.extraUsers.recovery = lib.mkIf (config.kosei.security.level
       < 4) {
       name = "recovery";
