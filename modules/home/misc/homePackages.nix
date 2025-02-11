@@ -27,6 +27,8 @@ in {
       inkscape
       blender
       gimp-with-plugins
+      obsidian
+      via
 
       # Office
       libreoffice-qt6
