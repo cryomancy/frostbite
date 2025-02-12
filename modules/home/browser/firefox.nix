@@ -28,7 +28,6 @@ scoped: {
     "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
     "browser.newtabpage.activity-stream.showSponsored" = false;
     "browser.newtabpage.activity-stream.feeds.telemetry" = false;
-    "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
     "browser.ping-centre.telemetry" = false;
     "browser.preferences.defaultPerformanceSettings.enabled" = false;
     "browser.search.suggest.enabled" = false;
