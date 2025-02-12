@@ -83,7 +83,7 @@ in {
     # Move temporary Nix-Daemon files to disk while packaging
     # TODO: Add option for this for high memory systems
     environment.variables.NIX_REMOTE = "daemon";
-    nix-daemon = {
+    systemd.services.nix-daemon = {
       environment = {
         # Location for temporary files
         TMPDIR = "/var/cache/nix";
