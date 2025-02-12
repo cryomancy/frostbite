@@ -17,7 +17,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    networking = {
+    networking = lib.mkDefault {
       inherit hostName;
 
       useDHCP = lib.mkDefault true;
