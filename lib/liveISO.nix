@@ -19,6 +19,7 @@ in
         (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
         home-manager.nixosModules.home-manager
         {
+          networking.wireless.enable = false;
           home-manager = {
             backupFileExtension = "bak";
             useGlobalPkgs = true;
