@@ -15,7 +15,7 @@ in {
           default = true;
         };
         initialPassword = lib.mkOption {
-          type = lib.types.path;
+          type = lib.types.str;
           default = "nixos";
           description = ''
             A password that will be set as the initial password for all new users.
