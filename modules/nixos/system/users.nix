@@ -43,12 +43,7 @@ in {
           hashedPasswordFile = lib.mkDefault (
             if config.kosei.secrets.enable
             then config.sops.secrets."${user}/hashedPasswordFile".path
-            else null
-          );
-          initialPasswordFile = lib.mkDefault (
-            if !config.kosei.secrets.enable
-            then cfg.hashedPasswordFile
-            else null
+            else cfg.hashedPasswordFile
           );
           isNormalUser = true;
           # TODO: variable shell for multi-user system?
