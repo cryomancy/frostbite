@@ -12,7 +12,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     boot.loader = {
-      grub = {
+      grub = lib.mkDefault {
         enable = true;
         device = "nodev";
         efiSupport = true;
