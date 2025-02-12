@@ -14,11 +14,11 @@ in {
           type = lib.types.bool;
           default = true;
         };
-        hashedPasswordFile = lib.mkOption {
+        initialPassword = lib.mkOption {
           type = lib.types.path;
-          default = null;
+          default = "nixos";
           description = ''
-            A path to a password file that will be set as the password for all new users.
+            A password that will be set as the initial password for all new users.
           '';
         };
       };

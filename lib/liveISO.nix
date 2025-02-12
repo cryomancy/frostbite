@@ -20,6 +20,7 @@ in
         home-manager.nixosModules.home-manager
         {
           networking.wireless.enable = false;
+          kosei.secrets.enable = false;
           home-manager = {
             backupFileExtension = "bak";
             useGlobalPkgs = true;
