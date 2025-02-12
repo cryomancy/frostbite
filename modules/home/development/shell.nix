@@ -142,12 +142,5 @@ in {
 
     # NOTE: I have removed ZSH Integration from session Variables
     home.sessionVariables.SHELL = /etc/profiles/per-user/${config.home.username}/bin/fish;
-
-    programs.zellij = {
-      enable = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      enableZshIntegration = true;
-    };
   };
 }
