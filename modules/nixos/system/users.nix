@@ -47,7 +47,7 @@ in {
           );
           hashedPasswordFile = lib.mkDefault (
             if config.kosei.secrets.enable
-            then config.sops.secrets."${users}/hashedPasswordFile".path
+            then config.sops.secrets."${user}/hashedPasswordFile".path
             else null
           );
           isNormalUser = true;
