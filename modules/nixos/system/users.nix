@@ -40,10 +40,15 @@ in {
         lib.genAttrs users
         (user: {
           home = "/home/${user}";
+          initialPassword = lib.mkDefault (
+            if !config.kosei.secrets.enable
+            then cfg.initialPassword
+            else null
+          );
           hashedPasswordFile = lib.mkDefault (
             if config.kosei.secrets.enable
-            then config.sops.secrets."${user}/hashedPasswordFile".path
-            else cfg.hashedPasswordFile
+            then config.sops.secrets."${users}/hashedPasswordFile".path
+            else null
           );
           isNormalUser = true;
           # TODO: variable shell for multi-user system?
