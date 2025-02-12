@@ -31,11 +31,12 @@
               password = "temp";
             };
           }
-          inputs.kosei.modules.boot
-          inputs.kosei.modules.network
-          inputs.kosei.modules.nixSettings
-          inputs.kosei.modules.tools
-          inputs.kosei.modules.ssh
+          inputs.kosei.modules.nixos.boot
+          inputs.kosei.modules.nixos.network
+          inputs.kosei.modules.nixos.nixSettings
+          inputs.kosei.modules.nixos.tools
+          inputs.kosei.modules.nixos.ssh
+          inputs.kosei.modules.nixos.GNOME
         ];
       };
     });
