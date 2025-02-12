@@ -112,7 +112,7 @@ in {
           dots_center = true
           font_size = 14
           fade_on_empty = false
-          placeholder_text = <i>Enter Password</span></i>
+          placeholder_text = "Enter Password..."
           hide_input = false
           position = 0, ${
           if nixosConfig.kosei.laptopSupport.enable

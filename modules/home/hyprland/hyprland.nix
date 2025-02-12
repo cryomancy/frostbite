@@ -191,6 +191,9 @@ in {
           "blur,rofi"
           "ignorezero,rofi"
           "blur,notifications"
+          "blur, notifications"
+          "blur, launcher"
+          "blur, lockscreen"
         ];
 
         misc = {
