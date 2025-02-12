@@ -16,7 +16,7 @@ in {
       enable = lib.mkEnableOption "hyprland";
 
       autostartWorkspaces = lib.mkOption {
-        type = lib.types.string;
+        type = lib.types.bool;
         default = cfg.enable;
       };
 
@@ -188,9 +188,9 @@ in {
         };
 
         layerrule = [
-          "blur,rofi"
-          "ignorezero,rofi"
-          "blur,notifications"
+          "blur, rofi"
+          "ignorezero, rofi"
+          "blur, notifications"
           "blur, notifications"
           "blur, launcher"
           "blur, lockscreen"
