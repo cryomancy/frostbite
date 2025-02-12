@@ -7,6 +7,9 @@
     url = "github:TahlonBrahic/fuyu-no-kosei";
     inputs.nixpkgs.follows = "nixpkgs";
   };
+  flake-utils = {
+    url = "github:numtide/flake-utils";
+  };
   fuyu-no-nur = {
     url = "github:TahlonBrahic/fuyu-no-nur";
     inputs = {
