@@ -58,7 +58,7 @@ in {
             (lib.lists.optionals (config.kosei.security.level < 4) ["networkmanager" "wireshark"])
             (lib.lists.optionals (config.kosei.security.level < 4) ["wheel"])
             (lib.lists.optionals config.home-manager.users.${user}.kosei.arduino.enable ["dialout"])
-            (lib.lists.optionals config.virtualization.enable ["libvirt"])
+            (lib.lists.optionals config.kosei.virtualization.enable ["libvirt"])
           ];
           openssh.authorizedKeys.keys = config.kosei.ssh.publicKeys;
         });
