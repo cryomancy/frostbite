@@ -66,7 +66,8 @@ in {
     # Recovery Account
     # Does not use Yubikey authentication / other PAM methods
     users.extraUsers.recovery = lib.mkIf (config.kosei.security.level
-      < 4) {
+      < 4
+      && config.kosei.secrets.enable) {
       name = "recovery";
       description = "Recovery Account";
       isNormalUser = true;
