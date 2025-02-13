@@ -34,7 +34,7 @@ in {
               dont_count_slow_torrents = true;
               max_active_seeding = -1;
               max_active_limit = -1;
-              max_active_downloading = 8;nix build .#nixosConfigurations.live.config.system.build.isoImage
+              max_active_downloading = 8;
               max_connections_global = -1;
               # Daemon on 58846
               allow_remote = true;
