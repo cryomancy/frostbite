@@ -18,14 +18,13 @@ in {
       xd
     ];
 
+    # TODO: Asserts secrets must be enabled
     containers = {
       deluge-container = {
         autoStart = true;
         config = {...}: {
           services.deluge = {
             enable = true;
-            declarative = true;
-            authFile = config.sops.secrets.deluge-accounts.path;
             config = {
               copy_torrent_file = true;
               move_completed = true;
@@ -35,7 +34,7 @@ in {
               dont_count_slow_torrents = true;
               max_active_seeding = -1;
               max_active_limit = -1;
-              max_active_downloading = 8;
+              max_active_downloading = 8;nix build .#nixosConfigurations.live.config.system.build.isoImage
               max_connections_global = -1;
               # Daemon on 58846
               allow_remote = true;
@@ -50,13 +49,6 @@ in {
               random_outgoing_ports = true;
             };
             openFirewall = true; # Forward listen ports
-          };
-
-          sops.secrets.deluge-accounts = {
-            sopsFile = ../secrets.yaml;
-            owner = config.users.users.deluge.name;
-            group = config.users.users.deluge.group;
-            mode = "0600";
           };
 
           networking.firewall = {
