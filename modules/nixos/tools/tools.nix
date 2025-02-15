@@ -79,6 +79,17 @@ in {
       whois
       arp-scan
       asn # OSINT CLI tool for investigating network data
+
+      # Nix
+      nix-du # Tool to determine which gc-roots take space in your nix store
+      nix-init # Generate Nix packages from URLs
+      nix-output-monitor # Generate additional information while building
+      nix-tree # Interactively browse dependency graphs of Nix derivations
+      nix-melt # Flake.lock viewer
+      nurl # Generate Nix fetcher calls from repository URLs
+      nh # Nix helper
+      comma # Quickly run any binary; wraps together nix run and nix-index.
+      manix # A fast CLI documentation searcher for Nix.
     ];
     programs = {
       fish = {
