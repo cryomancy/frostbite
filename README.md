@@ -40,6 +40,20 @@ The following websites and/or content creators were the most influential in the 
 
 [librephoenix](https://github.com/librephoenix/nixos-config)
 [Misterio77](https://github.com/Misterio77/nix-config)
-[ryan4yin](https://github.com/ryan4yin/nix-config)
+[Ryan Yin](https://github.com/ryan4yin/nix-config)
 [EmergentMind](https://github.com/EmergentMind/nix-config)
 [mwdavisii](https://github.com/mwdavisii/nyx/tree/main)
+[Ludovico Piero](https://github.com/LudovicoPiero/dotfiles)
+[Lan Tian](https://github.com/xddxdd/nixos-config)
+[Liasicca](https://codeberg.org/Liassica/nixos-config)
+[Max Mur](https://github.com/TheMaxMur/NixOS-Configuration)
+[Frost-Phoenix](https://github.com/Frost-Phoenix/nixos-config)
+[vimjoyer](https://github.com/vimjoyer/nixconf)
+
+### Articles
+
+["Stateless" Operating System](https://lantian.pub/en/article/modify-computer/nixos-impermanence.lantian/)
+
+### Documentation
+
+["nlewo NixOS Manual"](https://nlewo.github.io/nixos-manual-sphinx/index.html)
