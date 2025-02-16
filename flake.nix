@@ -64,7 +64,7 @@
         };
 
         modules = {
-          flakeModules =
+          flake =
             self.lib.loadModulesRecursively
             {
               inherit inputs;
@@ -76,7 +76,7 @@
               inherit inputs;
               src = ./modules/nixos;
             };
-          home =
+          homeManager =
             self.lib.loadModulesRecursively
             {
               inherit inputs;
