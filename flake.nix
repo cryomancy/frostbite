@@ -2,45 +2,62 @@
   description = "Nix flakes abstraction layer that supports multiple users, systems, and architectures.";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     eris.url = "github:TahlonBrahic/eris";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
   };
 
   outputs = inputs @ {
     eris,
+    flake-parts,
     self,
     ...
-  }: {
-    lib = eris.lib.load {
-      src = ./lib;
-      loader = eris.lib.loaders.scoped;
-    };
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;}
+    ({
+      withSystem,
+      flake-parts-lib,
+      ...
+    }: let
+      inherit (flake-parts-lib) importApply;
+      #flakeModules.default = importApply ./modules/flake/inputs.nix {inherit withSystem;};
+    in {
+      debug = true;
 
-    templates = {
-      "bootstrap" = {
-        path = ./templates/bootstrap;
-        description = "use to enable experimental features needed to switch to kosei modules";
-      };
+      systems = ["x86_64-linux"];
 
-      "multiple-systems" = {
-        path = ./templates/multiple-systems;
-        description = "example of a multiple systems";
-      };
-    };
+      imports = [
+        #inputs.flake-parts.flakeModules.flakeModules
+        #flakeModules.default
+      ];
 
-    modules = {
-      nixos =
-        self.lib.loadModulesRecursively
-        {
-          inherit inputs;
-          src = ./modules/nixos;
+      flake = {
+        lib = eris.lib.load {
+          src = ./lib;
+          loader = eris.lib.loaders.scoped;
         };
-      home =
-        self.lib.loadModulesRecursively
-        {
-          inherit inputs;
-          src = ./modules/home;
+
+        templates = {
+          "multiple-systems" = {
+            path = ./templates/multiple-systems;
+            description = "example of a multiple systems";
+          };
         };
-    };
-  };
+
+        modules = {
+          nixos =
+            self.lib.loadModulesRecursively
+            {
+              inherit inputs;
+              src = ./modules/nixos;
+            };
+          home =
+            self.lib.loadModulesRecursively
+            {
+              inherit inputs;
+              src = ./modules/home;
+            };
+        };
+      };
+    });
 }
