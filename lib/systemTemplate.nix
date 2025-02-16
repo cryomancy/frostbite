@@ -28,7 +28,7 @@ in
               imports =
                 lib.forEach
                 (builtins.attrNames kosei.modules.homeManager)
-                (module: builtins.getAttr module kosei.modules.homeHamager);
+                (module: builtins.getAttr module kosei.modules.homeManager);
               config.home.username = user;
             });
           };
