@@ -47,7 +47,7 @@
 
         partitions = {
           dev = {
-            extraInputsFlake = ./dev;
+            extraInputsFlake = ./dev/partitions;
             module = {inputs, ...}: {
               imports = [
                 inputs.hercules-ci-effects.flakeModule
