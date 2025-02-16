@@ -1,7 +1,5 @@
 scoped: importScoped: {
   inputs,
-  lib,
-  pkgs,
   outPath,
   src,
 }: let
@@ -14,4 +12,4 @@ in
   lib.attrsets.genAttrs systemNames
   (systemName:
     import "${src}/${systemName}/${systemName}.nix"
-    {inherit inputs lib pkgs outPath;})
+    {inherit inputs outPath;})
