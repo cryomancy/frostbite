@@ -17,18 +17,19 @@
     ({
       withSystem,
       flake-parts-lib,
+      self,
       ...
     }: let
       inherit (flake-parts-lib) importApply;
-      #flakeModules.default = importApply ./modules/flake/inputs.nix {inherit withSystem;};
     in {
       debug = true;
 
       systems = ["x86_64-linux"];
 
       imports = [
-        #inputs.flake-parts.flakeModules.flakeModules
-        #flakeModules.default
+        inputs.flake-parts.flakeModules.flakeModules
+        inputs.flake-parts.flakeModules.modules
+        inputs.flake-parts.flakeModules.partitions
       ];
 
       flake = {
@@ -44,7 +45,31 @@
           };
         };
 
+        partitions = {
+          dev = {
+            extraInputsFlake = ./dev;
+            module = {inputs, ...}: {
+              imports = [
+                inputs.hercules-ci-effects.flakeModule
+                inputs.git-hooks-nix.flakeModule
+              ];
+            };
+          };
+        };
+
+        partitionedAttrs = {
+          checks = "dev";
+          devShells = "dev";
+          herculesCI = "dev";
+        };
+
         modules = {
+          flakeModules =
+            self.lib.loadModulesRecursively
+            {
+              inherit inputs;
+              src = ./modules/flake;
+            };
           nixos =
             self.lib.loadModulesRecursively
             {
