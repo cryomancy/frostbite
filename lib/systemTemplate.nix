@@ -27,7 +27,7 @@ in
             users = inputs.nixpkgs.lib.attrsets.genAttrs users (user: {
               imports =
                 lib.forEach
-                (builtins.attrNames kosei.modules.home)
+                (builtins.attrNames kosei.modules.homeManager)
                 (module: builtins.getAttr module kosei.modules.home);
               config.home.username = user;
             });
