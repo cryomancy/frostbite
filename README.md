@@ -52,6 +52,7 @@ The following websites and/or content creators were the most influential in the 
 
 ### Articles
 
+["How to learn Nix"](https://ianthehenry.com/posts/how-to-learn-nix/introduction/)
 ["Stateless" Operating System](https://lantian.pub/en/article/modify-computer/nixos-impermanence.lantian/)
 
 ### Documentation
