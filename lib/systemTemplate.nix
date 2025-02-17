@@ -12,7 +12,8 @@ scoped: {
     config.allowUnfree = true;
     hostPlatform = system;
   };
-  specialArgs = {inherit inputs system pkgs outPath users;};
+  extraSpecialArgs = {inherit inputs system outPath users;};
+  specialArgs = extraSpecialArgs // pkgs;
 in
   nixpkgs.lib.nixosSystem {
     inherit specialArgs;
@@ -22,9 +23,9 @@ in
         {
           home-manager = {
             backupFileExtension = "bak";
+            inherit extraSpecialArgs;
             useGlobalPkgs = true; # Use system nixpkgs, remove impure dependencies
             useUserPackages = true; # Installs packages to /etc/profiles
-            extraSpecialArgs = specialArgs;
             # Iterates over a list of users provided in the function call
             users = nixpkgs.lib.attrsets.genAttrs users (user: {
               imports =
