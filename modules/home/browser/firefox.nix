@@ -145,7 +145,7 @@ in {
           id = 1;
           name = "work";
           inherit settings userChrome;
-          extensions = with firefox-addons; [
+          extensions.packages = with firefox-addons; [
             ublock-origin
             simple-tab-groups
             darkreader
