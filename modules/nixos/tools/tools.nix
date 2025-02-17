@@ -52,7 +52,6 @@ in {
       just # Command runner with easy-to-write scripts
 
       # Miscellaneous tools
-      age # Simple, secure, modern encryption tool
       fx # Command-line JSON processor
       bottom # Resource monitor (alternative to htop)
       alchemy # Drawing application
@@ -86,7 +85,7 @@ in {
       nix-output-monitor # Generate additional information while building
       nix-tree # Interactively browse dependency graphs of Nix derivations
       nix-melt # Flake.lock viewer
-      nurl # Generate Nix fetcher calls from repository URLs
+      nurl # Generate Nix fetcher calls from repository URLshttps://github.com/mwdavisii/nyx/tree/main
       nh # Nix helper
       comma # Quickly run any binary; wraps together nix run and nix-index.
       manix # A fast CLI documentation searcher for Nix.
