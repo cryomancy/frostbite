@@ -1,13 +1,13 @@
 scoped: {
   extraModules ? [],
-  hostName,
   inputs,
+  system ? builtins.currentSystem,
   outPath,
   users,
   ...
 }: let
   inherit (inputs) kosei home-manager nixpkgs;
-  specialArgs = {inherit hostName inputs outPath users;};
+  specialArgs = {inherit inputs system outPath users;};
 in
   nixpkgs.lib.nixosSystem {
     inherit specialArgs;
