@@ -17,8 +17,8 @@ in
         {
           home-manager = {
             backupFileExtension = "bak";
-            useGlobalPkgs = true;
-            useUserPackages = true;
+            useGlobalPkgs = true; # Use system nixpkgs, remove impure dependencies
+            useUserPackages = true; # Installs packages to /etc/profiles
             extraSpecialArgs = specialArgs;
             # Iterates over a list of users provided in the function call
             users = nixpkgs.lib.attrsets.genAttrs users (user: {
