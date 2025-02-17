@@ -19,9 +19,9 @@
       debug = true;
 
       systems = [
-	  "x86_64-linux"
-      "aarch64-linux"
-	  ];
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
 
       imports = [
         inputs.flake-parts.flakeModules.flakeModules
@@ -137,6 +137,10 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
       };
+    };
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix = {
       url = "github:Flameopathic/stylix/optional-image";
