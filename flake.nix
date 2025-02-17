@@ -18,7 +18,10 @@
     in {
       debug = true;
 
-      systems = ["x86_64-linux"];
+      systems = [
+	  "x86_64-linux"
+      "aarch64-linux"
+	  ];
 
       imports = [
         inputs.flake-parts.flakeModules.flakeModules

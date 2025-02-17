@@ -10,7 +10,7 @@ scoped: {
   pkgs = import nixpkgs {
     inherit system;
     config.allowUnfree = true;
-    config.hostPlatform = system;
+    hostPlatform = system;
   };
   specialArgs = {inherit inputs system pkgs outPath users;};
 in
