@@ -1,10 +1,8 @@
 scoped: {
   config,
-  hostName,
   inputs,
   lib,
   pkgs,
-  users,
   ...
 }: let
   cfg = config.kosei.virtualization;
@@ -31,6 +29,7 @@ in {
         dockerSocket.enable = true;
         networkSocket.openFirewall = lib.mkIf config.firewall.enable;
       };
+      spiceUSBRedirection = true;
 
       libvirtd = {
         enable = true;

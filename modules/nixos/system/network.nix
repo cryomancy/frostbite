@@ -1,6 +1,5 @@
 scoped: {
   config,
-  hostName,
   lib,
   pkgs,
   ...
@@ -18,7 +17,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     networking = lib.mkDefault {
-      inherit hostName;
+      hostName = config.system.name;
 
       useDHCP = lib.mkDefault true;
       networkmanager.enable = true;
