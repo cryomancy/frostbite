@@ -18,10 +18,6 @@ in {
 
   config = lib.mkIf cfg.enable {
     nixpkgs = {
-      config = {
-        allowUnfree = true;
-      };
-      hostPlatform = lib.mkForce system;
       overlays =
         [
           (final: _prev: {
