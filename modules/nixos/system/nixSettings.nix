@@ -15,6 +15,10 @@ in {
         default = true;
       };
     };
+    system = lib.mkOption {
+      type = lib.types.enum ["x86_64-linux"];
+      default = "x86_64-linux";
+    };
   };
 
   imports = [
@@ -60,10 +64,6 @@ in {
         options = "--delete-older-than 7d";
       };
       package = pkgs.nixVersions.stable;
-    };
-
-    nixpkgs = {
-      config.allowUnfree = true;
     };
 
     # OOM configuration:
