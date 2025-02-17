@@ -1,19 +1,16 @@
 scoped: {
   extraModules ? [],
-  hostName ? "nixos",
-  inputs ? {},
-  lib ? inputs.nixpkgs.lib,
-  pkgs ? import inputs.nixpkgs {inherit system;},
+  hostName,
+  inputs,
   outPath,
-  system ? "x86_64-linux",
-  users ? ["nixos"],
+  users,
   ...
 }: let
-  inherit (inputs) kosei home-manager;
-  specialArgs = {inherit hostName inputs outPath system users;};
+  inherit (inputs) kosei home-manager nixpkgs;
+  specialArgs = {inherit hostName inputs outPath users;};
 in
-  lib.nixosSystem {
-    inherit system specialArgs;
+  nixpkgs.lib.nixosSystem {
+    inherit specialArgs;
     modules =
       [
         home-manager.nixosModules.home-manager
@@ -22,11 +19,11 @@ in
             backupFileExtension = "bak";
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = specialArgs // {inherit pkgs;};
+            extraSpecialArgs = specialArgs;
             # Iterates over a list of users provided in the function call
-            users = inputs.nixpkgs.lib.attrsets.genAttrs users (user: {
+            users = nixpkgs.lib.attrsets.genAttrs users (user: {
               imports =
-                lib.forEach
+                nixpkgs.lib.forEach
                 (builtins.attrNames kosei.modules.homeManager)
                 (module: builtins.getAttr module kosei.modules.homeManager);
               config.home.username = user;
@@ -35,7 +32,7 @@ in
         }
       ]
       ++ extraModules
-      ++ lib.forEach
+      ++ nixpkgs.lib.forEach
       (builtins.attrNames kosei.modules.nixos)
       (module: builtins.getAttr module kosei.modules.nixos);
   }
