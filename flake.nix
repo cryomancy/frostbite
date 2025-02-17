@@ -47,13 +47,8 @@
 
         partitions = {
           dev = {
-            extraInputsFlake = ./dev/partitions;
-            module = {inputs, ...}: {
-              imports = [
-                inputs.hercules-ci-effects.flakeModule
-                inputs.git-hooks-nix.flakeModule
-              ];
-            };
+            extraInputsFlake = ./modules/flake/partitions/flake.nix;
+            module = ./modules/flake/partitions/partitions.nix;
           };
         };
 
