@@ -16,6 +16,10 @@ in {
     };
   };
 
+  imports = [
+    inputs.nur.modules.nixos.default
+  ];
+
   config = lib.mkIf cfg.enable {
     nixpkgs = {
       overlays =
