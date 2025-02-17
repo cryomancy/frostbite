@@ -9,8 +9,10 @@ scoped: {
   inherit (inputs) kosei home-manager nixpkgs;
   pkgs = import nixpkgs {
     inherit system;
-    config.allowUnfree = true;
-    hostPlatform = system;
+    config = {
+      allowUnfree = true;
+      hostPlatform = system;
+    };
   };
   extraSpecialArgs = {inherit inputs system outPath users;};
   specialArgs = extraSpecialArgs // pkgs;
