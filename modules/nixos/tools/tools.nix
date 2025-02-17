@@ -85,6 +85,7 @@ in {
       nix-output-monitor # Generate additional information while building
       nix-tree # Interactively browse dependency graphs of Nix derivations
       nix-melt # Flake.lock viewer
+      nix-doc # A tool leveraging the rnix Nix parser for intelligent documentation search and tags generation.
       nurl # Generate Nix fetcher calls from repository URLshttps://github.com/mwdavisii/nyx/tree/main
       nh # Nix helper
       comma # Quickly run any binary; wraps together nix run and nix-index.
