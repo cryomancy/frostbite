@@ -2,6 +2,7 @@ scoped: {
   config,
   inputs,
   lib,
+  pkgs,
   outPath,
   users,
   ...
@@ -18,12 +19,17 @@ in {
       };
       defaultSopsFile = lib.mkOption {
         type = lib.types.path;
-        default = "${outPath}/src/secrets/secrets.yaml";
+        default = "${outPath}/flake/secrets/secrets.yaml";
       };
     };
   };
 
   config = lib.mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      age # Simple, secure, modern encryption tool
+      sops
+    ];
+
     sops = {
       age = {
         keyFile = "/var/lib/sops-nix/key.txt";
