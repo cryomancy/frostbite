@@ -7,7 +7,10 @@ scoped: {
   ...
 }: let
   inherit (inputs) kosei home-manager nixpkgs;
-  pkgs = import nixpkgs {inherit system;};
+  pkgs = import nixpkgs {
+    inherit system;
+    config.allowUnfree = true;
+  };
   specialArgs = {inherit inputs system pkgs outPath users;};
 in
   nixpkgs.lib.nixosSystem {
