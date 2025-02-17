@@ -29,7 +29,7 @@ in {
         dockerSocket.enable = true;
         networkSocket.openFirewall = lib.mkIf config.firewall.enable;
       };
-      spiceUSBRedirection = true;
+      spiceUSBRedirection.enable = true;
 
       libvirtd = {
         enable = true;
