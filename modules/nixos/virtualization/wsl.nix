@@ -1,6 +1,5 @@
 scoped: {
   config,
-  hostName,
   inputs,
   lib,
   users,
@@ -26,7 +25,7 @@ in {
         automount.root = "/mnt";
         interop.appendWindowsPath = false;
         network.generateHosts = false;
-        network.hostname = "${hostName}";
+        network.hostname = config.system.name;
       };
     };
 
