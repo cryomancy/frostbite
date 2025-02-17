@@ -21,7 +21,7 @@ in {
       config = {
         allowUnfree = true;
       };
-      hostPlatform = system;
+      hostPlatform = lib.mkForce system;
       overlays =
         [
           (final: _prev: {
