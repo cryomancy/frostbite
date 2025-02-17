@@ -1,13 +1,14 @@
 scoped: {
   extraModules ? [],
   inputs,
-  system ? builtins.currentSystem,
+  system,
   outPath,
   users,
   ...
 }: let
   inherit (inputs) kosei home-manager nixpkgs;
-  specialArgs = {inherit inputs system outPath users;};
+  pkgs = import nixpkgs {inherit system;};
+  specialArgs = {inherit inputs system pkgs outPath users;};
 in
   nixpkgs.lib.nixosSystem {
     inherit specialArgs;
