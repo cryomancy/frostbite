@@ -2,6 +2,7 @@ scoped: {
   config,
   inputs,
   lib,
+  system,
   ...
 }: let
   cfg = config.kosei.nixpkgs;
@@ -20,6 +21,7 @@ in {
       config = {
         allowUnfree = true;
       };
+      hostPlatform = system;
       overlays =
         [
           (final: _prev: {
