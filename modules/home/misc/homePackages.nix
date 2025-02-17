@@ -36,11 +36,11 @@ in {
 
     programs = {
       obs-studio = {
-        enable = false;
+        enable = true;
         plugins = with pkgs.obs-studio-plugins; [
           wlrobs
           obs-vaapi
-          obs-nvfbc
+          #obs-nvfbc
           obs-teleport
           obs-vkcapture
           obs-gstreamer
