@@ -1,6 +1,5 @@
 scoped: {
   config,
-  inputs,
   lib,
   ...
 }: let
@@ -42,6 +41,7 @@ in {
         kitty.enable = true;
         librewolf.enable = true;
         mangohud.enable = true;
+        mako.enable = true;
         rofi.enable = true;
         vesktop.enable = true;
         vim.enable = true;
