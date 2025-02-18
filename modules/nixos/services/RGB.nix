@@ -1,9 +1,12 @@
 scoped: {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.kosei.RGB;
+  inherit (config.kosei.design.theme) theme;
+  setColor = theme: "${lib.getExe pkgs.openrgb} --client -c ${lib.removePrefix "#" theme} -m static";
 in {
   options = {
     kosei.RGB = {
@@ -18,6 +21,18 @@ in {
         services.hardware.openrgb = {
           enable = true;
           server.port = 6742;
+        };
+
+        services.rgb = {
+          Unit.Description = "Set RGB colors to match Stylix";
+          Service = {
+            Type = "oneshot";
+            ExecStart = setColor "random";
+            ExecStop = setColor "#000000";
+            Restart = "on-failure";
+            RemainAfterExit = true;
+          };
+          Install.WantedBy = ["default.target"];
         };
       };
     };
