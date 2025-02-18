@@ -7,7 +7,8 @@ scoped: {
   ...
 }: let
   inherit (inputs) kosei home-manager nixpkgs;
-  args = {inherit inputs system outPath users;};
+  pkgs = import nixpkgs {inherit system;};
+  args = {inherit inputs system pkgs outPath users;};
 in
   nixpkgs.lib.nixosSystem {
     specialArgs = args;
