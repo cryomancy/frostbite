@@ -211,11 +211,9 @@ in {
       packages = with pkgs; [
         grim # screenshot functionality
         slurp # screenshot functionality
-        wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
         wlogout # wayland logout menu
         wlr-randr # wayland output utility
         wlr-which-key # keymap manager
-        mako # notification system
         wofi # gtk-based app launcher
         kitty # backup terminal
         rot8 # screen rotation daemon
@@ -224,7 +222,6 @@ in {
         wl-screenrec
         wl-mirror
         wineWowPackages.wayland
-        clipman
         swappy
         wpa_supplicant_gui
         wev
