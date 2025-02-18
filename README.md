@@ -49,6 +49,7 @@ The following websites and/or content creators were the most influential in the 
 [Max Mur](https://github.com/TheMaxMur/NixOS-Configuration)
 [Frost-Phoenix](https://github.com/Frost-Phoenix/nixos-config)
 [vimjoyer](https://github.com/vimjoyer/nixconf)
+[Vladmir Timofeenko](https://github.com/VTimofeenko/monorepo-machine-config)
 
 ### Articles
 
