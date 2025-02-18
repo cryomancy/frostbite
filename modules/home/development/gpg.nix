@@ -28,6 +28,7 @@ in {
         enableBrowserSocket = true;
         enableExtraSocket = true;
         enableSSHSupport = true;
+        package = pkgs.gpg-true;
       };
     };
   };
