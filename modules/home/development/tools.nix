@@ -4,10 +4,10 @@ scoped: {
   config,
   ...
 }: let
-  cfg = config.kosei.developmentTools;
+  cfg = config.kosei.tools;
 in {
   options = {
-    kosei.developmentTools.enable = lib.mkOption {
+    kosei.tools.enable = lib.mkOption {
       default = true;
       example = false;
       description = "dev tools";
@@ -27,7 +27,7 @@ in {
       tree-sitter
       any-nix-shell
       zig
-      zig-shell-completions
+      zg-shell-completions
 
       # Formatters and Linters
       alejandra
@@ -62,6 +62,7 @@ in {
         enableFishIntegration = true;
         enableZshIntegration = true;
       };
+      btop.enable = true;
       fzf = {
         enable = true;
         enableBashIntegration = true;
@@ -75,6 +76,8 @@ in {
         enable = true;
         enableAliases = true;
       };
+      ripgrep.enable = true;
+      yazi.enable = true;
       zoxide = {
         enable = true;
         enableFishIntegration = true;
