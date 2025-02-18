@@ -7,25 +7,17 @@ scoped: {
   ...
 }: let
   inherit (inputs) kosei home-manager nixpkgs;
-  pkgs = import nixpkgs {
-    inherit system;
-    config = {
-      allowUnfree = true;
-      hostPlatform = system;
-    };
-  };
-  extraSpecialArgs = {inherit inputs system outPath users;};
-  specialArgs = extraSpecialArgs // pkgs;
+  args = {inherit inputs system outPath users;};
 in
   nixpkgs.lib.nixosSystem {
-    inherit specialArgs;
+    specialArgs = args;
     modules =
       [
         home-manager.nixosModules.home-manager
         {
           home-manager = {
             backupFileExtension = "bak";
-            inherit extraSpecialArgs;
+            extraSpecialArgs = args;
             useGlobalPkgs = true; # Use system nixpkgs, remove impure dependencies
             useUserPackages = true; # Installs packages to /etc/profiles
             # Iterates over a list of users provided in the function call
