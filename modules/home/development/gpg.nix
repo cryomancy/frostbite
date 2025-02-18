@@ -25,7 +25,6 @@ in {
       gpg = {
         enable = true;
         homedir = "${config.xdg.configHome}/gnupg";
-        enableSSHSupport = true;
         package = pkgs.gpg-true;
       };
     };
