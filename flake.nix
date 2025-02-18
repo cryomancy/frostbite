@@ -21,6 +21,19 @@
         flake-parts.flakeModules.partitions
       ];
 
+      partitions = {
+        dev = {
+          extraInputsFlake = ./modules/flake/partitions/flake.nix;
+          module = ./modules/flake/partitions/partitions.nix;
+        };
+      };
+
+      partitionedAttrs = {
+        checks = "dev";
+        devShells = "dev";
+        herculesCI = "dev";
+      };
+
       flake = {
         lib = eris.lib.load {
           src = ./lib;
@@ -32,19 +45,6 @@
             path = ./templates/multiple-systems;
             description = "example of a multiple systems";
           };
-        };
-
-        partitions = {
-          dev = {
-            extraInputsFlake = ./modules/flake/partitions/flake.nix;
-            module = ./modules/flake/partitions/partitions.nix;
-          };
-        };
-
-        partitionedAttrs = {
-          checks = "dev";
-          devShells = "dev";
-          herculesCI = "dev";
         };
 
         modules = {
