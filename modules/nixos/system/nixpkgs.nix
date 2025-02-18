@@ -17,6 +17,7 @@ in {
   };
 
   imports = [
+    inputs.nixpkgs.nixosModules.readOnlyPkgs
     inputs.nur.modules.nixos.default
   ];
 
