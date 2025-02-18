@@ -8,14 +8,7 @@
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;}
-    ({
-      withSystem,
-      flake-parts-lib,
-      self,
-      ...
-    }: let
-      inherit (flake-parts-lib) importApply;
-    in {
+    ({self, ...}: {
       debug = true;
 
       systems = [
@@ -24,9 +17,8 @@
       ];
 
       imports = [
-        inputs.flake-parts.flakeModules.flakeModules
-        inputs.flake-parts.flakeModules.modules
-        inputs.flake-parts.flakeModules.partitions
+        flake-parts.flakeModules.modules
+        flake-parts.flakeModules.partitions
       ];
 
       flake = {
