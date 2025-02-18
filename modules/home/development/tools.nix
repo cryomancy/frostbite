@@ -27,7 +27,7 @@ in {
       tree-sitter
       any-nix-shell
       zig
-      zg-shell-completions
+      zig-shell-completions
 
       # Formatters and Linters
       alejandra
