@@ -1,6 +1,7 @@
 scoped: {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.kosei.gammastep;
@@ -15,6 +16,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; [geoclue2];
     services = {
       gammastep = {
         enable = true;
