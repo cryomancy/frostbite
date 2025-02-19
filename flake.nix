@@ -23,7 +23,7 @@
 
       partitions = {
         dev = {
-          extraInputsFlake = ./modules/flake/partitions/flake.nix;
+          extraInputsFlake = ./module/flake/partitions;
           module = ./modules/flake/partitions/partitions.nix;
         };
       };
