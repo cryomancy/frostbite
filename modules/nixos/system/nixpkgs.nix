@@ -17,12 +17,14 @@ in {
   };
 
   imports = [
-    #inputs.nixpkgs.nixosModules.readOnlyPkgs
     inputs.nur.modules.nixos.default
   ];
 
   config = lib.mkIf cfg.enable {
     nixpkgs = {
+      pkgs = import inputs.nixpkgs {
+        config.allowUnfree = true;
+      };
       overlays =
         [
           (final: _prev: {
