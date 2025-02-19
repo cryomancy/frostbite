@@ -22,6 +22,8 @@ in {
       kernelPackages = lib.mkForce pkgs.linuxPackages_zen;
     };
 
+    hardware.steam-hardware.enable = true;
+
     programs = {
       gamemode = {
         enable = true;
@@ -38,7 +40,9 @@ in {
       };
       steam = {
         enable = true;
-
+        extest.enable = true;
+        protontricks.enable = true;
+        remotePlay.openFirewall = true;
         package = pkgs.steam.override {
           extraPkgs = pkgs:
             with pkgs; [
