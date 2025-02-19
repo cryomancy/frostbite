@@ -17,6 +17,10 @@ in {
       xd
     ];
 
+    environment.persistence = lib.mkIf config.kosei.impermanence.enable {
+      "/nix/persistent/".directories = ["/var/lib/i2pd"];
+    };
+
     # TODO: Asserts secrets must be enabled
     containers = {
       i2pd-container = {
