@@ -110,8 +110,8 @@
       };
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:/nixos/nixpkgs/nixos-24.11";
-    nixpkgs-master.url = "github:/nixos/nixpkgs";
+    #nixpkgs-stable.url = "github:/nixos/nixpkgs/nixos-24.11";
+    #nixpkgs-master.url = "github:/nixos/nixpkgs";
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs = {
