@@ -23,6 +23,7 @@ in {
   config = lib.mkIf cfg.enable {
     nixpkgs = {
       pkgs = import inputs.nixpkgs {
+        inherit system;
         config.allowUnfree = true;
       };
       overlays =
