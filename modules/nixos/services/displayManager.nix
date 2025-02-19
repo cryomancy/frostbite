@@ -37,7 +37,10 @@ in {
       vt = 2;
       settings = {
         default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+          command =
+            if config.kosei.GNOME.enable
+            then "${pkgs.greet.tuigreet}/bin/tuigreet --time --cmd dbus-run-session gnome-session"
+            else "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
           user = "greeter";
         };
       };
