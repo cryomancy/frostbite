@@ -17,6 +17,10 @@ in {
       bitmagnet
     ];
 
+    environment.persistence = lib.mkIf config.kosei.impermanence.enable {
+      "/nix/persistent/".directories = ["/var/lib/deluge"];
+    };
+
     # TODO: Asserts secrets must be enabled
     containers = {
       deluge-container = {
