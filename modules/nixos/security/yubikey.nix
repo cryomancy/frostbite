@@ -46,6 +46,8 @@ in {
           interactive = true;
         };
       };
+
+      # Enable the u2f PAM module for login and sudo requests
       services = {
         login.u2fAuth = true;
         sudo = {
@@ -56,9 +58,6 @@ in {
     };
 
     programs = {
-      ssh = lib.mkIf config.kosei.ssh.enable {
-        startAgent = false;
-      };
       yubikey-touch-detector.enable = true;
     };
   };
