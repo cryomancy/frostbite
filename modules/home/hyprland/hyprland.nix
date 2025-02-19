@@ -208,6 +208,10 @@ in {
     };
 
     home = {
+      persistence = lib.mkIf config.kosei.impermanence.enable {
+        "/persist/${config.home.homeDirectory}".directories = [".config/hypr"];
+      };
+
       packages = with pkgs; [
         grim # screenshot functionality
         slurp # screenshot functionality
@@ -223,7 +227,6 @@ in {
         wl-mirror
         wineWowPackages.wayland
         swappy
-        wpa_supplicant_gui
         wev
         playerctl
         pavucontrol
