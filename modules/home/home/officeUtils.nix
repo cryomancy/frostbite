@@ -4,10 +4,10 @@ scoped: {
   pkgs,
   ...
 }: let
-  cfg = config.kosei.homePackages;
+  cfg = config.kosei.officeUtils;
 in {
   options = {
-    kosei.homePackages = {
+    kosei.officeUtils = {
       enable = lib.mkEnableOption "kosei home packages";
     };
   };

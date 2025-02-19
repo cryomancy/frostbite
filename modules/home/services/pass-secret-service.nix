@@ -5,6 +5,7 @@ scoped: {
   ...
 }: let
   cfg = config.kosei.pass-secret-service;
+  storePath = "/home/${user}/.local/share/passwore-store";
 in {
   options = {
     kosei.pass-secret-service = {
@@ -13,10 +14,17 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    home.persistence = lib.mkIf config.kosei.impermanence.enable {
+      "/nix/persistent/home/${user}" = {
+        directories = [
+          storePath
+        ];
+      };
+    };
     services = {
       pass-secret-service = {
         enable = true;
-        storePath = "/home/${user}/.local/share/password-store";
+        inherit storePath;
       };
     };
   };
