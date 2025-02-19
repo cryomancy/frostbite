@@ -75,10 +75,6 @@
       url = "github:TahlonBrahic/assets";
       flake = false;
     };
-    kosei = {
-      url = "github:TahlonBrahic/fuyu-no-kosei";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     flake-utils = {
       url = "github:numtide/flake-utils";
     };
