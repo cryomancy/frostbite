@@ -17,6 +17,10 @@ in {
       gitlab-shell
     ];
 
+    environment.persistence = lib.mkIf config.kosei.impermanence.enable {
+      "/nix/persistent/".directories = ["/var/gitlab"];
+    };
+
     # TODO: Asserts secrets must be enabled
     containers = {
       gitlab-container = {
