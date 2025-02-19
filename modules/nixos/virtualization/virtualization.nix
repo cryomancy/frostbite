@@ -7,19 +7,23 @@ scoped: {
 }: let
   cfg = config.kosei.virtualization;
 in {
-  imports = [inputs.nixos-wsl.nixosModules.wsl];
-
   options = {
     kosei.virtualization = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
       };
-      waydroid.enable = lib.mkEnableOption "waydroid";
     };
   };
 
   config = lib.mkIf cfg.enable {
+    environment.persistence = lib.mkIf config.kosei.impermanence.enable {
+      "/nix/persistent/".directories = [
+        "/var/lib/containers"
+        "/var/lib/libvirt"
+      ];
+    };
+
     virtualisation = {
       podman = {
         autoPrune.enable = true;
@@ -46,7 +50,5 @@ in {
       podman-tui # status of containers in the terminal
       docker-compose # start group of containers for dev
     ];
-
-    virtualisation.waydroid.enable = lib.mkIf cfg.waydroid.enable true;
   };
 }
