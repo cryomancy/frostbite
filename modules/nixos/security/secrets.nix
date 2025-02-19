@@ -25,10 +25,20 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      age # Simple, secure, modern encryption tool
-      sops
-    ];
+    environment = {
+      persistence = lib.mkIf config.kosei.impermanence.enable {
+        "/nix/persistent/".directories = ["/var/lib/sops-nix"];
+      };
+
+      systemPackages = with pkgs; [
+        age # Simple, secure, modern encryption tool
+        sops
+      ];
+
+      variables = {
+        SOPS_AGE_KEY_FILE = "/var/lib/sops-nix/key.txt";
+      };
+    };
 
     sops = {
       age = {
@@ -43,9 +53,6 @@ in {
         }))))
         (lib.attrsets.optionalAttrs
           (config.kosei.security.level < 4) {"recovery/hashedPasswordFile" = {neededForUsers = true;};});
-    };
-    environment.variables = {
-      SOPS_AGE_KEY_FILE = "/var/lib/sops-nix/key.txt";
     };
   };
 }
