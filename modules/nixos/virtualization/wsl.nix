@@ -16,6 +16,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    environment.persistence = lib.mkIf config.kosei.impermanence.enable {
+      # TODO: dive deeper into the exact WSL mounts
+      "/nix/persistent/".directories = ["/mnt"];
+    };
+
     wsl = {
       enable = true;
       defaultUser = builtins.elemAt users 0;
