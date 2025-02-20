@@ -53,6 +53,7 @@ in {
           isNormalUser = true;
           # TODO: variable shell for multi-user system?
           shell = pkgs.fish;
+          # TODO: add logic to not add users to all groups depending on role
           extraGroups = lib.lists.concatLists [
             (lib.lists.optionals true ["${user}" "users" "video" "wheel" "seat"])
             (lib.lists.optionals (config.kosei.security.level < 4) ["networkmanager" "wireshark"])
