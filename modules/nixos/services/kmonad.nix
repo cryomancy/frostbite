@@ -21,24 +21,11 @@ in {
             all = {
               device = /dev/input/by-id;
               config = ''
-                  ;;                               Configuration for most TKL keyboards
-                  ;;                       use this if you need numeric keypad in some scenarios
-                  ;;                   binded as numpad keys (not just numerics) for alt-codes input
 
                 (defcfg
-                  ;; ** For Linux **
-                  input  (device-file "/dev/input/by-id/usb-HOLTEK_USB-HID_Keyboard-event-kbd") ;; Change this line for your device
+                  input  (device-file "/dev/input/by-id/usb-HOLTEK_USB-HID_Keyboard-event-kbd")
                   ;; input  (device-file "/dev/input/by-id/usb-Matias_Ergo_Pro_Keyboard-event-kbd")
                   output (uinput-sink "KMonad output")
-
-                  ;; ** For Windows **
-                  ;; input  (low-level-hook)
-                  ;; output (send-event-sink)
-
-                  ;; ** For MacOS **
-                  ;; input  (iokit-name "my-keyboard-product-string")
-                  ;; output (kext)
-
                   fallthrough true
                 )
 
