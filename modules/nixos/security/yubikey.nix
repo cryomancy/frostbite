@@ -12,12 +12,18 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      pam_u2f
-      age-plugin-yubikey
-      yubioath-flutter
-      yubikey-manager
-    ];
+    environment = {
+      persistence = lib.mkIf config.kosei.impermanence.enable {
+        "/nix/persistent/".directories = ["/etc/secure/Yubico/u2f_keys"];
+      };
+
+      systemPackages = with pkgs; [
+        pam_u2f
+        age-plugin-yubikey
+        yubioath-flutter
+        yubikey-manager
+      ];
+    };
 
     services = {
       pcscd.enable = true; # Smart card mode
