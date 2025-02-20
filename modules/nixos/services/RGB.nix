@@ -14,6 +14,10 @@ in {
     };
   };
 
+  environment.persistence = lib.mkIf config.kosei.impermanence.enable {
+    "/nix/persistent/".directories = ["/var/lib/OpenRGB"];
+  };
+
   config = lib.mkIf cfg.enable {
     containers.openrgb = {
       autostart = true;
