@@ -19,9 +19,12 @@ in {
     networking = lib.mkDefault {
       hostName = config.system.name;
 
+      ##  NOTE: current setup is configure DHCP networkmanager for ease of deployment
+      ## as of now further configuration can be done on consumer side with options
       useDHCP = lib.mkDefault true;
-      networkmanager.enable = true;
-      useNetworkd = false;
+      networkmanager.enable = lib.mkDefault true;
+      useNetworkd = lib.mkDefault false;
+      usePredictableInterfaceNames = lib.mkDefault true;
     };
 
     hardware.bluetooth.enable = true;
