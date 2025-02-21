@@ -1,6 +1,7 @@
 scoped: {
   lib,
   config,
+  user,
   ...
 }: let
   cfg = config.kosei.zellij;
@@ -13,6 +14,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    home.persistence = lib.mkIf config.kosei.impermanence.enable {
+      "/nix/persistent/home/${user}" = {
+        directories = [".config/zellij"];
+      };
+    };
     programs.zellij = {
       enable = true;
       enableBashIntegration = true;
