@@ -2,6 +2,7 @@ scoped: {
   config,
   lib,
   pkgs,
+  user,
   ...
 }: let
   cfg = config.kosei.mako;
@@ -16,7 +17,15 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [pkgs.libnotify];
+    home = {
+      #persistence = lib.mkIf config.kosei.impermanence.enable {
+      #  "/nix/persistent/home/${user}" = {
+      #    directories = [".config/"];
+      #  };
+      #};
+      packages = [pkgs.libnotify];
+    };
+
     services.mako = {
       enable = true;
 
