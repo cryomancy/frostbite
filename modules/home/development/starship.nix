@@ -1,6 +1,7 @@
 scoped: {
   config,
   lib,
+  user,
   ...
 }: let
   cfg = config.kosei.starship;
@@ -14,6 +15,12 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    home.persistence = lib.mkIf config.kosei.impermanence.enable {
+      "/nix/persistent/home/${user}" = {
+        files = [".config/starship.toml"];
+      };
+    };
+
     programs = {
       starship = {
         enable = true;
