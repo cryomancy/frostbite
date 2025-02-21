@@ -15,17 +15,15 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home = {
-      programs.ghostty = {
-        enable = true;
-        enableBashIntegration = true;
-        enableFishIntegration = true;
-        installBatSyntax = true;
-      };
-      persistence = lib.mkIf config.kosei.impermanence.enable {
-        "/nix/persistent/home/${user}" = {
-          directories = [".config/ghostty"];
-        };
+    programs.ghostty = {
+      enable = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      installBatSyntax = true;
+    };
+    home.persistence = lib.mkIf config.kosei.impermanence.enable {
+      "/nix/persistent/home/${user}" = {
+        directories = [".config/ghostty"];
       };
     };
   };
