@@ -3,6 +3,7 @@ scoped: {
   inputs,
   lib,
   nixosConfig,
+  user,
   ...
 }: let
   cfg = config.kosei.hyprlock;
@@ -17,6 +18,12 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    home.persistence = lib.mkIf config.kosei.impermanence.enable {
+      "/nix/persistent/home/${user}" = {
+        files = [".config/hpyr/hpyrlock.conf"];
+      };
+    };
+
     programs.hyprlock = {
       enable = true;
 
