@@ -3,6 +3,7 @@ scoped: {
   inputs,
   lib,
   pkgs,
+  user,
   ...
 }: let
   cfg = config.kosei.waypaper;
@@ -17,7 +18,14 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [waypaper swww];
+    home = {
+      persistence = lib.mkIf config.kosei.impermanence.enable {
+        "/nix/persistent/home/${user}" = {
+          directories = [".config/waypaper"];
+        };
+      };
+      packages = with pkgs; [waypaper swww];
+    };
 
     xdg.configFile."waypaper/config.ini".text = ''
       [Settings]
