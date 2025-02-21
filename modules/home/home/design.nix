@@ -1,6 +1,7 @@
 scoped: {
   config,
   lib,
+  user,
   ...
 }: let
   cfg = config.kosei.design;
@@ -15,6 +16,12 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    home.persistence = lib.mkIf config.kosei.impermanence.enable {
+      "/nix/persistent/home/${user}" = {
+        directories = [".config/stylix"];
+      };
+    };
+
     stylix = {
       enable = true;
       autoEnable = false;
