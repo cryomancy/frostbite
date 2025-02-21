@@ -2,6 +2,7 @@ scoped: {
   config,
   pkgs,
   lib,
+  user,
   ...
 }: let
   cfg = config.kosei.passwordManagement;
@@ -16,11 +17,19 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      keepassxc
-      keepassxc-go
-      keepass-diff
-    ];
+    home = {
+      packages = with pkgs; [
+        keepassxc
+        keepassxc-go
+        keepass-diff
+      ];
+
+      persistence = lib.mkIf config.kosei.impermanence.enable {
+        "/nix/persistent/home/${user}" = {
+          directories = [".local/share/password-store"];
+        };
+      };
+    };
 
     programs.password-store = {
       enable = true;
@@ -29,7 +38,7 @@ in {
         exts.pass-update
       ]);
       settings = {
-        #PASSWORD_STORE_DIR = passwordStoreDir;
+        PASSWORD_STORE_DIR = "/home/${user}/.local/share/password-store";
         PASSWORD_STORE_KEY = lib.strings.concatStringsSep " " [
           ""
         ];
