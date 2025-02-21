@@ -8,7 +8,10 @@ with lib; let
 in {
   options = {
     kosei.fastfetch = {
-      enable = mkEnableOption "fastfetch";
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+      };
     };
   };
 
