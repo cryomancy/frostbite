@@ -1,6 +1,7 @@
 scoped: {
   config,
   lib,
+  user,
   ...
 }: let
   cfg = config.kosei.homeManagement;
@@ -16,6 +17,11 @@ in {
 
   config = lib.mkIf cfg.enable {
     home = {
+      persistence = lib.mkIf config.kosei.impermanence.enable {
+        "/nix/persistent/home/${user}" = {
+          directories = [".local/state/home-manager"];
+        };
+      };
       homeDirectory = "/home/${config.home.username}";
       stateVersion = "24.11";
     };
