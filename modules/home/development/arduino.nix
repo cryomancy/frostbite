@@ -12,19 +12,21 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      arduino-cli
-      arduino-ide
-      digital
-      simulide
-    ];
+    home = {
+      packages = with pkgs; [
+        arduino-cli
+        arduino-ide
+        digital
+        simulide
+      ];
 
-    persistence = lib.mkIf config.kosei.impermanence.enable {
-      "/nix/persistent/home/${user}" = {
-        directories = [
-          ".config/arduino-ide"
-          ".config/Arduino-ide"
-        ];
+      persistence = lib.mkIf config.kosei.impermanence.enable {
+        "/nix/persistent/home/${user}" = {
+          directories = [
+            ".config/arduino-ide"
+            ".config/Arduino-ide"
+          ];
+        };
       };
     };
 
