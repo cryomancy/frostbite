@@ -23,7 +23,6 @@ in {
       ## as of now further configuration can be done on consumer side with options
       useDHCP = lib.mkDefault true;
       networkmanager.enable = lib.mkDefault true;
-      useNetworkd = lib.mkDefault false;
       usePredictableInterfaceNames = lib.mkDefault true;
     };
 
