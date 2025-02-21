@@ -22,6 +22,7 @@ in {
         ];
 
         files = [
+          ".bash_history"
         ];
       };
     };
