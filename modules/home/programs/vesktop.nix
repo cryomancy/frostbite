@@ -1,7 +1,8 @@
 scoped: {
+  config,
   lib,
   pkgs,
-  config,
+  user,
   ...
 }: let
   cfg = config.kosei.vesktop;
@@ -14,16 +15,24 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [
-      (pkgs.vesktop.overrideAttrs (old: {
-        postFixup =
-          (old.postFixup or "")
-          + ''
-            wrapProgram $out/bin/vesktop \
-              --add-flags "--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-accelerated-mjpeg-decode --enable-accelerated-video --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-gpu-rasterization --enable-gpu --enable-features=WebRTCPipeWireCapturer --enable-wayland-ime"
-          '';
-      }))
-    ];
+    home = {
+      packages = [
+        (pkgs.vesktop.overrideAttrs (old: {
+          postFixup =
+            (old.postFixup or "")
+            + ''
+              wrapProgram $out/bin/vesktop \
+                --add-flags "--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-accelerated-mjpeg-decode --enable-accelerated-video --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-gpu-rasterization --enable-gpu --enable-features=WebRTCPipeWireCapturer --enable-wayland-ime"
+            '';
+        }))
+      ];
+
+      persistence = lib.mkIf config.kosei.impermanence.enable {
+        "/nix/persistent/home/${user}" = {
+          directories = [".config/vesktop"];
+        };
+      };
+    };
 
     xdg.configFile."vesktop/settings.json".text = builtins.toJSON {
       discordBranch = "canary";
