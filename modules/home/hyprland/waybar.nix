@@ -3,6 +3,7 @@ scoped: {
   inputs,
   lib,
   pkgs,
+  user,
   ...
 }: let
   writeWaybarApplication = inputs.kosei.lib.writeWaybarApplication {inherit lib pkgs;};
@@ -16,6 +17,12 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    home.persistence = lib.mkIf config.kosei.impermanence.enable {
+      "/nix/persistent/home/${user}" = {
+        directories = [".config/waybar"];
+      };
+    };
+
     programs.waybar = {
       enable = true;
       systemd.enable = true;
