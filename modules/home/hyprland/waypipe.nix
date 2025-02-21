@@ -2,6 +2,7 @@ scoped: {
   config,
   lib,
   pkgs,
+  user,
   ...
 }: let
   cfg = config.kosei.waypipe;
@@ -14,7 +15,18 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [pkgs.waypipe];
+    home = {
+      persistence = lib.mkIf config.kosei.impermanence.enable {
+        "/nix/persistent/home/${user}" = {
+          # QUESTION: Do I need to persist default.target?
+          files = [
+            ".config/systemd/user/waypipe-client.service"
+            ".config/systemd/user/waypipe-server.service"
+          ];
+        };
+      };
+      packages = [pkgs.waypipe];
+    };
 
     systemd.user.services = {
       waypipe-client = {
