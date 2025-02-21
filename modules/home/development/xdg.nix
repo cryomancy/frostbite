@@ -1,6 +1,7 @@
 scoped: {
   config,
   lib,
+  user,
   ...
 }: let
   cfg = config.kosei.xdg;
@@ -16,6 +17,12 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    home.persistence = lib.mkIf config.kosei.impermanence.enable {
+      "/nix/persistent/home/${user}" = {
+        directories = [".config/boxxy"];
+      };
+    };
+
     xdg = {
       userDirs = {
         enable = true;
@@ -40,6 +47,9 @@ in {
     programs = {
       boxxy = {
         enable = true;
+        #rules = [
+        #
+        #];
       };
     };
 
