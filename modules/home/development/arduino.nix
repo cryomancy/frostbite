@@ -1,7 +1,8 @@
 scoped: {
+  config,
   pkgs,
   lib,
-  config,
+  user,
   ...
 }: let
   cfg = config.kosei.arduino;
@@ -17,5 +18,18 @@ in {
       digital
       simulide
     ];
+
+    persistence = lib.mkIf config.kosei.impermanence.enable {
+      "/nix/persistent/home/${user}" = {
+        directories = [
+          ".config/arduino-ide"
+          ".config/Arduino-ide"
+        ];
+      };
+    };
+
+    #xdg.configFile."arudino-ide/settings.json".text = builtins.toJSON {
+    #  enableMenu = false;
+    #};
   };
 }
