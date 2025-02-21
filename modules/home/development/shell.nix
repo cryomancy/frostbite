@@ -2,6 +2,7 @@ scoped: {
   pkgs,
   config,
   lib,
+  user,
   ...
 }: let
   cfg = config.kosei.shell;
@@ -24,6 +25,16 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    home.persistence = lib.mkIf config.kosei.impermanence.enable {
+      "/nix/persistent/home/${user}" = {
+        directories = builtins.concatLists [
+          # NOTE/TODO: Add method or env to move default config files of bash and zsh
+          (lib.lists.optional (cfg.defaultShell == pkgs.fish) ".config/fish")
+          (lib.lists.optional (cfg.defaultShell == pkgs.zsh) ".config/zsh")
+          (lib.lists.optional (cfg.defaultShell == pkgs.bash) ".config/bash")
+        ];
+      };
+    };
     programs = {
       bash = lib.mkIf (cfg.defaultShell
         == pkgs.bash) {
