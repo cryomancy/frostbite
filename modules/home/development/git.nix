@@ -1,6 +1,7 @@
 scoped: {
   lib,
   config,
+  user,
   ...
 }: let
   cfg = config.kosei.git;
@@ -26,6 +27,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    home.persistence = lib.mkIf config.kosei.impermanence.enable {
+      "/nix/persistent/home/${user}" = {
+        directories = [".config/git"];
+      };
+    };
     programs = {
       git = {
         enable = true;
