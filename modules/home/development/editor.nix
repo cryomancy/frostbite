@@ -4,6 +4,7 @@ scoped: {
   pkgs,
   lib,
   system,
+  user,
   ...
 }: let
   cfg = config.kosei.editor;
@@ -24,6 +25,18 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    # TODO: find a way to incorporate impermanence statement
+    persistence = lib.mkIf config.kosei.impermanence.enable {
+      "/nix/persistent/home/${user}" = {
+        directories = [
+          ".local/share/nvim"
+          ".config/emacs"
+          ".config/doom"
+          ".local/share/doom"
+          "./local/state/doom"
+        ];
+      };
+    };
     home.packages = [cfg.defaultEditor];
   };
 }
