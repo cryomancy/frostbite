@@ -2,6 +2,7 @@ scoped: {
   config,
   lib,
   pkgs,
+  user,
   ...
 }: let
   cfg = config.kosei.officeUtils;
@@ -12,27 +13,35 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      # Proton
-      protonvpn-gui
-      protonmail-desktop
+    home = {
+      persistence = lib.mkIf config.kosei.impermanence.enable {
+        "/nix/persistent/home/${user}" = {
+          directories = [".config/arduino-ide"];
+        };
+      };
 
-      # Music
-      musescore
-      audacity
+      packages = with pkgs; [
+        # Proton
+        protonvpn-gui
+        protonmail-desktop
 
-      # Visual
-      cheese
-      aseprite
-      inkscape
-      blender
-      gimp-with-plugins
-      obsidian
-      via
+        # Music
+        musescore
+        audacity
 
-      # Office
-      libreoffice-qt6
-    ];
+        # Visual
+        cheese
+        aseprite
+        inkscape
+        blender
+        gimp-with-plugins
+        obsidian
+        via
+
+        # Office
+        libreoffice-qt6
+      ];
+    };
 
     #programs = {
     #  obs-studio = {
