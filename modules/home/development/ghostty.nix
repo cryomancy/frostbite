@@ -2,6 +2,7 @@ scoped: {
   lib,
   config,
   pkgs,
+  user,
   ...
 }: let
   cfg = config.kosei.ghostty;
@@ -14,6 +15,18 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [ghostty];
+    home = {
+      programs.ghostty = {
+        enable = true;
+        enableBashIntegration = true;
+        enableFishIntegration = true;
+        installBatSyntax = true;
+      };
+      persistence = lib.mkIf config.kosei.impermanence.enable {
+        "/nix/persistent/home/${user}" = {
+          directories = [".config/ghostty"];
+        };
+      };
+    };
   };
 }
