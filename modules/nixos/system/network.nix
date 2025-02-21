@@ -21,9 +21,9 @@ in {
 
       ##  NOTE: current setup is configure DHCP networkmanager for ease of deployment
       ## as of now further configuration can be done on consumer side with options
-      useDHCP = lib.mkDefault true;
-      networkmanager.enable = lib.mkDefault true;
-      usePredictableInterfaceNames = lib.mkDefault true;
+      useDHCP = true;
+      networkmanager.enable = true;
+      usePredictableInterfaceNames = true;
     };
 
     hardware.bluetooth.enable = true;
