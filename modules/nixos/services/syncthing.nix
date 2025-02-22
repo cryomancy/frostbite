@@ -33,7 +33,7 @@ in {
               databaseDir = "/var/lib/syncthing/.config/syncthing";
               guiAddress = "127.0.0.1:8301";
               openDefaultPorts = true; # TCP/UDP 22000 for transfers and UDP 21027 for discovery.
-              inherit (cfg) settings; # Each consumer of this module defines their
+              # inherit (cfg) settings; # Each consumer of this module defines their
               # individual settings on their side.
             };
           };
