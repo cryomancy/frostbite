@@ -19,7 +19,6 @@ in {
     networking = {
       ##  NOTE: current setup is configure DHCP networkmanager for ease of deployment
       ## as of now further configuration can be done on consumer side with options
-      useDHCP = true;
       networkmanager.enable = true;
       usePredictableInterfaceNames = true;
     };
