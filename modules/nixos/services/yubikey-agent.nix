@@ -29,7 +29,7 @@ in {
     # This overrides the systemd user unit shipped with the
     # yubikey-agent package
     systemd.user.services.yubikey-agent = {
-      path = [pkgs.pinetry-curses];
+      path = [pkgs.pinentry-curses];
       wantedBy = ["default.target"];
     };
 
