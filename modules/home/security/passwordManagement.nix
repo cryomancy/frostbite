@@ -38,7 +38,7 @@ in {
         exts.pass-update
       ]);
       settings = {
-        PASSWORD_STORE_DIR = "/home/${user}/.local/share/password-store";
+        PASSWORD_STORE_DIR = config.xdg.dataHome + "/password-store";
         PASSWORD_STORE_KEY = lib.strings.concatStringsSep " " [
           ""
         ];
