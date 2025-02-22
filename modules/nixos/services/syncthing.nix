@@ -9,7 +9,6 @@ in {
   options = {
     kosei.syncthing = {
       enable = lib.mkEnableOption "syncthing";
-      settings = lib.mkOption;
     };
   };
 
