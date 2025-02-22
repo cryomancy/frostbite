@@ -11,10 +11,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    services.tcsd.enable = true;
     hardware = {
       enableAllFirmware = true;
       uinput.enable = true;
-      tcsd.enable = true; # TPM daemon
     };
   };
 }
