@@ -32,7 +32,6 @@ in {
       parted # A partitioning tool
       ethtool # Ethernet device settings and diagnostics
       acpilight # ACPI backlight control
-      pcsc_scan # Scan for smart cards
     ];
   };
 }
