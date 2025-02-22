@@ -16,9 +16,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    networking = lib.mkDefault {
-      hostName = config.system.name;
-
+    networking = {
       ##  NOTE: current setup is configure DHCP networkmanager for ease of deployment
       ## as of now further configuration can be done on consumer side with options
       useDHCP = true;
