@@ -27,7 +27,7 @@ jobs:
 
       - name: Build docs
         run: |
-          nix build ./docs
+          nix build ../docs
           cp -r --no-preserve=all result/ _site
 
       - name: Upload artifact
