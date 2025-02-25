@@ -14,7 +14,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     services.dbus = {
-      packages = [pkgs.gcr_4];
+      #packages = [pkgs.gcr_4];
     };
   };
 }
