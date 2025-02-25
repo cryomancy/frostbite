@@ -28,7 +28,7 @@ in {
       consoleLogLevel = (lib.mkIf cfg.quiet) 0;
       initrd = {
         systemd.enable = true;
-        initrd.verbose =
+        verbose =
           if cfg.quiet
           then false
           else true;
