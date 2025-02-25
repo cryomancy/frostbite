@@ -106,13 +106,18 @@
       };
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-droid.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-stable.url = "github:/nixos/nixpkgs/nixos-24.11";
     nixpkgs-master.url = "github:/nixos/nixpkgs";
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs = {
-        nixpkgs.follows = "nixpkgs";
+        nixpkgs.follows = "nixpkgs-droid";
       };
+    };
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nur = {
       url = "github:nix-community/NUR";
