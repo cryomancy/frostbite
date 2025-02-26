@@ -18,7 +18,6 @@ in {
       if !cfg.enable
       then {}
       else {
-        inherit (cfg) enable;
         "/persist/${user}" = {
           allowOther = true;
 
