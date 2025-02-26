@@ -21,3 +21,6 @@ lock:
 
 view-inputs:
   nix run github:nix-community/nix-melt
+
+partition-disk
+  sudo nix --extra-experimental-features 'nix-command flakes' run github:nix-community/disko --mode disko ./lib/diskoBTRFS.nix --arg device '"/dev/vga"'
