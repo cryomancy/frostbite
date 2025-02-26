@@ -13,19 +13,22 @@ in {
     kosei.impermanence.enable = lib.mkEnableOption "impermanence";
   };
 
-  config = lib.mkIf cfg.enable {
-    home.persistence = {
-      inherit (cfg) enable;
-      "/persist/${user}" = {
-        allowOther = true;
+  config = {
+    home.persistence =
+      if !cfg.enable
+      then {}
+      else {
+        inherit (cfg) enable;
+        "/persist/${user}" = {
+          allowOther = true;
 
-        directories = [
-        ];
+          directories = [
+          ];
 
-        files = [
-          ".bash_history"
-        ];
+          files = [
+            ".bash_history"
+          ];
+        };
       };
-    };
   };
 }
