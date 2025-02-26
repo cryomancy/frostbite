@@ -1,14 +1,14 @@
 # Impermanent Btrfs layout w/ encryption
-{drives, ...}: {
+{drive ? throw "Pass the device to be partitioned to this function"}: {
   disko.devices = {
     disk.main = {
       type = "disk";
-      inherit (drives.root) device;
+      inherit drive;
       content = {
         type = "gpt";
         partitions = {
           ESP = {
-            inherit (drives.esp) size;
+            size = "1G";
             type = "EF00";
             label = "ESP"; # Partition label
             content = {
@@ -27,7 +27,7 @@
           };
 
           luks = {
-            inherit (drives.root) size;
+            size = "100%FREE";
             label = "NixOS"; # Partition label
             content = {
               type = "luks";
