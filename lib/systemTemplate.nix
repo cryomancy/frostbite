@@ -27,6 +27,7 @@ in
                 (builtins.attrNames kosei.modules.homeManager)
                 (module: builtins.getAttr module kosei.modules.homeManager);
               config.home.username = user;
+              config._module.args = user;
             });
           };
         }
