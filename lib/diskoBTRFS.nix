@@ -1,14 +1,14 @@
 # Impermanent Btrfs layout w/o encryption
-{drives, ...}: {
+{drive ? throw "Pass the device to be partitioned to this function"}: {
   disko.devices = {
     disk.main = {
+      inherit drive;
       type = "disk";
-      inherit (drives.root) device;
       content = {
         type = "gpt";
         partitions = {
           ESP = {
-            inherit (drives.esp) size;
+            size = "1G";
             type = "EF00";
             label = "ESP"; # Partition label
             content = {
@@ -27,7 +27,7 @@
           };
 
           root = {
-            inherit (drives.root) size;
+            size = "100%FREE";
             label = "NixOS";
             content = {
               type = "btrfs";
@@ -43,62 +43,60 @@
                 umount /mnt
               '';
 
-              subvolumes = let
-                commonOptions = [
-                  "compress=zstd"
-                  "noatime"
-                ];
-              in {
+              subvolumes = {
                 # Root subvolume
                 "/@" = {
                   mountpoint = "/";
-                  mountOptions = commonOptions;
+                  mountOptions = [
+                    "compress=zstd"
+                    "noatime"
+                  ];
                 };
 
                 # Persistent data
                 "/@persist" = {
                   mountpoint = "/persist";
-                  mountOptions =
-                    commonOptions
-                    ++ [
-                      "nodev"
-                      "nosuid"
-                      "noexec"
-                    ];
+                  mountOptions = [
+                    "compress=zstd"
+                    "noatime"
+                    "nodev"
+                    "nosuid"
+                    "noexec"
+                  ];
                 };
 
                 # User home directories
                 "/@home" = {
                   mountpoint = "/home";
-                  mountOptions =
-                    commonOptions
-                    ++ [
-                      "nodev"
-                      "nosuid"
-                    ];
+                  mountOptions = [
+                    "compress=zstd"
+                    "noatime"
+                    "nodev"
+                    "nosuid"
+                  ];
                 };
 
                 # Nix data, including the store
                 "/@nix" = {
                   mountpoint = "/nix";
-                  mountOptions =
-                    commonOptions
-                    ++ [
-                      "nodev"
-                      "nosuid"
-                    ];
+                  mountOptions = [
+                    "compress=zstd"
+                    "noatime"
+                    "nodev"
+                    "nosuid"
+                  ];
                 };
 
                 # System logs
                 "/@log" = {
                   mountpoint = "/var/log";
-                  mountOptions =
-                    commonOptions
-                    ++ [
-                      "nodev"
-                      "nosuid"
-                      "noexec"
-                    ];
+                  mountOptions = [
+                    "compress=zstd"
+                    "noatime"
+                    "nodev"
+                    "nosuid"
+                    "noexec"
+                  ];
                 };
               };
             };
