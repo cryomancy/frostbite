@@ -31,31 +31,33 @@ in {
     #];
 
     #fileSystems."/persist".neededForBoot = true;
-    environment.persistence = {
-      inherit (cfg) enable;
-      "persist" = {
-        # Hide these mounts from the sidebar of file managers
-        hideMounts = true;
+    environment.persistence =
+      if !cfg.enable
+      then {}
+      else {
+        "persist" = {
+          # Hide these mounts from the sidebar of file managers
+          hideMounts = true;
 
-        directories = lib.lists.concatLists [
-          "/var/log"
-          "/var/lib/nixos"
-          "/var/lib/systemd"
-          "/var/lib/sops-nix"
-          "/etc/NetworkManager/system-connection"
-        ];
+          directories = lib.lists.concatLists [
+            "/var/log"
+            "/var/lib/nixos"
+            "/var/lib/systemd"
+            "/var/lib/sops-nix"
+            "/etc/NetworkManager/system-connection"
+          ];
 
-        files = [
-          "/etc/passwd"
-          "/etc/group"
-          "/etc/shadow"
-          "/etc/gshadow"
-          "/etc/subuid"
-          "/etc/subgid"
-          "/etc/machine-id"
-        ];
+          files = [
+            "/etc/passwd"
+            "/etc/group"
+            "/etc/shadow"
+            "/etc/gshadow"
+            "/etc/subuid"
+            "/etc/subgid"
+            "/etc/machine-id"
+          ];
+        };
       };
-    };
 
     boot.initrd.postResumeCommands =
       lib.strings.optionalString cfg.enable
