@@ -23,7 +23,7 @@ in {
         };
       };
       homeDirectory = "/home/${config.home.username}";
-      stateVersion = "24.11";
+      stateVersion = "24.05";
     };
 
     systemd.user.targets.tray = {
