@@ -1,7 +1,7 @@
 scoped: {
   config,
   lib,
-  nixosConfig,
+  osConfig,
   ...
 }: let
   cfg = config.kosei.gammastep;
@@ -16,7 +16,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    nixosConfig.services.geoclue2.enable = true;
+    osConfig.services.geoclue2.enable = true;
     services = {
       gammastep = {
         enable = true;
