@@ -21,7 +21,10 @@ in {
       ## as of now further configuration can be done on consumer side with options
       networkmanager.enable = true;
       usePredictableInterfaceNames = true;
+      resolvconf.enable = false;
     };
+
+    services.resolved.enable = true;
 
     hardware.bluetooth.enable = true;
 
