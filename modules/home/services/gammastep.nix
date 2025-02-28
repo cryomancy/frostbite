@@ -1,7 +1,6 @@
 scoped: {
   config,
   lib,
-  osConfig,
   ...
 }: let
   cfg = config.kosei.gammastep;
@@ -16,12 +15,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    osConfig.services.geoclue2.enable = true;
     services = {
       gammastep = {
         enable = true;
         enableVerboseLogging = true;
-        provider = "geoclue2";
+        provider = "manual";
         temperature = {
           day = 6000;
           night = 4600;
