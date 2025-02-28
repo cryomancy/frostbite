@@ -16,7 +16,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    nixosConfig.services.geoclue2.enable = true;
+    #nixosConfig.services.geoclue2.enable = true;
     services = {
       gammastep = {
         enable = true;
