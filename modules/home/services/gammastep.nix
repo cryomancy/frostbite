@@ -20,7 +20,7 @@ in {
         enable = true;
         enableVerboseLogging = true;
         dawnTime = "6:00-7:45";
-        dustTime = "18:35-20:15";
+        duskTime = "18:35-20:15";
         provider = "manual";
         temperature = {
           day = 6000;
