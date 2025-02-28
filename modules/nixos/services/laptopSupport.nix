@@ -13,12 +13,17 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    services.logind = {
-      lidSwitch = "suspend";
-      lidSwitchDocked = "ignore";
-      lidSwitchExternalPower = "ignore";
-      powerKey = "hibernate";
-      powerKeyLongPress = "poweroff";
+    services = {
+      logind = {
+        lidSwitch = "suspend";
+        lidSwitchDocked = "ignore";
+        lidSwitchExternalPower = "ignore";
+        powerKey = "hibernate";
+        powerKeyLongPress = "poweroff";
+      };
+      geoclue2 = {
+        enable = true;
+      };
     };
 
     hardware.sensor.iio.enable = true;
