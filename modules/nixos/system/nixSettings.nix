@@ -57,7 +57,7 @@ in {
       ];
       gc = {
         automatic = true;
-        options = "--delete-older-than 7d";
+        options = "--delete-older-than 14d";
       };
       package = pkgs.nixVersions.stable;
     };
