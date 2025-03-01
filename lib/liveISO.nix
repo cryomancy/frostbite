@@ -33,7 +33,37 @@ in
                 (builtins.attrNames kosei.modules.home)
                 (module: builtins.getAttr module kosei.modules.home);
               config.home.username = user;
+              config._module.args = {inherit user;};
             });
+          };
+        }
+        {
+          kosei = {
+            boot.enable = true;
+            displayManager.enable = true;
+            ssh = {
+              enable = true;
+              level = 0;
+            };
+            design = {
+              theme = "${inputs.assets}/themes/nord.yaml";
+            };
+          };
+
+          home-manager.users = {
+            "nixos".kosei = {
+              browser.firefox.enable = true;
+              fileManager.enable = true;
+              git = {
+                enable = true;
+              };
+              homePackages.enable = true;
+              hyprland = {
+                enable = true;
+              };
+              rofi.enable = true;
+              waybar.enable = true;
+            };
           };
         }
       ]
