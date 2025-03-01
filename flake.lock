@@ -1408,11 +1408,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1740801329,
-        "narHash": "sha256-ZAzI5NGQLALv0qy7v/X2g/6dt20mY7e6SyX/O7Hv+a4=",
+        "lastModified": 1740805774,
+        "narHash": "sha256-5R7f4UC5XMWqVSiGhjPS2EGaPFe+x1PUBjioHZUVD1E=",
         "owner": "TahlonBrahic",
         "repo": "sops-nix",
-        "rev": "bb84834772b34cabe0143fa1335be62e8f132c05",
+        "rev": "5a8e109888749fa129db57c82349175d92914804",
         "type": "github"
       },
       "original": {
