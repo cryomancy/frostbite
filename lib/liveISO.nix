@@ -50,15 +50,15 @@ in
 
           home-manager.users = {
             "nixos".kosei = {
-              browser.firefox.enable = true;
-              fileManager.enable = true;
               git = {
                 enable = true;
               };
-              homePackages.enable = true;
+              gpg.enable = false;
+              officeUtils.enable = true;
               hyprland = {
                 enable = true;
               };
+              passwordManagement.enable = true;
               rofi.enable = true;
               waybar.enable = true;
             };
