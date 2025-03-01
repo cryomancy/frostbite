@@ -39,6 +39,7 @@ in
           kosei = {
             boot.enable = true;
             displayManager.enable = true;
+            secrets.enable = false;
             ssh = {
               enable = true;
               level = 0;
