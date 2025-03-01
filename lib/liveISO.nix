@@ -50,6 +50,7 @@ in
 
           home-manager.users = {
             "nixos".kosei = {
+              git.enable = false;
               gpg.enable = false;
               officeUtils.enable = true;
               hyprland = {
