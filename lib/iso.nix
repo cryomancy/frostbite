@@ -5,7 +5,7 @@ scoped: {
   outPath,
   system ? "x86_64-linux",
   users ? ["nixos"],
-  format ? "iso"
+  format ? "iso",
   ...
 }: let
   inherit (inputs) kosei home-manager nixpkgs nixos-generators;
