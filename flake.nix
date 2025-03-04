@@ -23,7 +23,7 @@
 
       partitions = {
         dev = {
-          extraInputsFlake = ./module/flake/partitions;
+          extraInputsFlake = ./modules/flake/partitions;
           module = ./modules/flake/partitions/partitions.nix;
         };
       };
@@ -75,6 +75,7 @@
       url = "github:TahlonBrahic/assets";
       flake = false;
     };
+    flake-parts.url = "github:hercules-ci/flake-parts";
     flake-utils = {
       url = "github:numtide/flake-utils";
     };
@@ -104,6 +105,10 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
       };
+    };
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-droid.url = "github:NixOS/nixpkgs/nixos-24.05";
