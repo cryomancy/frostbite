@@ -15,7 +15,6 @@ in
     inherit system specialArgs format;
     modules =
       [
-        (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
         home-manager.nixosModules.home-manager
         {
           networking.wireless.enable = false;
