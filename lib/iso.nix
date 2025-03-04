@@ -5,13 +5,14 @@ scoped: {
   outPath,
   system ? "x86_64-linux",
   users ? ["nixos"],
+  format ? "iso"
   ...
 }: let
-  inherit (inputs) kosei home-manager nixpkgs;
+  inherit (inputs) kosei home-manager nixpkgs nixos-generators;
   specialArgs = {inherit hostName inputs outPath system users;};
 in
-  nixpkgs.lib.nixosSystem {
-    inherit system specialArgs;
+  nixos-generators.nixosGenerate {
+    inherit system specialArgs format;
     modules =
       [
         (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
