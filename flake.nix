@@ -4,7 +4,6 @@
   outputs = inputs @ {
     eris,
     flake-parts,
-    self,
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;}
@@ -23,8 +22,8 @@
 
       partitions = {
         dev = {
-          extraInputsFlake = ./modules/flake/partitions;
-          module = ./modules/flake/partitions/partitions.nix;
+          module = ./modules/flake/partitions/dev;
+          extraInputsFlake = ./modules/flake/partitions/dev;
         };
       };
 
