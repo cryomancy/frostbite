@@ -26,7 +26,7 @@
         }
         {
           name = "NIX_CONFIG";
-          value = "nix-command flakes pipe-operators";
+          value = "experimental-features = nix-command flakes pipe-operators";
         }
       ];
       commands = [

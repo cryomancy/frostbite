@@ -1,8 +1,8 @@
 scoped: {
   extraModules ? [],
   hostName ? "nixos",
-  inputs ? {},
-  outPath,
+  inputs,
+  outPath ? ./.,
   system ? "x86_64-linux",
   users ? ["nixos"],
   format ? "iso",

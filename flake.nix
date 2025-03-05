@@ -33,6 +33,19 @@
         herculesCI = "dev";
       };
 
+      perSystem = {pkgs, ...}: {
+        apps = {
+          makeIso = {
+            program = pkgs.writeShellApplication {
+              name = "makeIso";
+              text = ''
+                nix build ${self.lib.iso {inherit inputs;}}
+              '';
+            };
+          };
+        };
+      };
+
       flake = {
         lib = eris.lib.load {
           src = ./lib;
