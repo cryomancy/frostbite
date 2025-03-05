@@ -1,20 +1,55 @@
 {inputs, ...}: {
   systems = ["x86_64-linux"];
+
   imports = [
     inputs.devshell.flakeModule
     inputs.hercules-ci-effects.flakeModule
     inputs.git-hooks-nix.flakeModule
   ];
-  perSystem = {...}: {
+
+  perSystem = {pkgs, ...}: {
     devshells.default = {
-      commands = [
+      name = "Kosei Development Shell";
+      devshell.prj_root_fallback = {
+        # Use the top-level directory of the working tree
+        eval = "$(git rev-parse --show-toplevel)";
+      };
+
+      motd = ''
+        {117}❄ Kosei Developement Shell ❄{reset}
+        $(type -p menu &>/dev/null && menu)
+      '';
+      env = [
         {
-          name = "greet";
-          command = ''
-            printf -- 'Hello, %s!\n' "''${1:-world}"
-          '';
+          name = "IN_KOSEI_SHELL";
+          value = 0;
+        }
+        {
+          name = "NIX_CONFIG";
+          value = "nix-command flakes pipe-operators";
         }
       ];
+      commands = [
+        {
+          name = "repl";
+          command = ''
+            nix repl
+          '';
+          help = "Enter this flake's REPL";
+        }
+      ];
+      packages = [
+        pkgs.typos
+      ];
+    };
+
+    pre-commit = {
+      settings = {
+        addGcRoot = true;
+        hooks = {
+          alejandra.enable = true;
+        };
+      };
     };
   };
 }

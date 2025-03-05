@@ -27,7 +27,7 @@ builder='/nix/store/4k90qpzh1a4sldhnf7cxwkm9c0agq4fp-bash-interactive-5.2p37/bin
 export builder
 dontAddDisableDepTrack='1'
 export dontAddDisableDepTrack
-name='devshell-env'
+name='Kosei-Development-Shell-env'
 export name
 out='/home/tahlon/projects/kosei/outputs/out'
 export out
@@ -46,7 +46,7 @@ if [[ "$SHELL" == "/noshell" || "$SHELL" == "/sbin/nologin" ]]; then
 fi
 
 # Load the environment
-source "/nix/store/yjagpn9phkg4ygj21pq8j5bmnrii8447-devshell-dir/env.bash"
+source "/nix/store/45p8yj4s4p3hksx8y52iqlz1am2dqy0n-Kosei-Development-Shell-dir/env.bash"
 '
 export shellHook
 stdenv='/nix/store/vn51j3zi9wlj874n0vizm66drcfkipkp-naked-stdenv'
