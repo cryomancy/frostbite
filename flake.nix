@@ -33,11 +33,7 @@
         herculesCI = "dev";
       };
 
-      perSystem = {
-        pkgs,
-        self',
-        ...
-      }: {
+      perSystem = {pkgs, ...}: {
         apps = {
           makeIso = {
             program = pkgs.writeShellApplication {

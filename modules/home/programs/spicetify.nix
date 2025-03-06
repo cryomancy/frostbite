@@ -2,7 +2,6 @@ scoped: {
   config,
   inputs,
   lib,
-  pkgs,
   system,
   ...
 }: let
