@@ -3,7 +3,6 @@ scoped: {
   inputs,
   lib,
   pkgs,
-  modulesPath,
   ...
 }: let
   cfg = config.kosei.nixSettings;
@@ -30,7 +29,8 @@ in {
         auto-optimise-store = true;
         commit-lock-file-summary = "update lock file";
         experimental-features = ["nix-command" "flakes" "pipe-operators"];
-        pure-eval = true;
+        # NOTE/TODO: This needs more testing, it causes a lot of issues
+        # pure-eval = true;
         substituters = [
           "https://cache.nixos.org/"
           "https://fuyu-no-hokan.cachix.org"

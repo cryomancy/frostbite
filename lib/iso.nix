@@ -1,17 +1,16 @@
 scoped: {
   extraModules ? [],
   hostName ? "nixos",
-  inputs,
   outPath ? ./.,
   system ? "x86_64-linux",
   users ? ["nixos"],
   format ? "iso",
+  inputs,
   ...
 }: let
   inherit (inputs) kosei home-manager nixpkgs nixos-generators;
   specialArgs = {inherit hostName inputs outPath system users;};
-in
-  nixos-generators.nixosGenerate {
+  iso = nixos-generators.nixosGenerate {
     inherit system specialArgs format;
     modules =
       [
@@ -68,4 +67,11 @@ in
       ++ nixpkgs.lib.forEach
       (builtins.attrNames kosei.modules.nixos)
       (module: builtins.getAttr module kosei.modules.nixos);
+  };
+in
+  nixpkgs.legacyPackages.${system}.writeShellApplication.writeShellApplication {
+    name = "makeIso";
+    text = ''
+      nix build ${iso {inherit inputs;}}
+    '';
   }
