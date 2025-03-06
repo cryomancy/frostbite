@@ -33,7 +33,11 @@
         herculesCI = "dev";
       };
 
-      perSystem = {pkgs, ...}: {
+      perSystem = {
+        pkgs,
+        self',
+        ...
+      }: {
         apps = {
           makeIso = {
             program = pkgs.writeShellApplication {
@@ -118,6 +122,7 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    kosei.url = "github:TahlonBrahic/fuyu-no-kosei";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
