@@ -17,6 +17,8 @@ in {
     };
   };
 
+  imports = [inputs.spicetify-nix.homeManagerModules.spicetify];
+
   config = lib.mkIf cfg.enable {
     programs.spicetify = {
       enable = true;
