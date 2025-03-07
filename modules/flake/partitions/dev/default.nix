@@ -26,14 +26,15 @@
         }
         {
           name = "NIX_CONFIG";
-          value = "experimental-features = nix-command flakes pipe-operators";
+          value = "experimental-features = nix-command flakes pipe-operators repl-flake";
         }
       ];
       commands = [
         {
           name = "repl";
+          category = "flake";
           command = ''
-            nix repl
+            repl
           '';
           help = "Enter this flake's REPL";
         }

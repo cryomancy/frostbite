@@ -69,9 +69,6 @@ scoped: {
       (module: builtins.getAttr module kosei.modules.nixos);
   };
 in
-  nixpkgs.legacyPackages.${system}.writeShellApplication.writeShellApplication {
-    name = "makeIso";
-    text = ''
-      nix build ${iso {inherit inputs;}}
-    '';
-  }
+  nixpkgs.legacyPackages.${system}.runCommand "makeIso" ''
+    nix build ${iso {inherit inputs;}}
+  ''

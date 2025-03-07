@@ -1,7 +1,4 @@
 scoped: {pkgs, ...}:
-pkgs.writeShellApplication {
-  name = "viewInputs";
-  text = ''
-    nix run github:nix-community/nix-melt
-  '';
-}
+pkgs.runCommand "viewInputs" ''
+  nix run github:nix-community/nix-melt
+''

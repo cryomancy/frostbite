@@ -1,7 +1,4 @@
 scoped: {pkgs, ...}:
-pkgs.writeShellApplication {
-  name = "generateAgeKey";
-  text = ''
+pkgs.runCommand "generateAgeKey" ''
     nix-shell -p age --run "age-keygen -o /var/lib/sops-nix/key.txt"
-  '';
-}
+  ''
