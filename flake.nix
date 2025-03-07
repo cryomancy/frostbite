@@ -128,7 +128,6 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
-    kosei.url = "github:TahlonBrahic/fuyu-no-kosei";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
