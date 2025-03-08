@@ -18,8 +18,6 @@
         templates = import ./modules/flake/templates.nix;
       };
     in {
-      inherit (flakeModules.systems) systems debug;
-
       imports = [
         flake-parts.flakeModules.modules
         flake-parts.flakeModules.partitions
@@ -32,7 +30,6 @@
 
       flake = {
         inherit flakeModules;
-        inherit (flakeModules) lib template;
 
         modules = {
           flake =
