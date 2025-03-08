@@ -1,7 +1,0 @@
-keys:
-  # - &system agekey
-creation_rules:
-  - path_regex: ^src/secrets/secrets\.yaml$
-    key_groups:
-      - age:
-          # - *system

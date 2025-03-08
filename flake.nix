@@ -1,96 +1,38 @@
 {
   description = "Nix flakes abstraction layer that supports multiple users, systems, and architectures.";
 
-  outputs = inputs @ {
-    eris,
-    flake-parts,
-	nixpkgs,
-    ...
-  }:
+  outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;}
-    ({self, ...}: {
-      debug = true;
-
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-      ];
+    ({
+      self,
+      withSystem,
+      flake-parts-lib,
+      ...
+    }: let
+      inherit (flake-parts-lib) importApply;
+      flakeModules = {
+        apps = importApply ./modules/flake/apps.nix {inherit withSystem;};
+        lib = importApply ./modules/flake/lib.nix {inherit inputs flake-parts-lib;};
+        partitions = import ./modules/flake/partitions.nix;
+        systems = import ./modules/flake/systems.nix;
+        templates = import ./modules/flake/templates.nix;
+      };
+    in {
+      inherit (flakeModules.systems) systems debug;
 
       imports = [
         flake-parts.flakeModules.modules
         flake-parts.flakeModules.partitions
+        flakeModules.apps
+        flakeModules.lib
+        flakeModules.partitions
+        flakeModules.systems
+        flakeModules.templates
       ];
 
-      partitions = {
-        dev = {
-          module = ./modules/flake/partitions/dev;
-          extraInputsFlake = ./modules/flake/partitions/dev;
-        };
-      };
-
-      partitionedAttrs = {
-        checks = "dev";
-        devShells = "dev";
-        herculesCI = "dev";
-      };
-
-      perSystem = {pkgs, ...}: {
-        apps = {
-          generateAgeKey = {
-            program = self.lib.generateAgeKey {inherit pkgs;};
-          };
-          makeIso = {
-            program = self.lib.iso {inherit self;};
-          };
-          partitionDisk = {
-            program = self.lib.partitionDisk {inherit pkgs;};
-          };
-          yubikeyInit = {
-            program = self.lib.yubikeyInit {inherit pkgs;};
-          };
-          yubikeyTest = {
-            program = self.lib.yubikeyTest {inherit pkgs;};
-          };
-          viewInputs = {
-            program = self.lib.viewInputs {inherit pkgs;};
-          };
-        };
-      };
-
       flake = {
-        lib =
-		  (eris.lib.load
-		    {
-              src = ./lib;
-              loader = eris.lib.loaders.scoped;
-            }
-		  )
-          |>
-          (inputs.nixpkgs.lib.attrsets.mapAttrsRecursiveCond
-		    (x: builtins.isAttrs x)
-            (n: v:
-			  { lib =
-			    {
-				  ${ (inputs.nixpkgs.lib.lists.last n) } = v;
-				};
-			  }
-			)
-		  )
-		  |>
-          inputs.nixpkgs.lib.attrsets.collect (x: x ? lib)
-		  |>
-          builtins.map (x: builtins.attrValues x)
-		  |>
-          inputs.nixpkgs.lib.lists.flatten
-		  |>
-          inputs.nixpkgs.lib.attrsets.mergeAttrsList;
-
-        templates = {
-          "multiple-systems" = {
-            path = ./templates/multiple-systems;
-            description = "example of a multiple systems";
-          };
-        };
+        inherit flakeModules;
+        inherit (flakeModules) lib template;
 
         modules = {
           flake =
