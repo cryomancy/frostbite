@@ -4,6 +4,7 @@
   outputs = inputs @ {
     eris,
     flake-parts,
+	nixpkgs,
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;}
@@ -39,7 +40,7 @@
             program = self.lib.generateAgeKey {inherit pkgs;};
           };
           makeIso = {
-            program = self.lib.iso {inherit inputs;};
+            program = self.lib.iso {inherit self;};
           };
           partitionDisk = {
             program = self.lib.partitionDisk {inherit pkgs;};
@@ -57,10 +58,32 @@
       };
 
       flake = {
-        lib = eris.lib.load {
-          src = ./lib;
-          loader = eris.lib.loaders.scoped;
-        };
+        lib =
+		  (eris.lib.load
+		    {
+              src = ./lib;
+              loader = eris.lib.loaders.scoped;
+            }
+		  )
+          |>
+          (inputs.nixpkgs.lib.attrsets.mapAttrsRecursiveCond
+		    (x: builtins.isAttrs x)
+            (n: v:
+			  { lib =
+			    {
+				  ${ (inputs.nixpkgs.lib.lists.last n) } = v;
+				};
+			  }
+			)
+		  )
+		  |>
+          inputs.nixpkgs.lib.attrsets.collect (x: x ? lib)
+		  |>
+          builtins.map (x: builtins.attrValues x)
+		  |>
+          inputs.nixpkgs.lib.lists.flatten
+		  |>
+          inputs.nixpkgs.lib.attrsets.mergeAttrsList;
 
         templates = {
           "multiple-systems" = {

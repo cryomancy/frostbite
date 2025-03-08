@@ -5,9 +5,10 @@ scoped: {
   system ? "x86_64-linux",
   users ? ["nixos"],
   format ? "iso",
-  inputs,
+  self,
   ...
 }: let
+  inputs = builtins.deepSeq (self // self.inputs) (self.outputs.flake // self.inputs);
   inherit (inputs) kosei home-manager nixpkgs nixos-generators;
   specialArgs = {inherit hostName inputs outPath system users;};
   iso = nixos-generators.nixosGenerate {
@@ -69,6 +70,9 @@ scoped: {
       (module: builtins.getAttr module kosei.modules.nixos);
   };
 in
-  nixpkgs.legacyPackages.${system}.runCommand "makeIso" ''
-    nix build ${iso {inherit inputs;}}
-  ''
+  nixpkgs.legacyPackages.${system}.writeShellApplication {
+    name = "makeIso";
+    text = ''
+      nix build ${iso}
+    '';
+  }

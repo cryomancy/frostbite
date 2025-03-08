@@ -26,7 +26,7 @@
         }
         {
           name = "NIX_CONFIG";
-          value = "experimental-features = nix-command flakes pipe-operators repl-flake";
+          value = "experimental-features = nix-command flakes pipe-operators";
         }
       ];
       commands = [
@@ -34,9 +34,17 @@
           name = "repl";
           category = "flake";
           command = ''
-            repl
+            nix repl --expr "builtins.getFlake \"$PWD\""
           '';
           help = "Enter this flake's REPL";
+        }
+        {
+          name = "repair store";
+          category = "flake";
+          command = ''
+            nix-collect-garbage -d && sudo nix-store --verify --check-contents --repair
+          '';
+          help = "Clean then repair the nix store";
         }
       ];
       packages = [
