@@ -23,6 +23,12 @@
           inherit inputs;
           src = ../home;
         };
+      droid =
+        self.lib.loadModulesReursively
+        {
+          inherit inputs;
+          src = ../droid;
+        };
     };
   };
 }
