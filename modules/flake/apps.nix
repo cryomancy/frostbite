@@ -1,4 +1,4 @@
-_: {self, ...}: {
+{self, ...}: {
   perSystem = {pkgs, ...}: {
     apps = {
       generateAgeKey = {

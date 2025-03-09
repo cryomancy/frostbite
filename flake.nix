@@ -5,14 +5,14 @@
     flake-parts.lib.mkFlake {inherit inputs;}
     ({
       self,
-      withSystem,
       flake-parts-lib,
       ...
     }: let
       inherit (flake-parts-lib) importApply;
       flakeModules = {
-        apps = importApply ./modules/flake/apps.nix {inherit withSystem;};
-        lib = importApply ./modules/flake/lib.nix {inherit inputs flake-parts-lib;};
+        apps = importApply ./modules/flake/apps.nix {inherit self;};
+        lib = importApply ./modules/flake/lib.nix {inherit inputs;};
+        modules = importApply ./modules/flake/modules.nix {inherit self inputs;};
         partitions = import ./modules/flake/partitions.nix;
         systems = import ./modules/flake/systems.nix;
         templates = import ./modules/flake/templates.nix;
@@ -26,31 +26,12 @@
         flakeModules.partitions
         flakeModules.systems
         flakeModules.templates
+        flakeModules.modules
       ];
 
       flake = {
         inherit flakeModules;
-
-        modules = {
-          flake =
-            self.lib.loadModulesRecursively
-            {
-              inherit inputs;
-              src = ./modules/flake;
-            };
-          nixos =
-            self.lib.loadModulesRecursively
-            {
-              inherit inputs;
-              src = ./modules/nixos;
-            };
-          homeManager =
-            self.lib.loadModulesRecursively
-            {
-              inherit inputs;
-              src = ./modules/home;
-            };
-        };
+        inherit (flakeModules) modules;
       };
     });
 

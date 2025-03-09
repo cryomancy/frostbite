@@ -1,5 +1,4 @@
 {
-  flake-parts-lib,
   inputs,
 }:
 {
