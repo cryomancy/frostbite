@@ -1,30 +1,30 @@
 {
-  self,
+  config,
   inputs,
   ...
 }: {
   flake = {
     modules = {
       flake =
-        self.lib.loadModulesRecursively
+        config.flake.lib.loadModulesRecursively
         {
           inherit inputs;
           src = ../flake;
         };
       nixos =
-        self.lib.loadModulesRecursively
+        config.flake.lib.loadModulesRecursively
         {
           inherit inputs;
           src = ../nixos;
         };
       homeManager =
-        self.lib.loadModulesRecursively
+        config.flake.lib.loadModulesRecursively
         {
           inherit inputs;
           src = ../home;
         };
       droid =
-        self.lib.loadModulesReursively
+        config.flake.lib.loadModulesReursively
         {
           inherit inputs;
           src = ../droid;

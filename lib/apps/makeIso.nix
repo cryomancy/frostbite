@@ -1,17 +1,14 @@
-_: {
+{
   extraModules ? [],
   hostName ? "nixos",
   outPath ? ./.,
   system ? "x86_64-linux",
   users ? ["nixos"],
   format ? "iso",
-  self,
   inputs,
   ...
 }: let
-  inputsA = {inherit inputs;} // {inputs.kosei = self.outputs;};
-  inputs = builtins.deepSeq inputsA inputsA;
-  inherit (inputs) kosei home-manager nixpkgs nixos-generators;
+  inherit (inputs) kosei nixpkgs home-manager nixos-generators;
   specialArgs = {inherit hostName inputs outPath system users;};
 in
   nixos-generators.nixosGenerate {

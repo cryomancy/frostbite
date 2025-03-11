@@ -1,27 +1,28 @@
-{
-  self,
+_: {
+  config,
   inputs,
   ...
 }: {
   perSystem = {pkgs, ...}: {
     apps = {
       generateAgeKey = {
-        program = self.lib.generateAgeKey {inherit pkgs;};
+        program = config.flake.lib.generateAgeKey {inherit pkgs;};
       };
-      makeIso = {
-        program = self.lib.makeIso {inherit self inputs;};
-      };
+      #makeIso = {
+      #  program =
+      #    config.flake.lib.makeIso {inherit inputs;};
+      #};
       partitionDisk = {
-        program = self.lib.partitionDisk {inherit pkgs;};
+        program = config.lib.partitionDisk {inherit pkgs;};
       };
       yubikeyInit = {
-        program = self.lib.yubikeyInit {inherit pkgs;};
+        program = config.lib.yubikeyInit {inherit pkgs;};
       };
       yubikeyTest = {
-        program = self.lib.yubikeyTest {inherit pkgs;};
+        program = config.lib.yubikeyTest {inherit pkgs;};
       };
       viewInputs = {
-        program = self.lib.viewInputs {inherit pkgs;};
+        program = config.lib.viewInputs {inherit pkgs;};
       };
     };
   };
