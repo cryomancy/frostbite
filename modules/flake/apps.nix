@@ -1,11 +1,15 @@
-{self, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
   perSystem = {pkgs, ...}: {
     apps = {
       generateAgeKey = {
         program = self.lib.generateAgeKey {inherit pkgs;};
       };
       makeIso = {
-        program = self.lib.iso {inherit self;};
+        program = self.lib.makeIso {inherit self inputs;};
       };
       partitionDisk = {
         program = self.lib.partitionDisk {inherit pkgs;};

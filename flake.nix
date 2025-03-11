@@ -10,10 +10,10 @@
     }: let
       inherit (flake-parts-lib) importApply;
       flakeModules = {
-        apps = importApply ./modules/flake/apps.nix {inherit self;};
+        apps = importApply ./modules/flake/apps.nix {inherit self inputs;};
         lib = importApply ./modules/flake/lib.nix {inherit inputs;};
         modules = importApply ./modules/flake/modules.nix {inherit self inputs;};
-        partitions = import ./modules/flake/partitions.nix;
+        partitions = import ./modules/flake/partitions/partitions.nix;
         systems = import ./modules/flake/systems.nix;
         templates = import ./modules/flake/templates.nix;
       };

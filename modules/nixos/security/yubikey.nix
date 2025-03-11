@@ -31,13 +31,19 @@ in {
       udev = {
         packages = with pkgs; [yubikey-personalization libu2f-host];
         # Lock on yubikey removal
+        # Do NOT use the rule below https://github.com/keepassxreboot/keepassxc/issues/10077
+        # extraRules = ''
+        #  ACTION=="remove",\
+        #   ENV{ID_BUS}=="usb",\
+        #   ENV{ID_MODEL_ID}=="0407",\
+        #   ENV{ID_VENDOR_ID}=="1050",\
+        #   ENV{ID_VENDOR}=="Yubico",\
+        #   RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
+        # '';
         extraRules = ''
           ACTION=="remove",\
-           ENV{ID_BUS}=="usb",\
-           ENV{ID_MODEL_ID}=="0407",\
-           ENV{ID_VENDOR_ID}=="1050",\
-           ENV{ID_VENDOR}=="Yubico",\
-           RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
+          ENV{SUBSYSTEM}=="usb",\
+          ENV{PRODUCT}=="1050/407/XXX",\
         '';
       };
     };

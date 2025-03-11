@@ -1,4 +1,4 @@
-scoped: {
+_: {
   extraModules ? [],
   hostName ? "nixos",
   outPath ? ./.,
@@ -6,12 +6,15 @@ scoped: {
   users ? ["nixos"],
   format ? "iso",
   self,
+  inputs,
   ...
 }: let
-  inputs = builtins.deepSeq (self // self.inputs) (self.outputs.flake // self.inputs);
+  inputsA = {inherit inputs;} // {inputs.kosei = self.outputs;};
+  inputs = builtins.deepSeq inputsA inputsA;
   inherit (inputs) kosei home-manager nixpkgs nixos-generators;
   specialArgs = {inherit hostName inputs outPath system users;};
-  iso = nixos-generators.nixosGenerate {
+in
+  nixos-generators.nixosGenerate {
     inherit system specialArgs format;
     modules =
       [
@@ -68,11 +71,4 @@ scoped: {
       ++ nixpkgs.lib.forEach
       (builtins.attrNames kosei.modules.nixos)
       (module: builtins.getAttr module kosei.modules.nixos);
-  };
-in
-  nixpkgs.legacyPackages.${system}.writeShellApplication {
-    name = "makeIso";
-    text = ''
-      nix build ${iso}
-    '';
   }

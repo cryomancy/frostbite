@@ -1,8 +1,8 @@
 {
   partitions = {
     dev = {
-      module = ./partitions/dev;
-      extraInputsFlake = ./partitions/dev;
+      module = ./dev;
+      extraInputsFlake = ./dev;
     };
   };
 

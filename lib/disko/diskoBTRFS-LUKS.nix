@@ -1,5 +1,5 @@
 # Impermanent Btrfs layout w/ encryption
-{drive ? throw "Pass the device to be partitioned to this function"}: {
+_: {drive ? throw "Pass the device to be partitioned to this function"}: {
   disko.devices = {
     disk.main = {
       type = "disk";
