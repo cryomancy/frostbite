@@ -22,7 +22,6 @@ in {
   config = lib.mkIf cfg.enable {
     programs.dconf.enable = true;
     security = {
-      acme.acceptTerms = true;
       sudo = {
         wheelNeedsPassword =
           if cfg.level > 3

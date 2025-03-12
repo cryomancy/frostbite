@@ -16,6 +16,10 @@ in {
         type = lib.types.str;
         default = null;
       };
+      email = lib.mkOption {
+        type = lib.types.str;
+        default = null;
+      };
     };
   };
   config = lib.mkIf cfg.enable {
@@ -32,13 +36,14 @@ in {
     containers = {
       home-assistant-container = {
         autoStart = true;
-        config = _: {
+        config = {config, ...}: {
           services = {
             home-assistant = {
               enable = true;
               openFirewall = true;
               configDir = "/var/lib/hass";
-
+              default = config.contents;
+              defaultText = lib.literalExpression "contents";
               # Home Assistant has a monthly release schedule so
               # it is nice to receive those updates as soon as they
               # are released to everyone else.
@@ -134,6 +139,11 @@ in {
                 };
               };
             };
+          };
+
+          security = {
+            acme.acceptTerms = true;
+            default.email = config.kosei.email;
           };
 
           system.stateVersion = systemStateVersion;
