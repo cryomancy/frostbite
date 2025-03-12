@@ -15,7 +15,7 @@
       }: let
         flakeModules = {
           apps = import ./modules/flake/apps.nix {inherit inputs;};
-          legacyPackages = import ./modules/flake/legacyPackages {inherit inputs;};
+          legacyPackages = import ./modules/flake/legacyPackages.nix {inherit inputs;};
           lib = import ./modules/flake/lib.nix {inherit inputs;};
           modules = import ./modules/flake/modules.nix {inherit config inputs;};
           partitions = import ./modules/flake/partitions/partitions.nix;
