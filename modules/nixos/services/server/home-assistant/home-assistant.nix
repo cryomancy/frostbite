@@ -59,7 +59,7 @@ in {
               };
 
               lovelaceConfigWritable = false;
-              lovelaceConfig = import ./lovelace.nix;
+              lovelaceConfig = import ./__lovelace.nix;
               customLovelaceModules = with inputs.nixpkgs-master.legacyPackages.${system}.home-assistant-custom-lovelace-modules; [
                 mini-graph-card
                 mini-media-player
