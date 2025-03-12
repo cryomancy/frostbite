@@ -108,7 +108,7 @@ in {
 
               customComponents = with inputs.nixpkgs-master.legacyPackages.${system}.home-assistant-custom-components; [
                 alarmo
-                mass
+                # mass
               ];
 
               # Reverse Proxy
