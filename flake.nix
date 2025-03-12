@@ -3,43 +3,43 @@
 
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;}
-    ({
-      config,
-      flake-parts-lib,
-      self,
-      # moduleWithSystem,
-      withSystem,
-      ...
-    }: let
-      inherit inputs;
-      inherit (flake-parts-lib) importApply;
-      flakeModules = {
-        apps = import ./modules/flake/apps.nix {inherit inputs;};
-        lib = import ./modules/flake/lib.nix {inherit inputs;};
-        modules = importApply ./modules/flake/modules.nix {inherit config inputs;};
-        partitions = import ./modules/flake/partitions/partitions.nix;
-        systems = import ./modules/flake/systems.nix;
-        templates = import ./modules/flake/templates.nix;
-      };
-    in {
-      #_module.specialArgs.inputs = config._module.specialArgs.inputs;
-      # // {_modules.specialArgs.inputs.kosei = config._module.specialArgs.self.outputs;};
+    (
+      # @top
+      {
+        config,
+        # flake-parts-lib,
+        # self,
+        # moduleWithSystem,
+        # withSystem,
+        ...
+      }: let
+        flakeModules = {
+          apps = import ./modules/flake/apps.nix {inherit inputs;};
+          legacyPackages = import ./modules/flake/legacyPackages {inherit inputs;};
+          lib = import ./modules/flake/lib.nix {inherit inputs;};
+          modules = import ./modules/flake/modules.nix {inherit config inputs;};
+          partitions = import ./modules/flake/partitions/partitions.nix;
+          systems = import ./modules/flake/systems.nix;
+          templates = import ./modules/flake/templates.nix;
+        };
+      in {
+        imports = [
+          flake-parts.flakeModules.modules
+          flake-parts.flakeModules.partitions
+          flakeModules.apps
+          flakeModules.legacyPackages
+          flakeModules.lib
+          flakeModules.partitions
+          flakeModules.systems
+          flakeModules.templates
+          flakeModules.modules
+        ];
 
-      imports = [
-        flake-parts.flakeModules.modules
-        flake-parts.flakeModules.partitions
-        flakeModules.apps
-        flakeModules.lib
-        flakeModules.partitions
-        flakeModules.systems
-        flakeModules.templates
-        flakeModules.modules
-      ];
-
-      flake = {
-        inherit flakeModules;
-      };
-    });
+        flake = {
+          inherit flakeModules;
+        };
+      }
+    );
 
   inputs = {
     assets = {
@@ -89,6 +89,7 @@
     nixpkgs-droid.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-stable.url = "github:/nixos/nixpkgs/nixos-24.11";
     nixpkgs-master.url = "github:/nixos/nixpkgs";
+    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs = {
