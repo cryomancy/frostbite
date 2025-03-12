@@ -42,8 +42,8 @@ in {
               enable = true;
               openFirewall = true;
               configDir = "/var/lib/hass";
-              default = config.contents;
-              defaultText = lib.literalExpression "contents";
+              # default = config.contents;
+              # defaultText = lib.literalExpression "contents";
               # Home Assistant has a monthly release schedule so
               # it is nice to receive those updates as soon as they
               # are released to everyone else.
