@@ -143,7 +143,7 @@ in {
 
           security.acme = {
             acceptTerms = true;
-            defaults.email = config.kosei.email.address;
+            defaults.email = "tahlonbrahic@gmail.com";
           };
 
           system.stateVersion = systemStateVersion;
