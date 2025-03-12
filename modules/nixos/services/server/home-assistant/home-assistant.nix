@@ -115,28 +115,28 @@ in {
                   use_x_forwarded_for = true;
                 };
               };
+            };
 
-              # Reverse Proxy
-              nginx = {
-                enable = true;
-                recommendedProxySettings = true;
-                # e.g. "home.tahlon.org"
-                virtualHosts."home.${cfg.domain}" = {
-                  forceSSL = true;
-                  enableACME = true;
-                  extraConfig = ''
-                    proxy_buffering off;
-                  '';
-                  locations."/" = {
-                    proxyPass = "http://[0.0.0.0]:8123";
-                    proxyWebsockets = true;
-                  };
+            # Reverse Proxy
+            nginx = {
+              enable = true;
+              recommendedProxySettings = true;
+              # e.g. "home.tahlon.org"
+              virtualHosts."home.${cfg.domain}" = {
+                forceSSL = true;
+                enableACME = true;
+                extraConfig = ''
+                  proxy_buffering off;
+                '';
+                locations."/" = {
+                  proxyPass = "http://[0.0.0.0]:8123";
+                  proxyWebsockets = true;
                 };
               };
             };
-
-            system.stateVersion = systemStateVersion;
           };
+
+          system.stateVersion = systemStateVersion;
         };
       };
     };
