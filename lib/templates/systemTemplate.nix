@@ -10,7 +10,7 @@ scoped: {
   specialArgs = {inherit inputs system outPath users;};
 in
   nixpkgs.lib.nixosSystem {
-    _module.args.pkgs = inputs.kosei.legacyPackages.${system};
+    pkgs = inputs.kosei.legacyPackages.${system};
     inherit specialArgs;
     modules =
       [
