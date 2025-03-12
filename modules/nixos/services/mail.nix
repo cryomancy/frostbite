@@ -8,7 +8,7 @@ in {
   options = {
     kosei.email = {
       enable = lib.mkEnableOption "email and email-server options";
-      email = lib.mkOption {
+      address = lib.mkOption {
         type = lib.types.str;
         default = null;
       };
@@ -17,7 +17,7 @@ in {
   config = lib.mkIf cfg.enable {
     security = {
       acme.acceptTerms = true;
-      default.email = cfg.email;
+      default.email = cfg.email.address;
     };
   };
 }

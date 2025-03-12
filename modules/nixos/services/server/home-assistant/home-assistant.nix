@@ -141,9 +141,9 @@ in {
             };
           };
 
-          security = {
-            acme.acceptTerms = true;
-            default.email = config.kosei.email;
+          security.acme = {
+            acceptTerms = true;
+            defaults.email = config.kosei.email;
           };
 
           system.stateVersion = systemStateVersion;
