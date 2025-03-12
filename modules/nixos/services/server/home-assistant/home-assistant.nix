@@ -20,7 +20,7 @@ in {
   };
   config = lib.mkIf cfg.enable {
     environment = {
-      packages = with pkgs; [
+      systemPackages = with pkgs; [
         home-assistant-cli
       ];
       persistence = lib.mkIf config.kosei.impermanence.enable {
