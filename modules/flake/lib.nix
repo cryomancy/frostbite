@@ -1,22 +1,11 @@
-{
-  flake-parts-lib,
-  inputs,
-}:
+{inputs, ...}:
 let
-  inherit (inputs) eris nixpkgs;
-  inherit (nixpkgs) lib;
+  inherit (inputs) eris;
 in
 {
-  options.flake =
-      flake-parts-lib.mkSubmoduleOptions
-      {
-        lib = lib.mkOption {
-          description = ''
-            Custom functions used in Kosei modules that may be helpful in other places.
-          '';
-          type = lib.types.lazyAttrsOf lib.types.raw;
-          default = {
-			lib =
+  config = {
+    flake = {
+        lib =
 			  (eris.lib.load
 				{
 				  src = ../../lib;
@@ -42,7 +31,6 @@ in
 			  inputs.nixpkgs.lib.lists.flatten
 			  |>
 			  inputs.nixpkgs.lib.attrsets.mergeAttrsList;
-			};
-		  };
-		};
+	    };
+	  };
 }

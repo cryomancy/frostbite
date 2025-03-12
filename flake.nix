@@ -4,25 +4,26 @@
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;}
     ({
-      # moduleWithSystem, withSystem
       config,
       flake-parts-lib,
       self,
+      # moduleWithSystem,
+      withSystem,
       ...
     }: let
+      inherit inputs;
       inherit (flake-parts-lib) importApply;
       flakeModules = {
-        apps = importApply ./modules/flake/apps.nix {inherit config inputs;};
-        lib = importApply ./modules/flake/lib.nix {inherit flake-parts-lib inputs;};
+        apps = import ./modules/flake/apps.nix {inherit inputs;};
+        lib = import ./modules/flake/lib.nix {inherit inputs;};
         modules = importApply ./modules/flake/modules.nix {inherit config inputs;};
         partitions = import ./modules/flake/partitions/partitions.nix;
         systems = import ./modules/flake/systems.nix;
         templates = import ./modules/flake/templates.nix;
       };
     in {
-      # _module.specialArgs.inputs =
-      #  config._module.specialArgs.inputs
-      #  // {_modules.specialArgs.inputs.kosei = config._module.specialArgs.self.outputs;};
+      #_module.specialArgs.inputs = config._module.specialArgs.inputs;
+      # // {_modules.specialArgs.inputs.kosei = config._module.specialArgs.self.outputs;};
 
       imports = [
         flake-parts.flakeModules.modules
@@ -37,7 +38,6 @@
 
       flake = {
         inherit flakeModules;
-        inherit (flakeModules) lib modules;
       };
     });
 
