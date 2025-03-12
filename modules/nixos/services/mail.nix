@@ -15,8 +15,8 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
-    security = {
-      acme.acceptTerms = true;
+    security.acme = {
+      acceptTerms = true;
       default.email = cfg.address;
     };
   };
