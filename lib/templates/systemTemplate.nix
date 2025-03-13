@@ -6,11 +6,11 @@ scoped: {
   users,
   ...
 }: let
-  inherit (inputs) kosei home-manager nixpkgs;
+  inherit (inputs) kosei home-manager;
   specialArgs = {inherit inputs system outPath users;};
+  nixpkgs = inputs.kosei.legacyPackages.${system};
 in
   nixpkgs.lib.nixosSystem {
-    pkgs = inputs.kosei.legacyPackages.${system};
     inherit specialArgs;
     modules =
       [
