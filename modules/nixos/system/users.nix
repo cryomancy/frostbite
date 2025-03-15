@@ -56,7 +56,7 @@ in {
           # TODO: add logic to not add users to all groups depending on role
           extraGroups = lib.lists.concatLists [
             (lib.lists.optionals true ["${user}" "users" "video" "wheel" "seat"])
-            (lib.lists.optionals (config.kosei.security.level < 4) ["networkmanager" "wireshark"])
+            (lib.lists.optionals (config.kosei.security.level < 4) ["netadmin" "wireshark"])
             (lib.lists.optionals (config.kosei.security.level < 4) ["wheel"])
             (lib.lists.optionals config.home-manager.users.${user}.kosei.arduino.enable ["dialout"])
             (lib.lists.optionals config.kosei.virtualization.enable ["libvirtd"])

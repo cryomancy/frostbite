@@ -30,6 +30,7 @@ in {
         allowedUDPPorts =
           lib.lists.concatLists [
           ];
+        package = pkgs.nftables;
       };
     };
     services = {

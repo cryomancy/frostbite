@@ -32,7 +32,7 @@ in {
 
       systemPackages = with pkgs; [
         age # Simple, secure, modern encryption tool
-        sops
+        # sops # this needs to be replaced with my sops
       ];
 
       variables = {
@@ -52,7 +52,29 @@ in {
           "${user}/hashedPasswordFile" = {neededForUsers = true;};
         }))))
         (lib.attrsets.optionalAttrs
-          (config.kosei.security.level < 4) {"recovery/hashedPasswordFile" = {neededForUsers = true;};});
+          (config.kosei.security.level < 4)
+          {"recovery/hashedPasswordFile" = {neededForUsers = true;};})
+        (
+          lib.attrsets.optionalAttrs
+          config.kosei.networking.enable
+          (lib.attrsets.mergeAttrsList (
+            lib.lists.forEach
+            config.kosei.networking.wirelessNetworks (
+              network: {"network/${network}/psk" = {};}
+            )
+          ))
+        );
+      templates = {
+        "wireless.conf" = {
+          content =
+            lib.strings.concatLines
+            (lib.lists.forEach
+              config.kosei.networking.wirelessNetworks (network: ''
+                psk_${network}=${config.sops.secrets."network/${network}/psk"}
+              ''));
+          # owner = "networkmanager";
+        };
+      };
     };
   };
 }
