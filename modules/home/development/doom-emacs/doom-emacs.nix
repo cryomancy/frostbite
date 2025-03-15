@@ -20,7 +20,7 @@ in {
     programs.doom.emacs = {
       enable = true;
       doomPrivateDir = ./config/doom.d;
-      emacsPackage = pkgs.emacsPgtk;
+      emacsPackage = pkgs.emacspgtk;
     };
     home = {
       persistence = lib.mkIf config.kosei.impermanence.enable {
