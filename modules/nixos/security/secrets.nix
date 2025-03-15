@@ -46,14 +46,15 @@ in {
       };
       inherit (cfg) defaultSopsFile;
       defaultSopsFormat = "yaml";
-      secrets =
-        lib.mergeAttrs
+      secrets = lib.attrsets.mergeAttrsList [
         (lib.attrsets.mergeAttrsList (builtins.attrValues (lib.genAttrs users (user: {
           "${user}/hashedPasswordFile" = {neededForUsers = true;};
         }))))
+
         (lib.attrsets.optionalAttrs
           (config.kosei.security.level < 4)
           {"recovery/hashedPasswordFile" = {neededForUsers = true;};})
+
         (
           lib.attrsets.optionalAttrs
           config.kosei.networking.enable
@@ -63,16 +64,17 @@ in {
               network: {"network/${network}/psk" = {};}
             )
           ))
-        );
+        )
+      ];
+
       templates = {
-        "wireless.conf" = {
+        "wireless.conf" = lib.attrsets.optionalAttrs config.kosei.networking.enable {
           content =
             lib.strings.concatLines
             (lib.lists.forEach
               config.kosei.networking.wirelessNetworks (network: ''
                 psk_${network}=${config.sops.secrets."network/${network}/psk"}
               ''));
-          # owner = "networkmanager";
         };
       };
     };
