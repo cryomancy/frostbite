@@ -4,7 +4,7 @@ scoped: {
   pkgs,
   ...
 }: let
-  cfg = config.kosei.network;
+  cfg = config.kosei.networking;
 in {
   options = {
     kosei.networking = {
