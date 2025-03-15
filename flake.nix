@@ -106,6 +106,10 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    simple-nixos-mailserver = {
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     sops-nix = {
       url = "github:TahlonBrahic/sops-nix";
       inputs = {
