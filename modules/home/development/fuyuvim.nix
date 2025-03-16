@@ -10,7 +10,7 @@ scoped: {
   inherit (inputs.fuyuvim.packages.${system}) fuyuvim;
 in {
   options = {
-    kosei.fuyuim = {
+    kosei.fuyuvim = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

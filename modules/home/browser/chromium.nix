@@ -4,10 +4,10 @@ scoped: {
   lib,
   ...
 }: let
-  cfg = config.fuyuNoKosei.browser.chromium;
+  cfg = config.kosei.chromium;
 in {
   options = {
-    fuyuNoKosei.browser = {
+    kosei.browser = {
       chromium.enable = lib.mkOption {
         type = lib.types.bool;
         default = false;
