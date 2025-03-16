@@ -73,7 +73,7 @@ in {
             lib.strings.concatLines
             (lib.lists.forEach
               config.kosei.networking.wirelessNetworks (network: ''
-                psk_${network}=${config.sops.secrets."network/${network}/psk"}
+                psk_${network}=${config.sops.secrets."network/${network}/psk".path}
               ''));
         };
       };
