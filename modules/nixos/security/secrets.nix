@@ -55,16 +55,16 @@ in {
           (config.kosei.security.level < 4)
           {"recovery/hashedPasswordFile" = {neededForUsers = true;};})
 
-        (
-          lib.attrsets.optionalAttrs
-          config.kosei.networking.enable
-          (lib.attrsets.mergeAttrsList (
-            lib.lists.forEach
-            config.kosei.networking.wirelessNetworks (
-              network: {"network/${network}/psk" = {};}
-            )
-          ))
-        )
+        #(
+        #  lib.attrsets.optionalAttrs
+        #  config.kosei.networking.enable
+        #  (lib.attrsets.mergeAttrsList (
+        #    lib.lists.forEach
+        #    config.kosei.networking.wirelessNetworks (
+        #      network: {"network/${network}/psk" = {neededForUsers = false;};}
+        #    )
+        #  ))
+        #)
       ];
 
       #templates = {
