@@ -29,7 +29,7 @@ in {
       usePredictableInterfaceNames = true;
 
       resolvconf.enable = false;
-      useHostResolvConf = true;
+      useHostResolvConf = false;
 
       tempAddresses = "disabled";
       enableIPv6 = false;
