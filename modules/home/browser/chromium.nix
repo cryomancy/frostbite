@@ -7,8 +7,8 @@ scoped: {
   cfg = config.kosei.chromium;
 in {
   options = {
-    kosei.browser = {
-      chromium.enable = lib.mkOption {
+    kosei.chromium = {
+      enable = lib.mkOption {
         type = lib.types.bool;
         default = false;
       };
