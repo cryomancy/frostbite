@@ -42,12 +42,12 @@ in {
       #       networking.wireless.networks or imperatively
       wireless = {
         allowAuxiliaryImperativeNetworks = true;
-        secretsFile = config.sops.templates."network.conf".path;
-        networks =
-          lib.attrsets.mergeAttrsList
-          (lib.lists.forEach cfg.wirelessNetworks (
-            network: {${network}.pskRaw = "ext:psk_${network}";}
-          ));
+        #secretsFile = config.sops.templates."network.conf".path;
+        #networks =
+        #  lib.attrsets.mergeAttrsList
+        #  (lib.lists.forEach cfg.wirelessNetworks (
+        #    network: {${network}.pskRaw = "ext:psk_${network}";}
+        #  ));
       };
 
       rxe = {
