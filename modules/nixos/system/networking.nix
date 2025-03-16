@@ -35,7 +35,7 @@ in {
       enableIPv6 = false;
       dhcpcd.enable = false;
 
-      tcpcrypt.enable = true;
+      #tcpcrypt.enable = true;
       stevenblack.enable = true;
 
       # NOTE: Users can declare their wireless networks through
