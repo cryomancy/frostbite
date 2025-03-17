@@ -20,8 +20,21 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.network.enable = true;
-    services.networkd-dispatcher.enable = true;
+    systemd.network = {
+      enable = true;
+
+      networks = {
+      };
+
+      netdevs = {
+        "20-br0" = {
+          netdevConfig = {
+            Kind = "bridge";
+            Name = "br0";
+          };
+        };
+      };
+    };
 
     networking = {
       useNetworkd = true;
@@ -61,11 +74,13 @@ in {
         "3.nixos.pool.ntp.org"
       ];
 
-      bridges = {
+      nat = {
+        enable = true;
+        enableIPv6 = false;
+        internalIPs = ["192.168.1.0/24"];
+        internalInterfaces = [];
       };
     };
-
-    services.resolved.enable = true;
 
     hardware.bluetooth.enable = true;
 
@@ -81,6 +96,8 @@ in {
     services = {
       avahi.enable = true;
       blueman.enable = true;
+      resolved.enable = true;
+      networkd-dispatcher.enable = true;
     };
   };
 }

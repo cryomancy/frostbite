@@ -1,20 +1,23 @@
-{
+_: {
   extraModules ? [],
   hostName ? "nixos",
   outPath ? ./.,
   system ? "x86_64-linux",
   users ? ["nixos"],
-  format ? "iso",
-  inputs,
+  format ? flake.lib.iso,
+  preInputs,
+  flake,
   ...
 }: let
-  inherit (inputs) kosei nixpkgs home-manager nixos-generators;
+  inputs = preInputs // {kosei = flake;};
+  inherit (inputs) kosei nixpkgs home-manager;
   specialArgs = {inherit hostName inputs outPath system users;};
 in
-  nixos-generators.nixosGenerate {
-    inherit system specialArgs format;
+  nixpkgs.lib.nixosSystem {
+    inherit system specialArgs;
     modules =
       [
+        format
         home-manager.nixosModules.home-manager
         {
           networking.wireless.enable = false;

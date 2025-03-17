@@ -29,8 +29,6 @@ in {
             nextcloud = {
               enable = true;
 
-              package = pkgs.nextcloud28;
-
               hostName = "nextcloud.tahlon.org";
               https = true;
 
@@ -39,6 +37,7 @@ in {
                 dbtype = "sqlite";
               };
 
+              package = pkgs.nextcloud28;
               extraApps = {
                 inherit (config.services.nextcloud.package.packages.apps) news contacts calendar tasks;
               };

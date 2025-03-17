@@ -8,16 +8,17 @@
       {
         config,
         # flake-parts-lib,
-        # self,
+        self,
         # moduleWithSystem,
         # withSystem,
         ...
       }: let
+        # inherit (flake-parts-lib) importApply;
         flakeModules = {
-          apps = import ./modules/flake/apps.nix {inherit inputs;};
+          apps = import ./modules/flake/apps.nix {inherit config self;};
           legacyPackages = import ./modules/flake/legacyPackages.nix {inherit inputs;};
           lib = import ./modules/flake/lib.nix {inherit inputs;};
-          modules = import ./modules/flake/modules.nix {inherit config inputs;};
+          modules = import ./modules/flake/modules.nix {inherit config self inputs;};
           partitions = import ./modules/flake/partitions/partitions.nix;
           systems = import ./modules/flake/systems.nix;
           templates = import ./modules/flake/templates.nix;
@@ -71,18 +72,8 @@
     impermanence = {
       url = "github:nix-community/impermanence";
     };
-    jeezyvim = {
-      url = "github:LGUG2Z/JeezyVim";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
     mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";

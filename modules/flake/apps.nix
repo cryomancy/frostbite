@@ -1,23 +1,40 @@
-localFlake: {inputs, ...}: {
+{
+  config,
+  self,
+  ...
+}: {
   perSystem = {pkgs, ...}: {
     apps = {
       generateAgeKey = {
-        program = localFlake.lib.generateAgeKey {inherit pkgs;};
+        program = config.flake.lib.generateAgeKey {inherit pkgs;};
       };
-      #makeIso = {
-      #  program = localFlake.lib.makeIso {inherit inputs;};
-      #};
+      nixosGenerate = {
+        program = pkgs.writeShellApplication {
+          name = "nixosGenerate";
+          text = ''
+            nix build --file ${(config.flake.lib.nixosGenerate
+                {
+                  preInputs = self.inputs;
+                  inherit (config) flake;
+                })
+              .config
+              .system
+              .build
+              .isoImage}
+          '';
+        };
+      };
       partitionDisk = {
-        program = localFlake.lib.partitionDisk {inherit pkgs;};
+        program = config.flake.lib.partitionDisk {inherit pkgs;};
       };
       yubikeyInit = {
-        program = localFlake.lib.yubikeyInit {inherit pkgs;};
+        program = config.flake.lib.yubikeyInit {inherit pkgs;};
       };
       yubikeyTest = {
-        program = localFlake.lib.yubikeyTest {inherit pkgs;};
+        program = config.flake.lib.yubikeyTest {inherit pkgs;};
       };
       viewInputs = {
-        program = localFlake.lib.viewInputs {inherit pkgs;};
+        program = config.flake.lib.viewInputs {inherit pkgs;};
       };
     };
   };

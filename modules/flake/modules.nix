@@ -5,12 +5,12 @@
 }: {
   flake = {
     modules = {
-      flake =
-        config.flake.lib.loadModulesRecursively
-        {
-          inherit inputs;
-          src = ../flake;
-        };
+      #flake =
+      #config.flake.lib.loadModulesRecursively
+      #{
+      #  inherit (self) inputs;
+      #  src = ./.;
+      #};
       nixos =
         config.flake.lib.loadModulesRecursively
         {
@@ -24,7 +24,7 @@
           src = ../home;
         };
       droid =
-        config.flake.lib.loadModulesReursively
+        config.flake.lib.loadModulesRecursively
         {
           inherit inputs;
           src = ../droid;
