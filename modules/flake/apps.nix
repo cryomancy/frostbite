@@ -1,28 +1,11 @@
-{
-  config,
-  self,
-  ...
-}: {
+{config, ...}: {
   perSystem = {pkgs, ...}: {
     apps = {
       generateAgeKey = {
         program = config.flake.lib.generateAgeKey {inherit pkgs;};
       };
       nixosGenerate = {
-        program = pkgs.writeShellApplication {
-          name = "nixosGenerate";
-          text = ''
-            nix build --file ${(config.flake.lib.nixosGenerate
-                {
-                  preInputs = self.inputs;
-                  inherit (config) flake;
-                })
-              .config
-              .system
-              .build
-              .isoImage}
-          '';
-        };
+        program = config.flake.lib.generateKoseiISO {inherit pkgs;};
       };
       partitionDisk = {
         program = config.flake.lib.partitionDisk {inherit pkgs;};

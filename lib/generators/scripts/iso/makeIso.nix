@@ -33,57 +33,58 @@ assert usbBootable -> isohybridMbrImage != ""; let
     comp = squashfsCompression;
   };
 
-  createIso = pkgs.runCommand "make-iso" {
-    nativeBuildInputs = [xorriso syslinux zstd];
-    buildInputs = [xorriso syslinux zstd];
+  createIso =
+    pkgs.runCommand "make-iso" {
+      nativeBuildInputs = [xorriso syslinux zstd];
+      buildInputs = [xorriso syslinux zstd];
 
-    inherit
-      isoName
-      bootImage
-      bootable
-      efiBootable
-      usbBootable
-      ;
-
-    installPhase = ''
-          stripSlash() {
-            res="$1"
-            if ["${res:0:1}" = /;];
-        then res=${res:1};
-      fi
-          }
+      inherit
+        isoName
+        bootImage
+        bootable
+        efiBootable
+        usbBootable
+        ;
+    }
+    ''
+      stripSlash() {
+        res="$1"
+        if ["${res:0:1}" = /;];
+          then res=${res:1};
+        fi
+      }
 
        escapeEquals() {
-            echo "$1" | sed -e 's/\\/\\\\/g' -e 's/=/\\=/g'
-          }
+         echo "$1" | sed -e 's/\\/\\\\/g' -e 's/=/\\=/g'
+       }
 
        addPath() {
-            target="$1"
-            source="$2"
-            echo "$(escapeEquals "$target")=$(escapeEquals "$source")" >> pathlist
-          }
+         target="$1"
+         source="$2"
+         echo "$(escapeEquals "$target")=$(escapeEquals "$source")" >> pathlist
+       }
 
        stripSlash "$bootImage"; bootImage="$res"
 
-       if [ -n "$bootable" ]; then
-            for ((i = 0; i < ''${#targets[@]}; i++)); do
-              stripSlash "''${targets[$i]}"
-              if test "$res" = "$bootImage"; then
-                echo "copying the boot image ''${sources[$i]}"
-                cp "''${sources[$i]}" boot.img
-                chmod u+w boot.img
-                sources[$i]=boot.img
-              fi
-            done
+      if [ -n "$bootable" ]; then
+        for ((i = 0; i < ''${#targets[@]}; i++)); do
+          stripSlash "''${targets[$i]}"
+            if test "$res" = "$bootImage"; then
+              echo "copying the boot image ''${sources[$i]}"
+              cp "''${sources[$i]}" boot.img
+              chmod u+w boot.img
+              sources[$i]=boot.img
+            fi
+          done
 
-            isoBootFlags="-eltorito-boot ''${bootImage}
-                      -eltorito-catalog .boot.cat
-                      -no-emul-boot -boot-load-size 4 -boot-info-table
-                      --sort-weight 1 /isolinux" # Make sure isolinux is near the beginning of the ISO
-          fi
+          isoBootFlags="-eltorito-boot ${bootImage}
+            -eltorito-catalog .boot.cat
+            -no-emul-boot -boot-load-size 4 -boot-info-table
+            --sort-weight 1 /isolinux" # Make sure isolinux is near the beginning of the ISO
+        fi
 
          if [ -n "$usbBootable" ]; then
-           usbBootFlags="-isohybrid-mbr ''${isohybridMbrImage}"
+           usbBootFlags="-isohybrid-mbr ${isohybridMbrImage}"
          fi
 
          if [ -n "$efiBootable" ]; then
@@ -95,7 +96,7 @@ assert usbBootable -> isohybridMbrImage != ""; let
 
           touch pathlist
 
-       for ((i = 0; i < ''${#targets[@]}; i++)); do
+         for ((i = 0; i < ''${#targets[@]}; i++)); do
             stripSlash "''${targets[$i]}"
             addPath "$res" "''${sources[$i]}"
           done
@@ -114,7 +115,7 @@ assert usbBootable -> isohybridMbrImage != ""; let
             addPath "nix-path-registration" "nix-path-registration"
           fi
 
-       for ((n = 0; n < ''${#objects[*]}; n++)); do
+          for ((n = 0; n < ''${#objects[*]}; n++)); do
             object=''${objects[$n]}
             symlink=''${symlinks[$n]}
             if test "$symlink" != "none"; then
@@ -138,14 +139,13 @@ assert usbBootable -> isohybridMbrImage != ""; let
 
           if [ -n "$compressImage" ]; then
             zstd -T$NIX_BUILD_CORES --rm $out/iso/$isoName
-      echo "file iso $out/iso/$isoName.zst" >> $out/nix-support/hydra-build-products
-       else
+            echo "file iso $out/iso/$isoName.zst" >> $out/nix-support/hydra-build-products
+          else
             echo "file iso $out/iso/$isoName" >> $out/nix-support/hydra-build-products
           fi
 
        echo $system > $out/nix-support/system
     '';
-  };
 in
   stdenv.mkDerivation {
     name = isoName;

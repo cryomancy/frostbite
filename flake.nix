@@ -19,6 +19,7 @@
           legacyPackages = import ./modules/flake/legacyPackages.nix {inherit inputs;};
           lib = import ./modules/flake/lib.nix {inherit inputs;};
           modules = import ./modules/flake/modules.nix {inherit config self inputs;};
+          nixosConfigurations = import ./modules/flake/nixosConfigurations.nix {inherit config self;};
           partitions = import ./modules/flake/partitions/partitions.nix;
           systems = import ./modules/flake/systems.nix;
           templates = import ./modules/flake/templates.nix;
@@ -30,6 +31,7 @@
           flakeModules.apps
           flakeModules.legacyPackages
           flakeModules.lib
+          flakeModules.nixosConfigurations
           flakeModules.partitions
           flakeModules.systems
           flakeModules.templates
