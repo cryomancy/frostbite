@@ -1,6 +1,5 @@
 _: {
   lib,
-  pkgs,
   stdenv,
   modulesPath,
   callPackage,
@@ -34,7 +33,7 @@ assert usbBootable -> isohybridMbrImage != ""; let
   };
 
   createIso =
-    pkgs.runCommand "make-iso" {
+    lib.runJanetCommand "make-iso" {
       nativeBuildInputs = [xorriso syslinux zstd];
       buildInputs = [xorriso syslinux zstd];
 
@@ -47,104 +46,41 @@ assert usbBootable -> isohybridMbrImage != ""; let
         ;
     }
     ''
-      stripSlash() {
-        res="$1"
-        if ["${res:0:1}" = /;];
-          then res=${res:1};
-        fi
-      }
+            fn stripSlash(res) do
+              if (string:at res 0) == "/" do
+                return (string:sub res 1 (string:length res) )
+                end
+              return res
+            end
 
-       escapeEquals() {
-         echo "$1" | sed -e 's/\\/\\\\/g' -e 's/=/\\=/g'
-       }
+            fn escapeEquals(str) do
+              return (string:replace str "\\" "\\\\")
+              |> (string:replace "=" "\\=")
+            end
 
-       addPath() {
-         target="$1"
-         source="$2"
-         echo "$(escapeEquals "$target")=$(escapeEquals "$source")" >> pathlist
-       }
+            fn addPath(target, source) do
+              echo "$(escapeEquals target)=$(escapeEquals source)" > "pathlist"
+            end
 
-       stripSlash "$bootImage"; bootImage="$res"
+            fn createIso(args) do
+              isoName = get(args, "isoName", os:getenv("ISO_NAME"))
+              bootImage = get(args, "bootImage", os:getenv("BOOT_IMAGE"))
+              volumeID = get(args, "volumeID", os:getenv("VOLUME_ID"))
+              usbBootFlags = get(args, "usbBootFlags", os:getenv("USB_BOOT_FLAGS"))
 
-      if [ -n "$bootable" ]; then
-        for ((i = 0; i < ''${#targets[@]}; i++)); do
-          stripSlash "''${targets[$i]}"
-            if test "$res" = "$bootImage"; then
-              echo "copying the boot image ''${sources[$i]}"
-              cp "''${sources[$i]}" boot.img
-              chmod u+w boot.img
-              sources[$i]=boot.img
-            fi
-          done
+      	  system:exec(string:format("xorriso -output %s -boot_image any gpt_disk_guid=$(uuid -v 5 daed2280-b91e-42c0-aed6-82c825ca41f3 %s) -volume_date all_file_dates =$SOURCE_DATE_EPOCH -as mkisofs -iso-level 3 -volid %s -appid nixos -publisher nixos -graft-points -full-iso9660-filenames -joliet %s %s %s -r -path-list %s --sort-weight 0 /", isoName, out, volumeID, isoBootFlags, usbBootFlags, efiBootFlags, pathlist
+      ))
+              if (string:length usbBootFlags) > 0 do
+      		system:exec(string:format("xorriso -isohybrid-mbr %s", usbBootFlags))
+              end
+            end
 
-          isoBootFlags="-eltorito-boot ${bootImage}
-            -eltorito-catalog .boot.cat
-            -no-emul-boot -boot-load-size 4 -boot-info-table
-            --sort-weight 1 /isolinux" # Make sure isolinux is near the beginning of the ISO
-        fi
-
-         if [ -n "$usbBootable" ]; then
-           usbBootFlags="-isohybrid-mbr ${isohybridMbrImage}"
-         fi
-
-         if [ -n "$efiBootable" ]; then
-            efiBootFlags="-eltorito-alt-boot
-            -e $efiBootImage
-            -no-emul-boot
-            -isohybrid-gpt-basdat"
-          fi
-
-          touch pathlist
-
-         for ((i = 0; i < ''${#targets[@]}; i++)); do
-            stripSlash "''${targets[$i]}"
-            addPath "$res" "''${sources[$i]}"
-          done
-
-          for i in $(< $closureInfo/store-paths); do
-            addPath "''${i:1}" "$i"
-          done
-
-          if [[ -n "$squashfsCommand" ]]; then
-            (out="nix-store.squashfs" eval "$squashfsCommand")
-            addPath "nix-store.squashfs" "nix-store.squashfs"
-          fi
-
-          if [[ ''${#objects[*]} != 0 ]]; then
-            cp $closureInfo/registration nix-path-registration
-            addPath "nix-path-registration" "nix-path-registration"
-          fi
-
-          for ((n = 0; n < ''${#objects[*]}; n++)); do
-            object=''${objects[$n]}
-            symlink=''${symlinks[$n]}
-            if test "$symlink" != "none"; then
-              mkdir -p $(dirname ./$symlink)
-              ln -s $object ./$symlink
-              addPath "$symlink" "./$symlink"
-            fi
-          done
-
-
-          mkdir -p $out/iso
-          mkdir -p $out/nix-support
-
-          xorriso -output $out/iso/$isoName
-            -boot_image any gpt_disk_guid=$(uuid -v 5 daed2280-b91e-42c0-aed6-82c825ca41f3 $out) \
-            -volume_date all_file_dates =$SOURCE_DATE_EPOCH -as mkisofs -iso-level 3 \
-            -volid ''${volumeID} -appid nixos -publisher nixos -graft-points \
-            -full-iso9660-filenames \
-            -joliet ''${isoBootFlags} ''${usbBootFlags} ''${efiBootFlags} \
-            -r -path-list pathlist --sort-weight 0 /
-
-          if [ -n "$compressImage" ]; then
-            zstd -T$NIX_BUILD_CORES --rm $out/iso/$isoName
-            echo "file iso $out/iso/$isoName.zst" >> $out/nix-support/hydra-build-products
-          else
-            echo "file iso $out/iso/$isoName" >> $out/nix-support/hydra-build-products
-          fi
-
-       echo $system > $out/nix-support/system
+      	  createIso({
+              "isoName" => isoName,
+              "bootImage" => bootImage,
+              "volumeID" => volumeID,
+              "usbBootFlags" => usbBootFlags
+            })
     '';
 in
   stdenv.mkDerivation {
