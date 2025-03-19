@@ -148,6 +148,8 @@ in {
             defaults.email = "tahlonbrahic@gmail.com";
           };
 
+          nixpkgs.config.allowUnfree = true;
+
           system.stateVersion = systemStateVersion;
         };
       };
