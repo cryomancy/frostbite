@@ -49,6 +49,8 @@ in {
           # Do not create default ~/Sync folder
           systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true";
 
+          nixpkgs.config.allowUnfree = true;
+
           system.stateVersion = systemStateVersion;
         };
       };
