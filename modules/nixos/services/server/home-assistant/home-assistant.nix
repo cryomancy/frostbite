@@ -8,6 +8,7 @@ _: {
 }: let
   cfg = config.kosei.home-assistant;
   systemStateVersion = config.system.stateVersion;
+  inherit config inputs pkgs;
 in {
   options = {
     kosei.home-assistant = {
