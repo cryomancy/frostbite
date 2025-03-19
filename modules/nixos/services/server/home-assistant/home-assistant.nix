@@ -50,11 +50,6 @@ in {
               # it is nice to receive those updates as soon as they
               # are released to everyone else.
               package = inputs.nixpkgs-master.legacyPackages.${system}.home-assistant;
-              extraPackages = with inputs.nixpkgs-master.legacyPackages.${system}.python3Packages; [
-                # postgresql support
-                psycopg2
-              ];
-
               config = {
                 homeassistant = {
                   unit_system = "metric";
