@@ -103,10 +103,10 @@ in {
                 "backup"
               ];
 
-              customComponents = with inputs.nixpkgs-master.legacyPackages.${system}.home-assistant-custom-components; [
-                alarmo
-                # mass
-              ];
+              #customComponents = with inputs.nixpkgs-master.legacyPackages.${system}.home-assistant-custom-components; [
+              # alarmo
+              # mass
+              #];
 
               # Reverse Proxy
               config = {
