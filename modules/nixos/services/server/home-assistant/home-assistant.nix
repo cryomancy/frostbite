@@ -68,7 +68,7 @@ in {
               ];
 
               extraComponents = [
-                "adobe"
+                "abode"
                 "application_credentials"
                 "alert"
                 "automation"
@@ -99,7 +99,6 @@ in {
                 "proximity"
                 "schedule"
                 "timer"
-                "triggercmd"
                 "backup"
               ];
 
