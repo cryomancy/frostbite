@@ -845,7 +845,7 @@ in {
       image = config.system.build.isoImage;
       isoImage = pkgs.callPackage inputs.kosei.lib.makeIso ({
           inherit (config.isoImage) squashfsCompression compressImage volumeID contents;
-          inherit modulesPath;
+          inherit modulesPath inputs;
           isoName = "${config.image.baseName}.iso";
           bootable = config.isoImage.makeBiosBootable;
           bootImage = "/isolinux/isolinux.bin";
