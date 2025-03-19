@@ -67,7 +67,7 @@ in {
                 mini-media-player
               ];
 
-              defaultIntegrations = [
+              extraComponents = [
                 "adobe"
                 "application_credentials"
                 "alert"
