@@ -1,6 +1,7 @@
 scoped: {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.kosei.syncthing;
@@ -16,7 +17,7 @@ in {
     containers = {
       syncthing-container = {
         autoStart = true;
-        config = {pkgs, ...}: {
+        config = _: {
           services = {
             syncthing = {
               enable = true;
@@ -49,8 +50,6 @@ in {
 
           # Do not create default ~/Sync folder
           systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true";
-
-          nixpkgs.config.allowUnfree = true;
 
           system.stateVersion = systemStateVersion;
         };
