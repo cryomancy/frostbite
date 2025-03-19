@@ -37,12 +37,8 @@ in {
     containers = {
       home-assistant-container = {
         autoStart = true;
-        config = {
-          config,
-          inputs,
-          pkgs,
-          ...
-        }: {
+        config = {config, ...}: {
+          specialArgs = {inherit inputs;};
           services = {
             home-assistant = {
               enable = true;
