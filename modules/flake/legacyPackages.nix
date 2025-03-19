@@ -6,17 +6,26 @@ localFlake: {
   perSystem = {system, ...}: {
     legacyPackages = import inputs.nixpkgs {
       inherit system;
-      config.allowUnfree = true;
+      config = {
+        allowUnfree = true;
+        allowUnsupportedSystem = true;
+      };
       overlays =
         [
           (final: _prev: {
             stable = import inputs.nixpkgs-stable {
               inherit (final) system;
-              config.allowUnfree = true;
+              config = {
+                allowUnfree = true;
+                allowUnsupportedSystem = true;
+              };
             };
             master = import inputs.nixpkgs-master {
               inherit (final) system;
-              config.allowUnfree = true;
+              config = {
+                allowUnfree = true;
+                allowUnsupportedSystem = true;
+              };
             };
           })
         ]

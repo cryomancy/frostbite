@@ -17,7 +17,7 @@ in {
     containers = {
       syncthing-container = {
         autoStart = true;
-        config = _: {
+        config = {pkgs, ...}: {
           services = {
             syncthing = {
               enable = true;
