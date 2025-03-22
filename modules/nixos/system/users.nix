@@ -26,9 +26,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    services.userborn = {
-      enable = true;
-    };
+    systemd.sysusers.enable = true;
 
     users = {
       mutableUsers = lib.mkDefault (
