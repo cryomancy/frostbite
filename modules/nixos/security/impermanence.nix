@@ -23,12 +23,12 @@ in {
   };
 
   config = {
-    #assertions = [
-    #  {
-    #    assertion = config.kosei.secrets.enable;
-    #    message = "Kosei's secrets module must be enabled for this impermanence config";
-    #  }
-    #];
+    assertions = [
+      {
+        assertion = config.kosei.secrets.enable;
+        message = "Kosei's secrets module must be enabled for this impermanence config";
+      }
+    ];
 
     #fileSystems."/persist".neededForBoot = true;
     environment.persistence =

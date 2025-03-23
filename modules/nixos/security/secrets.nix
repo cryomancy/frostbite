@@ -1,26 +1,33 @@
-scoped: {
+_: {
   config,
   inputs,
   lib,
-  pkgs,
+  options,
   outPath,
   users,
   ...
 }: let
   cfg = config.kosei.secrets;
+  userList = lib.attrsets.attrNames users;
 in {
   imports = [inputs.sops-nix.nixosModules.sops];
 
   options = {
-    kosei.secrets = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
-      };
-      defaultSopsFile = lib.mkOption {
-        type = lib.types.path;
-        default = "${outPath}/src/secrets/secrets.yaml";
-      };
+    kosei.security = {
+	  type = lib.types.submodule {
+	    options = {
+	      secrets = {
+            enable = lib.mkOption {
+              type = lib.types.bool;
+              default = true;
+            };
+            defaultSopsFile = lib.mkOption {
+              type = lib.types.path;
+              default = "${outPath}/src/secrets/secrets.yaml";
+	        };
+	      };
+	    };
+	  };
     };
   };
 
@@ -30,15 +37,20 @@ in {
         "/nix/persistent/".directories = ["/var/lib/sops-nix"];
       };
 
-      systemPackages = with pkgs; [
-        age # Simple, secure, modern encryption tool
-        # sops # this needs to be replaced with my sops
-      ];
-
       variables = {
         SOPS_AGE_KEY_FILE = "/var/lib/sops-nix/key.txt";
       };
     };
+
+	warnings = [
+      (lib.optionals (cfg.defaultSopsFile == options.kosei.secrets.defaultSopsFile.default)
+        ''
+		  The default sops file location is set by default but not configured by the user.
+		  If you do not have a sops file at ${cfg.defaultSopsFile} then the
+		  configuration could fail to build in the future.
+		''
+	  )
+	];
 
     sops = {
       age = {
@@ -47,7 +59,7 @@ in {
       inherit (cfg) defaultSopsFile;
       defaultSopsFormat = "yaml";
       secrets = lib.attrsets.mergeAttrsList [
-        (lib.attrsets.mergeAttrsList (builtins.attrValues (lib.genAttrs users (user: {
+        (lib.attrsets.mergeAttrsList (builtins.attrValues (lib.genAttrs userList (user: {
           "${user}/hashedPasswordFile" = {neededForUsers = true;};
         }))))
 

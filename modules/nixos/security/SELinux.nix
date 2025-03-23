@@ -5,17 +5,23 @@ scoped: {
   ...
 }: let
   cfg = config.kosei.SELinux;
+  secOpts = config.kosei.security.settings;
+  isOpen = lib.mkIf secOpts.level == "open";
 in {
   options = {
-    kosei.SELinux = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
+    kosei.security = {
+      SELinux = lib.mkOption {
+        type = lib.types.submodule {
+          enable = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+          };
+        };
       };
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (cfg.enable && !isOpen) {
     boot.kernelParams = ["security=selinux"];
     # compile kernel with SELinux support - but also support for other LSM modules
     boot.kernelPatches = [

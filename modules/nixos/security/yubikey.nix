@@ -1,14 +1,18 @@
-scoped: {
+_: {
   config,
   lib,
   pkgs,
-  users,
   ...
 }: let
   cfg = config.kosei.yubikey;
 in {
   options = {
-    kosei.yubikey.enable = lib.mkEnableOption "yubikey";
+    kosei.yubikeySupport = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {

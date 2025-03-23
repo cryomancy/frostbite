@@ -13,6 +13,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     services = {
+      dbus.enable = true;
       earlyoom = {
         enable = true;
         enableNotifications = true;
