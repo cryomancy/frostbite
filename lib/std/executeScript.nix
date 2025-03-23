@@ -1,2 +1,2 @@
-scoped: lib: script: 
+_: lib: script: 
   lib.getExe script |> builtins.readFile |> lib.lists.toList |> builtins.exec
