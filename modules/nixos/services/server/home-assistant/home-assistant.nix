@@ -13,13 +13,23 @@ in {
   options = {
     kosei.home-assistant = {
       enable = lib.mkEnableOption "home-assistant";
+
       domain = lib.mkOption {
         type = lib.types.str;
         default = null;
+        example = "foobar.org";
       };
+
       email = lib.mkOption {
         type = lib.types.str;
         default = null;
+        example = "foo@bar.org";
+      };
+
+      s3bucket = lib.mkOption {
+        type = lib.types.str;
+        default = null;
+        example = "https://s3.us-east-2.amazonaws.com/bucketname";
       };
     };
   };
@@ -122,24 +132,59 @@ in {
             nginx = {
               enable = true;
               recommendedProxySettings = true;
-              # e.g. "home.tahlon.org"
+
               virtualHosts."home.${cfg.domain}" = {
                 forceSSL = true;
-                enableACME = true;
+                enableACME = true; # Enable ACME (certificate generation) with Route 53
+
+                locations."/" = {
+                  proxyPass = "http://127.0.0.1:8123";
+                  proxyWebsockets = true;
+                };
+
                 extraConfig = ''
                   proxy_buffering off;
                 '';
-                locations."/" = {
-                  proxyPass = "http://[0.0.0.0]:8123";
-                  proxyWebsockets = true;
-                };
               };
             };
           };
 
           security.acme = {
             acceptTerms = true;
-            defaults.email = "tahlonbrahic@gmail.com";
+
+            certs = {
+              "home.${cfg.domain}" = {
+                inherit (cfg) email fqdn;
+                dnsProvider = "route53";
+              };
+            };
+
+            defaults = {
+              inherit (cfg) email;
+              server = "https://acme-v02.api.letsencrypt.org/directory";
+              environmentFile = "${config.sops.templates."certs.secret".path}";
+            };
+          };
+
+          environment.systemPackages = with pkgs; [
+            lego
+          ];
+
+          sops.secrets = {
+            hass = {
+              "AWS_ACCESS_KEY_ID" = {};
+              "AWS_SECRET_ACCESS_KEY" = {};
+            };
+
+            templates = {
+              "certs.secret" = {
+                content = ''
+                  AWS_ACCESS_KEY_ID = "${config.sops.placeholder."AWS_ACCESS_KEY_ID"}"
+                  AWS_SECRET_ACCESS_KEY = "${config.sops.placeholder."AWS_SECRET_ACCESS_KEY"}"
+                '';
+                owner = "acme";
+              };
+            };
           };
 
           nixpkgs.config.allowUnfree = true;
