@@ -6,8 +6,8 @@ _: {
 }: let
   cfg = config.kosei.displayManager.service;
 in {
-  options.kosei = {
-    displayManager = lib.mkOption {
+  options = {
+    kosei.displayManager = lib.mkOption {
 	  type = lib.types.submodule;
 	  options = {
 		service = lib.mkOption {
