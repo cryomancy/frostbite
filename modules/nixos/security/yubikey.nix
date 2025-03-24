@@ -4,10 +4,10 @@ _: {
   pkgs,
   ...
 }: let
-  cfg = config.kosei.yubikey;
+  cfg = config.kosei.security.yubikey;
 in {
   options = {
-    kosei.yubikey = {
+    kosei.security.yubikey = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;
