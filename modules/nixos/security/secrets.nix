@@ -7,7 +7,7 @@ _: {
   users,
   ...
 }: let
-  cfg = config.kosei.secrets;
+  cfg = config.kosei.security.secrets;
   userList = lib.attrsets.attrNames users;
 in {
   imports = [inputs.sops-nix.nixosModules.sops];
