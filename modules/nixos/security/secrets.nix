@@ -13,7 +13,7 @@ in {
   imports = [inputs.sops-nix.nixosModules.sops];
 
   options = {
-    kosei.security.secrets = {
+    kosei.security.secrets = lib.mkOption {
       type = lib.types.submodule {
         options = {
           enable = lib.mkOption {
