@@ -4,7 +4,7 @@ _: {
   pkgs,
   ...
 }: let
-  cfg = config.kosei.displayManager.service;
+  cfg = config.kosei.displayManager;
 in {
   options = {
     kosei.displayManager = lib.mkOption {
