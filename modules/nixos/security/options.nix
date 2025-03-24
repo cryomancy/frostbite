@@ -7,10 +7,6 @@ _: {
 in {
   options = {
     kosei.security = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
-      };
       settings = lib.mkOption {
         type = lib.types.submodule {
           options = {
