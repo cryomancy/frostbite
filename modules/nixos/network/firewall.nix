@@ -1,21 +1,22 @@
-scoped: {
+_: {
   config,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.kosei.firewall;
+  cfg = config.kosei.networking.firewall;
 in {
   options = {
-    kosei.firewall = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
-      };
-      level = lib.mkOption {
-        type = lib.types.ints.between 0 5;
-        default = 2;
-      };
+    kosei.networking = {
+      firewall = {
+        type = lib.types.submodule;
+		option = lib.mkOption {
+          enable = lib.mkOption {
+		    type = lib.types.bool;
+		    default = true;
+		  };
+		};
+	  };
     };
   };
 
@@ -27,12 +28,13 @@ in {
         allowedTCPPorts = lib.lists.concatLists [
           [80 443]
         ];
-        allowedUDPPorts =
-          lib.lists.concatLists [
-          ];
-        package = pkgs.nftables;
       };
-    };
+
+	  nftables = {
+	    enable = true;
+      };
+	};
+
     services = {
       openssh.openFirewall = lib.mkIf config.kosei.ssh.enable true;
     };

@@ -1,4 +1,4 @@
-scoped: {
+_: {
   config,
   lib,
   pkgs,
@@ -7,32 +7,23 @@ scoped: {
   cfg = config.kosei.displayManager;
 in {
   options.kosei = {
-    displayManager = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
-      };
-      gdm.enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-      };
-      lightdm.enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-      };
-      tuigreet.enable = lib.mkOption {
-        type = lib.types.bool;
-        default = cfg.enable;
-      };
+    displayManager = lib.mkOption {
+	  type = lib.types.enum;
+	  default = null;
+	  description = ''
+	    The display manager service that is enabled by default.
+		If no value is selected then tuigreet is selected by default.
+	  '';
+	  values = ["greetd" "tuigreet" "lightdm" "gdm"];
     };
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = lib.mkIf cfg.tuigreet.enable [
+    environment.systemPackages = lib.mkIf (cfg == "tuigreet" || null) [
       pkgs.greetd.tuigreet
     ];
 
-    services.greetd = lib.mkIf cfg.tuigreet.enable {
+    services.greetd = lib.mkIf (cfg == "tuigreet" || null) {
       enable = true;
       vt = 2;
       settings = {
@@ -47,8 +38,8 @@ in {
     };
 
     services.xserver.displayManager = {
-      lightdm.enable = lib.mkIf cfg.lightdm.enable true;
-      gdm.enable = lib.mkIf cfg.gdm.enable true;
+      lightdm.enable = lib.mkIf (cfg == "lightdm") true;
+      gdm.enable = lib.mkIf (cfg == "gdm") true;
     };
   };
 }

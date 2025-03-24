@@ -1,40 +1,56 @@
 _: {
   config,
   lib,
+  pkgs,
   ...
 }: let
-  cfg = config.kosei.security;
+  cfg = config.kosei.networking.fail2ban;
 in {
   options = {
-    kosei.security = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
-      };
-      settings = lib.mkOption {
-        type = lib.types.submodule;
-        options = {
-          level = lib.mkOption {};
-          location = lib.mkOption {};
-          useCase = lib.mkOption {};
-        };
-      };
-    };
+	kosei.networking = {
+	  fail2ban = {
+		type = lib.types.submodule;
+		option = lib.mkOption {
+		  enable = lib.mkOption {
+			type = lib.types.bool;
+			default = true;
+		  };
+		};
+	  };
+	};
   };
 
+  # Good resources:
+  # https://dataswamp.org/~solene/2022-10-02-nixos-fail2ban.html
+
   config = lib.mkIf cfg.enable {
-    programs.dconf.enable = true;
-    security = {
-      # Enables authentication via Hyprlock
-      # NOTE: Does this need to match a home option?
-      pam.services.hyprlock = {};
+    services = {
+      fail2ban = {
+	    enable = true;
+		extraPackages = [pkgs.ipset];
+        banaction = "iptables-ipset-proto6-allports";
+	    ignoreIP = [
+          "192.168.0.0/16"
+        ];
+
+		jails = {
+          "nginx-spam" = ''
+            enabled  = true
+            filter   = nginx-bruteforce
+            logpath = /var/log/nginx/access.log
+            backend = auto
+            maxretry = 6
+            findtime = 600
+          '';
+		};
+      };
     };
 
-    services = {
-      fail2ban.enable =
-        if (cfg.level > 1)
-        then true
-        else false;
-    };
+	environment.etc = {
+	  "fail2ban/filter.d/nginx-bruteforce.conf".text = ''
+      [Definition]
+      failregex = ^<HOST>.*GET.*(matrix/server|\.php|admin|wp\-).* HTTP/\d.\d\" 404.*$
+      '';
+	};
   };
 }

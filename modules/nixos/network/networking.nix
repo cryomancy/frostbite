@@ -1,4 +1,4 @@
-scoped: {
+_: {
   config,
   lib,
   pkgs,
@@ -7,16 +7,12 @@ scoped: {
   cfg = config.kosei.networking;
 in {
   options = {
-    kosei.networking = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
-      };
-      wirelessNetworks = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = null;
-      };
-    };
+	kosei.networking = {
+	  enable = lib.mkOption {
+	    type = lib.types.bool;
+		default = true;
+	  };
+	};
   };
 
   config = lib.mkIf cfg.enable {
