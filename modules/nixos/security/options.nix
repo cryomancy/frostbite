@@ -51,7 +51,7 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = {
     assertions = [
       {
         assertion = cfg.settings.level == "open" || cfg.settings.level == "standard" || cfg.settings.level == "moderate" || cfg.settings.level == "restricted" || cfg.settings.level == "strict";

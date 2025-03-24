@@ -10,11 +10,12 @@ in {
   options = {
     kosei.security = {
       sudo = lib.mkOption {
-        type = lib.types.submodule;
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
+        type = lib.types.submodule {
+          options = {
+            enable = lib.mkOption {
+              type = lib.types.bool;
+              default = true;
+            };
           };
         };
       };
