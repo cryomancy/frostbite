@@ -1,17 +1,14 @@
-scoped: {
+_: {
   config,
   lib,
   ...
 }: let
   cfg = config.kosei.ssh;
+  secOpts = config.kosei.security.settings;
 in {
   options = {
     kosei.ssh = {
       enable = lib.mkEnableOption "ssh";
-      level = lib.mkOption {
-        type = lib.types.ints.between 0 2;
-        default = 2;
-      };
       publicKeys = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         default = [];
@@ -28,17 +25,23 @@ in {
     };
     services = {
       openssh = {
-        enable = true;
-        startWhenNeeded = (lib.mkIf (cfg.level > 1)) true;
+        enable = !secOpts.lockdownState;
+        startWhenNeeded =
+          if (secOpts.useCase == "server")
+          then "yes"
+          else "no";
         settings = {
           Banner = "冬の国境";
-          PasswordAuthentication = (lib.mkIf (cfg.level > 0)) false;
+          PasswordAuthentication =
+            if (secOpts.useCase != "server" || secOpts.useCase != "laptop")
+            then true
+            else false;
           PermitRootLogin =
-            if cfg.level == 0
+            if (secOpts.level == "open")
             then "yes"
             else "no";
           KbdInteractiveAuthentication = false;
-          X11Forwarding = (lib.mkIf (cfg.level < 2)) true;
+          X11Forwarding = (lib.mkIf (secOpts.useCase != "server")) true;
           UsePAM = true;
         };
       };
