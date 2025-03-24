@@ -17,7 +17,7 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = {
     environment.systemPackages = lib.mkIf (cfg == "tuigreet") [
       pkgs.greetd.tuigreet
     ];
