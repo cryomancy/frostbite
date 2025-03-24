@@ -13,21 +13,19 @@ in {
   imports = [inputs.sops-nix.nixosModules.sops];
 
   options = {
-    kosei.security = {
-	  type = lib.types.submodule {
-	    options = {
-	      secrets = {
-            enable = lib.mkOption {
-              type = lib.types.bool;
-              default = true;
-            };
-            defaultSopsFile = lib.mkOption {
-              type = lib.types.path;
-              default = "${outPath}/src/secrets/secrets.yaml";
-	        };
-	      };
-	    };
-	  };
+    kosei.security.secrets = {
+      type = lib.types.submodule {
+        options = {
+          enable = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+          };
+          defaultSopsFile = lib.mkOption {
+            type = lib.types.path;
+            default = "${outPath}/src/secrets/secrets.yaml";
+          };
+        };
+      };
     };
   };
 
@@ -42,15 +40,16 @@ in {
       };
     };
 
-	warnings = [
-      (lib.optionals (cfg.defaultSopsFile == options.kosei.secrets.defaultSopsFile.default)
+    warnings = [
+      (
+        lib.optionals (cfg.defaultSopsFile == options.kosei.secrets.defaultSopsFile.default)
         ''
-		  The default sops file location is set by default but not configured by the user.
-		  If you do not have a sops file at ${cfg.defaultSopsFile} then the
-		  configuration could fail to build in the future.
-		''
-	  )
-	];
+          The default sops file location is set by default but not configured by the user.
+          If you do not have a sops file at ${cfg.defaultSopsFile} then the
+          configuration could fail to build in the future.
+        ''
+      )
+    ];
 
     sops = {
       age = {
