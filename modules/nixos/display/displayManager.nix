@@ -9,7 +9,7 @@ in {
   options.kosei = {
     displayManager = lib.mkOption {
 	  type = lib.types.enum ["greetd" "tuigreet" "lightdm" "gdm"];
-	  default = null;
+	  default = "tuigreet";
 	  description = ''
 	    The display manager service that is enabled by default.
 		If no value is selected then tuigreet is selected by default.
@@ -18,11 +18,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = lib.mkIf (cfg == "tuigreet" || null) [
+    environment.systemPackages = lib.mkIf (cfg == "tuigreet") [
       pkgs.greetd.tuigreet
     ];
 
-    services.greetd = lib.mkIf (cfg == "tuigreet" || null) {
+    services.greetd = lib.mkIf (cfg == "tuigreet") {
       enable = true;
       vt = 2;
       settings = {
