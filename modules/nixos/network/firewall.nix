@@ -1,7 +1,6 @@
 _: {
   config,
   lib,
-  pkgs,
   ...
 }: let
   cfg = config.kosei.networking.firewall;
@@ -10,13 +9,13 @@ in {
     kosei.networking = {
       firewall = {
         type = lib.types.submodule;
-		option = lib.mkOption {
+        option = lib.mkOption {
           enable = lib.mkOption {
-		    type = lib.types.bool;
-		    default = true;
-		  };
-		};
-	  };
+            type = lib.types.bool;
+            default = true;
+          };
+        };
+      };
     };
   };
 
@@ -30,10 +29,10 @@ in {
         ];
       };
 
-	  nftables = {
-	    enable = true;
+      nftables = {
+        enable = true;
       };
-	};
+    };
 
     services = {
       openssh.openFirewall = lib.mkIf config.kosei.ssh.enable true;
