@@ -68,7 +68,7 @@ in {
     ];
 
     warning = [
-      (lib.options
+      (lib.optionals
         cfg.settings.lockdownState
         "Setting lockdownState to true can severely limit system operations. A NixOS rollback may be needed.")
     ];
