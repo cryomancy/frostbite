@@ -11,7 +11,7 @@ in {
         options = {
           level = lib.mkOption {
             type = lib.types.enum;
-            default = "normal";
+            default = "standard";
             description = ''
               Security level of the system. Can be 'open' 'standard', 'moderate', 'restricted', or 'strict'.
             '';
@@ -30,7 +30,7 @@ in {
 
           useCase = lib.mkOption {
             type = lib.types.enum;
-            default = "server";
+            default = "workstation";
             description = "Use case for the system. Options: 'server', 'workstation', 'laptop', 'vm'.";
             values = ["server" "workstation" "laptop" "vm"];
           };
