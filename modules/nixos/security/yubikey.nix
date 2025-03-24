@@ -7,7 +7,7 @@ _: {
   cfg = config.kosei.yubikey;
 in {
   options = {
-    kosei.yubikeySupport = {
+    kosei.yubikey = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;
