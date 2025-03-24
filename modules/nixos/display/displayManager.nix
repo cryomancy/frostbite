@@ -9,7 +9,7 @@ in {
   options.kosei = {
     displayManager = lib.mkOption {
 	  type = lib.types.submodule;
-	    options = {
+	  options = {
 		service = lib.mkOption {
 	      type = lib.types.enum ["greetd" "tuigreet" "lightdm" "gdm"];
 	      default = "tuigreet";
