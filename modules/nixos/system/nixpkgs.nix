@@ -1,4 +1,4 @@
-scoped: {
+_: {
   config,
   inputs,
   lib,
@@ -21,7 +21,7 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
-    nixpkgs = {
+    nixpkgs = lib.mkForce {
       pkgs = import inputs.nixpkgs {
         inherit system;
         config.allowUnfree = true;
