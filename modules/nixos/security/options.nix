@@ -6,41 +6,39 @@ _: {
   cfg = config.kosei.security;
 in {
   options = {
-    kosei.security = {
-      settings = lib.mkOption {
-        type = lib.types.submodule {
-          options = {
-            level = lib.mkOption {
-              type = lib.types.enum;
-              default = "normal";
-              description = ''
-                Security level of the system. Can be 'open' 'standard', 'moderate', 'restricted', or 'strict'.
-              '';
-              values = ["open" "standard" "moderate" "restricted" "strict"];
-            };
+    kosei.security.settings = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          level = lib.mkOption {
+            type = lib.types.enum;
+            default = "normal";
+            description = ''
+              Security level of the system. Can be 'open' 'standard', 'moderate', 'restricted', or 'strict'.
+            '';
+            values = ["open" "standard" "moderate" "restricted" "strict"];
+          };
 
-            location = lib.mkOption {
-              type = lib.types.enum;
-              default = "local";
-              description = ''
-                Location of the system, indicating its network environment.
-                Options: 'local', 'dmz', 'external', 'cloud', 'vps', 'remote'.
-              '';
-              values = ["local" "dmz" "external" "cloud" "vps" "remote"];
-            };
+          location = lib.mkOption {
+            type = lib.types.enum;
+            default = "local";
+            description = ''
+              Location of the system, indicating its network environment.
+              Options: 'local', 'dmz', 'external', 'cloud', 'vps', 'remote'.
+            '';
+            values = ["local" "dmz" "external" "cloud" "vps" "remote"];
+          };
 
-            useCase = lib.mkOption {
-              type = lib.types.enum;
-              default = "server";
-              description = "Use case for the system. Options: 'server', 'workstation', 'laptop', 'vm'.";
-              values = ["server" "workstation" "laptop" "vm"];
-            };
+          useCase = lib.mkOption {
+            type = lib.types.enum;
+            default = "server";
+            description = "Use case for the system. Options: 'server', 'workstation', 'laptop', 'vm'.";
+            values = ["server" "workstation" "laptop" "vm"];
+          };
 
-            lockdownState = lib.mkOption {
-              type = lib.types.bool;
-              default = false;
-              description = "If true, the system is in lockdown mode, restricting certain actions.";
-            };
+          lockdownState = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+            description = "If true, the system is in lockdown mode, restricting certain actions.";
           };
         };
       };

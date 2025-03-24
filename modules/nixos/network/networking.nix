@@ -1,4 +1,4 @@
-_: {
+{
   config,
   lib,
   pkgs,
@@ -7,81 +7,148 @@ _: {
   cfg = config.kosei.networking;
 in {
   options = {
-	kosei.networking = {
-	  enable = lib.mkOption {
-	    type = lib.types.bool;
-		default = true;
-	  };
-	};
+    kosei.networking = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+      };
+      ipAddr = lib.mkOption {
+        type = lib.types.str;
+        default = null;
+      };
+      gateway = lib.mkOption {
+        type = lib.types.str;
+        default = null;
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.network = {
-      enable = true;
+    systemd = {
+      network = {
+        enable = true;
 
-      networks = {
-      };
+        wait-online = {
+          enable = true;
+          anyInterface = true;
+          timeout = 10;
+          ignoredInterfaces = [
+            "nm_managed"
+          ];
+        };
 
-      netdevs = {
-        "20-br0" = {
-          netdevConfig = {
-            Kind = "bridge";
-            Name = "br0";
+        networks = {
+          "40-dhcp" = {
+            matchConfig = {
+              Name = "dhcp_vlan";
+            };
+            networkConfig = {
+              DHCP = "ipv4";
+            };
+            linkConfig.RequiredForOnline = "no";
+          };
+
+          "40-static" = (lib.mkIf cfg.ipAddr != null && cfg.gateway != null) {
+            matchConfig = {
+              Name = "static_vlan";
+            };
+            networkConfig = {
+              Address = "${cfg.ipAddr}";
+              Gateway = "${cfg.gateway}";
+            };
+            linkConfig.RequiredForOnline = "no";
+          };
+
+          "40-nm_managed" = {
+            enable = false;
+            matchConfig = {
+              Name = "nm_vlan";
+            };
+            networkConfig = {
+              Bridge = "br0";
+            };
+            linkConfig.RequiredForOnline = "enslaved";
+          };
+
+          "40-br0" = {
+            matchConfig.Name = "br0";
+            bridgeConfig = {};
+            linkConfig = {
+              RequiredForOnline = "carrier";
+            };
+          };
+        };
+
+        netdevs = {
+          "20-dhcp_vlan_netdev" = {
+            netdevConfig = {
+              Kind = "vlan";
+              Name = "dhcp_vlan";
+            };
+            vlanConfig = {
+              Id = 10;
+              Device = "wlo1";
+            };
+          };
+
+          "20-static_vlan_netdev" = {
+            netdevConfig = {
+              Kind = "vlan";
+              Name = "static_vlan";
+            };
+            vlanConfig = {
+              Id = 20;
+              Device = "wlo1";
+            };
+          };
+
+          "20-nm_vlan_netdev" = {
+            netdevConfig = {
+              Kind = "vlan";
+              Name = "nm_vlan";
+            };
+            vlanConfig = {
+              Id = 30;
+              Device = "wlo1";
+            };
+          };
+
+          "25-br0" = {
+            netdevConfig = {
+              Kind = "bridge";
+              Name = "br0";
+            };
+          };
+
+          "25-container-macvlan" = {
+            Kind = "macvlan";
+            Name = "container-macvlan";
+            macvlanConfig = {
+              Mode = "bridge";
+            };
           };
         };
       };
+
+      services."systemd-networkd".environment.SYSTEMD_LOG_LEVEL = "debug";
     };
 
     networking = {
       useNetworkd = true;
 
-      usePredictableInterfaceNames = true;
+      networkd = {
+        networks."nm_unmanaged" = {
+          matchConfig.Name = "nm_unmanaged";
+          linkConfig.Unmanaged = "yes";
+        };
+      };
 
+      usePredictableInterfaceNames = true;
       resolvconf.enable = false;
       useHostResolvConf = false;
-
       tempAddresses = "disabled";
       enableIPv6 = false;
       dhcpcd.enable = false;
-
-      #tcpcrypt.enable = true;
-      stevenblack.enable = true;
-
-      # NOTE: Users can declare their wireless networks through
-      #       networking.wireless.networks or imperatively
-      # wireless = {
-      #allowAuxiliaryImperativeNetworks = true;
-      #secretsFile = config.sops.templates."network.conf".path;
-      #networks =
-      #  lib.attrsets.mergeAttrsList
-      #  (lib.lists.forEach cfg.wirelessNetworks (
-      #    network: {${network}.pskRaw = "ext:psk_${network}";}
-      #  ));
-      # };
-
-      rxe = {
-        enable = true;
-      };
-
-      timeServers = [
-        "0.nixos.pool.ntp.org"
-        "1.nixos.pool.ntp.org"
-        "2.nixos.pool.ntp.org"
-        "3.nixos.pool.ntp.org"
-      ];
-
-      nat = {
-        enable = true;
-        enableIPv6 = false;
-        internalIPs = ["192.168.1.0/24"];
-        internalInterfaces = [];
-      };
-    };
-
-    hardware.bluetooth.enable = true;
-
-    programs.openvpn3 = {
-      enable = true;
     };
 
     environment.systemPackages = with pkgs; [
@@ -90,8 +157,6 @@ in {
     ];
 
     services = {
-      avahi.enable = true;
-      blueman.enable = true;
       resolved.enable = true;
       networkd-dispatcher.enable = true;
     };
