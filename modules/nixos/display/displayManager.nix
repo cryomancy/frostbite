@@ -8,13 +8,12 @@ _: {
 in {
   options.kosei = {
     displayManager = lib.mkOption {
-	  type = lib.types.enum;
+	  type = lib.types.enum ["greetd" "tuigreet" "lightdm" "gdm"];
 	  default = null;
 	  description = ''
 	    The display manager service that is enabled by default.
 		If no value is selected then tuigreet is selected by default.
 	  '';
-	  values = ["greetd" "tuigreet" "lightdm" "gdm"];
     };
   };
 
