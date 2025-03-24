@@ -8,17 +8,18 @@ _: {
 in {
   options = {
     kosei.displayManager = lib.mkOption {
-	  type = lib.types.submodule;
-	  options = {
-		service = lib.mkOption {
-	      type = lib.types.enum ["greetd" "tuigreet" "lightdm" "gdm"];
-	      default = "tuigreet";
-	      description = ''
-	        The display manager service that is enabled by default.
-		    If no value is selected then tuigreet is selected by default.
-	      '';
-		};
-	  };
+      type = lib.types.submodule {
+        options = {
+          service = lib.mkOption {
+            type = lib.types.enum ["greetd" "tuigreet" "lightdm" "gdm"];
+            default = "tuigreet";
+            description = ''
+                 The display manager service that is enabled by default.
+              If no value is selected then tuigreet is selected by default.
+            '';
+          };
+        };
+      };
     };
   };
 
