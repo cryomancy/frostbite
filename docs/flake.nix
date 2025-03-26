@@ -35,7 +35,7 @@
 
     packages = eachSystem (pkgs: {
       default = pkgs.stdenv.mkDerivation {
-        pname = "kosei-docs";
+        pname = "frostbite-docs";
         version = self.shortRev or "0000000";
 
         src = ../.;

@@ -1,16 +1,16 @@
-scoped: {
+_: {
   config,
   inputs,
   lib,
   user,
   ...
 }: let
-  cfg = config.kosei.impermanence;
+  cfg = config.frostbite.security.impermanence;
 in {
   imports = [inputs.impermanence.homeManagerModules.impermanence];
 
   options = {
-    kosei.impermanence.enable = lib.mkEnableOption "impermanence";
+    frostbite.security.impermanence.enable = lib.mkEnableOption "impermanence";
   };
 
   config = {

@@ -1,10 +1,6 @@
 <div>
   <img alt="NixOS Logo" src="https://github.com/NixOS/nixos-artwork/blob/master/logo/nix-snowflake-colours.svg" width="120px"/>
-  <img src="https://img.shields.io/github/languages/code-size/TahlonBrahic/fuyu-no-kosei?style=for-the-badge&logoSize=auto&label=REPO%20SIZE&color=%23a5e8e9" alt="GitHub repo size"/>
-  <img alt="Static Badge" src="https://img.shields.io/badge/%E5%86%AC%E3%81%AE%E6%A7%8B%E6%88%90-a5e8e9">
-  <a href="https://nixos.org" target="_blank">
-    <img src="https://img.shields.io/badge/NixOS-stable-blue.svg?style=for-the-badge&labelColor=1B2330&logo=NixOS&logoColor=white&color=ef65ea" alt="NixOS Stable"/>
-  </a>
+  <h1>❖ Frostbite ❖</h1>
 </div>
 
 This repository contains a modular NixOS configuration designed to support multiple machines with profile support distributed across those machines.
@@ -18,14 +14,6 @@ This repository contains a modular NixOS configuration designed to support multi
 - **`templates`**: Pre-built to quickly start using this flake.
 - **`LICENSE`**: A standard MIT License for ease of distribution and modification.
 - **`README.md`**: This file, which provides an overview of the repository.
-
-## Getting Started
-
-1. Choose your template:
-
-```bash
-$ nix --extra-experimental-features [ "nix-command flakes" ] flake init -t github:TahlonBrahic/multiple-systems
-```
 
 ## References
 
@@ -54,6 +42,7 @@ The following websites and/or content creators were the most influential in the 
 
 ["How to learn Nix"](https://ianthehenry.com/posts/how-to-learn-nix/introduction/)
 ["Stateless" Operating System](https://lantian.pub/en/article/modify-computer/nixos-impermanence.lantian/)
+["Hidden Gems Inside NixOS"](https://kokada.dev/blog/an-unordered-list-of-hidden-gems-inside-nixos/)
 
 ### Documentation
 

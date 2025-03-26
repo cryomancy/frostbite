@@ -11,6 +11,27 @@ in {
     inputs.git-hooks-nix.flakeModule
   ];
 
+  hercules-ci = {
+    # Automatically updates flake inputs
+    flake-update = {
+      when = {
+        hour = [2];
+        dayOfMonth = builtins.genList (x: x) 31;
+      };
+
+      # This requires GitHub branch protection to be configured for the repository.
+      autoMergeMethod = true;
+      baseMerge.enable = true;
+      createPullRequest = true;
+      #github-pages.branch = null; # Github pages deployment is maintained through Github CI
+
+      flakes = {
+        "." = {};
+        "./modules/flake/partitions/dev/" = {};
+      };
+    };
+  };
+
   perSystem = {
     config,
     pkgs,
@@ -117,27 +138,6 @@ in {
               no-check-filenames = true;
             };
           };
-        };
-      };
-    };
-
-    hercules-ci = {
-      # Automatically updates flake inputs
-      flake-update = {
-        when = {
-          hour = [2];
-          dayOfMonth = builtins.genList (x: x) 31;
-        };
-
-        # This requires GitHub branch protection to be configured for the repository.
-        autoMergeMethod = true;
-        baseMerge.enable = true;
-        createPullRequest = true;
-        github-pages.branch = null; # Github pages deployment is maintained through Github CI
-
-        flakes = {
-          "." = {};
-          "./modules/flake/partitions/dev/" = {};
         };
       };
     };

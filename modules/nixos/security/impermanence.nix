@@ -1,4 +1,4 @@
-scoped: {
+_: {
   config,
   inputs,
   lib,

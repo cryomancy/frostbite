@@ -1,16 +1,16 @@
-scoped: {
+_: {
   config,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.kosei.kde-connect;
+  cfg = config.frostbite.services.kde-connect;
 in {
   options = {
-    kosei.kde-connect = {
+    frostbite.services.kde-connect = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = config.kosei.hyprland.enable;
+        default = config.frostbite.display.hyprland.enable;
       };
     };
   };

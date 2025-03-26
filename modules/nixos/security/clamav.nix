@@ -9,14 +9,12 @@ _: {
   isOpen = lib.mkIf secOpts.level == "open";
 in {
   options = {
-    kosei.security = {
-      clamav = lib.mkOption {
-        type = lib.types.submodule {
-          options = {
-            enable = lib.mkOption {
-              type = lib.types.bool;
-              default = true;
-            };
+    kosei.security.clamav = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          enable = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
           };
         };
       };

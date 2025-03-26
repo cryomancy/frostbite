@@ -9,9 +9,9 @@ scoped: {
   isOpen = lib.mkIf secOpts.level == "open";
 in {
   options = {
-    kosei.security = {
-      SELinux = lib.mkOption {
-        type = lib.types.submodule {
+    kosei.security.SELinux = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
           enable = lib.mkOption {
             type = lib.types.bool;
             default = true;

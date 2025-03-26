@@ -7,10 +7,14 @@ _: {
   cfg = config.kosei.security.yubikey;
 in {
   options = {
-    kosei.security.yubikey = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
+    kosei.security.yubikey = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          enable = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+          };
+        };
       };
     };
   };

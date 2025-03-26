@@ -1,15 +1,15 @@
-scoped: {
+_: {
   config,
   inputs,
   lib,
   system,
   ...
 }: let
-  cfg = config.kosei.spicetify;
+  cfg = config.frostbite.programs.spicetify;
   spicePkgs = inputs.spicetify-nix.legacyPackages.${system};
 in {
   options = {
-    kosei.spicetify = {
+    frostbite.programs.spicetify = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

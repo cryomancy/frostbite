@@ -3,14 +3,14 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.kosei.security;
+  cfg = config.kosei.security.audit;
   secOpts = config.kosei.security.settings;
   isOpen = lib.mkIf secOpts.level == "open";
 in {
   options = {
-    kosei.security = {
-      audit = lib.mkOption {
-        type = lib.types.submodule {
+    kosei.security.audit = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
           enable = lib.mkOption {
             type = lib.types.bool;
             default = true;

@@ -6,14 +6,14 @@ _: {
   users,
   ...
 }: let
-  cfg = config.kosei.design;
+  cfg = config.frostbite.display.design;
 in {
   imports = [
     inputs.stylix.nixosModules.stylix
   ];
 
   options = {
-    kosei.design = {
+    frostbite.display.design = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

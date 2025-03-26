@@ -1,13 +1,13 @@
 [book]
 authors = ["Tahlon Brahic"]
 description = "Nix modules that abstract the arduous Linux customization experience"
-title = "kosei"
+title = "frostbite"
 
 [build]
 extra-watch-dirs = ["."]
 
 [output.html]
-edit-url-template = "https://github.com/TahlonBrahic/fuyu-no-kosei/edit/main/docs/{path}"
-git-repository-url = "https://github.com/TahlonBrahic/fuyu-no-kosei"
+edit-url-template = "https://github.com/cryomancy/frostbite/edit/main/docs/{path}"
+git-repository-url = "https://github.com/cryomancy/frostbite"
 preferred-dark-theme = "ayu"
-site-url = "/kosei/"
+site-url = "/frostbite/"

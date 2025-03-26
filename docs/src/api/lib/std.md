@@ -1,6 +1,6 @@
 # `executeScript`
 
-Source: [`lib/executeScript.nix`](https://github.com/TahlonBrahic/kosei/blob/main/lib/load.nix)
+Source: [`lib/executeScript.nix`](https://github.com/cryomancy/frostbite/blob/main/lib/load.nix)
 
 Type: `script -> { ... }`
 

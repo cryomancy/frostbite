@@ -8,9 +8,9 @@ _: {
   isOpen = lib.mkIf secOpts.level == "open";
 in {
   options = {
-    kosei.security = {
-      kernel = lib.mkOption {
-        type = lib.types.submodule {
+    kosei.security.kernel = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
           enable = lib.mkOption {
             type = lib.types.bool;
             default = true;

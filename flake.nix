@@ -4,16 +4,11 @@
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;}
     (
-      # @top
       {
         config,
-        # flake-parts-lib,
         self,
-        # moduleWithSystem,
-        # withSystem,
         ...
       }: let
-        # inherit (flake-parts-lib) importApply;
         flakeModules = {
           apps = import ./modules/flake/apps.nix {inherit config self;};
           legacyPackages = import ./modules/flake/legacyPackages.nix {inherit inputs;};
@@ -46,24 +41,24 @@
 
   inputs = {
     assets = {
-      url = "github:TahlonBrahic/assets";
+      url = "github:tahlonbrahic/assets";
       flake = false;
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-utils = {
       url = "github:numtide/flake-utils";
     };
-    fuyu-no-nur = {
-      url = "github:TahlonBrahic/fuyu-no-nur";
+    icebox = {
+      url = "github:tahlonbrahic/icebox";
       inputs = {
         nixpkgs.follows = "nixpkgs";
       };
     };
-    fuyuvim = {
-      url = "github:TahlonBrahic/fuyu-no-neovim";
+    vostok = {
+      url = "github:tahlonbrahic/vostok";
     };
     eris = {
-      url = "github:TahlonBrahic/eris";
+      url = "github:tahlonbrahic/eris";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -73,10 +68,6 @@
     };
     impermanence = {
       url = "github:nix-community/impermanence";
-    };
-    mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-droid.url = "github:NixOS/nixpkgs/nixos-24.05";
@@ -104,7 +95,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {
-      url = "github:TahlonBrahic/sops-nix";
+      url = "github:tahlonbrahic/sops-nix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
       };

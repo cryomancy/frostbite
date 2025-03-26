@@ -1,16 +1,18 @@
-scoped: {
+_: {
   config,
   lib,
   pkgs,
   user,
   ...
 }: let
-  cfg = config.kosei.vesktop;
+  cfg = config.frostbite.programs.vesktop;
 in {
-  options.kosei.vesktop = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
-      default = config.kosei.hyprland.enable;
+  options = {
+    frostbite.programs.vesktop = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = config.frostbite.display.hyprland.enable;
+      };
     };
   };
 

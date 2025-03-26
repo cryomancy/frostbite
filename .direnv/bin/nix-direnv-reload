@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 set -e
-if [[ ! -d "/home/tahlon/projects/kosei" ]]; then
+if [[ ! -d "/home/tahlon/projects/cryomancy/frostbite" ]]; then
   echo "Cannot find source directory; Did you move it?"
-  echo "(Looking for "/home/tahlon/projects/kosei")"
+  echo "(Looking for "/home/tahlon/projects/cryomancy/frostbite")"
   echo 'Cannot force reload with this script - use "direnv reload" manually and then try again'
   exit 1
 fi
 
 # rebuild the cache forcefully
-_nix_direnv_force_reload=1 direnv exec "/home/tahlon/projects/kosei" true
+_nix_direnv_force_reload=1 direnv exec "/home/tahlon/projects/cryomancy/frostbite" true
 
 # Update the mtime for .envrc.
 # This will cause direnv to reload again - but without re-building.
-touch "/home/tahlon/projects/kosei/.envrc"
+touch "/home/tahlon/projects/cryomancy/frostbite/.envrc"
 
 # Also update the timestamp of whatever profile_rc we have.
 # This makes sure that we know we are up to date.
-touch -r "/home/tahlon/projects/kosei/.envrc" "/home/tahlon/projects/kosei/.direnv"/*.rc
+touch -r "/home/tahlon/projects/cryomancy/frostbite/.envrc" "/home/tahlon/projects/cryomancy/frostbite/.direnv"/*.rc

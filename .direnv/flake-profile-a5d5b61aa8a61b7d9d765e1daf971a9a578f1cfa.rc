@@ -23,13 +23,13 @@ PATH='/path-not-set'
 export PATH
 PS4='+ '
 SHELL='/noshell'
-builder='/nix/store/4k90qpzh1a4sldhnf7cxwkm9c0agq4fp-bash-interactive-5.2p37/bin/bash'
+builder='/nix/store/vkxs2i4js42i26ay7vfqzyibsdbl4lrm-bash-interactive-5.2p37/bin/bash'
 export builder
 dontAddDisableDepTrack='1'
 export dontAddDisableDepTrack
 name='Kosei-Development-Shell-env'
 export name
-out='/home/tahlon/projects/kosei/outputs/out'
+out='/home/tahlon/projects/cryomancy/frostbite/outputs/out'
 export out
 outputs='out'
 shellHook='# Remove all the unnecessary noise that is set by the build env
@@ -42,14 +42,14 @@ unset dontAddDisableDepTrack outputs
 
 # For `nix develop`. We get /noshell on Linux and /sbin/nologin on macOS.
 if [[ "$SHELL" == "/noshell" || "$SHELL" == "/sbin/nologin" ]]; then
-  export SHELL=/nix/store/4k90qpzh1a4sldhnf7cxwkm9c0agq4fp-bash-interactive-5.2p37/bin/bash
+  export SHELL=/nix/store/vkxs2i4js42i26ay7vfqzyibsdbl4lrm-bash-interactive-5.2p37/bin/bash
 fi
 
 # Load the environment
-source "/nix/store/ar6z9i678h81fj7fwy65zlv7sq5l61xw-Kosei-Development-Shell-dir/env.bash"
+source "/nix/store/zrqyzmfm51kzvwyjpnw9hrdhj4gyhnjc-Kosei-Development-Shell-dir/env.bash"
 '
 export shellHook
-stdenv='/nix/store/vn51j3zi9wlj874n0vizm66drcfkipkp-naked-stdenv'
+stdenv='/nix/store/f1jsq670yx1wi26464gkh54hqlgc1l7x-naked-stdenv'
 export stdenv
 system='x86_64-linux'
 export system

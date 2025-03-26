@@ -1,13 +1,13 @@
-scoped: {
+_: {
   config,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.kosei.gpg-agent;
+  cfg = config.frostbite.services.gpg-agent;
 in {
   options = {
-    kosei.gpg-agent = {
+    frostbite.services.gpg-agent = {
       enable = lib.mkEnableOption "gpg-agent";
     };
   };

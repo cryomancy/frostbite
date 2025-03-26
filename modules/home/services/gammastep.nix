@@ -1,16 +1,16 @@
-scoped: {
+_: {
   config,
   lib,
   nixosConfig,
   ...
 }: let
-  cfg = config.kosei.gammastep;
+  cfg = config.frostbite.services.gammastep;
 in {
   options = {
-    kosei.gammastep = {
+    frostbite.services.gammastep = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = config.kosei.hyprland.enable;
+        default = config.frostbite.display.hyprland.enable;
       };
     };
   };

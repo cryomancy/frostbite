@@ -8,14 +8,12 @@ _: {
   strict = lib.lists.any secOpts.level ["restricted" "strict"];
 in {
   options = {
-    kosei.security = {
-      sudo = lib.mkOption {
-        type = lib.types.submodule {
-          options = {
-            enable = lib.mkOption {
-              type = lib.types.bool;
-              default = true;
-            };
+    kosei.security.sudo = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          enable = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
           };
         };
       };
