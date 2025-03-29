@@ -1,12 +1,12 @@
-scoped: {
+_: {
   config,
   lib,
   ...
 }: let
-  cfg = config.kosei.switch;
+  cfg = config.frostbite.nix.switch;
 in {
   options = {
-    kosei.switch = {
+    frostbite.nix.switch = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

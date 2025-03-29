@@ -7,7 +7,7 @@ _: {
   xorriso,
   syslinux,
   libossp_uuid,
-  isoName ? "kosei.iso",
+  isoName ? "frostbite.iso",
   contents,
   storeContents ? [],
   squashfsContents ? [],
@@ -32,7 +32,7 @@ assert usbBootable -> isohybridMbrImage != ""; let
     comp = squashfsCompression;
   };
 in
-  callPackage inputs.kosei.lib.buildJanetPackage {} {
+  callPackage inputs.frostbite.lib.buildJanetPackage {} {
     pname = "make-iso";
     version = "1.0.0";
 

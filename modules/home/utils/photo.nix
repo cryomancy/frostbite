@@ -7,7 +7,7 @@ _: {
   cfg = config.frostbite.utils.photo;
 in {
   options = {
-    kosei.officeUtils = {
+    frostbite.officeUtils = {
       enable = lib.mkEnableOption "photo packages";
     };
   };

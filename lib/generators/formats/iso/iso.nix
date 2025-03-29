@@ -501,8 +501,8 @@ in {
     };
 
     volumeID = lib.mkOption {
-      # kosei-$EDITION-$ARCH
-      default = "kosei${lib.optionalString (config.isoImage.edition != "") "-${config.isoImage.edition}"}-${pkgs.stdenv.hostPlatform.uname.processor}";
+      # frostbite-$EDITION-$ARCH
+      default = "frostbite${lib.optionalString (config.isoImage.edition != "") "-${config.isoImage.edition}"}-${pkgs.stdenv.hostPlatform.uname.processor}";
       type = lib.types.str;
       description = ''
         Specifies the label or volume ID of the generated ISO image.
@@ -843,7 +843,7 @@ in {
 
     system.build = {
       image = config.system.build.isoImage;
-      isoImage = pkgs.callPackage inputs.kosei.lib.makeIso ({
+      isoImage = pkgs.callPackage inputs.frostbite.lib.makeIso ({
           inherit (config.isoImage) squashfsCompression compressImage volumeID contents;
           inherit modulesPath inputs;
           isoName = "${config.image.baseName}.iso";

@@ -84,7 +84,7 @@
     hashedPasswordFile = lib.mkOption {
       type = with lib.types; nullOr str;
       default = lib.mkDefault (
-        if config.kosei.secrets.enable
+        if config.frostbite.secrets.enable
         then config.sops.secrets."${name}/hashedPasswordFile".path
         else null
       );
@@ -101,8 +101,8 @@
     initialPassword = lib.mkOption {
       type = with lib.types; nullOr str;
       default = lib.mkDefault (
-        if !config.kosei.secrets.enable
-        then config.kosei.initialPassword
+        if !config.frostbite.secrets.enable
+        then config.frostbite.initialPassword
         else null
       );
       description = ''

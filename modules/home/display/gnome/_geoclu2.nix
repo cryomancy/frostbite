@@ -1,4 +1,4 @@
-scoped: {lib, ...}: {
+_: {lib, ...}: {
   geoclue2 = {
     enable = lib.mkDefault true;
     enableDemoAgent = false;

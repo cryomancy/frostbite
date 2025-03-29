@@ -81,7 +81,7 @@ in {
 
         exec-once =
           ''${(lib.getExe pkgs.hyprland-monitor-attached)} ${onMonitorAttached} ${onMonitorDetached}''
-          + (lib.strings.optionalString config.kosei.waypaper.enable
+          + (lib.strings.optionalString config.frostbite.waypaper.enable
             ''${(lib.getExe pkgs.waypaper)} --restore'')
           + (lib.strings.optionalString cfg.autostartWorkspaces
             ''[workspace 1 silent] ${(lib.getExe pkgs.firefox)}'');
@@ -208,7 +208,7 @@ in {
     };
 
     home = {
-      persistence = lib.mkIf config.kosei.impermanence.enable {
+      persistence = lib.mkIf config.frostbite.impermanence.enable {
         "/persist/${config.home.homeDirectory}".directories = [".config/hypr"];
       };
 

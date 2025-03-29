@@ -4,20 +4,20 @@ _: {
   pkgs,
   ...
 }: let
-  cfg = config.kosei.networking.fail2ban;
+  cfg = config.frostbite.networking.fail2ban;
 in {
   options = {
-	kosei.networking = {
-	  fail2ban = {
-		type = lib.types.submodule;
-		option = lib.mkOption {
-		  enable = lib.mkOption {
-			type = lib.types.bool;
-			default = true;
-		  };
-		};
-	  };
-	};
+    frostbite.networking = {
+      fail2ban = {
+        type = lib.types.submodule;
+        option = lib.mkOption {
+          enable = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+          };
+        };
+      };
+    };
   };
 
   # Good resources:
@@ -26,14 +26,14 @@ in {
   config = lib.mkIf cfg.enable {
     services = {
       fail2ban = {
-	    enable = true;
-		extraPackages = [pkgs.ipset];
+        enable = true;
+        extraPackages = [pkgs.ipset];
         banaction = "iptables-ipset-proto6-allports";
-	    ignoreIP = [
+        ignoreIP = [
           "192.168.0.0/16"
         ];
 
-		jails = {
+        jails = {
           "nginx-spam" = ''
             enabled  = true
             filter   = nginx-bruteforce
@@ -42,15 +42,15 @@ in {
             maxretry = 6
             findtime = 600
           '';
-		};
+        };
       };
     };
 
-	environment.etc = {
-	  "fail2ban/filter.d/nginx-bruteforce.conf".text = ''
-      [Definition]
-      failregex = ^<HOST>.*GET.*(matrix/server|\.php|admin|wp\-).* HTTP/\d.\d\" 404.*$
+    environment.etc = {
+      "fail2ban/filter.d/nginx-bruteforce.conf".text = ''
+        [Definition]
+        failregex = ^<HOST>.*GET.*(matrix/server|\.php|admin|wp\-).* HTTP/\d.\d\" 404.*$
       '';
-	};
+    };
   };
 }

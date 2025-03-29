@@ -7,7 +7,7 @@ _: {
   cfg = config.frostbite.utils.musoc;
 in {
   options = {
-    kosei.frostbite.utils.music = {
+    frostbite.frostbite.utils.music = {
       enable = lib.mkEnableOption "music packages";
     };
   };

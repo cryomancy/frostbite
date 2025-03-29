@@ -3,10 +3,10 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.kosei.networking.devices.vlans;
+  cfg = config.frostbite.networking.devices.vlans;
 in {
   options = {
-    kosei.networking.devices.vlans = lib.mkOption {
+    frostbite.networking.devices.vlans = lib.mkOption {
       type = lib.types.submodule {
         options = {
           enable = lib.mkOption {

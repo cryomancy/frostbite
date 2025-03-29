@@ -54,7 +54,7 @@ in {
           font_size = 115
           shadow_passes = 3
           position = 0, ${
-          if nixosConfig.kosei.laptopSupport.enable
+          if nixosConfig.frostbite.laptopSupport.enable
           then "-25"
           else "-150"
         }
@@ -69,7 +69,7 @@ in {
           font_size = 18
           shadow_passes = 3
           position = 0, ${
-          if nixosConfig.kosei.laptopSupport.enable
+          if nixosConfig.frostbite.laptopSupport.enable
           then "-225"
           else "-350"
         }
@@ -87,7 +87,7 @@ in {
           rotate = 0
 
           position = 0, ${
-          if nixosConfig.kosei.laptopSupport.enable
+          if nixosConfig.frostbite.laptopSupport.enable
           then "120"
           else "270"
         }
@@ -101,7 +101,7 @@ in {
           text =   $USER
           font_size = 15
           position = 0, ${
-          if nixosConfig.kosei.laptopSupport.enable
+          if nixosConfig.frostbite.laptopSupport.enable
           then "131"
           else "281"
         }
@@ -122,7 +122,7 @@ in {
           placeholder_text = "Enter Password..."
           hide_input = false
           position = 0, ${
-          if nixosConfig.kosei.laptopSupport.enable
+          if nixosConfig.frostbite.laptopSupport.enable
           then "50"
           else "200"
         }

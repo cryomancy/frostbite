@@ -3,10 +3,10 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.kosei.network.networkd.devices.virtualWired;
+  cfg = config.frostbite.network.networkd.devices.virtualWired;
 in {
   options = {
-    kosei.network.networkd.devices.virtualWired = lib.mkOption {
+    frostbite.network.networkd.devices.virtualWired = lib.mkOption {
       type = lib.types.submodule {
         options = {
           enable = lib.mkOption {

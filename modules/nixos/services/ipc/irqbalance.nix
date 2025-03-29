@@ -3,10 +3,10 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.kosei.services.ipc.irqbalance;
+  cfg = config.frostbite.services.ipc.irqbalance;
 in {
   options = {
-    kosei.services.ips.irqbalance = lib.mkOption {
+    frostbite.services.ipc.irqbalance = lib.mkOption {
       type = lib.types.submodule {
         options = {
           enable = lib.mkOption {

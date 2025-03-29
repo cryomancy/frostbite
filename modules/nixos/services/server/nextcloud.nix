@@ -1,22 +1,17 @@
-scoped: {
+_: {
   config,
   lib,
-  pkgs,
   ...
 }: let
-  cfg = config.kosei.nextcloud;
+  cfg = config.frostbite.services.server.nextcloud;
   systemStateVersion = config.system.stateVersion;
 in {
   options = {
-    kosei.nextcloud = {
+    frostbite.services.server.nextcloud = {
       enable = lib.mkEnableOption "nextcloud";
     };
   };
   config = lib.mkIf cfg.enable {
-    environment.persistence = lib.mkIf config.kosei.impermanence.enable {
-      "/nix/persistent/".directories = ["/var/snapshots"];
-    };
-
     containers = {
       nextcloud-container = {
         autoStart = true;
@@ -53,7 +48,7 @@ in {
           security.acme = {
             acceptTerms = true;
             certs = {
-              ${config.services.nextcloud.hostName}.email = config.kosei.email;
+              ${config.services.nextcloud.hostName}.email = config.frostbite.email;
             };
           };
 

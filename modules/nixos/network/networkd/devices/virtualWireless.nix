@@ -3,10 +3,10 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.kosei.network.networkd.devices.virtualWireless;
+  cfg = config.frostbite.network.networkd.devices.virtualWireless;
 in {
   options = {
-    kosei.network.networkd.devices.virtualWireless = lib.mkOption {
+    frostbite.network.networkd.devices.virtualWireless = lib.mkOption {
       type = lib.types.submodule {
         options = {
           enable = lib.mkOption {

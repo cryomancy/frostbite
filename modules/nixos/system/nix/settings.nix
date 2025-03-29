@@ -1,14 +1,14 @@
-scoped: {
+_: {
   config,
   inputs,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.kosei.nixSettings;
+  cfg = config.frostbite.nix.settings;
 in {
   options = {
-    kosei.nixSettings = {
+    frostbite.nix.settings = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

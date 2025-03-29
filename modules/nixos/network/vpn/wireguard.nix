@@ -3,10 +3,10 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.kosei.networking.wireguard;
+  cfg = config.frostbite.networking.wireguard;
 in {
   options = {
-    kosei.networking.wireguard = lib.mkOption {
+    frostbite.networking.wireguard = lib.mkOption {
       type = lib.types.submodule {
         options = {
           enable = lib.mkOption {

@@ -1,4 +1,4 @@
-scoped: {
+_: {
   xserver.desktopManager.gnome.sessionPath = [
     pkgs.gnome-shell
     pkgs.gnome-shell-extensions

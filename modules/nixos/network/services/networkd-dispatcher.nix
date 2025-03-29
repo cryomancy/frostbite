@@ -3,10 +3,10 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.kosei.networking.services.networkd-dispatcher;
+  cfg = config.frostbite.networking.services.networkd-dispatcher;
 in {
   options = {
-    kosei.networking.services.networkd-dispatcher = lib.mkOption {
+    frostbite.networking.services.networkd-dispatcher = lib.mkOption {
       type = lib.types.submodule {
         options = {
           enable = lib.mkOption {

@@ -4,10 +4,10 @@ _: {
   pkgs,
   ...
 }: let
-  cfg = config.kosei.networking.devices;
+  cfg = config.frostbite.networking.devices;
 in {
   options = {
-    kosei.networking.devices = lib.mkOption {
+    frostbite.networking.devices = lib.mkOption {
       type = lib.types.submodule {
         options = {
           enable = lib.mkOption {

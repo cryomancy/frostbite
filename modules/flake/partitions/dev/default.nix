@@ -43,11 +43,11 @@ in {
         # Use the top-level directory of the working tree
         eval = "$(git rev-parse --show-toplevel)";
       };
+      devshell.startup.default.text = "${config.pre-commit.installationScript}";
 
       motd = ''
-        ${config.pre-commit.installationScript}
-           {117}❄ Kosei Developement Shell ❄{reset}
-           $(type -p menu &>/dev/null && menu)
+        {117}❄ Kosei Developement Shell ❄{reset}
+        $(type -p menu &>/dev/null && menu)
       '';
       env = [
         {
@@ -92,11 +92,16 @@ in {
           "${projectRoot}/.direnv"
           "${projectRoot}/.git"
           "${projectRoot}/.local"
+          "lib"
         ];
 
         hooks = {
           alejandra = {
             enable = true;
+            settings = {
+              check = true;
+              verbosity = "quiet";
+            };
           };
 
           detect-aws-credentials = {
@@ -109,34 +114,6 @@ in {
 
           ripsecrets = {
             enable = true;
-          };
-
-          sort-file-contents = {
-            enable = true;
-          };
-
-          treefmt = {
-            enable = true;
-            settings = {
-              no-cache = true;
-              fail-on-change = true;
-              formatters = [
-                pkgs.alejandra
-                pkgs.shfmt
-              ];
-            };
-          };
-
-          typos = {
-            enable = true;
-            settings = {
-              binary = false;
-              exclude = "*.nix";
-              diff = true;
-              hidden = false;
-              ignored-words = ["kosei" "Kosei"];
-              no-check-filenames = true;
-            };
           };
         };
       };

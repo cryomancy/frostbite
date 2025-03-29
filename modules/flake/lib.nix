@@ -9,7 +9,7 @@ in
 			  (eris.lib.load
 				{
 				  src = ../../lib;
-				  loader = eris.lib.loaders.scoped;
+				  loader = eris.lib.loaders._;
 				}
 			  )
 			  |>

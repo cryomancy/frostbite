@@ -29,7 +29,7 @@ in {
         }))
       ];
 
-      persistence = lib.mkIf config.kosei.impermanence.enable {
+      persistence = lib.mkIf config.frostbite.impermanence.enable {
         "/nix/persistent/home/${user}" = {
           directories = [".config/vesktop"];
         };

@@ -26,7 +26,7 @@ in {
       enableFishIntegration = true;
       installBatSyntax = true;
     };
-    home.persistence = lib.mkIf config.kosei.impermanence.enable {
+    home.persistence = lib.mkIf config.frostbite.impermanence.enable {
       "/nix/persistent/home/${user}" = {
         directories = [".config/ghostty"];
       };

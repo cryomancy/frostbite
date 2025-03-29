@@ -41,7 +41,7 @@ in {
       package = pkgs.kdePackages.kdeconnect-kde;
     };
 
-    home.persistence = lib.mkIf config.kosei.impermanence.enable {
+    home.persistence = lib.mkIf config.frostbite.impermanence.enable {
       "/persist/${config.home.homeDirectory}".directories = [".config/kdeconnect"];
     };
   };

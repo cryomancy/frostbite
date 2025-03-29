@@ -1,15 +1,14 @@
-scoped: {
+_: {
   config,
   lib,
-  pkgs,
   users,
   ...
 }: let
-  cfg = config.kosei.users;
+  cfg = config.frostbite.users;
   user = import ./options/__user.nix;
 in {
   options = {
-    kosei = {
+    frostbite = {
       users = {
         enable = lib.mkOption {
           type = lib.types.bool;
@@ -52,7 +51,7 @@ in {
 
     users = {
       mutableUsers = lib.mkDefault (
-        if config.kosei.secrets.enable
+        if config.frostbite.secrets.enable
         then false
         else true
       );
@@ -78,19 +77,17 @@ in {
             (lib.lists.optionals
               cfg.users.${user}.isAdministrator ["netadmin" "wheel" "wireshark"])
             (lib.lists.optionals
-              config.home-manager.users.${user}.kosei.arduino.enable ["dialout"])
+              config.home-manager.users.${user}.frostbite.arduino.enable ["dialout"])
             (lib.lists.optionals
-              (config.kosei.virtualization.enable && cfg.users.${user}.isAdministrator) ["libvirtd"])
+              (config.frostbite.virtualization.enable && cfg.users.${user}.isAdministrator) ["libvirtd"])
           ];
-          openssh.authorizedKeys.keys = config.kosei.ssh.publicKeys;
+          openssh.authorizedKeys.keys = config.frostbite.ssh.publicKeys;
         });
     };
 
     # Recovery Account
     # Does not use Yubikey authentication / other PAM methods
-    users.extraUsers.recovery = lib.mkIf (config.kosei.security.level
-      < 4
-      && config.kosei.secrets.enable) {
+    users.extraUsers.recovery = lib.mkIf config.frostbite.secrets.enable {
       name = "recovery";
       description = "Recovery Account";
       isNormalUser = true;

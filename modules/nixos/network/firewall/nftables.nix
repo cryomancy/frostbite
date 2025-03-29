@@ -3,10 +3,10 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.kosei.networking.firewall;
+  cfg = config.frostbite.networking.firewall;
 in {
   options = {
-    kosei.networking = {
+    frostbite.networking = {
       firewall = {
         type = lib.types.submodule;
         option = lib.mkOption {

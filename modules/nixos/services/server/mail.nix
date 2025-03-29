@@ -4,11 +4,11 @@ _: {
   inputs,
   ...
 }: let
-  cfg = config.kosei.email;
+  cfg = config.frostbite.services.server.email;
   systemStateVersion = config.system.stateVersion;
 in {
   options = {
-    kosei.email = {
+    frostbite.services.server.email = {
       enable = lib.mkEnableOption "email and email-server options";
       address = lib.mkOption {
         type = lib.types.str;

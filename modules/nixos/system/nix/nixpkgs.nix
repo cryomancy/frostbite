@@ -5,10 +5,10 @@ _: {
   system,
   ...
 }: let
-  cfg = config.kosei.nixpkgs;
+  cfg = config.frostbite.nix.nixpkgs;
 in {
   options = {
-    kosei.nixpkgs = {
+    frostbite.nix.nixpkgs = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
@@ -40,7 +40,7 @@ in {
           })
         ]
         ++ [
-          inputs.fuyuvim.overlays.default
+          inputs.icebox.overlays.default
           inputs.nur.overlays.default
         ];
     };

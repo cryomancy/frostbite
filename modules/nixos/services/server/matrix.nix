@@ -1,22 +1,17 @@
-scoped: {
+_: {
   config,
   lib,
-  pkgs,
   ...
 }: let
-  cfg = config.kosei.matrix;
+  cfg = config.frostbite.services.server.matrix;
   systemStateVersion = config.system.stateVersion;
 in {
   options = {
-    kosei.matrix = {
+    frostbite.services.server.matrix = {
       enable = lib.mkEnableOption "matrix";
     };
   };
   config = lib.mkIf cfg.enable {
-    environment.persistence = lib.mkIf config.kosei.impermanence.enable {
-      "/nix/persistent/".directories = ["/var/lib/matrix"];
-    };
-
     # TODO: Asserts secrets must be enabled
     containers = {
       matrix-container = {

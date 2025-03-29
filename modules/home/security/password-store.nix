@@ -8,7 +8,7 @@ _: {
   cfg = config.frostbite.security.password-store;
 in {
   options = {
-    kosei.frostbite.security.password-store = {
+    frostbite.frostbite.security.password-store = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
@@ -18,7 +18,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     home = {
-      persistence = lib.mkIf config.kosei.impermanence.enable {
+      persistence = lib.mkIf config.frostbite.impermanence.enable {
         "/nix/persistent/home/${user}" = {
           directories = [".local/share/password-store"];
         };

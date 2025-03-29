@@ -1,11 +1,11 @@
-scoped: {
+_: {
   config,
   lib,
   pkgs,
   nixosConfig,
   ...
 }: let
-  cfg = config.kosei.gnome;
+  cfg = config.frostbite.gnome;
 
   mimeAppsList = pkgs.writeTextFile {
     name = "gnome-mimeapps";
@@ -20,7 +20,7 @@ scoped: {
     inherit (cfg) extraGSettingsOverrides extraGSettingsOverridePackages favoriteAppsOverride;
   };
 in {
-  options.kosei = {
+  options.frostbite = {
     gnome = {
       enable = lib.mkEnableOption {
         type = lib.types.bool;

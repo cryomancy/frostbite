@@ -9,7 +9,7 @@ _: {
 in {
   options = {
     frostbite.programs.libreoffice = {
-      enable = lib.mkEnableOption "kosei home packages";
+      enable = lib.mkEnableOption "frostbite home packages";
     };
   };
   config = lib.mkIf cfg.enable {

@@ -7,7 +7,7 @@ _: {
   cfg = config.frostbite.browser.chromium;
 in {
   options = {
-    kosei.frostbite.browser.chromium = lib.mkOption {
+    frostbite.frostbite.browser.chromium = lib.mkOption {
       type = lib.types.submodule {
         options = {
           enable = lib.mkOption {

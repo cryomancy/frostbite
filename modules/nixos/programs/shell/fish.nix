@@ -1,13 +1,12 @@
-scoped: {
+_: {
   config,
   lib,
-  pkgs,
   ...
 }: let
-  cfg = config.kosei.fish;
+  cfg = config.frostbite.shell.fish;
 in {
   options = {
-    kosei.fish = {
+    frostbite.shell.fish = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

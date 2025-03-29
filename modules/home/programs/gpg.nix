@@ -65,7 +65,7 @@ in {
         };
       };
 
-      git = lib.mkIf (config.kosei.git.enable && cfg.commitSigning.enable) {
+      git = lib.mkIf (config.frostbite.git.enable && cfg.commitSigning.enable) {
         signing.key = "${cfg.keyID}";
         extraConfig.commit.gpgsign = true;
       };

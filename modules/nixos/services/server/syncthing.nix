@@ -1,14 +1,13 @@
-scoped: {
+_: {
   config,
   lib,
-  pkgs,
   ...
 }: let
-  cfg = config.kosei.syncthing;
+  cfg = config.frostbite.services.server.syncthing;
   systemStateVersion = config.system.stateVersion;
 in {
   options = {
-    kosei.syncthing = {
+    frostbite.services.server.syncthing = {
       enable = lib.mkEnableOption "syncthing";
     };
   };
@@ -56,7 +55,7 @@ in {
       };
     };
 
-    environment.persistence = lib.mkIf config.kosei.impermanence.enable {
+    environment.persistence = lib.mkIf config.frostbite.impermanence.enable {
       "/nix/persistent/".directories = ["/var/lib/syncthing"];
     };
   };

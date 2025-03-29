@@ -9,8 +9,8 @@ _: {
   flake,
   ...
 }: let
-  inputs = preInputs // {kosei = flake;};
-  inherit (inputs) kosei nixpkgs home-manager;
+  inputs = preInputs // {frostbite = flake;};
+  inherit (inputs) frostbite nixpkgs home-manager;
 
   specialArgs = {inherit hostName inputs outPath system users;};
 in
@@ -23,7 +23,7 @@ in
           home-manager.nixosModules.home-manager
           {
             networking.wireless.enable = false;
-            kosei.secrets.enable = false;
+            frostbite.secrets.enable = false;
             home-manager = {
               backupFileExtension = "bak";
               useGlobalPkgs = true;
@@ -32,15 +32,15 @@ in
               users = inputs.nixpkgs.lib.attrsets.genAttrs users (user: {
                 imports =
                   nixpkgs.lib.forEach
-                  (builtins.attrNames kosei.modules.homeManager)
-                  (module: builtins.getAttr module kosei.modules.homeManager);
+                  (builtins.attrNames frostbite.modules.homeManager)
+                  (module: builtins.getAttr module frostbite.modules.homeManager);
                 config.home.username = user;
                 config._module.args = {inherit user;};
               });
             };
           }
           {
-            kosei = {
+            frostbite = {
               boot.enable = true;
               displayManager.enable = true;
               secrets.enable = false;
@@ -50,7 +50,7 @@ in
             };
 
             home-manager.users = {
-              "nixos".kosei = {
+              "nixos".frostbite = {
                 git.enable = false;
                 gpg.enable = false;
                 officeUtils.enable = true;
@@ -64,8 +64,8 @@ in
         ]
         ++ extraModules
         ++ nixpkgs.lib.forEach
-        (builtins.attrNames kosei.modules.nixos)
-        (module: builtins.getAttr module kosei.modules.nixos);
+        (builtins.attrNames frostbite.modules.nixos)
+        (module: builtins.getAttr module frostbite.modules.nixos);
     })
   .config
   .system

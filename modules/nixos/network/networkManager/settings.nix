@@ -3,10 +3,10 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.kosei.networking.networkManager;
+  cfg = config.frostbite.networking.networkManager;
 in {
   options = {
-    kosei.networking.networkManager = lib.mkOption {
+    frostbite.networking.networkManager = lib.mkOption {
       type = lib.types.submodule {
         options = {
           enable = lib.mkOption {

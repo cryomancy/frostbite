@@ -3,10 +3,10 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.kosei.services.ipc.dbus;
+  cfg = config.frostbite.services.ipc.dbus;
 in {
   options = {
-    kosei.services.ips.dbus = lib.mkOption {
+    frostbite.services.ipc.dbus = lib.mkOption {
       type = lib.types.submodule {
         options = {
           enable = lib.mkOption {

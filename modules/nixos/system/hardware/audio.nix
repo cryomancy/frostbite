@@ -4,9 +4,9 @@ _: {
   pkgs,
   ...
 }: let
-  cfg = config.kosei.audio;
+  cfg = config.frostbite.hardware.audio;
 in {
-  options.kosei.audio = {
+  options.frostbite.hardware.audio = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = true;

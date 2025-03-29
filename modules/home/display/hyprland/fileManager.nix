@@ -7,7 +7,7 @@ _: {
   cfg = config.frostbite.displays.hyprland.fileManager;
 in {
   options = {
-    kosei.frostbite.displays.hyprland.fileManager = {
+    frostbite.frostbite.displays.hyprland.fileManager = {
       enable = lib.mkEnableOption "file manager";
     };
   };

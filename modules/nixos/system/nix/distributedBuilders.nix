@@ -1,15 +1,16 @@
-scoped: {
+_: {
   config,
   lib,
   ...
 }: let
-  cfg = config.kosei.distributedBuilders;
+  cfg = config.frostbite.nix.distributedBuilders;
 in {
   options = {
-    kosei.distributedBuilders = {
+    frostbite.nix.distributedBuilders = {
       enable = lib.mkEnableOption "distributed builders";
     };
   };
+  # TODO: Flush this out with declartive submodules
   config = lib.mkIf cfg.enable {
     nix = {
       extraOptions = ''

@@ -3,10 +3,10 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.kosei.networking.devices.bridges;
+  cfg = config.frostbite.networking.devices.bridges;
 in {
   options = {
-    kosei.networking.devices.bridges = lib.mkOption {
+    frostbite.networking.devices.bridges = lib.mkOption {
       type = lib.types.submodule {
         options = {
           enable = lib.mkOption {

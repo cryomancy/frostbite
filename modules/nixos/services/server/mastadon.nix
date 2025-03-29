@@ -1,14 +1,14 @@
-scoped: {
+_: {
   config,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.kosei.mastadon;
+  cfg = config.frostbite.services.server.mastadon;
   systemStateVersion = config.system.stateVersion;
 in {
   options = {
-    kosei.mastadon = {
+    frostbite.services.server.mastadon = {
       enable = lib.mkEnableOption "mastadon";
       email = lib.mkOption {
         type = lib.types.str;
@@ -17,10 +17,6 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
-    environment.persistence = lib.mkIf config.kosei.impermanence.enable {
-      "/nix/persistent/".directories = ["/var/lib/mastadon"];
-    };
-
     # TODO: Asserts secrets must be enabled
     containers = {
       mastadon-container = {

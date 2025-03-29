@@ -3,15 +3,15 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.kosei.networking.bluetooth;
+  cfg = config.frostbite.networking.bluetooth;
 in {
   options = {
-    kosei.networking.bluetooth = lib.mkOption {
+    frostbite.networking.bluetooth = lib.mkOption {
       type = lib.types.submodule {
         options = {
           enable = lib.mkOption {
             type = lib.types.bool;
-            default = lib.mkIf (config.kosei.security.settings.useCase == "laptop");
+            default = lib.mkIf (config.frostbite.security.settings.useCase == "laptop");
           };
         };
       };

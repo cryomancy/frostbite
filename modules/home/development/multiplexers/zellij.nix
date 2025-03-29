@@ -20,7 +20,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.persistence = lib.mkIf config.kosei.impermanence.enable {
+    home.persistence = lib.mkIf config.frostbite.impermanence.enable {
       "/nix/persistent/home/${user}" = {
         directories = [".config/zellij"];
       };

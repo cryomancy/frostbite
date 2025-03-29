@@ -1,17 +1,17 @@
-scoped: {
+_: {
   config,
   lib,
   pkgs,
   ...
 }:
 with lib; let
-  cfg = config.kosei.yubikey-agent;
+  cfg = config.frostbite.services.ipc.yubikey-agent;
 in {
   options = {
-    kosei.yubikey-agent = {
+    frostbite.services.ipc.yubikey-agent = {
       enable = mkOption {
         type = types.bool;
-        default = config.kosei.yubikey.enable;
+        default = config.frostbite.security.yubikey.enable;
         description = ''
           Whether to start yubikey-agent when you log in.
           Also sets SSH_AUTH_SOCK to point at yubikey-agent.

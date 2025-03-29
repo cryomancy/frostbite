@@ -5,7 +5,7 @@ _: {
   callPackage,
   inputs,
 }: name: env:
-callPackage inputs.kosei.lib.runJanetCommandWith {
+callPackage inputs.frostbite.lib.runJanetCommandWith {
   stdenv = stdenvNoCC;
   inherit name;
   derivationArgs = env;

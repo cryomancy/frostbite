@@ -1,3 +1,3 @@
-scoped: {
+_: {
   udisks2.enable = true;
 }

@@ -1,14 +1,14 @@
-scoped: {
+_: {
   config,
   lib,
   pkgs,
   ...
 }: let
-  cfg = config.kosei.gitlab;
+  cfg = config.frostbite.services.server.gitlab;
   systemStateVersion = config.system.stateVersion;
 in {
   options = {
-    kosei.gitlab = {
+    frostbite.services.server.gitlab = {
       enable = lib.mkEnableOption "gitlab";
     };
   };
@@ -16,10 +16,6 @@ in {
     environment.systemPackages = with pkgs; [
       gitlab-shell
     ];
-
-    environment.persistence = lib.mkIf config.kosei.impermanence.enable {
-      "/nix/persistent/".directories = ["/var/gitlab"];
-    };
 
     # TODO: Asserts secrets must be enabled
     containers = {

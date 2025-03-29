@@ -6,11 +6,11 @@ scoped: {
   users,
   ...
 }: let
-  inherit (inputs) kosei home-manager nixpkgs;
+  inherit (inputs) frostbite home-manager nixpkgs;
   specialArgs = {inherit inputs system outPath users;};
 in
   nixpkgs.lib.nixosSystem {
-    pkgs = inputs.kosei.legacyPackages.${system};
+    pkgs = inputs.frostbite.legacyPackages.${system};
     inherit specialArgs;
     modules =
       [
@@ -25,8 +25,8 @@ in
             users = nixpkgs.lib.attrsets.genAttrs users (user: {
               imports =
                 nixpkgs.lib.forEach
-                (builtins.attrNames kosei.modules.homeManager)
-                (module: builtins.getAttr module kosei.modules.homeManager);
+                (builtins.attrNames frostbite.modules.homeManager)
+                (module: builtins.getAttr module frostbite.modules.homeManager);
               config.home.username = user;
               config._module.args = {inherit user;};
             });
@@ -35,6 +35,6 @@ in
       ]
       ++ extraModules
       ++ nixpkgs.lib.forEach
-      (builtins.attrNames kosei.modules.nixos)
-      (module: builtins.getAttr module kosei.modules.nixos);
+      (builtins.attrNames frostbite.modules.nixos)
+      (module: builtins.getAttr module frostbite.modules.nixos);
   }

@@ -1,12 +1,12 @@
-scoped: {
+_: {
   config,
   lib,
   ...
 }: let
-  cfg = config.kosei.systemMaintenance;
+  cfg = config.frostbite.nix.maintenance;
 in {
   options = {
-    kosei.systemMaintenance = {
+    frostbite.nix.maintenance = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
@@ -15,6 +15,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    # TODO: Add clause for servers
     system = {
       stateVersion = "25.04";
       autoUpgrade = {

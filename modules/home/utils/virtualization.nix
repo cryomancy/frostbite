@@ -19,7 +19,7 @@ in {
   config = lib.mkIf cfg.enable {
     # TODO: add impermanence for distrobox and podman
     home = {
-      persistence = lib.mkIf config.kosei.security.impermanence.enable {
+      persistence = lib.mkIf config.frostbite.security.impermanence.enable {
         "/nix/persistent/home/${user}" = {
           directories = [".config/k9s"];
         };

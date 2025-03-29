@@ -1,12 +1,12 @@
-scoped: {
+_: {
   config,
   lib,
   ...
 }: let
-  cfg = config.kosei.laptopSupport;
+  cfg = config.frostbite.support.laptop;
 in {
   options = {
-    kosei.laptopSupport = {
+    frostbite.support.laptop = {
       enable = lib.mkEnableOption "laptop suppport";
       enableHyprlandSupport = lib.mkEnableOption "laptop Hyprland support";
     };

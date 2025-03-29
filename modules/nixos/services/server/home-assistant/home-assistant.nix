@@ -6,12 +6,12 @@ _: {
   system,
   ...
 }: let
-  cfg = config.kosei.home-assistant;
+  cfg = config.frostbite.home-assistant;
   systemStateVersion = config.system.stateVersion;
   inherit config inputs pkgs;
 in {
   options = {
-    kosei.home-assistant = {
+    frostbite.home-assistant = {
       enable = lib.mkEnableOption "home-assistant";
 
       domain = lib.mkOption {
@@ -38,7 +38,7 @@ in {
       systemPackages = with pkgs; [
         home-assistant-cli
       ];
-      persistence = lib.mkIf config.kosei.impermanence.enable {
+      persistence = lib.mkIf config.frostbite.impermanence.enable {
         "/nix/persistent/".directories = ["/var/lib/hass"];
       };
     };

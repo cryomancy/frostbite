@@ -3,10 +3,10 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.kosei.defaultServices;
+  cfg = config.frostbite.services.daemon.defaults;
 in {
   options = {
-    kosei.defaultServices = {
+    frostbite.services.daemon.defaults = {
       enable = lib.mkEnableOption "defaultServices";
     };
   };

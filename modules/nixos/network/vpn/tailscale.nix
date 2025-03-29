@@ -4,10 +4,10 @@ _: {
   pkgs,
   ...
 }: let
-  cfg = config.kosei.networking.vpn.tailscale;
+  cfg = config.frostbite.networking.vpn.tailscale;
 in {
   options = {
-    kosei.networking.tailscale = lib.mkOption {
+    frostbite.networking.tailscale = lib.mkOption {
       type = lib.types.submodule {
         options = {
           enable = lib.mkOption {
@@ -17,7 +17,7 @@ in {
           authKeyFile = {
             type = lib.tpes.str;
             default = null;
-            example = "config.kosei.secrets.tailscale.authKeyFile.path";
+            example = "config.frostbite.secrets.tailscale.authKeyFile.path";
             description = ''A one-time use key used to authenticate a single device to Tailscale.'';
           };
         };
