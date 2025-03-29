@@ -8,7 +8,7 @@ in {
   options = {
     frostbite.networking.firewall = lib.mkOption {
       type = lib.types.submodule;
-      option = lib.mkOption {
+      options = lib.mkOption {
         enable = lib.mkOption {
           type = lib.types.bool;
           default = true;
