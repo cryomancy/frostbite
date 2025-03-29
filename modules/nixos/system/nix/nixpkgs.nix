@@ -40,7 +40,6 @@ in {
           })
         ]
         ++ [
-          inputs.icebox.overlays.default
           inputs.nur.overlays.default
         ];
     };
