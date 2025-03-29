@@ -7,11 +7,12 @@ _: {
 in {
   options = {
     frostbite.networking.firewall = lib.mkOption {
-      type = lib.types.submodule;
-      options = lib.mkOption {
-        enable = lib.mkOption {
-          type = lib.types.bool;
-          default = true;
+      type = lib.types.submodule {
+        options = lib.mkOption {
+          enable = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+          };
         };
       };
     };
