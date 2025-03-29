@@ -24,7 +24,7 @@ in {
       server.port = 6742;
     };
 
-    services.rgb = {
+    systemd.services.rgb = {
       Unit.Description = "Set RGB colors to match Stylix";
       Service = {
         Type = "oneshot";
