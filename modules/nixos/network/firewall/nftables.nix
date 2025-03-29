@@ -6,14 +6,12 @@ _: {
   cfg = config.frostbite.networking.firewall;
 in {
   options = {
-    frostbite.networking = {
-      firewall = {
-        type = lib.types.submodule;
-        option = lib.mkOption {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
+    frostbite.networking.firewall = lib.mkOption {
+      type = lib.types.submodule;
+      option = lib.mkOption {
+        enable = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
         };
       };
     };
