@@ -7,7 +7,7 @@ _: {
   secOpts = config.frostbite.security.settings;
 in {
   options = {
-    frostbite.ssh = {
+    frostbite.services.daemon.ssh = {
       enable = lib.mkEnableOption "ssh";
       publicKeys = lib.mkOption {
         type = lib.types.listOf lib.types.str;
