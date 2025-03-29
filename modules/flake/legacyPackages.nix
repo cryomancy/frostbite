@@ -1,4 +1,4 @@
-localFlake: {
+_: {
   inputs,
   config,
   ...
@@ -30,8 +30,8 @@ localFlake: {
           })
         ]
         ++ [
-          inputs.fuyuvim.overlays.default
-          # inputs.nur.overlays.default
+          inputs.vostok.overlays.default
+          inputs.nur.overlays.default
         ];
     };
   };
