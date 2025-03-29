@@ -1,6 +1,7 @@
 _: {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.frostbite.services.daemon.syncthing;
