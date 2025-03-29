@@ -20,15 +20,24 @@ in {
 
   config = lib.mkIf cfg.enable {
     networking = {
+      "nm_managed" = {
+        configFile.path = "/etc/wpa_supplicant.conf";
+        userControlled.group = "network";
+        extraConf = ''
+          ap_scan=1
+        '';
+        extraCmdArgs = "-u -W";
+        bridge = "br0";
+      };
+
       networkmanager = {
-        enable = true;
+        enable = false;
         dns = "systemd-resolved";
         wifi = {
           backend = "iwd";
           scanRandMacAddress = true;
           powersave = false;
           macAddress = "random";
-          unmanaged = [];
         };
       };
     };

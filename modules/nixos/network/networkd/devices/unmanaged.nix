@@ -4,10 +4,10 @@ _: {
   pkgs,
   ...
 }: let
-  cfg = config.frostbite.networking.devices;
+  cfg = config.frostbite.networking.devices.unmanaged;
 in {
   options = {
-    frostbite.networking.devices = lib.mkOption {
+    frostbite.networking.devices.unmanaged = lib.mkOption {
       type = lib.types.submodule {
         options = {
           enable = lib.mkOption {
@@ -28,8 +28,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    assertions = import ./__assertions.nix {inherit lib;};
-
     systemd = {
       network = {
         networks = {
