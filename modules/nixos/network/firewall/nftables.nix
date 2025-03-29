@@ -23,11 +23,11 @@ in {
       nftables = {
         enable = true;
         checkRuleset = true;
-        checkRulesetRedirect = {
-          "/etc/hosts" = config.environment.etc.hosts.source;
-          "/etc/protocols" = config.environment.etc.protocols.source;
-          "/etc/services" = config.environment.etc.services.source;
-        };
+        #checkRulesetRedirect = {
+        #  "/etc/hosts" = config.environment.etc.hosts.source;
+        #  "/etc/protocols" = config.environment.etc.protocols.source;
+        #  "/etc/services" = config.environment.etc.services.source;
+        #};
 
         flushRuleset = true;
 
