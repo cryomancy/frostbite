@@ -4,13 +4,13 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.frostbite.impermanence;
+  cfg = config.frostbite.security.impermanence;
 in {
   imports = [inputs.impermanence.nixosModules.impermanence];
 
   # NOTE: Only configured for BTRFS with or without LUKS
   options = {
-    frostbite.impermanence = {
+    frostbite.security.impermanence = {
       enable = lib.mkEnableOption "impermanence";
       device = lib.mkOption {
         type = lib.types.path;
