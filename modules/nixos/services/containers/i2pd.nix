@@ -8,7 +8,7 @@ _: {
   systemStateVersion = config.system.stateVersion;
 in {
   options = {
-    frostbite.i2pd = {
+    frostbite.services.containers.i2pd = {
       enable = lib.mkEnableOption "i2pd";
     };
   };
