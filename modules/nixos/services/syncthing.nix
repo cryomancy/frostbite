@@ -4,10 +4,10 @@ _: {
   pkgs,
   ...
 }: let
-  cfg = config.frostbite.services.daemon.syncthing;
+  cfg = config.frostbite.services.syncthing;
 in {
   options = {
-    frostbite.services.daemon.syncthing = {
+    frostbite.services.syncthing = {
       enable = lib.mkEnableOption "syncthing";
     };
   };

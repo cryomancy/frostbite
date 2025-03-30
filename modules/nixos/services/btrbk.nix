@@ -3,10 +3,10 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.frostbite.services.daemon.btrbk;
+  cfg = config.frostbite.services.btrbk;
 in {
   options = {
-    frostbite.services.daemon.btrbk = {
+    frostbite.services.btrbk = {
       enable = lib.mkEnableOption "btrbk";
     };
   };

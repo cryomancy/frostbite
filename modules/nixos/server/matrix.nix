@@ -3,11 +3,11 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.frostbite.services.server.matrix;
+  cfg = config.frostbite.server.matrix;
   systemStateVersion = config.system.stateVersion;
 in {
   options = {
-    frostbite.services.server.matrix = {
+    frostbite.server.matrix = {
       enable = lib.mkEnableOption "matrix";
     };
   };

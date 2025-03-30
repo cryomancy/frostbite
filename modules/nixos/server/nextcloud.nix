@@ -3,11 +3,11 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.frostbite.services.server.nextcloud;
+  cfg = config.frostbite.server.nextcloud;
   systemStateVersion = config.system.stateVersion;
 in {
   options = {
-    frostbite.services.server.nextcloud = {
+    frostbite.server.nextcloud = {
       enable = lib.mkEnableOption "nextcloud";
     };
   };

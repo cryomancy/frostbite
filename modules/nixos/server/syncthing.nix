@@ -3,11 +3,11 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.frostbite.services.server.syncthing;
+  cfg = config.frostbite.server.syncthing;
   systemStateVersion = config.system.stateVersion;
 in {
   options = {
-    frostbite.services.server.syncthing = {
+    frostbite.server.syncthing = {
       enable = lib.mkEnableOption "syncthing";
     };
   };

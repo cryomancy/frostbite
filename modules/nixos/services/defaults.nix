@@ -3,10 +3,10 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.frostbite.services.daemon.defaults;
+  cfg = config.frostbite.services.defaults;
 in {
   options = {
-    frostbite.services.daemon.defaults = {
+    frostbite.services.defaults = {
       enable = lib.mkEnableOption "defaultServices";
     };
   };

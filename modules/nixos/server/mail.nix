@@ -4,11 +4,11 @@ _: {
   inputs,
   ...
 }: let
-  cfg = config.frostbite.services.server.email;
+  cfg = config.frostbite.server.email;
   systemStateVersion = config.system.stateVersion;
 in {
   options = {
-    frostbite.services.server.email = {
+    frostbite.server.email = {
       enable = lib.mkEnableOption "email and email-server options";
       address = lib.mkOption {
         type = lib.types.str;

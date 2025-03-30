@@ -3,11 +3,11 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.frostbite.services.daemon.ssh;
+  cfg = config.frostbite.services.ssh;
   secOpts = config.frostbite.security.settings;
 in {
   options = {
-    frostbite.services.daemon.ssh = {
+    frostbite.services.ssh = {
       enable = lib.mkEnableOption "ssh";
       publicKeys = lib.mkOption {
         type = lib.types.listOf lib.types.str;

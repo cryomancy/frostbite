@@ -3,10 +3,10 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.frostbite.services.daemon.kmonad;
+  cfg = config.frostbite.services.kmonad;
 in {
   options = {
-    frostbite.services.daemon.kmonad = {
+    frostbite.services.kmonad = {
       enable = lib.mkEnableOption "kmonad";
     };
   };

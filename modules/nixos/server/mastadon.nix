@@ -4,11 +4,11 @@ _: {
   pkgs,
   ...
 }: let
-  cfg = config.frostbite.services.server.mastadon;
+  cfg = config.frostbite.server.mastadon;
   systemStateVersion = config.system.stateVersion;
 in {
   options = {
-    frostbite.services.server.mastadon = {
+    frostbite.server.mastadon = {
       enable = lib.mkEnableOption "mastadon";
       email = lib.mkOption {
         type = lib.types.str;

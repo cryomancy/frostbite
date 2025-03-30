@@ -3,10 +3,10 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.frostbite.services.daemon.initrdSSH;
+  cfg = config.frostbite.services.initrdSSH;
 in {
   options = {
-    frostbite.initrdSSH = {
+    frostbite.services.initrdSSH = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;

@@ -6,12 +6,12 @@ _: {
   system,
   ...
 }: let
-  cfg = config.frostbite.home-assistant;
+  cfg = config.frostbite.server.home-assistant;
   systemStateVersion = config.system.stateVersion;
   inherit config inputs pkgs;
 in {
   options = {
-    frostbite.home-assistant = {
+    frostbite.server.home-assistant = {
       enable = lib.mkEnableOption "home-assistant";
 
       domain = lib.mkOption {

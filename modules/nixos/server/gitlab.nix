@@ -4,11 +4,11 @@ _: {
   pkgs,
   ...
 }: let
-  cfg = config.frostbite.services.server.gitlab;
+  cfg = config.frostbite.server.gitlab;
   systemStateVersion = config.system.stateVersion;
 in {
   options = {
-    frostbite.services.server.gitlab = {
+    frostbite.server.gitlab = {
       enable = lib.mkEnableOption "gitlab";
     };
   };

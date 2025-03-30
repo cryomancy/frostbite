@@ -4,13 +4,13 @@ _: {
   pkgs,
   ...
 }: let
-  cfg = config.frostbite.services.daemon.openrgb;
+  cfg = config.frostbite.services.openrgb;
   # TODO: Integrate with Stylix
   inherit (config.frostbite.display.design.theme) theme;
   setColor = theme: ''${lib.getExe pkgs.openrgb} --client -c ${lib.removePrefix "#" theme} -m static'';
 in {
   options = {
-    frostbite.services.daemon.openrgb = {
+    frostbite.services.openrgb = {
       enable = lib.mkEnableOption "rgb";
     };
   };

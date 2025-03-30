@@ -5,10 +5,10 @@ _: {
   ...
 }:
 with lib; let
-  cfg = config.frostbite.services.ipc.yubikey-agent;
+  cfg = config.frostbite.services.yubikey-agent;
 in {
   options = {
-    frostbite.services.ipc.yubikey-agent = {
+    frostbite.services.yubikey-agent = {
       enable = mkOption {
         type = types.bool;
         default = config.frostbite.security.yubikey.enable;

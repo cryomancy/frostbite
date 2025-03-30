@@ -3,10 +3,10 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.frostbite.services.ipc.irqbalance;
+  cfg = config.frostbite.services.dbus;
 in {
   options = {
-    frostbite.services.ipc.irqbalance = lib.mkOption {
+    frostbite.services.dbus = lib.mkOption {
       type = lib.types.submodule {
         options = {
           enable = lib.mkOption {
@@ -20,8 +20,10 @@ in {
 
   config = lib.mkIf cfg.enable {
     services = {
-      irqbalance = {
+      dbus = {
         enable = true;
+        implementation = "broker";
+        apparmor = "disabled"; # System is secured by SELinux;
       };
     };
   };
