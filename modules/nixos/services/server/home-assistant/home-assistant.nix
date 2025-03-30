@@ -38,7 +38,7 @@ in {
       systemPackages = with pkgs; [
         home-assistant-cli
       ];
-      persistence = lib.mkIf config.frostbite.impermanence.enable {
+      persistence = lib.mkIf config.frostbite.security.impermanence.enable {
         "/nix/persistent/".directories = ["/var/lib/hass"];
       };
     };

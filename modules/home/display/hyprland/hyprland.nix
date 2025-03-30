@@ -208,7 +208,7 @@ in {
     };
 
     home = {
-      persistence = lib.mkIf config.frostbite.impermanence.enable {
+      persistence = lib.mkIf config.frostbite.security.impermanence.enable {
         "/persist/${config.home.homeDirectory}".directories = [".config/hypr"];
       };
 

@@ -21,7 +21,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment = {
-      persistence = lib.mkIf config.frostbite.impermanence.enable {
+      persistence = lib.mkIf config.frostbite.security.impermanence.enable {
         "/nix/persistent/".directories = ["/etc/secure/Yubico/u2f_keys"];
       };
 

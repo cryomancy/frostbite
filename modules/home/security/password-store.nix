@@ -18,7 +18,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     home = {
-      persistence = lib.mkIf config.frostbite.impermanence.enable {
+      persistence = lib.mkIf config.frostbite.security.impermanence.enable {
         "/nix/persistent/home/${user}" = {
           directories = [".local/share/password-store"];
         };
