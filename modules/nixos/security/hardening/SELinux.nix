@@ -4,7 +4,7 @@ _: {
   pkgs,
   ...
 }: let
-  cfg = config.frostbite.SELinux;
+  cfg = config.frostbite.security.SELinux;
   secOpts = config.frostbite.security;
   isOpen = lib.mkIf secOpts.level == "open";
 in {
