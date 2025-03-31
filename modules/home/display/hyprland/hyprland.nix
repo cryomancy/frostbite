@@ -12,7 +12,7 @@ _: {
   onMonitorDetached = inputs.frostbite.lib.onMonitorDetached {inherit lib pkgs;};
 in {
   options = {
-    frostbite.displays.hyprland = {
+    frostbite.display.hyprland = {
       enable = lib.mkEnableOption "hyprland";
 
       autostartWorkspaces = lib.mkOption {
