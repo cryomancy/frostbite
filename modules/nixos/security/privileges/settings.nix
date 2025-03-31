@@ -3,10 +3,10 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.frostbite.security.settings;
+  cfg = config.frostbite.security;
 in {
   options = {
-    frostbite.security.settings = {
+    frostbite.security = {
       level = lib.mkOption {
         type = lib.types.enum;
         default = "standard";

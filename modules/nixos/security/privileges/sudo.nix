@@ -4,7 +4,7 @@ _: {
   ...
 }: let
   cfg = config.frostbite.security.sudo;
-  secOpts = config.frostbite.security.settings;
+  secOpts = config.frostbite.security;
   strict = lib.lists.any secOpts.level ["restricted" "strict"];
 in {
   options = {

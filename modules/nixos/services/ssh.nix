@@ -4,7 +4,7 @@ _: {
   ...
 }: let
   cfg = config.frostbite.services.ssh;
-  secOpts = config.frostbite.security.settings;
+  secOpts = config.frostbite.security;
 in {
   options = {
     frostbite.services.ssh = {

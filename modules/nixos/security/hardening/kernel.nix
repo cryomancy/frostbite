@@ -4,7 +4,7 @@ _: {
   ...
 }: let
   cfg = config.frostbite.security.kernel;
-  secOpts = config.frostbite.security.settings;
+  secOpts = config.frostbite.security;
   isOpen = lib.mkIf secOpts.level == "open";
 in {
   options = {

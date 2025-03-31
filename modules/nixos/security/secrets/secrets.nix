@@ -39,7 +39,7 @@ in {
         }))))
 
         (lib.attrsets.optionalAttrs
-          (!config.frostbite.security.settings.lockdownState)
+          (!config.frostbite.security.lockdownState)
           {"recovery/hashedPasswordFile" = {neededForUsers = true;};})
 
         #(
