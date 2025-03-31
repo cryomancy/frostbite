@@ -1,11 +1,12 @@
 _: {
   config,
   lib,
+  pkgs,
   users,
   ...
 }: let
   cfg = config.frostbite.users;
-  userOpts = import ./options/__user.nix {inherit config lib users;};
+  userOpts = import ./options/__user.nix {inherit config lib pkgs;};
 in {
   options = {
     frostbite.users = {
