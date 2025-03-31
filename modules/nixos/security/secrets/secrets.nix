@@ -22,7 +22,7 @@ in {
   config = lib.mkIf cfg.enable {
     warnings = [
       (
-        lib.optionals (cfg.defaultSopsFile == options.frostbite.secrets.defaultSopsFile.default)
+        lib.optionals (cfg.defaultSopsFile == options.frostbite.security.secrets.defaultSopsFile.default)
         ''
           The default sops file location is set by default but not configured by the user.
           If you do not have a sops file at ${cfg.defaultSopsFile} then the
