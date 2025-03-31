@@ -7,7 +7,7 @@ _: {
   cfg = config.frostbite.browser.chromium;
 in {
   options = {
-    frostbite.frostbite.browser.chromium = {
+    frostbite.browser.chromium = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;
