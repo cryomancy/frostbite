@@ -3,11 +3,10 @@ _: {
   inputs,
   lib,
   options,
-  users,
   ...
 }: let
   cfg = config.frostbite.security.secrets;
-  userList = lib.attrsets.attrNames users;
+  users = config.frostbite.users.accounts;
 in {
   imports = [inputs.sops-nix.nixosModules.sops];
 
@@ -34,7 +33,7 @@ in {
 
     sops = {
       secrets = lib.attrsets.mergeAttrsList [
-        (lib.attrsets.mergeAttrsList (builtins.attrValues (lib.genAttrs userList (user: {
+        (lib.attrsets.mergeAttrsList (builtins.attrValues (lib.genAttrs users (user: {
           "${user}/hashedPasswordFile" = {neededForUsers = true;};
         }))))
 

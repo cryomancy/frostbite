@@ -1,7 +1,6 @@
 _: {
   config,
   lib,
-  users,
   ...
 }: let
   cfg = config.frostbite.users.recovery;

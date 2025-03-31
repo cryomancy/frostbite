@@ -3,10 +3,10 @@ _: {
   lib,
   pkgs,
   inputs,
-  users,
   ...
 }: let
   cfg = config.frostbite.display.design;
+  users = config.frostbite.users.accounts;
 in {
   imports = [
     inputs.stylix.nixosModules.stylix
@@ -34,7 +34,7 @@ in {
       base16Scheme = "${cfg.theme}";
 
       # TODO: Check upstream, why does this have to be set for all users?
-      image = /home/${builtins.elemAt (lib.attrsets.attrNames users) 0}/.local/state/wallpaperd/wallpapers;
+      image = /home/${builtins.elemAt users 0}/.local/state/wallpaperd/wallpapers;
 
       cursor = {
         package = pkgs.bibata-cursors;

@@ -3,11 +3,10 @@ _: {
   inputs,
   system,
   outPath,
-  users,
   ...
 }: let
   inherit (inputs) frostbite home-manager nixpkgs;
-  specialArgs = {inherit inputs system outPath users;};
+  specialArgs = {inherit inputs system outPath;};
 in
   nixpkgs.lib.nixosSystem {
     pkgs = inputs.frostbite.legacyPackages.${system};
@@ -15,7 +14,7 @@ in
     modules =
       [
         home-manager.nixosModules.home-manager
-        {
+        ({config, ...}: {
           home-manager = {
             backupFileExtension = "bak";
             extraSpecialArgs = specialArgs;
@@ -23,7 +22,7 @@ in
             useUserPackages = true; # Installs packages to /etc/profiles
             # Iterates over a list of users provided in the function call
             users =
-              nixpkgs.lib.attrsets.genAttrs (nixpkgs.lib.attrsets.attrNames users)
+              nixpkgs.lib.attrsets.genAttrs config.frostbite.users.accounts
               (user: {
                 imports =
                   nixpkgs.lib.forEach
@@ -33,7 +32,7 @@ in
                 config._module.args = {inherit user;};
               });
           };
-        }
+        })
       ]
       ++ extraModules
       ++ nixpkgs.lib.forEach

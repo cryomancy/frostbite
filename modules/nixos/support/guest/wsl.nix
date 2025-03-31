@@ -2,10 +2,10 @@ _: {
   config,
   inputs,
   lib,
-  users,
   ...
 }: let
   cfg = config.frostbite.support.guest.wsl;
+  users = config.frostbite.users.accounts;
 in {
   imports = [inputs.nixos-wsl.nixosModules.wsl];
 

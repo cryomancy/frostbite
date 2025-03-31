@@ -1,12 +1,9 @@
 _: {
   config,
   lib,
-  pkgs,
-  users,
   ...
 }: let
   cfg = config.frostbite.users;
-  userOpts = import ./options/__user.nix {inherit config lib pkgs;};
 in {
   options = {
     frostbite.users = {
@@ -18,18 +15,11 @@ in {
         '';
       };
 
-      users = lib.mkOption {
+      accounts = lib.mkOption {
         default = {};
-        type = with lib.types; attrsOf (submodule userOpts);
-        example = {
-          tahlon = {
-            home = "/home/tahlon";
-            isAdministrator = true;
-          };
-        };
+        type = with lib.types; listOf str;
         description = ''
           Additional user accounts to be created automatically by the system.
-          This can also be used to set options for root.
           Password is either set through the global initalPassword option below,
           the submodule's globalIntialPassword option, or with sops-nix;
         '';
@@ -58,21 +48,8 @@ in {
       );
 
       users =
-        lib.genAttrs (lib.attrsets.attrNames cfg.users) # Retrieve all usernames
-        
+        lib.genAttrs cfg.accounts
         (user: {
-          inherit
-            (cfg.users.${user})
-            name
-            isSystemUser
-            isNormalUser
-            home
-            shell
-            createHome
-            hashedPasswordFile
-            ; # Inherit user-defined options
-          ${user}.group = "${user}";
-          initialPassword = cfg.globalIntialPassword;
           extraGroups = lib.lists.concatLists [
             (lib.lists.optionals true ["${user}" "users" "video" "seat"])
             (lib.lists.optionals
