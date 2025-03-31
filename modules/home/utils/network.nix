@@ -7,7 +7,7 @@ _: {
   cfg = config.frostbite.utils.network;
 in {
   options = {
-    frostbite.frostbite.utils.network = {
+    frostbite.utils.network = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
