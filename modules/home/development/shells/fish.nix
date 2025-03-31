@@ -2,11 +2,12 @@ _: {
   pkgs,
   config,
   lib,
+  nixosConfig,
   user,
   ...
 }: let
   cfg = config.frostbite.shells.fish;
-  wslIntegration = config.system.wsl.enable;
+  wslIntegration = nixosConfig.frostbite.support.guest.wsl.enable;
 in {
   options = {
     frostbite.shells.fish = {
