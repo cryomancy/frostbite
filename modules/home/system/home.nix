@@ -22,8 +22,8 @@ in {
           directories = [".local/state/home-manager"];
         };
       };
-      homeDirectory = "/home/${config.home.username}";
-      stateVersion = "24.05";
+      homeDirectory = lib.mkForce "/home/${config.home.username}";
+      stateVersion = "25.04";
     };
 
     systemd.user.targets.tray = {
