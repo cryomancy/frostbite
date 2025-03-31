@@ -5,7 +5,7 @@ _: {
   ...
 }: let
   cfg = config.frostbite.users;
-  userOpts = import ./options/__user.nix;
+  userOpts = import ./options/__user.nix {inherit config lib users;};
 in {
   options = {
     frostbite.users = {
