@@ -11,7 +11,7 @@ in {
   imports = [inputs.sops-nix.nixosModules.sops];
 
   options = {
-    frostbite.security.secrets = lib.mkOption {
+    frostbite.security.secrets = {
       defaultSopsFile = lib.mkOption {
         type = lib.types.path;
         default = "${outPath}/src/secrets/secrets.yaml";

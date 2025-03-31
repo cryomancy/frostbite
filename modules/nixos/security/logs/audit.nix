@@ -8,7 +8,7 @@ _: {
   isOpen = lib.mkIf secOpts.level == "open";
 in {
   options = {
-    frostbite.security.audit = lib.mkOption {
+    frostbite.security.audit = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

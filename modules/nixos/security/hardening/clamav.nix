@@ -9,7 +9,7 @@ _: {
   isOpen = lib.mkIf secOpts.level == "open";
 in {
   options = {
-    frostbite.security.clamav = lib.mkOption {
+    frostbite.security.clamav = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

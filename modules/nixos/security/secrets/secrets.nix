@@ -12,7 +12,7 @@ in {
   imports = [inputs.sops-nix.nixosModules.sops];
 
   options = {
-    frostbite.security.secrets = lib.mkOption {
+    frostbite.security.secrets = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

@@ -8,7 +8,7 @@ _: {
   strict = lib.lists.any secOpts.level ["restricted" "strict"];
 in {
   options = {
-    frostbite.security.sudo = lib.mkOption {
+    frostbite.security.sudo = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

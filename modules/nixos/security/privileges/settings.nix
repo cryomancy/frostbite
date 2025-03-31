@@ -6,7 +6,7 @@ _: {
   cfg = config.frostbite.security.settings;
 in {
   options = {
-    frostbite.security.settings = lib.mkOption {
+    frostbite.security.settings = {
       level = lib.mkOption {
         type = lib.types.enum;
         default = "standard";

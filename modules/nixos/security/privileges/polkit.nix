@@ -8,7 +8,7 @@ _: {
   isOpen = lib.mkIf secOpts.level == "open";
 in {
   options = {
-    frostbite.security.polkit = lib.mkOption {
+    frostbite.security.polkit = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

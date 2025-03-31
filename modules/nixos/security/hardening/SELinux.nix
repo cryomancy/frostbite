@@ -9,7 +9,7 @@ _: {
   isOpen = lib.mkIf secOpts.level == "open";
 in {
   options = {
-    frostbite.security.SELinux = lib.mkOption {
+    frostbite.security.SELinux = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
