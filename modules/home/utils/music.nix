@@ -4,10 +4,10 @@ _: {
   pkgs,
   ...
 }: let
-  cfg = config.frostbite.utils.musoc;
+  cfg = config.frostbite.utils.music;
 in {
   options = {
-    frostbite.frostbite.utils.music = {
+    frostbite.utils.music = {
       enable = lib.mkEnableOption "music packages";
     };
   };

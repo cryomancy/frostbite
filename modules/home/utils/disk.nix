@@ -7,7 +7,7 @@ _: {
   cfg = config.frostbite.utils.disk;
 in {
   options = {
-    frostbite.frostbite.utils.disk = {
+    frostbite.utils.disk = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
