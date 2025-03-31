@@ -23,7 +23,7 @@ in {
           if strict
           then true
           else false;
-        execWheelOnly = strict true;
+        execWheelOnly = lib.mkIf strict true;
         extraConfig =
           lib.strings.concatLines
           [
