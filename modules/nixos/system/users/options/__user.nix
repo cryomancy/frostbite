@@ -101,8 +101,8 @@
     initialPassword = lib.mkOption {
       type = with lib.types; nullOr str;
       default = lib.mkDefault (
-        if !config.frostbite.secrets.enable
-        then config.frostbite.initialPassword
+        if !config.frostbite.security.secrets.enable
+        then config.frostbite.users.globalInitialPassword
         else null
       );
       description = ''

@@ -51,17 +51,17 @@ in {
 
     users = {
       mutableUsers = lib.mkDefault (
-        if config.frostbite.secrets.enable
+        if config.frostbite.security.secrets.enable
         then false
         else true
       );
 
       users =
-        lib.genAttrs (lib.attrsets.attrNames cfg.users) # Retrieve all usernames
+        lib.genAttrs (lib.attrsets.attrNames cfg.users.users) # Retrieve all usernames
         
         (user: {
           inherit
-            (cfg.users.${user})
+            (cfg.users.users.${user})
             name
             isSystemUser
             isNormalUser
