@@ -57,7 +57,7 @@ in {
             (lib.lists.optionals
               config.home-manager.users.${user}.frostbite.programs.arduino.enable ["dialout"])
             (lib.lists.optionals
-              (config.frostbite.virtualisation.enable && config.users.users.${user}.isSystemUser) ["libvirtd"])
+              (config.frostbite.virtualisation.qemu.enable && config.users.users.${user}.isSystemUser) ["libvirtd"])
           ];
           openssh.authorizedKeys.keys = config.frostbite.ssh.publicKeys;
         });
