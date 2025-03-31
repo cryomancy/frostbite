@@ -5,7 +5,12 @@ _: {
 }: let
   cfg = config.frostbite.security.audit;
   secOpts = config.frostbite.security;
-  isOpen = lib.mkIf secOpts.level == "open";
+  enableIt = let
+    isSecure = secOpts.level != "open";
+  in
+    if isSecure
+    then true
+    else false;
 in {
   options = {
     frostbite.security.audit = {
@@ -20,10 +25,10 @@ in {
     programs.dconf.enable = lib.mkForce true;
     security = {
       audit = {
-        enable = !isOpen true;
+        enable = enableIt;
       };
       auditd = {
-        enable = !isOpen true;
+        enable = enableIt;
       };
     };
   };
