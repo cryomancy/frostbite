@@ -87,7 +87,7 @@ in {
 
     # Recovery Account
     # Does not use Yubikey authentication / other PAM methods
-    users.extraUsers.recovery = lib.mkIf config.frostbite.secrets.enable {
+    users.extraUsers.recovery = lib.mkIf config.frostbite.security.secrets.enable {
       name = "recovery";
       description = "Recovery Account";
       isNormalUser = true;
