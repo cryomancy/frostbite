@@ -8,29 +8,26 @@ in {
   options = {
     frostbite.security = {
       level = lib.mkOption {
-        type = lib.types.enum;
+        type = lib.types.enum ["open" "standard" "moderate" "restricted" "strict"];
         default = "standard";
         description = ''
           Security level of the system. Can be 'open' 'standard', 'moderate', 'restricted', or 'strict'.
         '';
-        values = ["open" "standard" "moderate" "restricted" "strict"];
       };
 
       location = lib.mkOption {
-        type = lib.types.enum;
+        type = lib.types.enum ["local" "dmz" "external" "cloud" "vps" "remote"];
         default = "local";
         description = ''
           Location of the system, indicating its network environment.
           Options: 'local', 'dmz', 'external', 'cloud', 'vps', 'remote'.
         '';
-        values = ["local" "dmz" "external" "cloud" "vps" "remote"];
       };
 
       useCase = lib.mkOption {
-        type = lib.types.enum;
+        type = lib.types.enum ["server" "workstation" "laptop" "vm"];
         default = "workstation";
         description = "Use case for the system. Options: 'server', 'workstation', 'laptop', 'vm'.";
-        values = ["server" "workstation" "laptop" "vm"];
       };
 
       lockdownState = lib.mkOption {
