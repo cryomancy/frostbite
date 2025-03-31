@@ -4,12 +4,16 @@ _: {
   ...
 }: let
   cfg = config.frostbite.networking.bluetooth;
+  isLaptop = config.frostbite.security.useCase == "laptop";
 in {
   options = {
     frostbite.networking.bluetooth = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = lib.mkIf (config.frostbite.security.useCase == "laptop") true;
+        default =
+          if isLaptop
+          then true
+          else false;
       };
     };
   };
