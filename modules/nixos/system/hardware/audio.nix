@@ -51,7 +51,6 @@ in {
           # TODO: add RTK option
           kernelModules = ["snd-seq" "snd-rawmidi"];
           kernel.sysctl = {
-            "vm.swappiness" = 10;
             "fs.inotify.max_user_watches" = 524288;
           };
           kernelParams = ["threadirq"];
