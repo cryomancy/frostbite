@@ -7,7 +7,7 @@ _: {
   cfg = config.frostbite.networking.vpn.tailscale;
 in {
   options = {
-    frostbite.networking.tailscale = {
+    frostbite.networking.vpn.tailscale = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;
