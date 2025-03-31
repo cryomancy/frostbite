@@ -7,15 +7,10 @@ _: {
   cfg = config.frostbite.networking.fail2ban;
 in {
   options = {
-    frostbite.networking = {
-      fail2ban = {
-        type = lib.types.submodule;
-        option = lib.mkOption {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.networking.fail2ban = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };

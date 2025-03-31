@@ -6,21 +6,15 @@ _: {
   cfg = config.frostbite.network.networkd.devices.virtualWireless;
 in {
   options = {
-    frostbite.network.networkd.devices.virtualWireless = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.network.networkd.devices.virtualWireless = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };
 
   config = lib.mkIf cfg.enable {
-    assertions = import ./__assertions.nix {inherit lib;};
-
     systemd = {
       network = {
         networks = {

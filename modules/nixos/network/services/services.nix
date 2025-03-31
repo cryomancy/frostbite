@@ -6,14 +6,10 @@ _: {
   cfg = config.frostbite.networking.services.resolved;
 in {
   options = {
-    frostbite.networking.services.resolved = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.networking.services.resolved = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };

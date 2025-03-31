@@ -6,14 +6,10 @@ _: {
   cfg = config.frostbite.network.networkd.devices.virtualWired;
 in {
   options = {
-    frostbite.network.networkd.devices.virtualWired = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.network.networkd.devices.virtualWired = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };

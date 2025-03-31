@@ -6,24 +6,20 @@ _: {
   cfg = config.frostbite.networking.wireguard;
 in {
   options = {
-    frostbite.networking.wireguard = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = false;
-          };
-          server = lib.mkOption {
-            type = lib.types.str;
-            default = null;
-            description = "IP Address of the wireguard server you are connecting to.";
-          };
-          port = lib.mkOption {
-            type = lib.types.port;
-            default = 51820;
-            description = "Port used by the wireguard server you are connecting to.";
-          };
-        };
+    frostbite.networking.wireguard = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+      server = lib.mkOption {
+        type = lib.types.str;
+        default = null;
+        description = "IP Address of the wireguard server you are connecting to.";
+      };
+      port = lib.mkOption {
+        type = lib.types.port;
+        default = 51820;
+        description = "Port used by the wireguard server you are connecting to.";
       };
     };
   };

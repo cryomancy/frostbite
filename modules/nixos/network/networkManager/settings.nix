@@ -6,14 +6,10 @@ _: {
   cfg = config.frostbite.networking.networkManager;
 in {
   options = {
-    frostbite.networking.networkManager = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.networking.networkManager = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };

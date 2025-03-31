@@ -1,28 +1,23 @@
 _: {
   config,
   lib,
-  pkgs,
   ...
 }: let
   cfg = config.frostbite.networking.devices.unmanaged;
 in {
   options = {
-    frostbite.networking.devices.unmanaged = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-          ipAddr = lib.mkOption {
-            type = lib.types.str;
-            default = null;
-          };
-          gateway = lib.mkOption {
-            type = lib.types.str;
-            default = null;
-          };
-        };
+    frostbite.networking.devices.unmanaged = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+      };
+      ipAddr = lib.mkOption {
+        type = lib.types.str;
+        default = null;
+      };
+      gateway = lib.mkOption {
+        type = lib.types.str;
+        default = null;
       };
     };
   };

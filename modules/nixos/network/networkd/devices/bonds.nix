@@ -6,14 +6,10 @@ _: {
   cfg = config.frostbite.networking.devices.macvlans;
 in {
   options = {
-    frostbite.networking.devices.macvlans = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.networking.devices.macvlans = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };

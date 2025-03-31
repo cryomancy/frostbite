@@ -6,14 +6,10 @@ _: {
   cfg = config.frostbite.networking.devices.vlans;
 in {
   options = {
-    frostbite.networking.devices.vlans = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.networking.devices.vlans = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };

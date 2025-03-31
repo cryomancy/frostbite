@@ -6,14 +6,10 @@ _: {
   cfg = config.frostbite.networking.devices.bridges;
 in {
   options = {
-    frostbite.networking.devices.bridges = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.networking.devices.bridges = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };

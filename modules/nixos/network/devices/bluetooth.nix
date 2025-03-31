@@ -6,14 +6,10 @@ _: {
   cfg = config.frostbite.networking.bluetooth;
 in {
   options = {
-    frostbite.networking.bluetooth = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = lib.mkIf (config.frostbite.security.settings.useCase == "laptop");
-          };
-        };
+    frostbite.networking.bluetooth = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = lib.mkIf (config.frostbite.security.settings.useCase == "laptop");
       };
     };
   };

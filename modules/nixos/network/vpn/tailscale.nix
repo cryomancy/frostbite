@@ -7,20 +7,16 @@ _: {
   cfg = config.frostbite.networking.vpn.tailscale;
 in {
   options = {
-    frostbite.networking.tailscale = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = false;
-          };
-          authKeyFile = {
-            type = lib.tpes.str;
-            default = null;
-            example = "config.frostbite.secrets.tailscale.authKeyFile.path";
-            description = ''A one-time use key used to authenticate a single device to Tailscale.'';
-          };
-        };
+    frostbite.networking.tailscale = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+      authKeyFile = {
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+        example = "config.frostbite.secrets.tailscale.authKeyFile.path";
+        description = ''A one-time use key used to authenticate a single device to Tailscale.'';
       };
     };
   };

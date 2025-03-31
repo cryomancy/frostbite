@@ -6,14 +6,10 @@ _: {
   cfg = config.frostbite.networking.services.networkd-dispatcher;
 in {
   options = {
-    frostbite.networking.services.networkd-dispatcher = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.networking.services.networkd-dispatcher = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };
