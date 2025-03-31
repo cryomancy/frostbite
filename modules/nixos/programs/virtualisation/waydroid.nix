@@ -3,10 +3,10 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.frostbite.waydroid;
+  cfg = config.frostbite.virtualisation.waydroid;
 in {
   options = {
-    frostbite.waydroid.enable = lib.mkEnableOption "waydroid";
+    frostbite.virtualisation.waydroid.enable = lib.mkEnableOption "waydroid";
   };
 
   config = lib.mkIf cfg.enable {
