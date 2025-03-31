@@ -6,7 +6,7 @@ _: {
 }: let
   cfg = config.frostbite.security.clamav;
   secOpts = config.frostbite.security;
-  isOpen = lib.mkIf secOpts.level == "open";
+  isSecure = lib.mkIf secOpts.level != "open";
 in {
   options = {
     frostbite.security.clamav = {
@@ -20,8 +20,8 @@ in {
   config = lib.mkIf cfg.enable {
     services = {
       clamav = {
-        daemon.enable = !isOpen true;
-        updater.enable = !isOpen true;
+        daemon.enable = lib.mkIf isSecure true;
+        updater.enable = lib.mkIf isSecure true;
       };
     };
 
