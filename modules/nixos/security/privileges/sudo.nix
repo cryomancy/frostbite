@@ -19,16 +19,16 @@ in {
   config = lib.mkIf cfg.enable {
     security = {
       sudo = {
-        wheelNeedsPassword =
-          if strict
-          then true
-          else false;
-        execWheelOnly = lib.mkIf strict true;
+        wheelNeedsPassword = false;
+        #if strict
+        #then true
+        #else false;
+        execWheelOnly = true;
         extraConfig =
           lib.strings.concatLines
           [
             ''Defaults lecture = never''
-            (lib.strings.optionalString (!strict) "recovery ALL=(ALL:ALL) NOPASSWD:ALL")
+            "recovery ALL=(ALL:ALL) NOPASSWD:ALL"
           ];
       };
     };
