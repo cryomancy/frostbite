@@ -6,14 +6,10 @@ _: {
   cfg = config.frostbite.udev;
 in {
   options = {
-    frostbite.udev = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.udev = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };
