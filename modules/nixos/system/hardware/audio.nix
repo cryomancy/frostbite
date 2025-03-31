@@ -65,7 +65,6 @@ in {
           # $ lspci ¦ grep -i audio
         };
         powerManagement.cpuFreqGovernor = "performance";
-        fileSystems."/" = {options = "noatime errors=remount-ro";};
         security.pam.loginLimits = [
           {
             domain = "@audio";
