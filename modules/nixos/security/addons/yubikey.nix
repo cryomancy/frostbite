@@ -7,7 +7,7 @@ _: {
   cfg = config.frostbite.security.yubikey;
 in {
   options = {
-    frostbite.security.yubikey = lib.mkOption {
+    frostbite.security.yubikey = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;
