@@ -7,14 +7,10 @@ _: {
   cfg = config.frostbite.browser.lynx;
 in {
   options = {
-    frostbite.browser.lynx = lib.mkoption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.browser.lynx = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };

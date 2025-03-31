@@ -9,14 +9,10 @@ _: {
   wslIntegration = config.system.wsl.enable;
 in {
   options = {
-    frostbite.shells.fish = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.shells.fish = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };

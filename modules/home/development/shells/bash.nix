@@ -7,14 +7,10 @@ _: {
   cfg = config.frostbite.shells.bash;
 in {
   options = {
-    frostbite.shells.bash = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.shells.bash = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };

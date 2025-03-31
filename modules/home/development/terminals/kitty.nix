@@ -6,14 +6,10 @@ _: {
   cfg = config.frostbite.terminals.kitty;
 in {
   options = {
-    frostbite.terminals.kitty = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.terminals.kitty = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };

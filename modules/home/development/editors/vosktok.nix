@@ -10,14 +10,10 @@ _: {
   inherit (inputs.vostok.packages.${system}) vostok;
 in {
   options = {
-    frostbite.editors.vostok = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.editors.vostok = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };

@@ -7,14 +7,10 @@ _: {
   cfg = config.frostbite.multiplexers.zellij;
 in {
   options = {
-    frostbite.multiplexers.zellij = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.multiplexers.zellij = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };

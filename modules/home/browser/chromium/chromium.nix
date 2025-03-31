@@ -7,14 +7,10 @@ _: {
   cfg = config.frostbite.browser.chromium;
 in {
   options = {
-    frostbite.frostbite.browser.chromium = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = false;
-          };
-        };
+    frostbite.frostbite.browser.chromium = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
       };
     };
   };

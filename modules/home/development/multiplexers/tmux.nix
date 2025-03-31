@@ -6,14 +6,10 @@ _: {
   cfg = config.frostbite.multiplexers.tmux;
 in {
   options = {
-    frostbite.multiplexers.tmux = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.multiplexers.tmux = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };

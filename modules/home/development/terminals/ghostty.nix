@@ -7,14 +7,10 @@ _: {
   cfg = config.frostbite.terminals.ghostty;
 in {
   options = {
-    frostbite.terminals.ghostty = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.terminals.ghostty = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };

@@ -98,18 +98,14 @@ _: {
   };
 in {
   options = {
-    frostbite.browser.firefox = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = false;
-          };
-          stylesheet = lib.mkOption {
-            type = lib.types.str;
-            default = builtins.readFile ./_assets/twilly.css;
-          };
-        };
+    frostbite.browser.firefox = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+      stylesheet = lib.mkOption {
+        type = lib.types.str;
+        default = builtins.readFile ./_assets/twilly.css;
       };
     };
   };
