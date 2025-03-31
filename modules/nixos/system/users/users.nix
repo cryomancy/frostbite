@@ -5,43 +5,42 @@ _: {
   ...
 }: let
   cfg = config.frostbite.users;
-  user = import ./options/__user.nix;
+  userOpts = import ./options/__user.nix;
 in {
   options = {
-    frostbite = {
-      users = {
-        enable = lib.mkOption {
-          type = lib.types.bool;
-          default = true;
-          description = ''
-            If enabled, users will be managed by Kosei and it's options.
-          '';
-        };
+    frostbite.users = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = ''
+          If enabled, users will be managed by Frostbite and it's options.
+        '';
+      };
 
-        users = lib.mkOption {
-          type = with lib.types; attrsOf (submodule user);
-          example = {
-            tahlon = {
-              home = "/home/tahlon";
-              isAdministrator = true;
-            };
+      users = lib.mkOption {
+        default = {};
+        type = with lib.types; attrsOf (submodule userOpts);
+        example = {
+          tahlon = {
+            home = "/home/tahlon";
+            isAdministrator = true;
           };
-          description = ''
-            Additional user accounts to be created automatically by the system.
-            This can also be used to set options for root.
-            Password is either set through the global initalPassword option below,
-            the submodule's initialPassword option, or with sops-nix;
-          '';
         };
+        description = ''
+          Additional user accounts to be created automatically by the system.
+          This can also be used to set options for root.
+          Password is either set through the global initalPassword option below,
+          the submodule's globalIntialPassword option, or with sops-nix;
+        '';
+      };
 
-        initialPassword = lib.mkOption {
-          type = lib.types.str;
-          default = "nixos";
-          description = ''
-            A password that will be set as the initial password for all new users.
-            This is used if the secrets module does not set passwords.
-          '';
-        };
+      globalIntialPassword = lib.mkOption {
+        type = lib.types.str;
+        default = "nixos";
+        description = ''
+          A password that will be set as the initial password for all new users.
+          This is used if the secrets module does not set passwords.
+        '';
       };
     };
   };
@@ -65,13 +64,12 @@ in {
             name
             isSystemUser
             isNormalUser
-            isAdministrator
             home
             shell
             createHome
             hashedPasswordFile
-            initialPassword
             ; # Inherit user-defined options
+          initialPassword = cfg.globalIntialPassword;
           extraGroups = lib.lists.concatLists [
             (lib.lists.optionals true ["${user}" "users" "video" "seat"])
             (lib.lists.optionals
@@ -83,19 +81,6 @@ in {
           ];
           openssh.authorizedKeys.keys = config.frostbite.ssh.publicKeys;
         });
-    };
-
-    # Recovery Account
-    # Does not use Yubikey authentication / other PAM methods
-    users.extraUsers.recovery = lib.mkIf config.frostbite.security.secrets.enable {
-      name = "recovery";
-      description = "Recovery Account";
-      isNormalUser = true;
-      uid = 1100;
-      group = "users";
-      extraGroups = ["wheel"];
-      useDefaultShell = true;
-      hashedPasswordFile = config.sops.secrets."recovery/hashedPasswordFile".path;
     };
   };
 }
