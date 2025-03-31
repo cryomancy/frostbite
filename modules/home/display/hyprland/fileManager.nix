@@ -7,7 +7,7 @@ _: {
   cfg = config.frostbite.display.hyprland.fileManager;
 in {
   options = {
-    frostbite.frostbite.display.hyprland.fileManager = {
+    frostbite.display.hyprland.fileManager = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = config.frostbite.display.hyprland.enable;
