@@ -8,7 +8,7 @@ _: {
   cfg = config.frostbite.security.password-store;
 in {
   options = {
-    frostbite.frostbite.security.password-store = {
+    frostbite.security.password-store = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
