@@ -6,7 +6,7 @@ _: {
   nixosConfig,
   ...
 }: let
-  cfg = config.frostbite.displays.hyprland;
+  cfg = config.frostbite.display.hyprland;
   gamemode = inputs.frostbite.lib.hyprlandGameMode {inherit config lib pkgs;};
   onMonitorAttached = inputs.frostbite.lib.onMonitorAttached {inherit lib pkgs;};
   onMonitorDetached = inputs.frostbite.lib.onMonitorDetached {inherit lib pkgs;};
