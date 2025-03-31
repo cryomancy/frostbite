@@ -7,24 +7,20 @@ _: {
   cfg = config.frostbite.programs.gpg;
 in {
   options = {
-    frostbite.programs.gpg = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-            example = false;
-            description = "gpg";
-          };
-          keyID = lib.mkOption {
-            type = lib.types.str;
-            default = null;
-          };
-          commitSigning.enable = lib.mkOption {
-            type = lib.types.bool;
-            default = false;
-          };
-        };
+    frostbite.programs.gpg = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        example = false;
+        description = "gpg";
+      };
+      keyID = lib.mkOption {
+        type = lib.types.str;
+        default = null;
+      };
+      commitSigning.enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
       };
     };
   };
