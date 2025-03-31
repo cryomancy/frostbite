@@ -47,7 +47,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.sysusers.enable = true;
+    systemd.sysusers.enable = false; # Conflicts with sops-nix
+    services.userborn.enable = true;
 
     users = {
       mutableUsers = lib.mkDefault (
@@ -74,11 +75,11 @@ in {
           extraGroups = lib.lists.concatLists [
             (lib.lists.optionals true ["${user}" "users" "video" "seat"])
             (lib.lists.optionals
-              cfg.users.${user}.isAdministrator ["netadmin" "wheel" "wireshark"])
+              cfg.users.${user}.isSystemUser ["netadmin" "wheel" "wireshark"])
             (lib.lists.optionals
-              config.home-manager.users.${user}.frostbite.arduino.enable ["dialout"])
+              config.home-manager.users.${user}.frostbite.programs.arduino.enable ["dialout"])
             (lib.lists.optionals
-              (config.frostbite.virtualization.enable && cfg.users.${user}.isAdministrator) ["libvirtd"])
+              (config.frostbite.virtualisation.enable && cfg.users.${user}.isSystemUser) ["libvirtd"])
           ];
           openssh.authorizedKeys.keys = config.frostbite.ssh.publicKeys;
         });

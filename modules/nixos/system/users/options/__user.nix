@@ -16,7 +16,7 @@
 
     isSystemUser = lib.mkOption {
       type = lib.types.bool;
-      default = false;
+      default = true;
       description = ''
         Indicates if the user is a system user or not. This option
         only has an effect if {option}`uid` is
@@ -31,7 +31,7 @@
 
     isNormalUser = lib.mkOption {
       type = lib.types.bool;
-      default = true;
+      default = false;
       description = ''
         Indicates whether this is an account for a “real” user.
         This automatically sets {option}`group` to `users`,
@@ -40,16 +40,6 @@
         {option}`useDefaultShell` to `true`,
         and {option}`isSystemUser` to `false`.
         Exactly one of `isNormalUser` and `isSystemUser` must be true.
-      '';
-    };
-
-    isAdministrator = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = ''
-        Indicates whether this account is a system administrator.
-        This will add the user to the necessary groups to perform
-        administrative tasks without having to become root.
       '';
     };
 
