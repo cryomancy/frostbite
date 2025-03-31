@@ -4,10 +4,10 @@ _: {
   pkgs,
   ...
 }: let
-  cfg = config.frostbite.virtualization.qemu;
+  cfg = config.frostbite.virtualisation.qemu;
 in {
   options = {
-    frostbite.virtualization.qemu = {
+    frostbite.virtualisation.qemu = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
