@@ -57,11 +57,11 @@ in {
       );
 
       users =
-        lib.genAttrs (lib.attrsets.attrNames cfg.users.users) # Retrieve all usernames
+        lib.genAttrs (lib.attrsets.attrNames cfg.users) # Retrieve all usernames
         
         (user: {
           inherit
-            (cfg.users.users.${user})
+            (cfg.users.${user})
             name
             isSystemUser
             isNormalUser
