@@ -7,6 +7,7 @@
   options = {
     name = lib.mkOption {
       type = lib.types.passwdEntry lib.types.str;
+      apply = username: username;
       description = ''
         The name of the user account. If undefined, the name of the
         attribute set will be used.
