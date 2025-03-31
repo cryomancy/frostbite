@@ -9,7 +9,7 @@ in {
     frostbite.networking.bluetooth = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = lib.mkIf (config.frostbite.security.useCase == "laptop");
+        default = lib.mkIf (config.frostbite.security.useCase == "laptop") true;
       };
     };
   };
