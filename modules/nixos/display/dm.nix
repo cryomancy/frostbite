@@ -28,7 +28,7 @@ in {
       settings = {
         default_session = {
           command =
-            if config.frostbite.GNOME.enable
+            if config.frostbite.display.gnome.enable
             then "${pkgs.greet.tuigreet}/bin/tuigreet --time --cmd dbus-run-session gnome-session"
             else "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
           user = "greeter";
