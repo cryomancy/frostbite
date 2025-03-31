@@ -23,7 +23,7 @@ in {
         };
       };
       homeDirectory = lib.mkForce "/home/${config.home.username}";
-      stateVersion = "25.04";
+      stateVersion = "25.05";
     };
 
     systemd.user.targets.tray = {
