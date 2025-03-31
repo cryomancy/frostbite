@@ -6,7 +6,7 @@ _: {
   cfg = config.frostbite.support.guest.qemu;
 in {
   options = {
-    frostbite.support.quest.qemu = {
+    frostbite.support.guest.qemu = {
       enable = lib.mkEnableOption "QEMU guest suppport";
     };
   };
