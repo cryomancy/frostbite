@@ -72,7 +72,7 @@ in {
       lsd = {
         enable = true;
         # NOTE: Could overwrite other shell aliases?
-        enableAliases = lib.mkForce true;
+        enableAliases = true;
       };
       ripgrep.enable = true;
       yazi.enable = true;
