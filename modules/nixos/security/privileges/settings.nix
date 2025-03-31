@@ -3,7 +3,7 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.frostbite.security;
+  cfg = config.frostbite.security.settings;
 in {
   options = {
     frostbite.security.settings = lib.mkOption {
@@ -44,26 +44,26 @@ in {
   config = {
     assertions = [
       {
-        assertion = cfg.settings.level == "open" || cfg.settings.level == "standard" || cfg.settings.level == "moderate" || cfg.settings.level == "restricted" || cfg.settings.level == "strict";
+        assertion = cfg.level == "open" || cfg.level == "standard" || cfg.level == "moderate" || cfg.level == "restricted" || cfg.level == "strict";
         message = "Invalid value for 'level'. Must be one of 'standard', 'moderate', 'restricted', or 'strict'.";
       }
       {
-        assertion = cfg.settings.location == "local" || cfg.settings.location == "dmz" || cfg.settings.location == "external" || cfg.settings.location == "cloud" || cfg.settings.location == "vps" || cfg.settings.location == "remote";
+        assertion = cfg.location == "local" || cfg.location == "dmz" || cfg.location == "external" || cfg.location == "cloud" || cfg.location == "vps" || cfg.location == "remote";
         message = "Invalid value for 'location'. Must be one of 'local', 'dmz', 'external', 'cloud', 'vps', or 'remote'.";
       }
       {
-        assertion = cfg.settings.useCase == "server" || cfg.settings.useCase == "workstation" || cfg.settings.useCase == "laptop" || cfg.settings.useCase == "vm";
+        assertion = cfg.useCase == "server" || cfg.useCase == "workstation" || cfg.useCase == "laptop" || cfg.useCase == "vm";
         message = "Invalid value for 'useCase'. Must be one of 'server', 'workstation', 'laptop', or 'vm'.";
       }
       {
-        assertion = lib.isBool cfg.settings.lockdownState;
+        assertion = lib.isBool cfg.lockdownState;
         message = "Invalid value for 'lockdownState'. Must be a boolean (true or false).";
       }
     ];
 
     warnings = [
       (lib.optionals
-        cfg.settings.lockdownState
+        cfg.lockdownState
         "Setting lockdownState to true can severely limit system operations. A NixOS rollback may be needed.")
     ];
 

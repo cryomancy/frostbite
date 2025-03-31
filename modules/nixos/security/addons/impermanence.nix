@@ -13,7 +13,7 @@ in {
     frostbite.security.impermanence = {
       enable = lib.mkEnableOption "impermanence";
       device = lib.mkOption {
-        type = lib.types.path;
+        type = lib.types.nullOr lib.types.path;
         default = null;
         description = ''
           Exact path of device containing BTRFS root file system

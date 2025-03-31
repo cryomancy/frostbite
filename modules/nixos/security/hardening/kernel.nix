@@ -9,13 +9,9 @@ _: {
 in {
   options = {
     frostbite.security.kernel = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };

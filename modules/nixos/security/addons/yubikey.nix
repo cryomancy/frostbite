@@ -8,13 +8,9 @@ _: {
 in {
   options = {
     frostbite.security.yubikey = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = false;
-          };
-        };
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
       };
     };
   };

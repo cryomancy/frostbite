@@ -12,13 +12,9 @@ in {
 
   options = {
     frostbite.security.secrets = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          defaultSopsFile = lib.mkOption {
-            type = lib.types.path;
-            default = "${outPath}/src/secrets/secrets.yaml";
-          };
-        };
+      defaultSopsFile = lib.mkOption {
+        type = lib.types.path;
+        default = "${outPath}/src/secrets/secrets.yaml";
       };
     };
   };
