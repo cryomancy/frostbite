@@ -71,6 +71,7 @@ in {
             createHome
             hashedPasswordFile
             ; # Inherit user-defined options
+          ${user}.group = "${user}";
           initialPassword = cfg.globalIntialPassword;
           extraGroups = lib.lists.concatLists [
             (lib.lists.optionals true ["${user}" "users" "video" "seat"])
