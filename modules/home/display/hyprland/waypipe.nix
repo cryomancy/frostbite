@@ -10,7 +10,7 @@ in {
   options = {
     frostbite.display.hyprland.waypipe.enable = lib.mkOption {
       type = lib.types.bool;
-      default = config.frostbite.hyprland.enable;
+      default = config.frostbite.display.hyprland.enable;
     };
   };
 

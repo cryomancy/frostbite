@@ -4,11 +4,14 @@ _: {
   pkgs,
   ...
 }: let
-  cfg = config.frostbite.displays.hyprland.fileManager;
+  cfg = config.frostbite.display.hyprland.fileManager;
 in {
   options = {
-    frostbite.frostbite.displays.hyprland.fileManager = {
-      enable = lib.mkEnableOption "file manager";
+    frostbite.frostbite.display.hyprland.fileManager = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = config.frostbite.display.hyprland.enable;
+      };
     };
   };
 

@@ -12,7 +12,10 @@ _: {
 in {
   options = {
     frostbite.display.hyprland.waybar = {
-      enable = lib.mkEnableOption "waybar";
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = config.frostbite.display.hyprland.enable;
+      };
     };
   };
 
