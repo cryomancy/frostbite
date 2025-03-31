@@ -25,7 +25,7 @@ in {
   config = {
     assertions = [
       {
-        assertion = config.frostbite.secrets.enable;
+        assertion = config.frostbite.security.secrets.enable;
         message = "Kosei's secrets module must be enabled for this impermanence config";
       }
     ];
