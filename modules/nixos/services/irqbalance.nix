@@ -6,14 +6,10 @@ _: {
   cfg = config.frostbite.services.irqbalance;
 in {
   options = {
-    frostbite.services.irqbalance = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.services.irqbalance = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };

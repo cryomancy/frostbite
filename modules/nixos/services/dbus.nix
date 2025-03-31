@@ -6,14 +6,10 @@ _: {
   cfg = config.frostbite.services.dbus;
 in {
   options = {
-    frostbite.services.dbus = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-        };
+    frostbite.services.dbus = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };
