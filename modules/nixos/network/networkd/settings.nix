@@ -7,22 +7,10 @@ _: {
   cfg = config.frostbite.networking.settings;
 in {
   options = {
-    frostbite.networking.settings = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkOption {
-            type = lib.types.bool;
-            default = true;
-          };
-          ipAddr = lib.mkOption {
-            type = lib.types.str;
-            default = null;
-          };
-          gateway = lib.mkOption {
-            type = lib.types.str;
-            default = null;
-          };
-        };
+    frostbite.networking.settings = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
       };
     };
   };
