@@ -19,7 +19,7 @@ in {
     home.packages = with pkgs; [
       # Essential utilities
       which # Locate a command
-      vim # Text editor
+      # vim # Text editor
       curl # Transfer data from or to a server
       tmux # Terminal multiplexer
       htop # Interactive process viewer
