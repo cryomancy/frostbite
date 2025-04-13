@@ -42,7 +42,7 @@ in {
       # NOTE: This is redundant.
       useNetworkd = true;
 
-      allowAuxiliaryImperativeNetworks = true;
+      # allowAuxiliaryImperativeNetworks = true;
       usePredictableInterfaceNames = true;
       resolvconf.enable = false;
       useHostResolvConf = false;
