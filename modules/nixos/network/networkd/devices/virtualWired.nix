@@ -9,7 +9,7 @@ in {
     frostbite.network.networkd.devices.virtualWired = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = true;
+        default = config.frostbite.networking.enable;
       };
     };
   };

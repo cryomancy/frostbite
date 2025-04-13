@@ -4,10 +4,10 @@ _: {
   pkgs,
   ...
 }: let
-  cfg = config.frostbite.networking.settings;
+  cfg = config.frostbite.networking;
 in {
   options = {
-    frostbite.networking.settings = {
+    frostbite.networking = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;

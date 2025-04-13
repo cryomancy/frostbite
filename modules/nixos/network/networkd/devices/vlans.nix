@@ -9,7 +9,7 @@ in {
     frostbite.networking.devices.vlans = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = true;
+        default = config.frostbite.networking.enable;
       };
     };
   };
