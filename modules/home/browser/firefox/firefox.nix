@@ -3,6 +3,7 @@ _: {
   inputs,
   lib,
   system,
+  pkgs,
   ...
 }: let
   cfg = config.frostbite.browser.firefox;
@@ -120,13 +121,13 @@ in {
           name = "main";
           inherit settings userChrome;
           extensions.packages = with firefox-addons; [
-            ublock-origin
-            simple-tab-groups
-            darkreader
-            keepassxc-browser
-            musescore-downloader
-            sponsorblock
-            torrent-control
+            (pkgs.callPackage ublock-origin {})
+            (pkgs.callPackage simple-tab-groups {})
+            (pkgs.callPackage darkreader {})
+            (pkgs.callPackage keepassxc-browser {})
+            (pkgs.callPackage musescore-downloader {})
+            (pkgs.callPackage sponsorblock {})
+            (pkgs.callPackage torrent-control {})
           ];
 
           search = {
@@ -143,10 +144,10 @@ in {
           name = "work";
           inherit settings userChrome;
           extensions.packages = with firefox-addons; [
-            ublock-origin
-            simple-tab-groups
-            darkreader
-            keepassxc-browser
+            (pkgs.callPackage ublock-origin {})
+            (pkgs.callPackage simple-tab-groups {})
+            (pkgs.callPackage darkreader {})
+            (pkgs.callPackage keepassxc-browser {})
           ];
           search = {
             force = true;
