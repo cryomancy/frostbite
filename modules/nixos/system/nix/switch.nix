@@ -19,7 +19,7 @@ in {
       preSwitchChecks = {};
       activationScripts = {};
       userActivationScripts = {};
-      rebuild.enableNg = true;
+      # 25.05 option: rebuild.enableNg = true;
       switch = {
         enable = false;
         enableNg = true;
