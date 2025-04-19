@@ -105,7 +105,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix = {
-      url = "github:Flameopathic/stylix/optional-image";
+      url = "github:danth/stylix/release-24.11";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
