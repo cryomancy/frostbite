@@ -67,7 +67,7 @@ in {
     security = {
       # Enables authentication via Hyprlock
       # NOTE: Does this need to match a home option?
-      pam.services.hyprlock = {};
+      # pam.services.hyprlock = {};
     };
   };
 }
