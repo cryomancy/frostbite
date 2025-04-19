@@ -7,7 +7,6 @@ _: {
   ...
 }: let
   cfg = config.frostbite.browser.firefox;
-  inherit (inputs.nur.legacyPackages.${system}.repos.rycee) firefox-addons;
   userChrome = cfg.stylesheet;
   settings = {
     "app.normandy.api_url" = "";
@@ -120,15 +119,15 @@ in {
           id = 0;
           name = "main";
           inherit settings userChrome;
-          extensions.packages = with firefox-addons; [
-            (pkgs.callPackage ublock-origin {})
-            (pkgs.callPackage simple-tab-groups {})
-            (pkgs.callPackage darkreader {})
-            (pkgs.callPackage keepassxc-browser {})
-            (pkgs.callPackage musescore-downloader {})
-            (pkgs.callPackage sponsorblock {})
-            (pkgs.callPackage torrent-control {})
-          ];
+          # extensions.packages = with firefox-addons; [
+          #   (pkgs.callPackage ublock-origin {})
+          #   (pkgs.callPackage simple-tab-groups {})
+          #   (pkgs.callPackage darkreader {})
+          #   (pkgs.callPackage keepassxc-browser {})
+          #   (pkgs.callPackage musescore-downloader {})
+          #   (pkgs.callPackage sponsorblock {})
+          #   (pkgs.callPackage torrent-control {})
+          # ];
 
           search = {
             force = true;
@@ -143,12 +142,12 @@ in {
           id = 1;
           name = "work";
           inherit settings userChrome;
-          extensions.packages = with firefox-addons; [
-            (pkgs.callPackage ublock-origin {})
-            (pkgs.callPackage simple-tab-groups {})
-            (pkgs.callPackage darkreader {})
-            (pkgs.callPackage keepassxc-browser {})
-          ];
+          # extensions.packages = with firefox-addons; [
+          #   (pkgs.callPackage ublock-origin {})
+          #   (pkgs.callPackage simple-tab-groups {})
+          #   (pkgs.callPackage darkreader {})
+          #   (pkgs.callPackage keepassxc-browser {})
+          # ];
           search = {
             force = true;
             order = [
