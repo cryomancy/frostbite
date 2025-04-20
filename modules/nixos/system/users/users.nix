@@ -33,6 +33,8 @@ in {
           This is used if the secrets module does not set passwords.
         '';
       };
+
+      isAdminstrator = lib.mkEnableOption "Grants additional administrative priveleges";
     };
   };
 
@@ -57,7 +59,7 @@ in {
             (lib.lists.optionals
               config.home-manager.users.${user}.frostbite.programs.arduino.enable ["dialout"])
             (lib.lists.optionals
-              (config.frostbite.virtualisation.qemu.enable && config.users.users.${user}.isSystemUser) ["libvirtd"])
+              (config.frostbite.virtualisation.qemu.enable && config.users.users.${user}.isAdministrator) ["libvirtd"])
           ];
           openssh.authorizedKeys.keys = config.frostbite.ssh.publicKeys;
         });
