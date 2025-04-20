@@ -44,7 +44,7 @@ in {
         ghostty.enable = true;
         hyprland.enable = true;
         #hyprlock.enable = true;
-        hyprpaper.enable = true;
+        hyprpaper.enable = false;
         kitty.enable = true;
         librewolf.enable = true;
         mangohud.enable = true;
