@@ -23,7 +23,7 @@ in {
         };
       };
       homeDirectory = lib.mkForce "/home/${config.home.username}";
-      stateVersion = "25.05";
+      stateVersion = "24.11";
     };
 
     systemd.user.targets.tray = {
@@ -35,6 +35,7 @@ in {
 
     home.sessionVariables = {
       XDG_RUNTIME_VARIABLES = "/run/user/$UID";
+      # TODO: Base this off a user option?
       EDITOR = "nvim";
     };
 
