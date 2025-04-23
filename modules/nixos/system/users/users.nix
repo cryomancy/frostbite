@@ -79,7 +79,7 @@ in {
           extraGroups = lib.lists.concatLists [
             (lib.lists.optionals true ["${user}" "users" "video" "seat"])
             (lib.lists.optionals
-              config.users.users.${user}.isAdministrator ["libvirtd" "netadmin" "network" "wheel" "wireshark"])
+              cfg.users.${user}.isAdministrator ["libvirtd" "netadmin" "network" "wheel" "wireshark"])
             (lib.lists.optionals
               config.home-manager.users.${user}.frostbite.programs.arduino.enable ["dialout"])
           ];
