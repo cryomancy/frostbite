@@ -11,22 +11,22 @@ _: {
     (lib.filterAttrs (_: v: v.isNormalUser) config.users.users);
 
   userOpts = {
-    name,
+    #name,
     config,
     ...
   }: {
     options = {
-      name = lib.mkOption {
-        type = lib.types.passwdEntry lib.types.str;
-        apply = x:
-          assert (lib.types.stringLength x
-            < 32
-            || abort "Username '${x}' is longer than 31 characters which is not allowed!"); x;
-        description = ''
-          The name of the user account. If undefined, the name of the
-          attribute set will be used.
-        '';
-      };
+      #name = lib.mkOption {
+      #  type = lib.types.passwdEntry lib.types.str;
+      #  apply = x:
+      #    assert (lib.types.stringLength x
+      #      < 32
+      #      || abort "Username '${x}' is longer than 31 characters which is not allowed!"); x;
+      #  description = ''
+      #    The name of the user account. If undefined, the name of the
+      #    attribute set will be used.
+      #  '';
+      #};
 
       isAdministrator = lib.mkOption {
         type = lib.types.bool;
@@ -39,7 +39,7 @@ _: {
     };
 
     config = {
-      name = lib.mkDefault config.name;
+      # name = lib.mkDefault config.name;
       isAdministrator = lib.mkDefault false;
     };
   };
