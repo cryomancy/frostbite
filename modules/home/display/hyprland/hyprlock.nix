@@ -18,7 +18,8 @@ in {
         default = config.frostbite.display.hyprland.enable;
       };
     };
-    nixosConfig.security.pam.services.hyprlock = lib.mkIf isLaptop {};
+    # This causes infinite recursion :(
+    # nixosConfig.security.pam.services.hyprlock = lib.mkIf isLaptop {};
   };
 
   config = lib.mkIf cfg.enable {
