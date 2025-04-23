@@ -90,6 +90,7 @@ in {
           home = "/home/${user}";
           group = "users";
           createHome = true;
+          isNormalUser = true;
         });
     };
   };
