@@ -6,9 +6,12 @@ _: {
   cfg = config.frostbite.users;
 
   # Collects list of defined normal user
-  userList =
-    lib.attrsets.attrNames
-    (lib.filterAttrs (_: v: v.isNormalUser) config.users.users);
+  # Disabled: causes infrec
+  # userList =
+  #   lib.attrsets.attrNames
+  #  (lib.filterAttrs (_: v: v.isNormalUser) config.users.users);
+
+  userList = lib.attrsets.attrNames cfg.users;
 
   userOpts = _: {
     options = {
@@ -71,7 +74,7 @@ in {
       );
 
       users =
-        lib.genAttrs ["tahlon"]
+        lib.genAttrs userList
         (user: {
           extraGroups = lib.lists.concatLists [
             (lib.lists.optionals true ["${user}" "users" "video" "seat"])
