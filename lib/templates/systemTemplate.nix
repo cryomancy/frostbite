@@ -22,7 +22,7 @@ in
             useUserPackages = true; # Installs packages to /etc/profiles
             # Iterates over a list of users provided in the function call
             users =
-              nixpkgs.lib.attrsets.genAttrs config.frostbite.users.users
+              nixpkgs.lib.attrsets.genAttrs (nixpkgs.lib.attrsets.attrNames config.frostbite.users.users)
               (user: {
                 imports =
                   nixpkgs.lib.forEach
