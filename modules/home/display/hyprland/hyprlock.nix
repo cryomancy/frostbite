@@ -25,6 +25,8 @@ in {
       };
     };
 
+    nixosConfig.security.pam.services.hyprlock = lib.mkIf isLaptop {};
+
     programs.hyprlock = {
       enable = true;
 

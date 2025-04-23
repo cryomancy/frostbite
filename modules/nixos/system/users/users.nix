@@ -4,6 +4,45 @@ _: {
   ...
 }: let
   cfg = config.frostbite.users;
+
+  # Collects list of defined normal user
+  userList =
+    lib.attrsets.attrNames
+    (lib.filterAttrs (_: v: v.isNormalUser) config.users.users);
+
+  userOpts = {
+    name,
+    config,
+    ...
+  }: {
+    options = {
+      name = lib.mkOption {
+        type = lib.types.passwdEntry lib.types.str;
+        apply = x:
+          assert (lib.types.stringLength x
+            < 32
+            || abort "Username '${x}' is longer than 31 characters which is not allowed!"); x;
+        description = ''
+          The name of the user account. If undefined, the name of the
+          attribute set will be used.
+        '';
+      };
+
+      isAdministrator = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        example = true;
+        description = ''
+          If enabled, the user will be given access to certain administrative privileges.
+        '';
+      };
+    };
+
+    config = {
+      name = lib.mkDefault config.name;
+      isAdministrator = lib.mkDefault false;
+    };
+  };
 in {
   options = {
     frostbite.users = {
@@ -12,16 +51,6 @@ in {
         default = true;
         description = ''
           If enabled, users will be managed by Frostbite and it's options.
-        '';
-      };
-
-      accounts = lib.mkOption {
-        default = {};
-        type = with lib.types; listOf str;
-        description = ''
-          Additional user accounts to be created automatically by the system.
-          Password is either set through the global initalPassword option below,
-          the submodule's globalIntialPassword option, or with sops-nix;
         '';
       };
 
@@ -34,7 +63,20 @@ in {
         '';
       };
 
-      isAdminstrator = lib.mkEnableOption "Grants additional administrative priveleges";
+      # Abstraction over config.users.users
+      # Includes pre-defined options so you can easily
+      # define users with the options below instead of
+      # the cumbersome NixOS options.
+      users = lib.mkOption {
+        default = {};
+        type = lib.types.attrsOf (lib.types.submodule userOpts);
+        example = {
+          main-user = {
+            isAdministrator = true;
+          };
+          regular-guy = {};
+        };
+      };
     };
   };
 
@@ -50,18 +92,22 @@ in {
       );
 
       users =
-        lib.genAttrs cfg.accounts
+        lib.genAttrs userList
         (user: {
           extraGroups = lib.lists.concatLists [
             (lib.lists.optionals true ["${user}" "users" "video" "seat"])
             (lib.lists.optionals
-              config.users.users.${user}.isSystemUser ["netadmin" "wheel" "wireshark"])
+              config.users.users.${user}.isAdministrator ["libvirtd" "netadmin" "network" "wheel" "wireshark"])
             (lib.lists.optionals
               config.home-manager.users.${user}.frostbite.programs.arduino.enable ["dialout"])
-            (lib.lists.optionals
-              (config.frostbite.virtualisation.qemu.enable && config.users.users.${user}.isAdministrator) ["libvirtd"])
           ];
+
+          # Aggregates all given trusted ssh public keys to be added to all users.
           openssh.authorizedKeys.keys = config.frostbite.ssh.publicKeys;
+
+          home = "/home/${user}";
+          group = "users";
+          createHome = true;
         });
     };
   };
