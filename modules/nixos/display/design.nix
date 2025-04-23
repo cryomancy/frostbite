@@ -6,7 +6,7 @@ _: {
   ...
 }: let
   cfg = config.frostbite.display.design;
-  users = config.frostbite.users.accounts;
+  users = lib.attrsets.attrNames config.frostbite.users.users;
 in {
   imports = [
     inputs.stylix.nixosModules.stylix
