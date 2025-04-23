@@ -2,12 +2,12 @@ _: {
   config,
   inputs,
   lib,
-  nixosConfig,
+  osConfig,
   user,
   ...
 }: let
   cfg = config.frostbite.display.hyprland.hyprlock;
-  isLaptop = nixosConfig.frostbite.security.useCase == "laptop";
+  isLaptop = osConfig.frostbite.security.useCase == "laptop";
 in {
   options = {
     frostbite.display.hyprland.hyprlock = {
@@ -25,7 +25,7 @@ in {
       };
     };
 
-    nixosConfig.security.pam.services.hyprlock = lib.mkIf isLaptop {};
+    osConfig.security.pam.services.hyprlock = lib.mkIf isLaptop {};
 
     programs.hyprlock = {
       enable = true;
