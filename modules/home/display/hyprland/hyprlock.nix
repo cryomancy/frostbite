@@ -18,14 +18,14 @@ in {
     };
   };
 
+  nixosConfig.security.pam.services.hyprlock = lib.mkIf isLaptop {};
+
   config = lib.mkIf cfg.enable {
     home.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
       "/nix/persistent/home/${user}" = {
         files = [".config/hpyr/hpyrlock.conf"];
       };
     };
-
-    nixosConfig.security.pam.services.hyprlock = lib.mkIf isLaptop {};
 
     programs.hyprlock = {
       enable = true;
