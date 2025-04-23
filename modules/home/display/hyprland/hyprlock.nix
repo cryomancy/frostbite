@@ -8,6 +8,8 @@ _: {
 }: let
   cfg = config.frostbite.display.hyprland.hyprlock;
   isLaptop = nixosConfig.frostbite.security.useCase == "laptop";
+  # from home-manager nixos/default.nix
+  # home-manager.extraSpecialArgs.nixosConfig = config;
 in {
   options = {
     frostbite.display.hyprland.hyprlock = {
@@ -16,9 +18,8 @@ in {
         default = config.frostbite.display.hyprland.enable;
       };
     };
+    nixosConfig.security.pam.services.hyprlock = lib.mkIf isLaptop {};
   };
-
-  nixosConfig.security.pam.services.hyprlock = lib.mkIf isLaptop {};
 
   config = lib.mkIf cfg.enable {
     home.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
