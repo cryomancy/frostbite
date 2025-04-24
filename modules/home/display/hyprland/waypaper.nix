@@ -12,7 +12,7 @@ in {
     frostbite.display.hyprland.waypaper = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = config.frostbite.display.hyprland.enable;
+        default = false;
       };
     };
   };
