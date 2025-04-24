@@ -29,10 +29,11 @@ in {
 
     programs.wpaperd = {
       enable = true;
-      settings = ''
-        [any]
-        path = ${inputs.assets}/wallpapers/anime/a_waterfall_in_the_rain.jpg
-      '';
+      settings = {
+        any = {
+          path = "${inputs.assets}" + "/wallpapers/anime/a_waterfall_in_the_rain.jpg";
+        };
+      };
     };
   };
 }
