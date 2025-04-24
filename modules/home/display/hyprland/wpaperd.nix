@@ -47,7 +47,7 @@ in {
         After = ["graphical-session-pre.target"];
         PartOf = ["graphical-session.target"];
         X-Restart-Triggers =
-          lib.mkIf (cfg.settings != {})
+          lib.mkIf (config.programs.wpaperd.settings != {})
           ["${config.xdg.configFile."wpaperd/wallpaper.toml".source}"];
       };
 
