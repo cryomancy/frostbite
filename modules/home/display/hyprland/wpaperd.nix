@@ -35,5 +35,27 @@ in {
         };
       };
     };
+
+    systemd.user.services.wpaperd = {
+      Install = {
+        WantedBy = ["graphical-session.target"];
+      };
+
+      Unit = {
+        ConditionEnvironment = "WAYLAND_DISPLAY";
+        Description = "hyprpaper";
+        After = ["graphical-session-pre.target"];
+        PartOf = ["graphical-session.target"];
+        X-Restart-Triggers =
+          lib.mkIf (cfg.settings != {})
+          ["${config.xdg.configFile."wpaperd/wallpaper.toml".source}"];
+      };
+
+      Service = {
+        ExecStart = "${lib.getExe pkgs.wpaperd}";
+        Restart = "always";
+        RestartSec = "10";
+      };
+    };
   };
 }
