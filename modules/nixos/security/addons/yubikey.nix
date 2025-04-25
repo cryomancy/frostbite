@@ -17,6 +17,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment = {
+      # TODO: These are currently stored by users in ~/.config/Yubico/u2f/keys
       persistence = lib.mkIf config.frostbite.security.impermanence.enable {
         "/nix/persistent/".directories = ["/etc/secure/Yubico/u2f_keys"];
       };
@@ -70,6 +71,8 @@ in {
           u2fAuth = true;
           sshAgentAuth = true;
         };
+
+        hyprlock = lib.mkIf config.frostbite.support.laptop.enableHyprlandSupport {};
       };
     };
 
