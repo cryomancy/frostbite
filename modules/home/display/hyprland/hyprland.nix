@@ -81,8 +81,8 @@ in {
 
         exec-once =
           ''${(lib.getExe pkgs.hyprland-monitor-attached)} ${onMonitorAttached} ${onMonitorDetached}''
-          + (lib.strings.optionalString config.frostbite.display.hyprland.waypaper.enable
-            ''${(lib.getExe pkgs.waypaper)} --restore'')
+          #+ (lib.strings.optionalString config.frostbite.display.hyprland.waypaper.enable
+          #  ''${(lib.getExe pkgs.waypaper)} --restore'')
           + (lib.strings.optionalString cfg.autostartWorkspaces
             ''[workspace 1 silent] ${(lib.getExe pkgs.firefox)}'');
 
