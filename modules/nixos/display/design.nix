@@ -29,7 +29,7 @@ in {
   config = lib.mkIf cfg.enable {
     stylix = {
       enable = true;
-      autoEnable = false;
+      autoEnable = true;
 
       base16Scheme = "${cfg.theme}";
 
