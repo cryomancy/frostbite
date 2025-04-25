@@ -30,6 +30,7 @@ in {
       };
     };
 
+    # TODO: Create pkgs.runCommand to create this file if not present?
     sops = {
       age = {
         keyFile = "/var/lib/sops-nix/key.txt";
