@@ -8,22 +8,20 @@ _: {
 in {
   options = {
     frostbite.programs.git = {
-      options = {
-        enable = lib.mkOption {
-          default = true;
-          example = false;
-          description = "git";
-        };
-        userName = lib.mkOption {
-          default = null;
-          type = lib.types.str;
-          example = "Foo Bar";
-        };
-        userEmail = lib.mkOption {
-          default = null;
-          type = lib.types.str;
-          example = "foo@bar.com";
-        };
+      enable = lib.mkOption {
+        default = true;
+        example = false;
+        description = "git";
+      };
+      userName = lib.mkOption {
+        default = null;
+        type = lib.types.str;
+        example = "Foo Bar";
+      };
+      userEmail = lib.mkOption {
+        default = null;
+        type = lib.types.str;
+        example = "foo@bar.com";
       };
     };
   };
