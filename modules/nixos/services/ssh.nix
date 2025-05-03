@@ -13,6 +13,9 @@ in {
         type = lib.types.listOf lib.types.str;
         default = [];
         example = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDRUJCFyU2Bhag5GHGq2ihZL6LljX8EZygeKU6KDzHL8 tbrahic@proton.me"];
+        description = ''
+          List of ssh keys to be added to all normal user accounts.
+        '';
       };
     };
   };
