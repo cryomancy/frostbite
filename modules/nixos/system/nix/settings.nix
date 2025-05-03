@@ -70,11 +70,13 @@ in {
         ManagedOOMMemoryPressure = "kill";
         ManagedOOMMemoryPressureLimit = "50%";
       };
-      services."nix-daemon".serviceConfig.Slice = "nix-daemon.slice";
+      services."nix-daemon".serviceConfig = {
+        Slice = "nix-daemon.slice";
 
       # If a kernel-level OOM event does occur anyway,
       # strongly prefer killing nix-daemon child processes
-      services."nix-daemon".serviceConfig.OOMScoreAdjust = 1000;
+        OOMScoreAdjust = 1000;
+      };
     };
     # Move temporary Nix-Daemon files to disk while packaging
     # TODO: Add option for this for high memory systems
