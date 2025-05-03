@@ -37,6 +37,8 @@ in {
     pkgs,
     ...
   }: {
+    formatter = pkgs.alejandra;
+
     devshells.default = {
       name = "Kosei Development Shell";
       devshell.prj_root_fallback = {
@@ -97,7 +99,7 @@ in {
 
         hooks = {
           alejandra = {
-            enable = true;
+            enable = false;
             settings = {
               check = true;
               verbosity = "quiet";

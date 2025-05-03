@@ -9,6 +9,7 @@
   partitionedAttrs = {
     checks = "dev";
     devShells = "dev";
+    formatter = "dev";
     herculesCI = "dev";
   };
 }
