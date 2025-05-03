@@ -30,7 +30,7 @@ in {
           "vi"
         ];
         shellAliases = {
-          la = "ls -al";
+         # la = "ls -al";
           ll = "ls -l";
           ".." = "cd ..";
           switch = "sudo nixos-rebuild switch";
