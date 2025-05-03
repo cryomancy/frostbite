@@ -31,9 +31,9 @@ in {
         ];
         shellAliases = {
          # la = "ls -al";
-          ll = "ls -l";
-          ".." = "cd ..";
-          switch = "sudo nixos-rebuild switch";
+          #ll = "ls -l";
+          #".." = "cd ..";
+          #switch = "sudo nixos-rebuild switch";
         };
       };
     };
