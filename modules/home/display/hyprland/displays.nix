@@ -12,6 +12,10 @@ in {
         type = lib.types.bool;
         default = config.frostbite.display.hyprland.enable;
       };
+      config = lib.mkOption {
+        type = lib.types.str;
+	default = "monitor = , preferred, auto, 1";
+      };
     };
   };
 
@@ -20,7 +24,7 @@ in {
 
     home.packages = with pkgs; [nwg-displays];
 
-    xdg.configFile."hypr/workspaces.conf".text = "monitor = , preferred, auto, 1";
+    xdg.configFile."hypr/workspaces.conf".text = cfg.config;
 
     systemd.user.services.displays = {
       Unit = {
