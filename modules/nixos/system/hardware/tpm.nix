@@ -7,7 +7,7 @@ _: {
 in {
   options.frostbite.hardware.tpm.enable = lib.mkOption {
     type = lib.types.bool;
-    default = true;
+    default = false;
   };
 
   config = lib.mkIf cfg.enable {
