@@ -10,7 +10,7 @@ _: {
     loader = eris.lib.loaders.scoped;
   };
 in
-  nixpkgs.pipe view [
+  lib.pipe view [
     (lib.attrsets.mapAttrsRecursiveCond (x: builtins.isAttrs x)
       (n: v: {module = {${lib.lists.last n} = v;};}))
     (lib.attrsets.collect (x: x ? module))
