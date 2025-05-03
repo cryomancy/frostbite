@@ -24,7 +24,7 @@ in {
         enable = false;
         enableNg = true;
       };
-      includeBuildDependencies = true;
+      includeBuildDependencies = false;
 
       # NOTE: This is really cool but difficult in practice
       etc = {
