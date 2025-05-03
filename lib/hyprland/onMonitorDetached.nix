@@ -1,8 +1,10 @@
-scoped: {
+_: {
   lib,
   pkgs,
 }:
-(pkgs.writeShellApplication
+lib.getExe
+(
+  pkgs.writeShellApplication
   {
     name = "onMonitorDetached.sh";
     runtimeInputs = with pkgs; [hyprland waybar];
@@ -12,4 +14,3 @@ scoped: {
     '';
   }
 )
-|> lib.getExe
