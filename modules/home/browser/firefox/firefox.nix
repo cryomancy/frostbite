@@ -117,7 +117,7 @@ in {
           id = 0;
           name = "main";
           inherit settings userChrome;
-          extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
+          extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             darkreader
             keepassxc-browser
             musescore-downloader
