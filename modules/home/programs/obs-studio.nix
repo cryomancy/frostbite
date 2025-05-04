@@ -12,8 +12,8 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
+    services.easyeffects.enable = true;
     programs = {
-      easyeffects.enable = true;
       obs-studio = {
         enable = true;
         plugins = with pkgs.obs-studio-plugins; [
