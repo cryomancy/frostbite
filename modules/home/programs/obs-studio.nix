@@ -13,6 +13,7 @@ in {
   };
   config = lib.mkIf cfg.enable {
     programs = {
+      easyeffects.enable = true;
       obs-studio = {
         enable = true;
         plugins = with pkgs.obs-studio-plugins; [
