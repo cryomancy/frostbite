@@ -10,7 +10,7 @@ in {
     frostbite.networking.fail2ban = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = true;
+        default = false;
       };
     };
   };

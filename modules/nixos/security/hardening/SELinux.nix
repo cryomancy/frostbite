@@ -12,7 +12,7 @@ in {
     frostbite.security.SELinux = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = true;
+        default = false;
       };
     };
   };
