@@ -1,8 +1,6 @@
 _: {
   config,
-  inputs,
   lib,
-  system,
   pkgs,
   ...
 }: let
@@ -119,52 +117,21 @@ in {
           id = 0;
           name = "main";
           inherit settings userChrome;
-          # extensions.packages = with firefox-addons; [
-          #   (pkgs.callPackage ublock-origin {})
-          #   (pkgs.callPackage simple-tab-groups {})
-          #   (pkgs.callPackage darkreader {})
-          #   (pkgs.callPackage keepassxc-browser {})
-          #   (pkgs.callPackage musescore-downloader {})
-          #   (pkgs.callPackage sponsorblock {})
-          #   (pkgs.callPackage torrent-control {})
-          # ];
+          extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
+            darkreader
+            keepassxc-browser
+            musescore-downloader
+            sideberry
+            sponsorblock
+            torrent-control
+            ublock-origin
+          ];
 
           search = {
             force = true;
             order = [
               "DuckDuckGo"
               "Google"
-            ];
-          };
-        };
-
-        work = {
-          id = 1;
-          name = "work";
-          inherit settings userChrome;
-          # extensions.packages = with firefox-addons; [
-          #   (pkgs.callPackage ublock-origin {})
-          #   (pkgs.callPackage simple-tab-groups {})
-          #   (pkgs.callPackage darkreader {})
-          #   (pkgs.callPackage keepassxc-browser {})
-          # ];
-          search = {
-            force = true;
-            order = [
-              "Google"
-              "DuckDuckGo"
-            ];
-          };
-        };
-
-        i2pd = {
-          # TODO: add a policy to 'use this proxy for HTTPS' 127.0.0.1:4444 and 4447
-          id = 2;
-          name = "i2pd";
-          search = {
-            force = true;
-            order = [
-              "DuckDuckGo"
             ];
           };
         };
