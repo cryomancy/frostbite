@@ -13,7 +13,7 @@ _: {
       overlays =
         [
           (final: _prev: {
-            stable = import inputs.nixpkgs-stable {
+            unstable = import inputs.nixpkgs-unstable {
               inherit (final) system;
               config = {
                 allowUnfree = true;
