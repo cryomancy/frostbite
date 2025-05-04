@@ -121,7 +121,7 @@ in {
             darkreader
             keepassxc-browser
             musescore-downloader
-            sideberry
+            sidebery
             sponsorblock
             torrent-control
             ublock-origin
