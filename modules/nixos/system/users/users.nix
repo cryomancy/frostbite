@@ -98,7 +98,7 @@ in {
           group = "users";
           createHome = true;
           isNormalUser = true;
-          inherit (user) shell;
+          inherit (cfg.users.${user}) shell;
         });
     };
   };
