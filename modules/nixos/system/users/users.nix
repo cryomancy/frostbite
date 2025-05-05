@@ -1,6 +1,7 @@
 _: {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.frostbite.users;
@@ -23,10 +24,9 @@ _: {
           If enabled, the user will be given access to certain administrative privileges.
         '';
       };
-      shell = lib.mkOption {
-        type = lib.types.enum ["fish" "zsh"]; # good shell or slightly better than bash posix shell
-        default = "fish";
-        example = "zsh";
+      shell = lib.mkPackageOption pkgs "shell" {
+        default = [pkgs.fish];
+        example = [pkgs.zsh];
       };
     };
   };
