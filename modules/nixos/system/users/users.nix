@@ -23,6 +23,11 @@ _: {
           If enabled, the user will be given access to certain administrative privileges.
         '';
       };
+      shell = lib.mkOption {
+        type = lib.types.enum ["fish" "zsh"]; # good shell or slightly better than bash posix shell
+        default = "fish";
+        example = "zsh";
+      };
     };
   };
 in {
@@ -56,7 +61,9 @@ in {
           main-user = {
             isAdministrator = true;
           };
-          regular-guy = {};
+          regular-guy = {
+            shell = "zsh";
+          };
         };
       };
     };
@@ -91,6 +98,7 @@ in {
           group = "users";
           createHome = true;
           isNormalUser = true;
+          inherit (user) shell;
         });
     };
   };
