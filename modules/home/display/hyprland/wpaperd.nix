@@ -12,10 +12,13 @@ in {
     frostbite.display.hyprland.wpaperd = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = config.frostbite.display.hyprland.enable;
+        default = false;
       };
     };
   };
+
+  # NOTE: THIS IS NOT CURRENTLY STABLE / IMPLEMENTED AS IT SEEMS TO BE TO FOCUSED ON STATE
+  # AND SHELL SCRIPTS WHICH DOES NOT PLAY WELL IN THE NIX ENVIRONMENT
 
   config = lib.mkIf cfg.enable {
     home = {
@@ -24,7 +27,6 @@ in {
           directories = [".config/wpaperd"];
         };
       };
-      packages = with pkgs; [wpaperd swww];
     };
 
     programs.wpaperd = {

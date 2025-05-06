@@ -24,7 +24,7 @@ in {
           directories = [".config/waypaper"];
         };
       };
-      packages = [pkgs.waypaper pkgs.swww];
+      packages = [pkgs.waypaper];
     };
 
     xdg.configFile."waypaper/config.ini" = {
@@ -45,7 +45,7 @@ in {
         show_gifs_only = False
         show_path_in_tooltip = True
         number_of_columns = 3
-        use_xdg_state = False
+        use_xdg_state = True
         swww_transition_type = any
         swww_transition_step = 90
         swww_transition_angle = 0

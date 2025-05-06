@@ -31,7 +31,7 @@ in {
         enable = true;
         interactiveShellInit = lib.strings.concatStringsSep " " [
           ''
-             ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
+            ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
 
             set -U fish_greeting
           ''

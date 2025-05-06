@@ -202,6 +202,10 @@ in {
           vfr = true;
           vrr = 0;
         };
+
+        source = [
+          "~/.config/hypr/monitors.conf" # autoload monitors from nwg-displays
+        ];
       };
 
       xwayland.enable = true;
