@@ -24,7 +24,7 @@ in {
           directories = [".config/waypaper"];
         };
       };
-      packages = [pkgs.waypaper];
+      packages = [pkgs.waypaper pkgs.swww];
     };
 
     xdg.configFile."waypaper/config.ini" = {
