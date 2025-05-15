@@ -1,0 +1,6 @@
+# dune init project secset .
+# OCAMLPARAM: unset
+# Shared cache: enabled-except-user-rules
+# Shared cache location: /home/tahlon/.cache/dune/db
+# Workspace root: /home/tahlon/projects/cryomancy/frostbite/packages/secset/src
+# Auto-detected concurrency: 16
