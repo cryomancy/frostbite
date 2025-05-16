@@ -11,6 +11,13 @@ in {
         type = lib.types.bool;
         default = true;
       };
+
+      # THIS ALLOWS RESOLVED TO ACT AS A COMPLETE mDNS
+      localDNSResolver = lib.mkOption {
+        type = lib.types.str;
+        default = null;
+        example = "https://192.168.1.254";
+      };
     };
   };
 
@@ -18,6 +25,7 @@ in {
     services = {
       resolved = {
         enable = true;
+        domains = ["~."];
         fallbackDns = [
           "1.1.1.1" # Cloudflare DNSSEC
         ];
