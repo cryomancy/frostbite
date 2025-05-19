@@ -10,7 +10,7 @@ in {
     frostbite.networks = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = true;
+        default = false;
       };
     };
   };
@@ -39,7 +39,6 @@ in {
     networking = {
       # NOTE: This is redundant.
       useNetworkd = true;
-      allowAuxiliaryImperativeNetworks = true;
       usePredictableInterfaceNames = true;
       resolvconf.enable = false;
       useHostResolvConf = false;
