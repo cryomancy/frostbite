@@ -14,6 +14,7 @@ in {
     };
   };
 
+  # MAJOR WIP
   config = lib.mkIf cfg.enable {
     networking = {
       nftables = {

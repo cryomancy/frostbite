@@ -18,6 +18,7 @@ in {
   # Good resources:
   # https://dataswamp.org/~solene/2022-10-02-nixos-fail2ban.html
 
+  # BROKE, need to research more...
   config = lib.mkIf cfg.enable {
     services = {
       fail2ban = {

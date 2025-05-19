@@ -3,10 +3,10 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.frostbite.network.networkd.devices.virtualWireless;
+  cfg = config.frostbite.networks.wireless;
 in {
   options = {
-    frostbite.network.networkd.devices.virtualWireless = {
+    frostbite.networks.wireless = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = config.frostbite.networking.enable;
@@ -18,9 +18,9 @@ in {
     systemd = {
       network = {
         networks = {
-          "20-wireless-static" = {
+          "20-wireless" = {
             matchConfig = {
-              Name = "wireless_static_vlan";
+              Name = "wireless_static";
             };
             networkConfig = {
               DNSSEC = "allow-downgrade";

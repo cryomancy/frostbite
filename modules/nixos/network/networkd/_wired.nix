@@ -3,13 +3,13 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.frostbite.network.networkd.devices.virtualWired;
+  cfg = config.frostbite.networks.wired;
 in {
   options = {
-    frostbite.network.networkd.devices.virtualWired = {
+    frostbite.networks.wired = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = config.frostbite.networking.enable;
+        default = config.frostbite.networks.enable;
       };
     };
   };
@@ -20,7 +20,7 @@ in {
         networks = {
           "20-wired-static" = {
             matchConfig = {
-              Name = "wired_static_vlan";
+              Name = "wired_static";
             };
             networkConfig = {
               DNSSEC = "allow-downgrade";
@@ -29,12 +29,16 @@ in {
               # NOTE: Jumbo Frames
               MTUBytes = 9014;
             };
+
+	    networkConfig = {
+	    
+	    }
           };
 
           # Manage by Networkd but can by configured ad-hoc by IWDGTK (IWD)
           "40-wired-dhcp" = {
             matchConfig = {
-              Name = "wired_dhcp_vlan";
+              Name = "wired_dhcp";
             };
             networkConfig = {
               DHCP = "ipv4";

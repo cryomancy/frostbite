@@ -4,10 +4,10 @@ _: {
   pkgs,
   ...
 }: let
-  cfg = config.frostbite.networking;
+  cfg = config.frostbite.networks;
 in {
   options = {
-    frostbite.networking = {
+    frostbite.networks = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
@@ -26,23 +26,20 @@ in {
         enable = true;
 
         wait-online = {
-          enable = true;
+          enable = false;
           anyInterface = true;
           timeout = 10;
           ignoredInterfaces = [
             "nm_managed"
           ];
         };
-
-        # services."systemd-networkd".environment.SYSTEMD_LOG_LEVEL = "debug";
       };
     };
 
     networking = {
       # NOTE: This is redundant.
       useNetworkd = true;
-
-      # allowAuxiliaryImperativeNetworks = true;
+      allowAuxiliaryImperativeNetworks = true;
       usePredictableInterfaceNames = true;
       resolvconf.enable = false;
       useHostResolvConf = false;

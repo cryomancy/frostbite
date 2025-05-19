@@ -25,17 +25,19 @@ in {
   config = lib.mkIf cfg.enable {
     systemd = {
       network = {
-        networks = {
+        netdevs = {
           # Managed by NetworkManager
           "40-nm_managed" = {
-            enable = false;
-            matchConfig = {
-              Name = "nm_vlan";
+            netdevConfig = {
+              Description = "Logical seperation of wlo1 to be managed by Network Manager.";
+              Name = "nm_managed";
+              Kind = "ipvlan";
+              MTUBytes = "9400";
             };
-            networkConfig = {
-              Bridge = "br0";
+            ipvlanConfig = {
+              Mode = "l3";
+              Flag = "private";
             };
-            linkConfig.RequiredForOnline = "enslaved";
           };
         };
       };

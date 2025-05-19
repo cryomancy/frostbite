@@ -3,20 +3,23 @@ _: {
   lib,
   ...
 }: let
-  cfg = config.frostbite.networking.devices.macvlans;
+  cfg = config.frostbite.networking.macvlans;
 in {
   options = {
-    frostbite.networking.devices.macvlans = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = config.frostbite.networking.enable;
+    frostbite.networking.macvlans = {
+      type = lib.types.submodule {
+        options = {
+        };
       };
     };
   };
 
+  # CREATES A MACVLAN NETDEV FOR EACH CONTAINER PRESENTED AS AN INPUT
+  # lib.mkIf macvlans is not {} empty
   config = lib.mkIf cfg.enable {
     systemd = {
       network = {
+        # for each seperate netdev option passed create a netdev and its corresponding network?
         netdevs = {
           "25-container-macvlan" = {
             Kind = "macvlan";
