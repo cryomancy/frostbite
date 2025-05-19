@@ -13,7 +13,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     services.kmonad = {
-      enable = true;
+      enable = false;
       keyboards = {
         all = {
           device = /dev/input/by-id;
