@@ -10,6 +10,15 @@ in {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = config.frostbite.networks.enable;
+      }; 
+      settings = lib.mkOption {
+        type = lib.types.attrsOf (lib.types.submodule {
+          options.moresettings = lib.mkOption {
+            type = lib.types.attrsOf (lib.types.submodule {
+              ip = lib.mkOption {};
+            });
+          };
+        });
       };
     };
   };
