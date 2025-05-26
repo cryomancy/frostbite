@@ -55,8 +55,9 @@ in {
       };
     };
 
-    environment.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-      "/nix/persistent/".directories = ["/var/lib/syncthing"];
-    };
+    ## This would be how to enable persistence if not in a container...
+    # environment.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
+    #  "/nix/persistent/".directories = ["/var/lib/syncthing"];
+    # };
   };
 }
