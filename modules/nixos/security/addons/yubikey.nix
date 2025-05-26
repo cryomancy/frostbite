@@ -45,11 +45,13 @@ in {
         #   ENV{ID_VENDOR}=="Yubico",\
         #   RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
         # '';
-        extraRules = ''
-          ACTION=="remove",\
-          ENV{SUBSYSTEM}=="usb",\
-          ENV{PRODUCT}=="1050/407/XXX",\
-        '';
+
+        # does not work in 25.05
+        # extraRules = ''
+        #   ACTION=="remove",\
+        #   ENV{SUBSYSTEM}=="usb",\
+        #   ENV{PRODUCT}=="1050/407/XXX",\
+        # '';
       };
     };
 
