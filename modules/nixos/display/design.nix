@@ -44,6 +44,7 @@ in {
       fonts = {
         monospace = {
           package = pkgs.nerd-fonts.fira-code;
+          name = "Fira Code Nerd Font Mono";
         };
         sansSerif = {
           package = pkgs.dejavu_fonts;
