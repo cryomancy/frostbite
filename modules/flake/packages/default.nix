@@ -15,7 +15,8 @@ in {
     ...
   }: {
     packages = {
-      secset = pkgs.callPackage ./secset/default.nix {};
+      # secset = pkgs.callPackage ./secset/default.nix {};
+      # emane = pkgs.callPackage ./emane/default.nix {};
     };
 
     devshells.secset = {
