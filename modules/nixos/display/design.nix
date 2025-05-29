@@ -37,7 +37,7 @@ in {
       image = /home/${builtins.elemAt users 0}/.local/state/wallpaperd/wallpapers;
 
       cursor = {
-        package = pkgs.bibata-cursors-translucent;
+        package = pkgs.bibata-cursors;
         name = "Bibata-Modern-Ice";
       };
 
