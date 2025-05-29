@@ -24,8 +24,10 @@ in {
           directories = [".config/waypaper"];
         };
       };
-      packages = [pkgs.waypaper pkgs.swww];
+      packages = [pkgs.waypaper];
     };
+
+    services.swww.enable = true;
 
     xdg.configFile."waypaper/config.ini" = {
       enable = true;
