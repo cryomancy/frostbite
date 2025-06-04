@@ -38,6 +38,7 @@ in {
 
       cursor = {
         package = pkgs.bibata-cursors;
+        size = 2;
         name = "Bibata-Modern-Ice";
       };
 
