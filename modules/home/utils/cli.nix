@@ -71,7 +71,7 @@ in {
       };
       lsd = {
         enable = true;
-        enableFishIntegrations = true;
+        enableFishIntegration = true;
         enableZshIntegration = true;
       };
       ripgrep.enable = true;
