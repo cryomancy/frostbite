@@ -25,7 +25,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
       "/nix/persistent/home/${user}" = {
-        files = [".config/hpyr/hpyrlock.conf"];
+        files = [".config/hypr/hpyrlock.conf"];
       };
     };
 
@@ -35,7 +35,7 @@ in {
       extraConfig = ''
         background {
           monitor =
-          path = ${inputs.assets}/anime/a_drawing_of_a_horse_carriage_on_a_bridge.png"
+          path = ${inputs.assets}/wallpapers/anime/a_drawing_of_a_horse_carriage_on_a_bridge.png"
           blur_passes = 2
           contrast = 0.8916
           brightness = 0.8172
