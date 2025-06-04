@@ -38,16 +38,16 @@ in {
       width = 300;
       format = "<b>%s</b>\\n%b";
 
-      settings = ''
-        [urgency=low]
-        default-timeout=3000
-
-        [urgency=high]
-        default-timeout=10000
-
-        [mode=dnd]
-        invisible=1
-      '';
+      # settings = ''
+      #  [urgency=low]
+      #  default-timeout=3000
+      #
+      #  [urgency=high]
+      #  default-timeout=10000
+      #
+      #  [mode=dnd]
+      #  invisible=1
+      #'';
     };
   };
 }
