@@ -71,8 +71,8 @@ in {
       };
       lsd = {
         enable = true;
-        # NOTE: Could overwrite other shell aliases?
-        enableAliases = true;
+        enableFishIntegrations = true;
+        enableZshIntegration = true;
       };
       ripgrep.enable = true;
       yazi.enable = true;

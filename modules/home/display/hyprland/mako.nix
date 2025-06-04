@@ -38,7 +38,7 @@ in {
       width = 300;
       format = "<b>%s</b>\\n%b";
 
-      extraConfig = ''
+      settings = ''
         [urgency=low]
         default-timeout=3000
 
