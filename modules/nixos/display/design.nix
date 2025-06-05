@@ -34,7 +34,7 @@ in {
       base16Scheme = "${cfg.theme}";
 
       # TODO: Check upstream, why does this have to be set for all users?
-      image = /home/${builtins.elemAt users 0}/.local/state/wallpaperd/wallpapers;
+      image = "${inputs.assets}/wallpapers/dark/a_screen_shot_of_a_computer.jpg";
 
       cursor = {
         package = pkgs.bibata-cursors;
