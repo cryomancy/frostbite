@@ -45,6 +45,11 @@ in {
       tempAddresses = "disabled";
       enableIPv6 = false;
       dhcpcd.enable = false;
+
+      wireless = {
+        enable = true;
+        iwd.enable = true;
+      };
     };
   };
 }
