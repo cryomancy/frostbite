@@ -16,15 +16,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      gnome-control-center
-      networkmanagerapplet
-    ];
-
     systemd = {
       network = {
-        enable = true;
-
         wait-online = {
           enable = false;
           anyInterface = true;
