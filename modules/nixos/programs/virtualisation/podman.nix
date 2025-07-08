@@ -31,7 +31,7 @@ in {
         dockerSocket.enable = true;
         networkSocket.openFirewall = lib.mkIf config.firewall.enable;
       };
-      lxd.enable = true;
+      # lxd.enable = true;
     };
 
     environment.systemPackages = with pkgs; [
