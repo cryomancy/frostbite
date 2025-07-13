@@ -113,6 +113,7 @@ in {
             "SUPER,s,togglespecialworkspace"
             "SUPER,g,togglegroup"
             "SUPER,w,fullscreen"
+            "SUPER,l,exec,hyprlock"
             ''SUPER,p,exec,grim -g "$(slurp)" - | wl-copy && wl-paste > ~/pictures/screenshots''
             ",XF86AudioRaiseVolume,exec,${pactl} set-sink-volume @DEFAULT_SINK@ +5%"
             ",XF86AudioLowerVolume,exec,${pactl} set-sink-volume @DEFAULT_SINK@ -5%"
