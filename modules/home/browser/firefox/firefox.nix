@@ -6,7 +6,7 @@ _: {
 }: let
   cfg = config.frostbite.browser.firefox;
   userChrome = cfg.stylesheet;
-  firefoxSettings = import ./_firefoxSettings;
+  firefoxSettings = import ./_firefoxSettings.nix;
   inherit (firefoxSettings) settings policies;
 in {
   options = {
