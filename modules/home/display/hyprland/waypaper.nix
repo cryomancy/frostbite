@@ -59,6 +59,17 @@ in {
       '';
     };
 
+    xdg.stateFile."waypaper/state.ini" = {
+      enable = true;
+      force = true;
+      text = ''
+        [State]
+        folder = ${inputs.assets}/wallpapers
+        monitors = All
+        wallpaper =
+      '';
+    };
+
     wayland.windowManager.hyprland.extraConfig = ''
       exec-once=${(lib.getExe pkgs.waypaper)} --restore
     '';
