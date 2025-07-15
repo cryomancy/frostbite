@@ -4,7 +4,7 @@ _: {
   pkgs,
   ...
 }: let
-  cfg = config.frostbite.networks;
+  cfg = config.frostbite.networks.wireless;
 in {
   options = {
     frostbite.networks.wireless = {

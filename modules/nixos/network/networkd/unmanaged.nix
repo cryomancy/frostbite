@@ -9,7 +9,7 @@ in {
     frostbite.networks.unmanaged = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = config.frostbite.networks.enable;
+        default = false;;
       };
     };
   };
