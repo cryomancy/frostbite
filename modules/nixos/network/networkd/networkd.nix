@@ -7,28 +7,33 @@ _: {
   cfg = config.frostbite.networks;
 in {
   options = {
-    frostbite.networks = {
+    frostbite.networks.wireless = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;
+      };
+      home = {
+        pci = lib.mkOption {
+          type = lib.types.str;
+          example = "pci-0000:00:14.3*";
+        };
+        SSID = lib.mkOption {
+          type = lib.types.str;
+          example = "NSA_VAN";
+        };
+        staticIP = lib.mkOption {
+          type = lib.types.str;
+          example = "192.168.100.10/24";
+        };
+        gateway = lib.mkOption {
+          type = lib.types.str;
+          example = "192.168.100.1";
+        };
       };
     };
   };
 
   config = lib.mkIf cfg.enable {
-    systemd = {
-      network = {
-        wait-online = {
-          enable = false;
-          anyInterface = true;
-          timeout = 10;
-          ignoredInterfaces = [
-            "nm_managed"
-          ];
-        };
-      };
-    };
-
     networking = {
       # NOTE: This is redundant.
       useNetworkd = true;
@@ -39,9 +44,56 @@ in {
       enableIPv6 = false;
       dhcpcd.enable = false;
 
+      nameservers = ["8.8.8.8"];
       wireless = {
-        enable = true;
-        iwd.enable = true;
+        iwd = {
+          enable = true;
+          settings = {
+            Network = {
+              EnableIPv6 = false;
+              RoutePriorityOffset = 300;
+              NameResolvingService = "systemd";
+            };
+            Settings = {
+              AutoConnect = true;
+            };
+          };
+        };
+        interfaces = ["wlan0" "wireless"];
+      };
+    };
+
+    environment.systemPackages = [pkgs.iwgtk];
+
+    services.resolved.enable = true;
+
+    systemd.network = {
+      enable = true;
+      wait-online.enable = false;
+
+      links = {
+        "10-rename-wlo1" = {
+          matchConfig.Path = "${cfg.home.pci}";
+          linkConfig.Name = "wireless";
+        };
+      };
+
+      networks = {
+        "25-wireless" = {
+          matchConfig = {
+            Name = "wireless";
+            SSID = "${cfg.home.SSID}";
+          };
+          address = ["${cfg.home.staticIP}"];
+          routes = [
+            {Gateway = "${cfg.home.gateway}";}
+          ];
+          dns = ["8.8.8.8"];
+          networkConfig = {
+            DHCP = "no";
+            LinkLocalAddressing = "no";
+          };
+        };
       };
     };
   };
