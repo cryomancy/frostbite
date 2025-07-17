@@ -14,6 +14,7 @@ in {
       };
       additionalWhistelistedInterfaces = {
         type = lib.types.listOf lib.types.str;
+        default = [];
         example = ["wlp7s0"];
       };
       home = {
