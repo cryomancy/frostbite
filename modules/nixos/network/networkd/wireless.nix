@@ -12,6 +12,10 @@ in {
         type = lib.types.bool;
         default = false;
       };
+      additionalWhistelistedInterfaces = {
+        type = lib.types.listOf lib.types.str;
+        example = ["wlp7s0"];
+      };
       home = {
         pci = lib.mkOption {
           type = lib.types.str;
@@ -59,7 +63,7 @@ in {
             };
           };
         };
-        interfaces = ["wlan0" "wireless"];
+        interfaces = ["wlan0" "wireless"] ++ cfg.additionalWhitelistedInterfaces;
       };
     };
 
