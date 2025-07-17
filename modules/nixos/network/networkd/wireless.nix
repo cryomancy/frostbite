@@ -12,7 +12,7 @@ in {
         type = lib.types.bool;
         default = false;
       };
-      additionalWhistelistedInterfaces = {
+      additionalWhistelistedInterfaces = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         default = [];
         example = ["wlp7s0"];
