@@ -4,10 +4,10 @@ _: {
   pkgs,
   ...
 }: let
-  cfg = config.frostbite.support.nvidia.enable;
+  cfg = config.frostbite.support.nvidia;
 in {
   options = {
-    frostbite.support.nvidia.enable = {
+    frostbite.support.nvidia = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;
