@@ -17,11 +17,13 @@ in {
         default = [];
         example = ["wlp7s0"];
       };
+
+      pci = lib.mkOption {
+        type = lib.types.str;
+        example = "pci-0000:00:14.3*";
+      };
       # home = {
-      # pci = lib.mkOption {
-      #  type = lib.types.str;
-      #  example = "pci-0000:00:14.3*";
-      # };
+
       # SSID = lib.mkOption {
       #  type = lib.types.str;
       #  example = "NSA_VAN";
@@ -78,7 +80,7 @@ in {
 
       links = {
         "10-rename-wlo1" = {
-          matchConfig.Path = "${cfg.home.pci}";
+          matchConfig.Path = "${cfg.pci}";
           linkConfig.Name = "wireless";
         };
       };
