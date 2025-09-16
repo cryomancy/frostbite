@@ -17,24 +17,24 @@ in {
         default = [];
         example = ["wlp7s0"];
       };
-      home = {
-        pci = lib.mkOption {
-          type = lib.types.str;
-          example = "pci-0000:00:14.3*";
-        };
-        SSID = lib.mkOption {
-          type = lib.types.str;
-          example = "NSA_VAN";
-        };
-        staticIP = lib.mkOption {
-          type = lib.types.str;
-          example = "192.168.100.10/24";
-        };
-        gateway = lib.mkOption {
-          type = lib.types.str;
-          example = "192.168.100.1";
-        };
-      };
+      # home = {
+      # pci = lib.mkOption {
+      #  type = lib.types.str;
+      #  example = "pci-0000:00:14.3*";
+      # };
+      # SSID = lib.mkOption {
+      #  type = lib.types.str;
+      #  example = "NSA_VAN";
+      # };
+      # staticIP = lib.mkOption {
+      #  type = lib.types.str;
+      #  example = "192.168.100.10/24";
+      # };
+      # gateway = lib.mkOption {
+      #  type = lib.types.str;
+      #  example = "192.168.100.1";
+      # };
+      # };
     };
   };
 
@@ -49,7 +49,7 @@ in {
       enableIPv6 = false;
       dhcpcd.enable = false;
 
-      nameservers = ["8.8.8.8"];
+      nameservers = ["1.1.1.1"];
       wireless = {
         iwd = {
           enable = true;
@@ -87,16 +87,16 @@ in {
         "25-wireless" = {
           matchConfig = {
             Name = "wireless";
-            SSID = "${cfg.home.SSID}";
+            # SSID = "${cfg.home.SSID}";
           };
-          address = ["${cfg.home.staticIP}"];
-          routes = [
-            {Gateway = "${cfg.home.gateway}";}
-          ];
-          dns = ["8.8.8.8"];
+          # address = ["${cfg.home.staticIP}"];
+          # routes = [
+          # {Gateway = "${cfg.home.gateway}";}
+          # ];
+          # dns = ["1.1.1.1"];
           networkConfig = {
-            DHCP = "no";
-            LinkLocalAddressing = "no";
+            DHCP = "yes";
+            # LinkLocalAddressing = "no";
           };
         };
       };
