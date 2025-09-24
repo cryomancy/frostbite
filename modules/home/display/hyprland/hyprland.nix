@@ -110,7 +110,7 @@ in {
             "SUPER,f,exec,firefox"
             "SUPER,q,killactive"
             "SUPER,a,exec,killall rofi || rofi -show drun"
-	    "SUPER,s,togglefloating"
+	    "SUPER,o,togglefloating"
             "SUPER,s,togglespecialworkspace"
             "SUPER,g,togglegroup"
             "SUPER,w,fullscreen"
