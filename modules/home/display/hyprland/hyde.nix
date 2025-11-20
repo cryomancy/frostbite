@@ -18,7 +18,7 @@ in
     };
   };
 
-  inputs = [ inputs.hyde.homeModules.default ];
+  imports = [ inputs.hyde.homeModules.default ];
 
   config = lib.mkIf cfg.enable {
     hydenix = {
