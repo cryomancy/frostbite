@@ -13,7 +13,8 @@ in
     frostbite.display.hyprland.mako = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = config.frostbite.display.hyprland.enable;
+        # default = config.frostbite.display.hyprland.enable;
+        default = false;
       };
     };
   };

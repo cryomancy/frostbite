@@ -1,18 +1,22 @@
-_: {
+_:
+{
   config,
   inputs,
   lib,
   pkgs,
   user,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.display.hyprland.waypaper;
-in {
+in
+{
   options = {
     frostbite.display.hyprland.waypaper = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = config.frostbite.display.hyprland.enable;
+        # default = config.frostbite.display.hyprland.enable;
+        default = false;
       };
     };
   };
@@ -21,10 +25,10 @@ in {
     home = {
       persistence = lib.mkIf config.frostbite.security.impermanence.enable {
         "/nix/persistent/home/${user}" = {
-          directories = [".config/waypaper"];
+          directories = [ ".config/waypaper" ];
         };
       };
-      packages = [pkgs.waypaper];
+      packages = [ pkgs.waypaper ];
     };
 
     services.swww.enable = true;

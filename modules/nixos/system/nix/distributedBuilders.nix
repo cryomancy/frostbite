@@ -1,10 +1,14 @@
-_: {
+_:
+{
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.nix.distributedBuilders;
-in {
+in
+{
+  # WIP
   options = {
     frostbite.nix.distributedBuilders = {
       enable = lib.mkEnableOption "distributed builders";
@@ -24,7 +28,10 @@ in {
         hostName = "localhost";
         maxJobs = 4;
         speedFactor = 4;
-        supportedFeatures = ["benchmark" "big-parallel"];
+        supportedFeatures = [
+          "benchmark"
+          "big-parallel"
+        ];
       };
     };
   };

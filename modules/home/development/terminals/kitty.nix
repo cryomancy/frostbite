@@ -1,15 +1,18 @@
-_: {
+_:
+{
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.terminals.kitty;
-in {
+in
+{
   options = {
     frostbite.terminals.kitty = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = true;
+        default = false;
       };
     };
   };

@@ -1,17 +1,20 @@
-_: {
+_:
+{
   config,
   lib,
   user,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.display.gtk;
-in {
+in
+{
   options = {
     frostbite.display.gtk = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = true;
+        default = false;
       };
     };
   };

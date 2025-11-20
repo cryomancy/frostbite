@@ -1,16 +1,20 @@
-_: {
+_:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.display.hyprland.hypridle;
-in {
+in
+{
   options = {
     frostbite.display.hyprland.hypridle = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = config.frostbite.display.hyprland.enable;
+        # default = config.frostbite.display.hyprland.enable;
+        default = false;
       };
     };
   };

@@ -1,23 +1,22 @@
 {
   description = "Nix flakes abstraction layer that supports multiple users, systems, and architectures.";
 
-  outputs = inputs @ {flake-parts, ...}:
-    flake-parts.lib.mkFlake {inherit inputs;}
-    (
+  outputs =
+    inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } (
       {
         config,
         self,
         ...
-      }: let
+      }:
+      let
         inherit (self) outPath;
         flakeModules = {
-          apps = import ./modules/flake/apps.nix {inherit config self;};
-          legacyPackages = import ./modules/flake/legacyPackages.nix {inherit inputs;};
-          lib = import ./modules/flake/lib.nix {inherit inputs;};
-          modules = import ./modules/flake/modules.nix {inherit config self inputs;};
-          nixosConfigurations =
-            import
-            ./modules/flake/nixosConfigurations.nix {inherit config self;};
+          apps = import ./modules/flake/apps.nix { inherit config self; };
+          legacyPackages = import ./modules/flake/legacyPackages.nix { inherit inputs; };
+          lib = import ./modules/flake/lib.nix { inherit inputs; };
+          modules = import ./modules/flake/modules.nix { inherit config self inputs; };
+          nixosConfigurations = import ./modules/flake/nixosConfigurations.nix { inherit config self; };
           # // (
           #  import
           #  ./modules/tests/configuration/system.nix
@@ -30,7 +29,8 @@
           systems = import ./modules/flake/systems.nix;
           templates = import ./modules/flake/templates.nix;
         };
-      in {
+      in
+      {
         imports = [
           flake-parts.flakeModules.modules
           flake-parts.flakeModules.partitions
@@ -58,6 +58,9 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-utils = {
       url = "github:numtide/flake-utils";
+    };
+    hyde = {
+      url = "github:richen604/hydenix";
     };
     icebox = {
       url = "github:tahlonbrahic/icebox";
@@ -88,13 +91,10 @@
     nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
-      inputs = {
-        nixpkgs.follows = "nixpkgs-droid";
-      };
     };
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-droid";
     };
     nur = {
       url = "github:nix-community/NUR";

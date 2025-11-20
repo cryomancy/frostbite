@@ -1,20 +1,24 @@
-_: {
+_:
+{
   config,
   inputs,
   lib,
   pkgs,
   user,
   ...
-}: let
-  writeWaybarApplication = inputs.frostbite.lib.writeWaybarApplication {inherit lib pkgs;};
+}:
+let
+  writeWaybarApplication = inputs.frostbite.lib.writeWaybarApplication { inherit lib pkgs; };
   writeWaybarModule = inputs.frostbite.lib.writeWaybarModule pkgs;
   cfg = config.frostbite.display.hyprland.waybar;
-in {
+in
+{
   options = {
     frostbite.display.hyprland.waybar = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = config.frostbite.display.hyprland.enable;
+        # default = config.frostbite.display.hyprland.enable;
+        default = false;
       };
     };
   };
@@ -22,7 +26,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
       "/nix/persistent/home/${user}" = {
-        directories = [".config/waybar"];
+        directories = [ ".config/waybar" ];
       };
     };
 
@@ -31,7 +35,7 @@ in {
       systemd.enable = true;
 
       package = pkgs.waybar.overrideAttrs (oa: {
-        mesonFlags = (oa.mesonFlags or []) ++ ["-Dexperimental=true"];
+        mesonFlags = (oa.mesonFlags or [ ]) ++ [ "-Dexperimental=true" ];
       });
 
       settings = {
@@ -41,15 +45,14 @@ in {
           position = "top";
           font-family = "JetBrainsMono Nerd Font Mono";
 
-          modules-left =
-            [
-              "hyprland/workspaces"
-              "hyprland/submap"
-            ]
-            ++ [
-              "custom/currentplayer"
-              "custom/player"
-            ];
+          modules-left = [
+            "hyprland/workspaces"
+            "hyprland/submap"
+          ]
+          ++ [
+            "custom/currentplayer"
+            "custom/player"
+          ];
 
           modules-center = [
             "cpu"
@@ -93,9 +96,9 @@ in {
               sort-by-number = true;
             };
             persistent-workspaces = {
-              "1" = [];
-              "2" = [];
-              "3" = [];
+              "1" = [ ];
+              "2" = [ ];
+              "3" = [ ];
             };
           };
 
@@ -173,12 +176,14 @@ in {
             interval = 1;
             return-type = "json";
             exec = writeWaybarModule {
-              dependencies = [pkgs.hyprland];
+              dependencies = [ pkgs.hyprland ];
               text = "";
               tooltip = ''$(grep PRETTY_NAME /etc/os-release | cut -d '"' -f2)'';
-              class = let
-                isFullScreen = "hyprctl activewindow -j | jq -e '.fullscreen' &>/dev/null";
-              in "$(if ${isFullScreen}; then echo fullscreen; fi)";
+              class =
+                let
+                  isFullScreen = "hyprctl activewindow -j | jq -e '.fullscreen' &>/dev/null";
+                in
+                "$(if ${isFullScreen}; then echo fullscreen; fi)";
             };
           };
 
@@ -186,7 +191,7 @@ in {
             interval = 2;
             return-type = "json";
             exec = writeWaybarModule {
-              dependencies = [pkgs.playerctl];
+              dependencies = [ pkgs.playerctl ];
               script = ''
                 all_players=$(playerctl -l 2>/dev/null)
                 selected_player="$(playerctl status -f "{{playerName}}" 2>/dev/null || true)"
@@ -207,14 +212,14 @@ in {
 
           "custom/player" = {
             exec-if = writeWaybarApplication {
-              dependencies = [pkgs.playerctl];
+              dependencies = [ pkgs.playerctl ];
               text = ''
                 selected_player="$(playerctl status -f "{{playerName}}" 2>/dev/null || true)"
                 playerctl status -p "$selected_player" 2>/dev/null
               '';
             };
             exec = writeWaybarApplication {
-              dependencies = [pkgs.playerctl];
+              dependencies = [ pkgs.playerctl ];
               text = ''
                 selected_player="$(playerctl status -f "{{playerName}}" 2>/dev/null || true)"
                 playerctl metadata -p "$selected_player" \
@@ -231,7 +236,7 @@ in {
               "Stopped" = "󰓛";
             };
             on-click = writeWaybarApplication {
-              dependencies = [pkgs.playerctl];
+              dependencies = [ pkgs.playerctl ];
               text = "playerctl play-pause";
             };
           };

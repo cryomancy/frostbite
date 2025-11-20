@@ -1,21 +1,25 @@
-_: {
+_:
+{
   config,
   inputs,
   lib,
   nixosConfig,
   user,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.display.hyprland.hyprlock;
   isLaptop = nixosConfig.frostbite.security.useCase == "laptop";
   # from home-manager nixos/default.nix
   # home-manager.extraSpecialArgs.nixosConfig = config;
-in {
+in
+{
   options = {
     frostbite.display.hyprland.hyprlock = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = config.frostbite.display.hyprland.enable;
+        # default = config.frostbite.display.hyprland.enable;
+        default = true;
       };
     };
     # This causes infinite recursion :(
@@ -25,7 +29,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
       "/nix/persistent/home/${user}" = {
-        files = [".config/hypr/hpyrlock.conf"];
+        files = [ ".config/hypr/hpyrlock.conf" ];
       };
     };
 
@@ -58,11 +62,7 @@ in {
           text = cmd[update:1000] echo "$(date +"%k:%M")"
           font_size = 115
           shadow_passes = 3
-          position = 0, ${
-          if isLaptop
-          then "-25"
-          else "-150"
-        }
+          position = 0, ${if isLaptop then "-25" else "-150"}
           halign = center
           valign = top
         }
@@ -73,11 +73,7 @@ in {
           text = cmd[update:1000] echo "- $(date +"%A, %B %d") -"
           font_size = 18
           shadow_passes = 3
-          position = 0, ${
-          if isLaptop
-          then "-225"
-          else "-350"
-        }
+          position = 0, ${if isLaptop then "-225" else "-350"}
           halign = center
           valign = top
         }
@@ -91,11 +87,7 @@ in {
           border_size = 0
           rotate = 0
 
-          position = 0, ${
-          if isLaptop
-          then "120"
-          else "270"
-        }
+          position = 0, ${if isLaptop then "120" else "270"}
           halign = center
           valign = bottom
         }
@@ -105,11 +97,7 @@ in {
           monitor =
           text =   $USER
           font_size = 15
-          position = 0, ${
-          if isLaptop
-          then "131"
-          else "281"
-        }
+          position = 0, ${if isLaptop then "131" else "281"}
           halign = center
           valign = bottom
         }
@@ -126,11 +114,7 @@ in {
           fade_on_empty = false
           placeholder_text = "Enter Password..."
           hide_input = false
-          position = 0, ${
-          if isLaptop
-          then "50"
-          else "200"
-        }
+          position = 0, ${if isLaptop then "50" else "200"}
           halign = center
           valign = bottom
         }
