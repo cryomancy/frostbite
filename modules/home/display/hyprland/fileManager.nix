@@ -23,6 +23,7 @@ in {
       qtwayland
       kio-fuse
       kio-extras
+      # nautilus
     ];
   };
 }
