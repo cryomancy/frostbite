@@ -1,16 +1,19 @@
-_: {
+_:
+{
   config,
   inputs,
   lib,
   pkgs,
   nixosConfig,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.display.hyprland;
-  gamemode = inputs.frostbite.lib.hyprlandGameMode {inherit config lib pkgs;};
-  onMonitorAttached = inputs.frostbite.lib.onMonitorAttached {inherit lib pkgs;};
-  onMonitorDetached = inputs.frostbite.lib.onMonitorDetached {inherit lib pkgs;};
-in {
+  gamemode = inputs.frostbite.lib.hyprlandGameMode { inherit config lib pkgs; };
+  onMonitorAttached = inputs.frostbite.lib.onMonitorAttached { inherit lib pkgs; };
+  onMonitorDetached = inputs.frostbite.lib.onMonitorDetached { inherit lib pkgs; };
+in
+{
   options = {
     frostbite.display.hyprland = {
       enable = lib.mkEnableOption "hyprland";
@@ -43,7 +46,7 @@ in {
 
       systemd = {
         enable = true;
-        variables = ["--all"];
+        variables = [ "--all" ];
       };
 
       settings = {
@@ -83,34 +86,45 @@ in {
           ''${(lib.getExe pkgs.hyprland-monitor-attached)} ${onMonitorAttached} ${onMonitorDetached}''
           #+ (lib.strings.optionalString config.frostbite.display.hyprland.waypaper.enable
           #  ''${(lib.getExe pkgs.waypaper)} --restore'')
-          + (lib.strings.optionalString cfg.autostartWorkspaces
-            ''[workspace 1 silent] ${(lib.getExe pkgs.firefox)}'');
+          + (lib.strings.optionalString cfg.autostartWorkspaces ''[workspace 1 silent] ${(lib.getExe pkgs.firefox)}'');
 
         bindm = [
           "SUPER,mouse:272,movewindow"
           "SUPER,mouse:273,resizewindow"
         ];
 
-        bind = let
-          pactl = lib.getExe' pkgs.pulseaudio "pactl";
-          workspaces = ["0" "1" "2" "3" "4" "5" "6" "7" "8" "9"];
-          directions = rec {
-            left = "l";
-            right = "r";
-            up = "u";
-            down = "d";
-            h = left;
-            l = right;
-            k = up;
-            j = down;
-          };
-        in
+        bind =
+          let
+            pactl = lib.getExe' pkgs.pulseaudio "pactl";
+            workspaces = [
+              "0"
+              "1"
+              "2"
+              "3"
+              "4"
+              "5"
+              "6"
+              "7"
+              "8"
+              "9"
+            ];
+            directions = rec {
+              left = "l";
+              right = "r";
+              up = "u";
+              down = "d";
+              h = left;
+              l = right;
+              k = up;
+              j = down;
+            };
+          in
           [
             "SUPER,t,exec,kitty"
             "SUPER,f,exec,firefox"
             "SUPER,q,killactive"
-            "SUPER,a,exec,killall rofi || rofi -show drun"
-	    "SUPER,o,togglefloating"
+            "SUPER,a,exec,killall wofi || wofi -show drun"
+            "SUPER,o,togglefloating"
             "SUPER,s,togglespecialworkspace"
             "SUPER,g,togglegroup"
             "SUPER,w,fullscreen"
@@ -123,24 +137,23 @@ in {
             '',XF86MonBrightnessDown,exec,brightnessctl set 50-''
           ]
           ++
-          # Change workspaces
-          (map (n: "SUPER,${n},workspace,name:${n}") workspaces)
+            # Change workspaces
+            (map (n: "SUPER,${n},workspace,name:${n}") workspaces)
           ++
-          # Move window to workspace
-          (map (n: "SUPERSHIFT,${n},movetoworkspacesilent,name:${n}") workspaces)
+            # Move window to workspace
+            (map (n: "SUPERSHIFT,${n},movetoworkspacesilent,name:${n}") workspaces)
           ++
-          # Move focus
-          (lib.mapAttrsToList (key: direction: "SUPER,${key},movefocus,${direction}") directions)
+            # Move focus
+            (lib.mapAttrsToList (key: direction: "SUPER,${key},movefocus,${direction}") directions)
           ++ (lib.mapAttrsToList (
-              key: direction: "SUPERCONTROL,${key},movewindoworgroup,${direction}"
-            )
-            directions)
+            key: direction: "SUPERCONTROL,${key},movewindoworgroup,${direction}"
+          ) directions)
           ++
-          # Scroll through existing workspaces
-          [
-            "SUPER,mouse_down,workspace,e+1"
-            "SUPER,mouse_up,workspace,e-1"
-          ];
+            # Scroll through existing workspaces
+            [
+              "SUPER,mouse_down,workspace,e+1"
+              "SUPER,mouse_up,workspace,e-1"
+            ];
 
         decoration = {
           rounding = 5;
@@ -190,8 +203,8 @@ in {
         };
 
         layerrule = [
-          "blur, rofi"
-          "ignorezero, rofi"
+          "blur, wofi"
+          "ignorezero, wofi"
           "blur, notifications"
           "blur, notifications"
           "blur, launcher"
@@ -215,7 +228,7 @@ in {
 
     home = {
       persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-        "/persist/${config.home.homeDirectory}".directories = [".config/hypr"];
+        "/persist/${config.home.homeDirectory}".directories = [ ".config/hypr" ];
       };
 
       packages = with pkgs; [
@@ -228,6 +241,9 @@ in {
         kitty # backup terminal
         rot8 # screen rotation daemon
         hyprland-monitor-attached
+        hyprsunset
+        clipse
+        hyprpicker
         wl-kbptr
         wl-screenrec
         wl-mirror
