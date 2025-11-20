@@ -39,7 +39,6 @@ in
         };
         fastfetch.enable = true; # fastfetch configuration
         firefox.enable = false; # enable firefox module
-        gaming.enable = false; # enable gaming module
         hyde.enable = true; # enable hyde module
         hyprland = {
           enable = true; # enable hyprland module
