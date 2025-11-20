@@ -1,11 +1,14 @@
-_: {
+_:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.display.hyprland.mako;
-in {
+in
+{
   options = {
     frostbite.display.hyprland.mako = {
       enable = lib.mkOption {
@@ -22,21 +25,35 @@ in {
       #    directories = [".config/"];
       #  };
       #};
-      packages = [pkgs.libnotify];
+      packages = [ pkgs.libnotify ];
     };
 
     services.mako = {
       enable = true;
 
-      anchor = "top-right";
-      borderRadius = 5;
-      borderSize = 2;
-      padding = "20";
-      defaultTimeout = 5000;
-      layer = "top";
-      height = 100;
-      width = 300;
-      format = "<b>%s</b>\\n%b";
+      settings = {
+        width = 420;
+        height = 110;
+        padding = "10";
+        margin = "10";
+        border-size = 2;
+        border-radius = 0;
+
+        anchor = "top-right";
+        layer = "overlay";
+
+        default-timeout = 5000;
+        ignore-timeout = false;
+        max-visible = 5;
+        sort = "-time";
+
+        group-by = "app-name";
+
+        actions = true;
+
+        format = "<b>%s</b>\\n%b";
+        markup = true;
+      };
 
       # settings = ''
       #  [urgency=low]
