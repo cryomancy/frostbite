@@ -116,7 +116,7 @@ in
           satty.enable = false; # enable satty screenshot annotation tool
           swappy.enable = true; # enable swappy screenshot editor
         };
-        wallpapers.enable = true; # enable wallpapers module
+        # wallpapers.enable = false; # enable wallpapers module
         shell = {
           enable = true; # enable shell module
           zsh = {
