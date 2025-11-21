@@ -41,7 +41,7 @@ in {
       steam-tui
       steam-run
       steamtinkerlaunch
-      protonup
+      protonup-ng
       protonplus
       protontricks
     ];

@@ -1,14 +1,11 @@
-_:
-{
+_: {
   config,
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.frostbite.shell.fish;
-in
-{
+in {
   options = {
     frostbite.shell.fish = {
       enable = lib.mkOption {
@@ -21,7 +18,7 @@ in
   config = lib.mkIf cfg.enable {
     programs = {
       fish = {
-        enable = true;
+        enable = false;
       };
     };
 

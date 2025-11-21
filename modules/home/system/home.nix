@@ -9,8 +9,8 @@ in {
   options = {
     frostbite.system.home = {
       enable = lib.mkOption {
-        default = true;
-        example = false;
+        default = false;
+        example = true;
       };
     };
   };
