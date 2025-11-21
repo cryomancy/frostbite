@@ -1,16 +1,19 @@
-_: {
+_:
+{
   config,
   lib,
   user,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.system.xdg;
   dir = "${config.home.homeDirectory}";
-in {
+in
+{
   options = {
     frostbite.system.xdg = {
       enable = lib.mkOption {
-        default = true;
+        default = false;
         example = false;
       };
     };
@@ -19,7 +22,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
       "/nix/persistent/home/${user}" = {
-        directories = [".config/boxxy"];
+        directories = [ ".config/boxxy" ];
       };
     };
 

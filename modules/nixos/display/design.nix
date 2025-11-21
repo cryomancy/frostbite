@@ -1,13 +1,16 @@
-_: {
+_:
+{
   config,
   lib,
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.display.design;
   users = lib.attrsets.attrNames config.frostbite.users.users;
-in {
+in
+{
   imports = [
     inputs.stylix.nixosModules.stylix
   ];
@@ -28,8 +31,8 @@ in {
 
   config = lib.mkIf cfg.enable {
     stylix = {
-      enable = true;
-      autoEnable = true;
+      enable = false;
+      autoEnable = false;
 
       base16Scheme = "${cfg.theme}";
 

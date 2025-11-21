@@ -3,14 +3,15 @@ _:
   config,
   lib,
   inputs,
+  pkgs,
   ...
 }:
 let
-  cfg = config.frostbite.display.hyprland.hyde;
+  cfg = config.frostbite.display.hyde;
 in
 {
   options = {
-    frostbite.display.hyprland.hyde = {
+    frostbite.display.hyde = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
