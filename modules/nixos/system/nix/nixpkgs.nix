@@ -31,14 +31,6 @@ in
       };
       overlays = [
         (final: _prev: {
-          unstable = import inputs.nixpkgs-unstable {
-            inherit (final) system;
-            config.allowUnfree = true;
-          };
-          master = import inputs.nixpkgs-master {
-            inherit (final) system;
-            config.allowUnfree = true;
-          };
         })
       ]
       ++ [
