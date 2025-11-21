@@ -17,7 +17,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      angryipscanner # fast and friendly network scanner
+      # angryipscanner # fast and friendly network scanner
       ethtool # Ethernet device settings and diagnostics
       tcpdump # CLI packet analyzer
       nmap # Ttility for network discovery
