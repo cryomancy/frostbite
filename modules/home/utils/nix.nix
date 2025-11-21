@@ -28,7 +28,7 @@ in
       nix-doc # A tool leveraging the rnix Nix parser for intelligent documentation search and tags generation.
       nurl # Generate Nix fetcher calls from repository URLshttps://github.com/mwdavisii/nyx/tree/main
       nh # Nix helper
-      comma # Quickly run any binary; wraps together nix run and nix-index.
+      #comma # Quickly run any binary; wraps together nix run and nix-index.
       manix # A fast CLI documentation searcher for Nix.
     ];
   };
