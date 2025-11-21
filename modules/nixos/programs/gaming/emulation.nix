@@ -16,7 +16,7 @@ in {
       steam-rom-manager
       bottles
       # emulationstation-de
-      ryujinx # Experimental Nintendo Switch Emulator written in C#
+      ryubing # Experimental Nintendo Switch Emulator written in C#
       retroarchFull
     ];
   };
