@@ -297,7 +297,7 @@ in
     };
 
     stylix = {
-      enable = true;
+      enable = false;
       autoEnable = false;
 
       opacity = {
@@ -314,7 +314,7 @@ in
         firefox.enable = true;
         fish.enable = true;
         fzf.enable = true;
-        gtk.enable = true;
+        gtk.enable = false;
         ghostty.enable = true;
         hyprland.enable = true;
         hyprlock.enable = true;
