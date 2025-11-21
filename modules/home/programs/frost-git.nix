@@ -1,11 +1,14 @@
-_: {
+_:
+{
   lib,
   config,
   user,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.programs.git;
-in {
+in
+{
   options = {
     frostbite.programs.git = {
       enable = lib.mkOption {
@@ -29,7 +32,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
       "/nix/persistent/home/${user}" = {
-        directories = [".config/git"];
+        directories = [ ".config/git" ];
       };
     };
     programs = {
