@@ -45,8 +45,8 @@ in
         hyprland = {
           enable = true; # enable hyprland module
           extraConfig = ""; # extra config appended to userprefs.conf
-          overrideMain = null; # complete override of hyprland.conf
-          suppressWarnings = false; # suppress warnings
+          overrideMain = true; # complete override of hyprland.conf
+          suppressWarnings = true; # suppress warnings
           # Animation configurations
           animations = {
             enable = true; # enable animation configurations
@@ -118,7 +118,7 @@ in
           satty.enable = false; # enable satty screenshot annotation tool
           swappy.enable = true; # enable swappy screenshot editor
         };
-        # wallpapers.enable = false; # enable wallpapers module
+        wallpapers.enable = false; # enable wallpapers module
         shell = {
           enable = true; # enable shell module
           zsh = {
@@ -150,9 +150,66 @@ in
           enable = true; # enable theme module
           active = "Catppuccin Mocha"; # active theme name
           themes = [
-            "Catppuccin Mocha"
+            "1-Bit"
+            "Abyssal-Wave"
+            "AbyssGreen"
+            "Amethyst-Aura"
+            "AncientAliens"
+            "Another World"
+            "Bad Blood"
+            "BlueSky"
+            "Breezy Autumn"
+            "Cat Latte"
             "Catppuccin Latte"
-          ]; # default enabled themes, full list in https://github.com/richen604/hydenix/tree/main/hydenix/sources/themes
+            "Catppuccin-Macchiato"
+            "Catppuccin Mocha"
+            "Code Garden"
+            "Cosmic Blue"
+            "Crimson Blade"
+            "Crimson-Blue"
+            "Decay Green"
+            "DoomBringers"
+            "Dracula"
+            "Edge Runner"
+            "Electra"
+            "Eternal Arctic"
+            "Ever Blushing"
+            "Frosted Glass"
+            "Graphite Mono"
+            "Green Lush"
+            "Greenify"
+            "Grukai"
+            "Gruvbox Retro"
+            "Hack the Box"
+            "Ice Age"
+            "Joker"
+            "LimeFrenzy"
+            "Mac OS"
+            "Material Sakura"
+            "Monokai"
+            "Monterey Frost"
+            "Moonlight"
+            "Nightbrew"
+            "Nordic Blue"
+            "Obsidian-Purple"
+            "One Dark"
+            "Oxo Carbon"
+            "Paranoid Sweet"
+            "Peace Of Mind"
+            "Pixel Dream"
+            "Rain Dark"
+            "Red Stone"
+            "Rosé Pine"
+            "Scarlet Night"
+            "Sci-fi"
+            "Solarized Dark"
+            "Synth Wave"
+            "Timeless Dream"
+            "Tokyo Night"
+            "Tundra"
+            "Vanta Black"
+            "Windows 11"
+          ];
         };
         waybar = {
           enable = true; # enable waybar module
