@@ -34,7 +34,7 @@ in
           id = 0;
           name = "main";
           inherit settings userChrome;
-          extensions.packages = with pkgs.nur.repos.rycee.librewolf-addons; [
+          extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
             darkreader
             # keepassxc-browser
             musescore-downloader
