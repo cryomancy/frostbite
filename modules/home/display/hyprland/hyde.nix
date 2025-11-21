@@ -37,7 +37,7 @@ in
           vim.enable = false; # enable vim module
           default = "code"; # default text editor
         };
-        fastfetch.enable = true; # fastfetch configuration
+        fastfetch.enable = false; # fastfetch configuration
         firefox.enable = false; # enable firefox module
         git.enable = false;
         hyde.enable = true; # enable hyde module

@@ -19,7 +19,7 @@ in
       enable = lib.mkOption {
         type = lib.types.bool;
         # default = config.frostbite.display.hyprland.enable;
-        default = true;
+        default = false;
       };
     };
     # This causes infinite recursion :(
