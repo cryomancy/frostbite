@@ -34,6 +34,8 @@ in
           enable = true;
           support32Bit = true;
         };
+        pulse.enable = true;
+        wireplumber.enable = true;
 
         jack.enable = true;
       };
@@ -41,6 +43,11 @@ in
       environment.systemPackages = with pkgs; [
         alsa-utils
         alsa-ucm-conf
+        pipewire
+        wireplumber
+        pavucontrol
+        pamixer
+        playerctl
       ];
 
       security.rtkit.enable = true;

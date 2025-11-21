@@ -1,11 +1,14 @@
-_: {
+_:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.utils.disk;
-in {
+in
+{
   options = {
     frostbite.utils.disk = {
       enable = lib.mkOption {
@@ -23,6 +26,9 @@ in {
       du-dust # A tool to find disk usage by directories
       # btrfs-list # Get a nice tree-style view of your btrfs subvolumes/snapshot
       btrfs-assistant # GUI management tool to make managing a Btrfs filesystem easier
+      udiskie # manage removable media
+      ntfs3g # ntfs support
+      exfat # exFAT support
     ];
   };
 }

@@ -1,19 +1,22 @@
-_: {
+_:
+{
   pkgs,
   config,
   lib,
   nixosConfig,
   user,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.shells.fish;
   wslIntegration = nixosConfig.frostbite.support.guest.wsl.enable;
-in {
+in
+{
   options = {
     frostbite.shells.fish = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = true;
+        default = false;
       };
     };
   };
@@ -36,10 +39,7 @@ in {
             set -U fish_greeting
           ''
 
-          (
-            (lib.strings.optionalString wslIntegration)
-            ''fish_add_path --append /mnt/c/Users/${config.home.username}/AppData/Local/Microsoft/WinGet/Packages/equalsraf.win32yank_Microsoft.Winget.Source_8wekyb3d8bbwe/''
-          )
+          ((lib.strings.optionalString wslIntegration) ''fish_add_path --append /mnt/c/Users/${config.home.username}/AppData/Local/Microsoft/WinGet/Packages/equalsraf.win32yank_Microsoft.Winget.Source_8wekyb3d8bbwe/'')
         ];
 
         functions = {
@@ -54,33 +54,32 @@ in {
             end
           '';
         };
-        shellAbbrs =
-          {
-            gc = "nix-collect-garbage --delete-old";
-          }
-          # navigation shortcuts
-          // {
-            ".." = "cd ..";
-            "..." = "cd ../../";
-            "...." = "cd ../../../";
-            "....." = "cd ../../../../";
-          }
-          # git shortcuts
-          // {
-            gapa = "git add --patch";
-            grpa = "git reset --patch";
-            gst = "git status";
-            gdh = "git diff HEAD";
-            gp = "git push";
-            gph = "git push -u origin HEAD";
-            gco = "git checkout";
-            gcob = "git checkout -b";
-            gcm = "git checkout master";
-            gcd = "git checkout develop";
-            gsp = "git stash push -m";
-            gsa = "git stash apply stash^{/";
-            gsl = "git stash list";
-          };
+        shellAbbrs = {
+          gc = "nix-collect-garbage --delete-old";
+        }
+        # navigation shortcuts
+        // {
+          ".." = "cd ..";
+          "..." = "cd ../../";
+          "...." = "cd ../../../";
+          "....." = "cd ../../../../";
+        }
+        # git shortcuts
+        // {
+          gapa = "git add --patch";
+          grpa = "git reset --patch";
+          gst = "git status";
+          gdh = "git diff HEAD";
+          gp = "git push";
+          gph = "git push -u origin HEAD";
+          gco = "git checkout";
+          gcob = "git checkout -b";
+          gcm = "git checkout master";
+          gcd = "git checkout develop";
+          gsp = "git stash push -m";
+          gsa = "git stash apply stash^{/";
+          gsl = "git stash list";
+        };
         shellAliases = lib.mkIf wslIntegration {
           jvim = "nvim";
           lvim = "nvim";

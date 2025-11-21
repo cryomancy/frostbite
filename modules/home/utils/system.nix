@@ -1,11 +1,14 @@
-_: {
+_:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.utils.system;
-in {
+in
+{
   options = {
     frostbite.utils.system = {
       enable = lib.mkOption {
@@ -32,6 +35,12 @@ in {
       parted # A partitioning tool
       ethtool # Ethernet device settings and diagnostics
       acpilight # ACPI backlight control
+
+      brightnessctl # screen brightness control
+      libinput-gestures # actions touchpad gestures using libinput
+      libinput # libinput library
+      lm_sensors # system sensors
+      pciutils # pci utils
     ];
   };
 }

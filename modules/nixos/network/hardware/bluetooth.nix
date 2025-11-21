@@ -1,19 +1,19 @@
-_: {
+_:
+{
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.networking.bluetooth;
   isLaptop = config.frostbite.security.useCase == "laptop";
-in {
+in
+{
   options = {
     frostbite.networking.bluetooth = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default =
-          if isLaptop
-          then true
-          else false;
+        default = if isLaptop then true else false;
       };
     };
   };
@@ -22,12 +22,18 @@ in {
     hardware.bluetooth = {
       enable = true;
       powerOnBoot = true;
-      settings = {};
+      settings = { };
     };
 
     services = {
       blueman.enable = true;
       gpsd.enable = true;
     };
+    environment.systemPackages = with pkgs; [
+      bluez
+      bluez-tools
+      blueman
+      pipewire
+    ];
   };
 }

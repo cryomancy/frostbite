@@ -1,10 +1,14 @@
-_: {
+_:
+{
   config,
   lib,
+  pkgs,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.shell.fish;
-in {
+in
+{
   options = {
     frostbite.shell.fish = {
       enable = lib.mkOption {
@@ -20,5 +24,43 @@ in {
         enable = true;
       };
     };
+
+    environment.systemPackages = with pkgs; [
+      parallel # Shell tool for executing jobs in parallel
+      jq # Command-line JSON processor
+      imagemagick # Image manipulation tools
+      resvg # SVG rendering library and tools
+      libnotify # Desktop notification library
+      envsubst # Environment variable substitution utility
+      killall # Process termination utility
+      wl-clipboard # Wayland clipboard utilities
+      wl-clip-persist # Keep Wayland clipboard even after programs close (avoids crashes)
+      gnumake # Build automation tool
+      git # distributed version control system
+      fzf # command line fuzzy finder
+      polkit_gnome # authentication agent for privilege escalation
+      dbus # inter-process communication daemon
+      upower # power management/battery status daemon
+      mesa # OpenGL implementation and GPU drivers
+      dconf # configuration storage system
+      dconf-editor # dconf editor
+      home-manager # user environment manager
+      xdg-utils # Collection of XDG desktop integration tools
+      desktop-file-utils # for updating desktop database
+      hicolor-icon-theme # Base fallback icon theme
+      kdePackages.ark # kde file archiver
+      cava # audio visualizer
+      cliphist # clipboard manager
+      wayland # for wayland support
+      egl-wayland # for wayland support
+      xwayland # for x11 support
+      gobject-introspection # for python packages
+      trash-cli # cli to manage trash files
+      gawk # awk implementation
+      coreutils # coreutils implementation
+      bash-completion # Add bash-completion package
+
+      hypridle
+    ];
   };
 }

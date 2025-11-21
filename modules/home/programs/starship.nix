@@ -1,15 +1,18 @@
-_: {
+_:
+{
   config,
   lib,
   user,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.programs.starship;
-in {
+in
+{
   options = {
     frostbite.programs.starship = {
       enable = lib.mkOption {
-        default = true;
+        default = false;
       };
     };
   };
@@ -17,7 +20,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
       "/nix/persistent/home/${user}" = {
-        files = [".config/starship.toml"];
+        files = [ ".config/starship.toml" ];
       };
     };
 

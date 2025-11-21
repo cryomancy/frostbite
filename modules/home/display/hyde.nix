@@ -128,8 +128,8 @@ in
           };
           bash.enable = false; # enable bash shell
           fish.enable = false; # enable fish shell
-          pokego.enable = false; # enable Pokemon ASCII art scripts
-          p10k.enable = false; # enable p10k prompt
+          pokego.enable = true; # enable Pokemon ASCII art scripts
+          p10k.enable = true; # enable p10k prompt
           starship.enable = true; # enable starship prompt
         };
         social = {
