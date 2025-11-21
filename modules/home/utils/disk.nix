@@ -23,7 +23,7 @@ in
       # Disk and file management
       pciutils # PCI device listing
       usbutils # USB device listing
-      du-dust # A tool to find disk usage by directories
+      dust # A tool to find disk usage by directories
       # btrfs-list # Get a nice tree-style view of your btrfs subvolumes/snapshot
       btrfs-assistant # GUI management tool to make managing a Btrfs filesystem easier
       udiskie # manage removable media
