@@ -15,7 +15,7 @@ in {
     environment.systemPackages = with pkgs; [
       steam-rom-manager
       bottles
-      emulationstation-de
+      # emulationstation-de
       ryujinx # Experimental Nintendo Switch Emulator written in C#
       retroarchFull
     ];
