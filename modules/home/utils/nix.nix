@@ -19,14 +19,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    programs.nix-index-database.comma.enable = true;
-    programs.nix-index = {
-      enable = true;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-    };
-
     home.packages = with pkgs; [
       nix-du # Tool to determine which gc-roots take space in your nix store
       nix-init # Generate Nix packages from URLs
