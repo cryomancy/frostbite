@@ -1,16 +1,19 @@
-_: {
+_:
+{
   lib,
   config,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.frostbite.programs.fastfetch;
-in {
+in
+{
   options = {
     frostbite.programs.fastfetch = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = true;
+        default = false;
       };
     };
   };
