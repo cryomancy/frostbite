@@ -1,22 +1,20 @@
 {
   description = "Nix flakes abstraction layer that supports multiple users, systems, and architectures.";
 
-  outputs =
-    inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } (
+  outputs = inputs @ {flake-parts, ...}:
+    flake-parts.lib.mkFlake {inherit inputs;} (
       {
         config,
         self,
         ...
-      }:
-      let
+      }: let
         inherit (self) outPath;
         flakeModules = {
-          apps = import ./modules/flake/apps.nix { inherit config self; };
-          legacyPackages = import ./modules/flake/legacyPackages.nix { inherit inputs; };
-          lib = import ./modules/flake/lib.nix { inherit inputs; };
-          modules = import ./modules/flake/modules.nix { inherit config self inputs; };
-          nixosConfigurations = import ./modules/flake/nixosConfigurations.nix { inherit config self; };
+          apps = import ./modules/flake/apps.nix {inherit config self;};
+          legacyPackages = import ./modules/flake/legacyPackages.nix {inherit inputs;};
+          lib = import ./modules/flake/lib.nix {inherit inputs;};
+          modules = import ./modules/flake/modules.nix {inherit config self inputs;};
+          nixosConfigurations = import ./modules/flake/nixosConfigurations.nix {inherit config self;};
           # // (
           #  import
           #  ./modules/tests/configuration/system.nix
@@ -29,8 +27,7 @@
           systems = import ./modules/flake/systems.nix;
           templates = import ./modules/flake/templates.nix;
         };
-      in
-      {
+      in {
         imports = [
           flake-parts.flakeModules.modules
           flake-parts.flakeModules.partitions
@@ -86,7 +83,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-droid.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-stable.url = "github:/nixos/nixpkgs/nixos-24.11";
-    #nixpkgs-unstable.url = "github:/nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-master.url = "github:/nixos/nixpkgs";
     nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     nix-index-database = {
