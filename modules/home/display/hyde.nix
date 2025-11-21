@@ -45,7 +45,7 @@ in
         hyprland = {
           enable = true; # enable hyprland module
           extraConfig = ""; # extra config appended to userprefs.conf
-          overrideMain = true; # complete override of hyprland.conf
+          overrideMain = null; # complete override of hyprland.conf
           suppressWarnings = true; # suppress warnings
           # Animation configurations
           animations = {
