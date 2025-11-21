@@ -1,12 +1,15 @@
-_: {
+_:
+{
   config,
   inputs,
   lib,
   system,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.nix.nixpkgs;
-in {
+in
+{
   options = {
     frostbite.nix.nixpkgs = {
       enable = lib.mkOption {
@@ -26,23 +29,23 @@ in {
         inherit system;
         config.allowUnfree = true;
       };
-      overlays =
-        [
-          (final: _prev: {
-            unstable = import inputs.nixpkgs-unstable {
-              inherit (final) system;
-              config.allowUnfree = true;
-            };
-            master = import inputs.nixpkgs-master {
-              inherit (final) system;
-              config.allowUnfree = true;
-            };
-          })
-        ]
-        ++ [
-          inputs.nur.overlays.default
-          inputs.vostok.overlays.default
-        ];
+      overlays = [
+        (final: _prev: {
+          unstable = import inputs.nixpkgs-unstable {
+            inherit (final) system;
+            config.allowUnfree = true;
+          };
+          master = import inputs.nixpkgs-master {
+            inherit (final) system;
+            config.allowUnfree = true;
+          };
+        })
+      ]
+      ++ [
+        inputs.nur.overlays.default
+        inputs.vostok.overlays.default
+        inputs.hyde.overlays.default
+      ];
     };
   };
 }
