@@ -11,7 +11,7 @@ in {
     frostbite.programs.vesktop = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = config.frostbite.display.hyprland.enable;
+        default = false;
       };
     };
   };

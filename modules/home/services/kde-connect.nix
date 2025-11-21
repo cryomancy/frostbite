@@ -10,7 +10,7 @@ in {
     frostbite.services.kde-connect = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = config.frostbite.display.hyprland.enable;
+        default = true;
       };
     };
   };

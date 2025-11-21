@@ -1,16 +1,19 @@
-_: {
+_:
+{
   config,
   lib,
   nixosConfig,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.services.gammastep;
-in {
+in
+{
   options = {
     frostbite.services.gammastep = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = config.frostbite.display.hyprland.enable;
+        default = true;
       };
     };
   };
