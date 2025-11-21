@@ -1,14 +1,22 @@
-_: {
+_:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.display.dm;
-in {
+in
+{
   options = {
     frostbite.display.dm = lib.mkOption {
-      type = lib.types.enum ["greetd" "tuigreet" "lightdm" "gdm"];
+      type = lib.types.enum [
+        "greetd"
+        "tuigreet"
+        "lightdm"
+        "gdm"
+      ];
       default = "tuigreet";
       description = ''
            The display manager service that is enabled by default.
@@ -24,7 +32,7 @@ in {
 
     services.greetd = lib.mkIf (cfg == "tuigreet") {
       enable = true;
-      vt = 2;
+      #vt = 2;
       settings = {
         default_session = {
           command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";

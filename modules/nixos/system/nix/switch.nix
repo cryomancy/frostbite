@@ -1,10 +1,13 @@
-_: {
+_:
+{
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.nix.switch;
-in {
+in
+{
   options = {
     frostbite.nix.switch = {
       enable = lib.mkOption {
@@ -16,14 +19,9 @@ in {
 
   config = lib.mkIf cfg.enable {
     system = {
-      preSwitchChecks = {};
-      activationScripts = {};
-      userActivationScripts = {};
-      # 25.05 option: rebuild.enableNg = true;
-      switch = {
-        enable = false;
-        enableNg = true;
-      };
+      preSwitchChecks = { };
+      activationScripts = { };
+      userActivationScripts = { };
       includeBuildDependencies = false;
 
       # NOTE: This is really cool but difficult in practice
