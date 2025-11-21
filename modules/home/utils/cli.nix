@@ -69,11 +69,11 @@ in {
       eza = {
         enable = true;
       };
-      lsd = {
-        enable = true;
-        enableFishIntegration = true;
-        enableZshIntegration = true;
-      };
+      # lsd = {
+      #   enable = true;
+      #   enableFishIntegration = true;
+      #   enableZshIntegration = true;
+      # };
       ripgrep.enable = true;
       yazi.enable = true;
       zoxide = {
