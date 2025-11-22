@@ -21,7 +21,7 @@ in {
       ethtool # Ethernet device settings and diagnostics
       tcpdump # CLI packet analyzer
       nmap # Ttility for network discovery
-      nmapsi4 # Qt frontend for nmap
+      # nmapsi4 # Qt frontend for nmap
       netcat
       traceroute
       wireshark
