@@ -1,13 +1,16 @@
-_: {
+_:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
-  cfg = config.frostbite.shell.fish;
-in {
+}:
+let
+  cfg = config.frostbite.defaultPrograms;
+in
+{
   options = {
-    frostbite.shell.fish = {
+    frostbite.defaultPrograms = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
@@ -17,8 +20,11 @@ in {
 
   config = lib.mkIf cfg.enable {
     programs = {
-      fish = {
-        enable = false;
+      zsh.enable = true;
+      dconf.enable = true;
+      gnupg.agent = {
+        enable = true;
+        enableSSHSupport = true;
       };
     };
 
@@ -56,7 +62,14 @@ in {
       gawk # awk implementation
       coreutils # coreutils implementation
       bash-completion # Add bash-completion package
-
+      brightnessctl # screen brightness control
+      udiskie # manage removable media
+      ntfs3g # ntfs support
+      exfat # exFAT support
+      libinput-gestures # actions touchpad gestures using libinput
+      libinput # libinput library
+      lm_sensors # system sensors
+      pciutils # pci utils
       hypridle
     ];
   };

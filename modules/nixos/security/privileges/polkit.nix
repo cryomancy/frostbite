@@ -1,12 +1,13 @@
-_: {
+_:
+{
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.security.polkit;
-  secOpts = config.frostbite.security;
-  isSecure = secOpts.level != "open";
-in {
+in
+{
   options = {
     frostbite.security.polkit = {
       enable = lib.mkOption {
@@ -19,10 +20,7 @@ in {
   config = lib.mkIf cfg.enable {
     security = {
       polkit = {
-        enable =
-          if isSecure
-          then true
-          else false;
+        enable = true;
       };
     };
   };

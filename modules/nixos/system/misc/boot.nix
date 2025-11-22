@@ -1,16 +1,20 @@
-_: {
+_:
+{
   config,
   lib,
+  pkgs,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.boot;
-in {
+in
+{
   options.frostbite.boot = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = true;
     };
-    quiet = lib.mkEnableOption "quiet boot mode";
+    # quiet = lib.mkEnableOption "quiet boot mode";
   };
 
   config = lib.mkIf cfg.enable {
@@ -28,10 +32,7 @@ in {
       consoleLogLevel = (lib.mkIf cfg.quiet) 0;
       initrd = {
         systemd.enable = true;
-        verbose =
-          if cfg.quiet
-          then false
-          else true;
+        verbose = false;
       };
       loader = {
         grub = lib.mkDefault {
@@ -40,6 +41,7 @@ in {
           efiSupport = true;
           efiInstallAsRemovable = true;
           useOSProber = true;
+          theme = pkgs.hyde + "/share/grub/themes/Retroboot";
         };
       };
     };
