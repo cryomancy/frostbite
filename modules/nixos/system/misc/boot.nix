@@ -21,7 +21,7 @@ in
     boot = {
       # TODO: make a post on the difference between these
       # and why this is _
-      kernelParams = (lib.mkIf cfg.quiet) [
+      kernelParams = [
         "quiet"
         "loglevel=3"
         "systemd.show_status=auto"
