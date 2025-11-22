@@ -31,6 +31,7 @@ in
       gpsd.enable = true;
     };
     environment.systemPackages = with pkgs; [
+      blueman-applet
       bluez
       bluez-tools
       blueman
