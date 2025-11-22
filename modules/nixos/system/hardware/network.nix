@@ -6,10 +6,10 @@ _:
   ...
 }:
 let
-  cfg = config.frostbite.hardware.audio;
+  cfg = config.frostbite.network;
 in
 {
-  options.frostbite.hardware.audio = {
+  options.frostbite.network = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = true;
