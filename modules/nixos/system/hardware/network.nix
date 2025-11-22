@@ -20,7 +20,7 @@ in
   config = lib.mkIf cfg.enable {
     networking = {
       # useDHCP = true;
-      wireless.enable = true;
+      # wireless.enable = true;
       networkmanager.enable = true;
     };
 
