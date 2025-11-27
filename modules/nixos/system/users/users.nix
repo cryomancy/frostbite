@@ -92,7 +92,7 @@ in {
           ];
 
           # Aggregates all given trusted ssh public keys to be added to all users.
-          openssh.authorizedKeys.keys = config.frostbite.services.ssh.publicKeys;
+          # openssh.authorizedKeys.keys = config.frostbite.services.ssh.publicKeys;
 
           home = "/home/${user}";
           group = "users";
