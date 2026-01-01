@@ -36,6 +36,7 @@ in
       };
     };
     programs = {
+      delta.enable = true;
       git = {
         enable = true;
         lfs.enable = true;
@@ -46,7 +47,10 @@ in
           navigate = true;
         };
 
-        inherit (cfg) userName userEmail;
+        settings = {
+          user.email = cfg.userEmail;
+          user.name = cfg.userName;
+        };
 
         extraConfig = {
           init.defaultBranch = "main";
