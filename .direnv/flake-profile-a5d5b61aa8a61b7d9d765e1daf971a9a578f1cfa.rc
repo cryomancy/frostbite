@@ -11,7 +11,7 @@ IN_NIX_SHELL='impure'
 export IN_NIX_SHELL
 LINENO='76'
 MACHTYPE='x86_64-pc-linux-gnu'
-NIX_BUILD_CORES='0'
+NIX_BUILD_CORES='16'
 export NIX_BUILD_CORES
 NIX_STORE='/nix/store'
 export NIX_STORE
@@ -46,7 +46,7 @@ if [[ "$SHELL" == "/noshell" || "$SHELL" == "/sbin/nologin" ]]; then
 fi
 
 # Load the environment
-source "/nix/store/xclcy637dyia1zi75aic5hq48rk5azvr-Kosei-Development-Shell-dir/env.bash"
+source "/nix/store/zdbnbx0i7q33vpkaw8jvs9487q8q1xaz-Kosei-Development-Shell-dir/env.bash"
 '
 export shellHook
 stdenv='/nix/store/f1jsq670yx1wi26464gkh54hqlgc1l7x-naked-stdenv'
