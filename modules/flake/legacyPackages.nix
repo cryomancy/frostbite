@@ -1,26 +1,18 @@
-_: {
-  inputs,
-  config,
-  ...
-}: {
-  perSystem = {system, ...}: {
-    legacyPackages = import inputs.nixpkgs {
-      inherit system;
-      config = {
-        allowUnfree = true;
-        allowUnsupportedSystem = true;
-      };
-      overlays =
-        [
+_:
+{ inputs, ... }:
+{
+  perSystem =
+    { system, ... }:
+    {
+      legacyPackages = import inputs.nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
+          allowUnsupportedSystem = true;
+        };
+        overlays = [
           (final: _prev: {
-            unstable = import inputs.nixpkgs-unstable {
-              inherit (final) system;
-              config = {
-                allowUnfree = true;
-                allowUnsupportedSystem = true;
-              };
-            };
-            master = import inputs.nixpkgs-master {
+            stable = import inputs.nixpkgs-stable {
               inherit (final) system;
               config = {
                 allowUnfree = true;
@@ -33,6 +25,6 @@ _: {
           inputs.vostok.overlays.default
           inputs.nur.overlays.default
         ];
+      };
     };
-  };
 }

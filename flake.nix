@@ -51,10 +51,6 @@
     );
 
   inputs = {
-    # assets = {
-    #   url = "github:tahlonbrahic/assets";
-    #   flake = false;
-    # };
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-utils = {
       url = "github:numtide/flake-utils";
@@ -84,8 +80,7 @@
       url = "github:nix-community/impermanence";
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:/nixos/nixpkgs/nixos-24.11";
-    nixpkgs-master.url = "github:/nixos/nixpkgs";
+    nixpkgs-stable.url = "github:/nixos/nixpkgs/nixos-25.11";
     nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
@@ -95,10 +90,6 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
       };
-    };
-    simple-nixos-mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {
       url = "github:Mic92/sops-nix";
