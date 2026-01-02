@@ -71,6 +71,8 @@ in
       lm_sensors # system sensors
       pciutils # pci utils
       hypridle
+      wl-gammarelay-applet
+      networkmanagerapplet
     ];
   };
 }

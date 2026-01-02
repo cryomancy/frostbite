@@ -1,11 +1,14 @@
-_: {
+_:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.services.kde-connect;
-in {
+in
+{
   options = {
     frostbite.services.kde-connect = {
       enable = lib.mkOption {
@@ -17,23 +20,23 @@ in {
 
   config = lib.mkIf cfg.enable {
     # Hide all .desktop, except for org.kde.kdeconnect.settings
-    xdg.desktopEntries = {
-      "org.kde.kdeconnect.sms" = {
-        exec = "";
-        name = "KDE Connect SMS";
-        settings.NoDisplay = "true";
-      };
-      "org.kde.kdeconnect.nonplasma" = {
-        exec = "";
-        name = "KDE Connect Indicator";
-        settings.NoDisplay = "true";
-      };
-      "org.kde.kdeconnect.app" = {
-        exec = "";
-        name = "KDE Connect";
-        settings.NoDisplay = "true";
-      };
-    };
+    # xdg.desktopEntries = {
+    #   "org.kde.kdeconnect.sms" = {
+    #     exec = "";
+    #     name = "KDE Connect SMS";
+    #     settings.NoDisplay = "true";
+    #   };
+    #   "org.kde.kdeconnect.nonplasma" = {
+    #     exec = "";
+    #     name = "KDE Connect Indicator";
+    #     settings.NoDisplay = "true";
+    #   };
+    #   "org.kde.kdeconnect.app" = {
+    #     exec = "";
+    #     name = "KDE Connect";
+    #     settings.NoDisplay = "true";
+    #   };
+    # };
 
     services.kdeconnect = {
       enable = true;
@@ -42,7 +45,7 @@ in {
     };
 
     home.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-      "/persist/${config.home.homeDirectory}".directories = [".config/kdeconnect"];
+      "/persist/${config.home.homeDirectory}".directories = [ ".config/kdeconnect" ];
     };
   };
 }
