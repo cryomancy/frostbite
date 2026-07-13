@@ -16,9 +16,9 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-      "/nix/persistent/".directories = ["/var/lib/openrgb"];
-    };
+    # environment.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
+    #   "/nix/persistent/".directories = ["/var/lib/openrgb"];
+    # };
     services.hardware.openrgb = {
       enable = true;
       server.port = 6742;
