@@ -6,15 +6,15 @@ _:
   user,
   ...
 }:
-let
-  cfg = config.frostbite.security.impermanence;
-in
+# let
+#   cfg = config.frostbite.security.impermanence;
+# in
 {
-  imports = [ inputs.impermanence.homeManagerModules.impermanence ];
+  #imports = [ inputs.impermanence.homeManagerModules.impermanence ];
 
-  options = {
-    frostbite.security.impermanence.enable = lib.mkEnableOption "impermanence";
-  };
+  # options = {
+  #   frostbite.security.impermanence.enable = lib.mkEnableOption "impermanence";
+  # };
 
   config = {
     # home.persistence =

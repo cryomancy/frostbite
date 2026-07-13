@@ -1,19 +1,22 @@
-_: {
+_:
+{
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.services.btrbk;
-in {
+in
+{
   options = {
     frostbite.services.btrbk = {
       enable = lib.mkEnableOption "btrbk";
     };
   };
   config = lib.mkIf cfg.enable {
-    environment.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-      "/nix/persistent/".directories = ["/var/snapshots"];
-    };
+    # environment.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
+    #   "/nix/persistent/".directories = ["/var/snapshots"];
+    # };
 
     services.btrbk = {
       instances."btrbak" = {

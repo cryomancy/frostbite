@@ -1,11 +1,14 @@
-_: {
+_:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.services.syncthing;
-in {
+in
+{
   options = {
     frostbite.services.syncthing = {
       enable = lib.mkEnableOption "syncthing";
@@ -39,15 +42,21 @@ in {
     # 21027/UDP for discovery
     # source: https://docs.syncthing.net/users/firewall.html
     networking.firewall = {
-      allowedTCPPorts = [8301 22000];
-      allowedUDPPorts = [22000 21027];
+      allowedTCPPorts = [
+        8301
+        22000
+      ];
+      allowedUDPPorts = [
+        22000
+        21027
+      ];
     };
 
     # Do not create default ~/Sync folder
     systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true";
 
-    environment.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-      "/nix/persistent/".directories = ["/var/lib/syncthing"];
-    };
+    # environment.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
+    #   "/nix/persistent/".directories = ["/var/lib/syncthing"];
+    # };
   };
 }

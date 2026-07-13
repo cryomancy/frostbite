@@ -1,11 +1,14 @@
-_: {
+_:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.virtualisation.podman;
-in {
+in
+{
   options = {
     frostbite.virtualisation.podman = {
       enable = lib.mkOption {
@@ -16,11 +19,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-      "/nix/persistent/".directories = [
-        "/var/lib/containers"
-      ];
-    };
+    # environment.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
+    #   "/nix/persistent/".directories = [
+    #     "/var/lib/containers"
+    #   ];
+    # };
 
     virtualisation = {
       podman = {

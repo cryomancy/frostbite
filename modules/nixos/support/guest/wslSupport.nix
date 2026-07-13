@@ -1,13 +1,16 @@
-_: {
+_:
+{
   config,
   inputs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.support.guest.wsl;
   users = config.frostbite.users.accounts;
-in {
-  imports = [inputs.nixos-wsl.nixosModules.wsl];
+in
+{
+  imports = [ inputs.nixos-wsl.nixosModules.wsl ];
 
   options = {
     frostbite.support.guest.wsl = {
@@ -16,10 +19,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-      # TODO: dive deeper into the exact WSL mounts
-      "/nix/persistent/".directories = ["/mnt"];
-    };
+    # environment.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
+    #   # TODO: dive deeper into the exact WSL mounts
+    #   "/nix/persistent/".directories = ["/mnt"];
+    # };
 
     wsl = {
       enable = true;

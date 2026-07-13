@@ -76,9 +76,9 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
-    impermanence = {
-      url = "github:nix-community/impermanence";
-    };
+    # impermanence = {
+    #   url = "github:nix-community/impermanence";
+    # };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:/nixos/nixpkgs/nixos-25.11";
     nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";

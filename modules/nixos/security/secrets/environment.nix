@@ -21,9 +21,9 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment = {
-      persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-        "/nix/persistent/".directories = ["/var/lib/sops-nix"];
-      };
+      # persistence = lib.mkIf config.frostbite.security.impermanence.enable {
+      #   "/nix/persistent/".directories = ["/var/lib/sops-nix"];
+      # };
 
       variables = {
         SOPS_AGE_KEY_FILE = "/var/lib/sops-nix/key.txt";
