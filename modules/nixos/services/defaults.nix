@@ -30,7 +30,7 @@ in
       gvfs.enable = true;
       tumbler.enable = true;
       dbus.enable = true;
-      nixbit.enable = true;
+      #nixbit.enable = true;
       upower.enable = true;
       openssh.enable = true;
       libinput.enable = true;
