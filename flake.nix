@@ -57,11 +57,14 @@
     };
     hyde = {
       url = "github:richen604/hydenix";
+      inputs = {
+        nixpkgs.follows = "hyde-nixpkgs";
+      };
     };
     icebox = {
       url = "github:tahlonbrahic/icebox";
       inputs = {
-        nixpkgs.follows = "nixpkgs";
+        nixpkgs.follows = "nixpkgs-stable";
       };
     };
     vostok = {
@@ -81,6 +84,7 @@
     # };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:/nixos/nixpkgs/nixos-25.11";
+    hyde-nixpkgs.url = "github:nixos/nixpkgs/95e96e8632c387dcf8c4223b8ab14a58936f8b10";
     nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     nix-index-database = {
       url = "github:Mic92/nix-index-database";

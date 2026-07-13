@@ -3,6 +3,7 @@ _:
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -18,7 +19,7 @@ in
 
   config = {
     programs.hyprland = {
-      package = pkgs.hyprland;
+      package = inputs.hyde-nixpkgs.packages.x86_64-linux.hyprland;
       portalPackage = pkgs.xdg-desktop-portal-hyprland;
       enable = true;
       withUWSM = true;
