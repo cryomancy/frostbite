@@ -40,7 +40,7 @@ in
       git = {
         enable = true;
         lfs.enable = true;
-        delta.enable = true;
+        # delta.enable = true; # renamed to programs.git.enable
         delta.options = {
           line-numbers = true;
           side-by-side = true;
