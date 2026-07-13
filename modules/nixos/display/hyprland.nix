@@ -19,7 +19,7 @@ in
 
   config = {
     programs.hyprland = {
-      package = inputs.hyde-nixpkgs.packages.x86_64-linux.hyprland;
+      package = inputs.hyde-nixpkgs.legacyPackages.x86_64-linux.hyprland;
       portalPackage = pkgs.xdg-desktop-portal-hyprland;
       enable = true;
       withUWSM = true;
