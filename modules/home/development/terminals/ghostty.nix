@@ -22,10 +22,10 @@ in {
       enableFishIntegration = true;
       installBatSyntax = true;
     };
-    home.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-      "/nix/persistent/home/${user}" = {
-        directories = [".config/ghostty"];
-      };
-    };
+    # home.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
+    #   "/nix/persistent/home/${user}" = {
+    #     directories = [".config/ghostty"];
+    #   };
+    # };
   };
 }
