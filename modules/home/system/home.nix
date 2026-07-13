@@ -1,11 +1,14 @@
-_: {
+_:
+{
   config,
   lib,
   user,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.system.home;
-in {
+in
+{
   options = {
     frostbite.system.home = {
       enable = lib.mkOption {
@@ -17,11 +20,11 @@ in {
 
   config = lib.mkIf cfg.enable {
     home = {
-      persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-        "/nix/persistent/home/${user}" = {
-          directories = [".local/state/home-manager"];
-        };
-      };
+      # persistence = lib.mkIf config.frostbite.security.impermanence.enable {
+      #   "/nix/persistent/home/${user}" = {
+      #     directories = [".local/state/home-manager"];
+      #   };
+      # };
       homeDirectory = lib.mkForce "/home/${config.home.username}";
       stateVersion = "25.05";
     };
@@ -29,7 +32,7 @@ in {
     systemd.user.targets.tray = {
       Unit = {
         Description = "Home Manager System Tray";
-        Requires = ["graphical-session-pre.target"];
+        Requires = [ "graphical-session-pre.target" ];
       };
     };
 

@@ -1,12 +1,15 @@
-_: {
+_:
+{
   config,
   pkgs,
   lib,
   user,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.security.password-store;
-in {
+in
+{
   options = {
     frostbite.security.password-store = {
       enable = lib.mkOption {
@@ -17,13 +20,13 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home = {
-      persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-        "/nix/persistent/home/${user}" = {
-          directories = [".local/share/password-store"];
-        };
-      };
-    };
+    # home = {
+    #   persistence = lib.mkIf config.frostbite.security.impermanence.enable {
+    #     "/nix/persistent/home/${user}" = {
+    #       directories = [".local/share/password-store"];
+    #     };
+    #   };
+    # };
 
     programs.password-store = {
       enable = true;

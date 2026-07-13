@@ -18,11 +18,11 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-      "/nix/persistent/home/${user}" = {
-        files = [ ".config/starship.toml" ];
-      };
-    };
+    # home.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
+    #   "/nix/persistent/home/${user}" = {
+    #     files = [ ".config/starship.toml" ];
+    #   };
+    # };
 
     programs = {
       starship = {

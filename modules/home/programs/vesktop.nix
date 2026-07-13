@@ -1,12 +1,15 @@
-_: {
+_:
+{
   config,
   lib,
   pkgs,
   user,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.programs.vesktop;
-in {
+in
+{
   options = {
     frostbite.programs.vesktop = {
       enable = lib.mkOption {
@@ -20,20 +23,18 @@ in {
     home = {
       packages = [
         (pkgs.vesktop.overrideAttrs (old: {
-          postFixup =
-            (old.postFixup or "")
-            + ''
-              wrapProgram $out/bin/vesktop \
-                --add-flags "--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-accelerated-mjpeg-decode --enable-accelerated-video --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-gpu-rasterization --enable-gpu --enable-features=WebRTCPipeWireCapturer --enable-wayland-ime"
-            '';
+          postFixup = (old.postFixup or "") + ''
+            wrapProgram $out/bin/vesktop \
+              --add-flags "--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-accelerated-mjpeg-decode --enable-accelerated-video --ignore-gpu-blacklist --enable-native-gpu-memory-buffers --enable-gpu-rasterization --enable-gpu --enable-features=WebRTCPipeWireCapturer --enable-wayland-ime"
+          '';
         }))
       ];
 
-      persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-        "/nix/persistent/home/${user}" = {
-          directories = [".config/vesktop"];
-        };
-      };
+      # persistence = lib.mkIf config.frostbite.security.impermanence.enable {
+      #   "/nix/persistent/home/${user}" = {
+      #     directories = [".config/vesktop"];
+      #   };
+      # };
     };
 
     xdg.configFile."vesktop/settings.json".text = builtins.toJSON {

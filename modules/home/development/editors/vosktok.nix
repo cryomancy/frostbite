@@ -1,14 +1,17 @@
-_: {
+_:
+{
   config,
   inputs,
   lib,
   system,
   user,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.editors.vostok;
   inherit (inputs.vostok.packages.${system}) vostok;
-in {
+in
+{
   options = {
     frostbite.editors.vostok = {
       enable = lib.mkOption {
@@ -20,14 +23,14 @@ in {
 
   config = lib.mkIf cfg.enable {
     home = {
-      persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-        "/nix/persistent/home/${user}" = {
-          directories = [
-            ".local/share/nvim"
-          ];
-        };
-      };
-      packages = [vostok];
+      # persistence = lib.mkIf config.frostbite.security.impermanence.enable {
+      #   "/nix/persistent/home/${user}" = {
+      #     directories = [
+      #       ".local/share/nvim"
+      #     ];
+      #   };
+      # };
+      packages = [ vostok ];
     };
   };
 }

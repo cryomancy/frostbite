@@ -1,12 +1,15 @@
-_: {
+_:
+{
   config,
   lib,
   pkgs,
   user,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.programs.libreoffice;
-in {
+in
+{
   options = {
     frostbite.programs.libreoffice = {
       enable = lib.mkEnableOption "frostbite home packages";
@@ -14,11 +17,11 @@ in {
   };
   config = lib.mkIf cfg.enable {
     home = {
-      persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-        "/nix/persistent/home/${user}" = {
-          directories = [".config/arduino-ide"];
-        };
-      };
+      # persistence = lib.mkIf config.frostbite.security.impermanence.enable {
+      #   "/nix/persistent/home/${user}" = {
+      #     directories = [".config/arduino-ide"];
+      #   };
+      # };
 
       packages = with pkgs; [
         libreoffice-qt6

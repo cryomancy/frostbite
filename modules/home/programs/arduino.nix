@@ -1,12 +1,15 @@
-_: {
+_:
+{
   config,
   pkgs,
   lib,
   user,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.programs.arduino;
-in {
+in
+{
   options = {
     frostbite.programs.arduino.enable = lib.mkEnableOption "arduino";
   };
@@ -20,14 +23,14 @@ in {
         simulide
       ];
 
-      persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-        "/nix/persistent/home/${user}" = {
-          directories = [
-            ".config/arduino-ide"
-            ".config/Arduino-ide"
-          ];
-        };
-      };
+      # persistence = lib.mkIf config.frostbite.security.impermanence.enable {
+      #   "/nix/persistent/home/${user}" = {
+      #     directories = [
+      #       ".config/arduino-ide"
+      #       ".config/Arduino-ide"
+      #     ];
+      #   };
+      # };
     };
 
     #xdg.configFile."arudino-ide/settings.json".text = builtins.toJSON {

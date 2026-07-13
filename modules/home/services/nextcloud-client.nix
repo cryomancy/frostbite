@@ -23,8 +23,8 @@ in
       startInBackground = true;
     };
 
-    home.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-      "/persist/${config.home.homeDirectory}".directories = [ ".config/nextcloud-client" ];
-    };
+    # home.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
+    #   "/persist/${config.home.homeDirectory}".directories = [ ".config/nextcloud-client" ];
+    # };
   };
 }

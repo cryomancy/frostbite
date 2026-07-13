@@ -1,12 +1,15 @@
-_: {
+_:
+{
   config,
   lib,
   pkgs,
   user,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.utils.virtualisation;
-in {
+in
+{
   options = {
     frostbite.utils.virtualisation = {
       enable = lib.mkOption {
@@ -19,21 +22,20 @@ in {
   config = lib.mkIf cfg.enable {
     # TODO: add impermanence for distrobox and podman
     home = {
-      persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-        "/nix/persistent/home/${user}" = {
-          directories = [".config/k9s"];
-        };
+      # persistence = lib.mkIf config.frostbite.security.impermanence.enable {
+      #   "/nix/persistent/home/${user}" = {
+      #     directories = [".config/k9s"];
+      #   };
 
-        packages = with pkgs; [
-          distrobox
-          docker-compose
-          podman
-          podman-tui
-          skopeo
-          kubectl
-          kubevirt
-        ];
-      };
+      packages = with pkgs; [
+        distrobox
+        docker-compose
+        podman
+        podman-tui
+        skopeo
+        kubectl
+        kubevirt
+      ];
     };
 
     programs.k9s.enable = true;

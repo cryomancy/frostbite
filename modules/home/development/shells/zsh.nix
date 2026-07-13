@@ -1,11 +1,14 @@
-_: {
+_:
+{
   config,
   lib,
   user,
   ...
-}: let
+}:
+let
   cfg = config.frostbite.shells.zsh;
-in {
+in
+{
   options = {
     frostbite.shells.zsh = {
       enable = lib.mkOption {
@@ -16,13 +19,13 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
-      "/nix/persistent/home/${user}" = {
-        directories = [
-          ".config/zsh"
-        ];
-      };
-    };
+    # home.persistence = lib.mkIf config.frostbite.security.impermanence.enable {
+    #   "/nix/persistent/home/${user}" = {
+    #     directories = [
+    #       ".config/zsh"
+    #     ];
+    #   };
+    # };
 
     programs = {
       zsh = {
